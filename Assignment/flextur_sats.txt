@@ -1,0 +1,18 @@
+package sats;
+
+public class Sats {
+  
+  // array med alle kommune-navne
+  public String[] getKommuner()
+  
+  // (e.g. 30. april 2016, year=2016, month=4, day=30)
+  // fraKommune/tilKommune er ikke case-sensitive
+  public double getSats( String fraKommune, String tilKommune, int year, int month, int day )
+    throws UnknownKommuneException
+
+  // Singleton Pattern instance-metode
+  public static Sats i()
+}
+
+public class UnknownKommuneException extends Exception {
+}
