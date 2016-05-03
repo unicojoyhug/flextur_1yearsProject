@@ -26,8 +26,8 @@ public class Sats {
         this.satser.put("Norddjurs", 4.0);
         this.satser.put("Odder", 14.0);
         this.satser.put("Randers", 7.0);
-        this.satser.put("Ringk\u00f8bing/Skjern", 4.0);
-        this.satser.put("Sams\u00f8", 14.0);
+        this.satser.put("Ringkøbing/Skjern", 4.0);
+        this.satser.put("Samsø", 14.0);
         this.satser.put("Silkeborg", 7.0);
         this.satser.put("Skanderborg", 4.0);
         this.satser.put("Skive", 7.0);
