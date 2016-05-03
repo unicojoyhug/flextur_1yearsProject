@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ChoiceBox layoutX="117.0" layoutY="200.0" prefWidth="150.0" />
+      <Button layoutX="301.0" layoutY="246.0" mnemonicParsing="false" text="Ret Profil" />
+      <Label layoutX="118.0" layoutY="95.0" text="Fornavn:" />
+      <PasswordField layoutX="117.0" layoutY="245.0" />
+      <TextField layoutX="117.0" layoutY="110.0" />
+      <Label layoutX="301.0" layoutY="95.0" text="Efternavn:" />
+      <TextField layoutX="300.0" layoutY="110.0" />
+      <Label layoutX="119.0" layoutY="145.0" text="Addresse:" />
+      <TextField layoutX="118.0" layoutY="160.0" />
+      <Label layoutX="118.0" layoutY="185.0" text="Kommune:" />
+      <Label layoutX="118.0" layoutY="230.0" text="Ønsket Kodeord:" />
+      <Label layoutX="59.0" layoutY="47.0" text="Ændre Profil:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="301.0" layoutY="145.0" text="Telefon nr:" />
+      <TextField layoutX="300.0" layoutY="160.0" />
+      <Label layoutX="301.0" layoutY="186.0" text="Email:" />
+      <TextField layoutX="300.0" layoutY="200.0" />
+      <Button layoutX="382.0" layoutY="246.0" mnemonicParsing="false" text="Slet Profil" />
+   </children>
+</AnchorPane>
