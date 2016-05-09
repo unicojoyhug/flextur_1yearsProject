@@ -23,7 +23,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="483.0" layoutY="357.0" mnemonicParsing="false" text="Luk Historik" />
+      <Button layoutX="496.0" layoutY="357.0" mnemonicParsing="false" text="Luk Historik" />
       <DatePicker layoutX="86.0" layoutY="78.0" />
       <DatePicker layoutX="335.0" layoutY="78.0" />
       <Label layoutX="263.0" layoutY="82.0" text="Dato Interval" />
