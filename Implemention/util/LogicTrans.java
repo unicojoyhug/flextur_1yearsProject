@@ -22,34 +22,18 @@ public class LogicTrans<T> {
 		try {
 			T t = supplier.get();
 			dataaccess.commit();
-
 			return t;
 		} catch (Exception e) {
 			dataaccess.rollback();
 			throw new RuntimeException("Transaction rolled back", e);
 		} finally {
 			if(dataaccess != null)
-				dataaccess.close();
-			
+				dataaccess.close();			
 		}
 	}
 
-	public void transaction(Consumer<T> consumer, T t) {
-		try {
-			consumer.accept(t);
-			dataaccess.commit();
-		} catch (Exception e) {
-			dataaccess.rollback();
-			throw new RuntimeException("Transaction rolled back", e);
-		} finally {
-			dataaccess.close();
-			
-		}
-	}
-	
-	
-	
-	public void transaction(Runnable runnable) { // better
+
+	public void transaction(Runnable runnable) {
 		try {
 			runnable.run();
 			dataaccess.commit();
@@ -57,8 +41,7 @@ public class LogicTrans<T> {
 			dataaccess.rollback();
 			throw new RuntimeException("Transaction rolled back", e);
 		} finally {
-			dataaccess.close();
-			
+			dataaccess.close();			
 		}
 	}
 }
