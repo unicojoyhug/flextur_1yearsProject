@@ -21,7 +21,7 @@ public class Sats {
         this.satser.put("Herning", 14.0);
         this.satser.put("Holstebro", 4.0);
         this.satser.put("Horsens", 4.0);
-        this.satser.put("Ikast/Brande", 7.0);
+        this.satser.put("Ikast/Brande", 7.0); //TODO check with enum
         this.satser.put("Lemvig", 4.0);
         this.satser.put("Norddjurs", 4.0);
         this.satser.put("Odder", 14.0);
