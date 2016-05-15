@@ -40,7 +40,7 @@ public class KilometerUdregning {
 		Document doc = (Document) xpath.evaluate("/", source, XPathConstants.NODE);
 		String distance = xpath.evaluate("/DistanceMatrixResponse/row/element/distance/text", doc);
 
-		System.out.println("Distance er =" + distance);
+		System.out.println("Distance er = " + distance);
 		return distance;
 	}
 }
