@@ -21,7 +21,6 @@ public class KilometerUdregning {
 		KilometerUdregning request = new KilometerUdregning();
 		String url_request = "https://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + Origin
 				+ "&destinations=" + Destination + "&mode=driving&language=da-DK&key=" + API_KEY;
-
 		String response = request.run(url_request);
 		String distance = XMLparse(response);
 		return distance;
@@ -29,13 +28,11 @@ public class KilometerUdregning {
 
 	public String run(String url) throws IOException {
 		Request request = new Request.Builder().url(url).build();
-
 		Response response = client.newCall(request).execute();
 		return response.body().string();
 	}
 
 	private String XMLparse(String xml) throws XPathExpressionException {
-
 		XPathFactory xpathFactory = XPathFactory.newInstance();
 		XPath xpath = xpathFactory.newXPath();
 
@@ -44,7 +41,6 @@ public class KilometerUdregning {
 		String distance = xpath.evaluate("/DistanceMatrixResponse/row/element/distance/text", doc);
 
 		System.out.println("Distance er =" + distance);
-
 		return distance;
 	}
 }
