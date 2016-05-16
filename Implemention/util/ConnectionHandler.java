@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import exception.PersistenceCommitFailureException;
 import exception.PersistenceConnectionFailureException;
+import exception.PersistenceRollbackFailureException;
 
 /**
  * ConnectionHandler with Singleton : so it can use only one connection
@@ -15,7 +16,7 @@ import exception.PersistenceConnectionFailureException;
 public class ConnectionHandler {
 
 	private static ConnectionHandler handler = new ConnectionHandler();
-	private Connection conn;
+	private Connection connection;
 	private int level = 0;
 
 	private ConnectionHandler() {
@@ -29,20 +30,20 @@ public class ConnectionHandler {
 	public Connection getConnection() throws PersistenceConnectionFailureException {
 		if (level == 0) {
 			try {
-				this.conn = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/mydatabase", "SA", "");
-				this.conn.setAutoCommit(false);
+				this.connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/mydatabase", "SA", "");
+				this.connection.setAutoCommit(false);
 			} catch (SQLException e) {
 				throw new PersistenceConnectionFailureException("Failed to connect to database");
 			}
 		}
 		level++;
-		return this.conn;
+		return this.connection;
 	}
 
 	public void commit() throws PersistenceCommitFailureException {
 		if (level == 1) {
 			try {
-				this.conn.commit();
+				this.connection.commit();
 			} catch (SQLException e) {
 				throw new PersistenceCommitFailureException("Failed to commit transaction");
 			}
@@ -52,9 +53,9 @@ public class ConnectionHandler {
 	public void rollback() {
 		if (level == 1) {
 			try {
-				this.conn.rollback();
+				this.connection.rollback();
 			} catch (SQLException e) {
-				throw new RuntimeException("Exception caught", e);
+				throw new PersistenceRollbackFailureException("Failed to rolleback and Exception caught");
 			}
 		}
 	}
@@ -62,10 +63,10 @@ public class ConnectionHandler {
 	public void close() {
 		if (level == 1) {
 			try {
-				this.conn.close();
-				this.conn = null;
+				this.connection.close();
+				this.connection = null;
 			} catch (SQLException e) {
-				throw new RuntimeException("Exception caught", e);
+				throw new RuntimeException("Exception caught", e); //what is the difference when those above are also extends RuntimeException?
 			}
 		}
 		level--;

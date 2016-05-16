@@ -12,23 +12,23 @@ import data.DataAccess;
 
 public class LogicTrans<T> {
 	
-	DataAccess dataaccess = null;
+	DataAccess dataAccess = null;
 	
-	public LogicTrans(DataAccess dataccess) {
-		this.dataaccess = dataccess;
+	public LogicTrans(DataAccess dataAccess) {
+		this.dataAccess = dataAccess;
 	}
 
 	public T transaction (Supplier<T> supplier) {
 		try {
 			T t = supplier.get();
-			dataaccess.commit();
+			dataAccess.commit();
 			return t;
 		} catch (Exception e) {
-			dataaccess.rollback();
+			dataAccess.rollback();
 			throw new RuntimeException("Transaction rolled back", e);
 		} finally {
-			if(dataaccess != null)
-				dataaccess.close();			
+			if(dataAccess != null)
+				dataAccess.close();			
 		}
 	}
 
@@ -36,12 +36,12 @@ public class LogicTrans<T> {
 	public void transaction(Runnable runnable) {
 		try {
 			runnable.run();
-			dataaccess.commit();
+			dataAccess.commit();
 		} catch (Exception e) {
-			dataaccess.rollback();
+			dataAccess.rollback();
 			throw new RuntimeException("Transaction rolled back", e);
 		} finally {
-			dataaccess.close();			
+			dataAccess.close();			
 		}
 	}
 }

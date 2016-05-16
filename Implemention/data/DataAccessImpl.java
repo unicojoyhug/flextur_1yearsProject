@@ -5,7 +5,7 @@ import java.sql.Connection;
 import util.ConnectionHandler;
 
 /**
- * DataAccess using Singleton pattern
+ * DataAccess using Singleton pattern : ConnectionHandler
  * @author Juyoung Choi
  *
  */

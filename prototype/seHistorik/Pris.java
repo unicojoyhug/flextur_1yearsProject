@@ -32,7 +32,7 @@ public class Pris {
 			e.printStackTrace();
 		}
 
-		if(tur.getAntalPersoner()<0){
+		if(tur.getAntalPersoner()<0 || tur.getAntalPersoner()>5){
 
 			throw new AntalPersonerException("Antal Personer exception");
 
