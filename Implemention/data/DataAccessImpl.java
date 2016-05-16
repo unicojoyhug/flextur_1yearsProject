@@ -16,7 +16,7 @@ public class DataAccessImpl implements DataAccess {
 
 	public DataAccessImpl(){
 		
-		this.connection = ConnectionHandler.instance().getConnection();
+		this.connection = ConnectionHandler.getInstance().getConnection();
 	}
 
 	@Override
@@ -26,18 +26,18 @@ public class DataAccessImpl implements DataAccess {
 
 	@Override
 	public void commit()  {
-		ConnectionHandler.instance().commit();
+		ConnectionHandler.getInstance().commit();
 
 	}
 
 	@Override
 	public void close() {
-		ConnectionHandler.instance().close();
+		ConnectionHandler.getInstance().close();
 	}
 
 	@Override
 	public void rollback() {
-		ConnectionHandler.instance().rollback();
+		ConnectionHandler.getInstance().rollback();
 	}
 
 }

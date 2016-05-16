@@ -14,7 +14,7 @@ public class LoginSingleton {
 	private LoginSingleton() {
 	}
 	
-	public static LoginSingleton instance() {
+	public static LoginSingleton getInstance() {
 		return userloggedin;
 	}
 

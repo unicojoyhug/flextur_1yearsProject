@@ -12,7 +12,7 @@ import data.DataAccess;
 
 public class LogicTrans<T> {
 	
-	DataAccess dataAccess = null;
+	private DataAccess dataAccess = null;
 	
 	public LogicTrans(DataAccess dataAccess) {
 		this.dataAccess = dataAccess;

@@ -23,7 +23,7 @@ public class ConnectionHandler {
 
 	}
 
-	public static ConnectionHandler instance() {
+	public static ConnectionHandler getInstance() {
 		return handler;
 	}
 

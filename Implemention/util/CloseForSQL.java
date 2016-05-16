@@ -9,7 +9,7 @@ import java.sql.SQLException;
  *
  */
 
-public class CloseforSQL {
+public class CloseForSQL {
 	
 	public void cleanup(ResultSet rs, PreparedStatement stmt) {
 		if (rs != null) {
