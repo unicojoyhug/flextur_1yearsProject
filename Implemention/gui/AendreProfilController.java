@@ -16,11 +16,11 @@ import javafx.scene.control.Label;
  *
  * @author Jonas Mørch
  */
-public class flexmainController implements Initializable {
+public class AendreProfilController implements Initializable {
     
     @FXML
     private Label label;
-	private Flextur Flextur;
+	private Flextur flextur;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -28,7 +28,7 @@ public class flexmainController implements Initializable {
         label.setText("Hello World!");
     }
     public void setMainApp(Flextur flextur) {
-		this.Flextur = flextur;
+		this.flextur = flextur;
 		
 	}
     @Override
