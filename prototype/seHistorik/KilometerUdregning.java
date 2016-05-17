@@ -23,6 +23,7 @@ public class KilometerUdregning {
 				+ "&destinations=" + Destination + "&mode=driving&language=da-DK&key=" + API_KEY;
 		String response = request.run(url_request);
 		String distance = XMLparse(response);
+		System.out.println(response);
 		return distance;
 	}
 
