@@ -58,5 +58,6 @@
       <Label layoutX="256.0" layoutY="173.0" text="Slut Postnummer:" />
       <TextField fx:id="forventetTid" editable="false" layoutX="255.0" layoutY="331.0" prefHeight="25.0" prefWidth="81.0" />
       <Label layoutX="255.0" layoutY="315.0" text="Forventet køretid:" />
+      <Button layoutX="535.0" layoutY="438.0" mnemonicParsing="false" onAction="#handleToMenu" text="Tilbage til menuen" />
    </children>
 </AnchorPane>

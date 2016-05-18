@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" fx:controller="gui.SeHistorikAdminController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SeHistorikAdminController">
    <children>
       <TableView layoutX="79.0" layoutY="190.0" prefHeight="200.0" prefWidth="550.0">
         <columns>
@@ -23,7 +23,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="550.0" layoutY="392.0" mnemonicParsing="false" text="Luk Historik" />
+      <Button layoutX="550.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleToMenu" text="Tilbage til Menuen" />
       <DatePicker layoutX="140.0" layoutY="113.0" />
       <DatePicker layoutX="389.0" layoutY="113.0" />
       <Label layoutX="317.0" layoutY="117.0" text="Dato Interval" />

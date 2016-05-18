@@ -40,6 +40,10 @@ public class OpretProfilController implements Initializable {
 		this.flextur = flextur;
 		
 	}
+    @FXML
+    private void handleCancel(ActionEvent event) {
+        flextur.showLogin();
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

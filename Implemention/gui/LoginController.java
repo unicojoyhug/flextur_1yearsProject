@@ -28,10 +28,17 @@ public class LoginController implements Initializable {
 	private void handleOpretProfil(ActionEvent event) {
 		flextur.showOpretProfil();
 	}
+
 	@FXML
 	private void handleKunde(ActionEvent event) {
-		flextur.showBestilFlex();
+		flextur.showMenuKunde();
 	}
+
+	@FXML
+	private void handleAdmin(ActionEvent event) {
+		flextur.showMenuAdmin();
+	}
+
 	@FXML
 	private void handleLogin(ActionEvent event) {
 		String user = username.getText();
@@ -55,6 +62,6 @@ public class LoginController implements Initializable {
 
 	public void setMainApp(FlexturGUI flextur) {
 		this.flextur = flextur;
-		
+
 	}
 }

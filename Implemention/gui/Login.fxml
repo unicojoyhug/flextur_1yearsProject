@@ -27,5 +27,6 @@
          </image>
       </ImageView>
       <Button layoutX="170.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleKunde" text="Kunde" />
+      <Button layoutX="170.0" layoutY="278.0" mnemonicParsing="false" onAction="#handleAdmin" text="Admin" />
    </children>
 </AnchorPane>

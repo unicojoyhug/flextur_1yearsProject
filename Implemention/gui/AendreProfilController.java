@@ -23,9 +23,8 @@ public class AendreProfilController implements Initializable {
 	private FlexturGUI flextur;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private void handleToMenu(ActionEvent event) {
+        flextur.showMenuKunde();
     }
     public void setMainApp(FlexturGUI flextur) {
 		this.flextur = flextur;

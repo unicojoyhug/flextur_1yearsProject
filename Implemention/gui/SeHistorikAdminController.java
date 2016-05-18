@@ -35,8 +35,8 @@ public class SeHistorikAdminController implements Initializable {
 	private ComboBox<?> cprsoeg;
 
 	@FXML
-	private void handleRetur(ActionEvent event) {
-		flexturGUI.showHistorikAdmin();
+	private void handleToMenu(ActionEvent event) {
+		flexturGUI.showMenuAdmin();
 	}
 
 	public void setMainApp(FlexturGUI flexturGUI) {

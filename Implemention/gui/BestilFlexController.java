@@ -68,22 +68,29 @@ public class BestilFlexController implements Initializable {
 		String distance = kilometer.getText();
 		String OriginKommune = fraKommune.getConverter().toString();
 		String DestinationKommune = tilKommune.getConverter().toString();
-		//TODO String pris = someone.udregn(distance, OriginKommune, DestinationKommune);
-		//TODO pris.setText(pris);
+		// TODO String pris = someone.udregn(distance, OriginKommune,
+		// DestinationKommune);
+		// TODO pris.setText(pris);
 		prisBar.setVisible(false);
 	}
 
 	@FXML
 	private void handleBestilFlextur(ActionEvent event) {
 		System.out.println("Ikke impletemteret");
-		
+
 		String distance = kilometer.getText();
 		String OriginKommune = fraKommune.getConverter().toString();
 		String DestinationKommune = tilKommune.getConverter().toString();
 		String Pris = pris.getText();
-		//TODO Finish method
-		
+		// TODO Finish method
+
 	}
+
+	@FXML
+	private void handleToMenu(ActionEvent event) {
+		flextur.showMenuKunde();
+	}
+
 	public void setMainApp(FlexturGUI flextur) {
 		this.flextur = flextur;
 

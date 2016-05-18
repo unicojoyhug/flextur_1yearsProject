@@ -19,13 +19,25 @@ import javafx.scene.control.Label;
 public class MenuAdminController implements Initializable {
     
     @FXML
-    private Label label;
+    private Label usernameL;
 	private FlexturGUI Flextur;
+	private String user = "Den der bruger systemet";
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private void handleRegistrerFlextur(ActionEvent event) {
+    	System.out.println("Ikke impletementeret");
+    }
+    @FXML
+    private void handleSeBestillinger(ActionEvent event){
+    	Flextur.showBestillingsOversigt();
+    }
+    @FXML
+    private void handleSeHistorik(ActionEvent event){
+    	Flextur.showHistorikAdmin();
+    }
+    @FXML
+    private void handleLogUd(ActionEvent event){
+    	System.out.println("Ikke impletementeret");
     }
     public void setMainApp(FlexturGUI flextur) {
 		this.Flextur = flextur;
@@ -33,7 +45,7 @@ public class MenuAdminController implements Initializable {
 	}
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        usernameL.setText(user);
     }    
     
 }

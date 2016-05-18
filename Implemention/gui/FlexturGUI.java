@@ -86,6 +86,7 @@ public class FlexturGUI extends Application {
 			e.printStackTrace();
 		}
 	}
+
 	public void showMenuKunde() {
 		try {
 			// Load person overview.
@@ -103,6 +104,7 @@ public class FlexturGUI extends Application {
 			e.printStackTrace();
 		}
 	}
+
 	public void showMenuAdmin() {
 		try {
 			// Load person overview.
@@ -120,6 +122,7 @@ public class FlexturGUI extends Application {
 			e.printStackTrace();
 		}
 	}
+
 	public void showBestilFlex() {
 		try {
 			// Load person overview.
@@ -211,21 +214,7 @@ public class FlexturGUI extends Application {
 	}
 
 	public void Login(String user, String password) {
-		try {
-			// Load person overview.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(FlexturGUI.class.getResource("BestillingsOversigt.fxml"));
-			AnchorPane personOverview = (AnchorPane) loader.load();
-
-			// Set person overview into the center of root layout.
-			rootLayout.setCenter(personOverview);
-
-			BestillingsOversigtController controller = loader.getController();
-			controller.setMainApp(this);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		System.out.println("Ikke implementeret");
 
 	}
 

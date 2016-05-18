@@ -18,35 +18,44 @@ import javafx.scene.control.TableView;
  * @author Jonas Mørch
  */
 public class BestillingsOversigtController implements Initializable {
-    
-    @FXML
-    private TableView tableView;
-    @FXML
-    private DatePicker fraDato, tilDato;
+
+	@FXML
+	private TableView tableView;
+	@FXML
+	private DatePicker fraDato, tilDato;
 	private FlexturGUI Flextur;
-   
-    @FXML
-    private void handleNyBestilling(ActionEvent event) {
-        Flextur.showBestilFlex();
-       
-    }
-    @FXML
-    private void handleSeHistorik(ActionEvent event) {
-        Flextur.showHistorikAdmin();
-       
-    }
-    @FXML
-    private void handleTildelBil(ActionEvent event) {
-        Flextur.showBestilFlex();
-       
-    }
-    public void setMainApp(FlexturGUI flextur) {
-		this.Flextur = flextur;
-		
+
+	@FXML
+	private void handleNyBestilling(ActionEvent event) {
+		Flextur.showBestilFlex();
+
 	}
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+
+	@FXML
+	private void handleSeHistorik(ActionEvent event) {
+		Flextur.showHistorikAdmin();
+
+	}
+
+	@FXML
+	private void handleTildelBil(ActionEvent event) {
+		Flextur.showBestilFlex();
+
+	}
+
+	public void setMainApp(FlexturGUI flextur) {
+		this.Flextur = flextur;
+
+	}
+
+	@FXML
+	private void handleToMenu(ActionEvent event) {
+		Flextur.showMenuAdmin();
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		// TODO
+	}
+
 }

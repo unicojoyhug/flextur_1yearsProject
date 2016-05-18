@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MenuAdminController">
+   <children>
+      <Label layoutX="106.0" layoutY="54.0" text="Velkommen til Flextur systemet : ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameL" layoutX="369.0" layoutY="54.0" prefHeight="27.0" prefWidth="263.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="239.0" layoutY="146.0" text="De har nu følgende valgmuligheder:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="297.0" layoutY="194.0" mnemonicParsing="false" onAction="#handleRegistrerFlextur" prefHeight="25.0" prefWidth="107.0" text="Registrer flextur" />
+      <Button layoutX="297.0" layoutY="239.0" mnemonicParsing="false" onAction="#handleSeBestillinger" prefHeight="25.0" prefWidth="107.0" text="Se bestillinger" />
+      <Button layoutX="297.0" layoutY="285.0" mnemonicParsing="false" onAction="#handleSeHistorik" prefHeight="25.0" prefWidth="107.0" text="Se Historik" />
+      <Button layoutX="297.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleLogUd" prefHeight="25.0" prefWidth="107.0" text="Log ud" />
+   </children>
+</AnchorPane>
