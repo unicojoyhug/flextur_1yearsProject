@@ -2,6 +2,7 @@ package seHistorik;
 
 import sats.Sats;
 import sats.UnknownKommuneException;
+
 public class Pris {
 
 	EkstraTilvalg ekstraTilvalg;
@@ -32,10 +33,14 @@ public class Pris {
 			e.printStackTrace();
 		}
 
-		if(tur.getAntalPersoner()<0 || tur.getAntalPersoner()>5){
+		if(tur.getAntalPersoner()<0){
+//		if(tur.getAntalPersoner()<0 || tur.getAntalPersoner()>5){
+
 
 			throw new AntalPersonerException("Antal Personer exception");
 
+		}else if(tur.getAntalPersoner()>5){
+			
 		}
 		return tur.getAfstand() * (satsRate) * ((tur.getAntalPersoner() * 0.5) + 0.5);
 

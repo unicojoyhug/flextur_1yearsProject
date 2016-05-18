@@ -16,12 +16,15 @@ public class CloseForSQL {
 			try {
 				rs.close();
 			} catch (SQLException e) {
+				//never happens here
 			}
 		}
 		if (stmt != null) {
 			try {
 				stmt.close();
 			} catch (SQLException e) {
+				//never happens here
+
 			}
 		}		
 	}
@@ -31,6 +34,8 @@ public class CloseForSQL {
 			try {
 				stmt.close();
 			} catch (SQLException e) {
+				//never happens here
+
 			}
 		}		
 	}
