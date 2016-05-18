@@ -10,17 +10,26 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 /**
  *
  * @author Jonas Mørch
  */
-public class OpretBrugerController implements Initializable {
+public class OpretProfilController implements Initializable {
     
     @FXML
     private Label label;
 	private Flextur flextur;
+	@FXML
+	private PasswordField password;
+	@FXML
+	private TextField fornavn, efternavn, addresse, telefonnr, email, cprnummer;
+	@FXML
+	private ChoiceBox Kommune;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {

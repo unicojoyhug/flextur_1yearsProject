@@ -10,7 +10,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 
 /**
  *
@@ -19,14 +21,17 @@ import javafx.scene.control.Label;
 public class BestillingsOversigtController implements Initializable {
     
     @FXML
-    private Label label;
+    private TableView tableView;
+    @FXML
+    private DatePicker fraDato, tilDato;
 	private Flextur Flextur;
-    
+  /*  
     @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
-        label.setText("Hello World!");
+       
     }
+  */
     public void setMainApp(Flextur flextur) {
 		this.Flextur = flextur;
 		

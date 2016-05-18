@@ -26,7 +26,6 @@ public class LoginController implements Initializable {
 
 	@FXML
 	private void handleOpretBruger(ActionEvent event) {
-		System.out.println("Opret Bruger");
 		flextur.showOpretBruger();
 	}
 
