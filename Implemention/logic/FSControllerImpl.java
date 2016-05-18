@@ -14,7 +14,7 @@ import util.LogicTrans;
 public class FSControllerImpl implements FSController {
 	private TurMapper turMapper = new TurMapperImpl();
 	private List<Observer> observers;
-	private SøgHistorik søgHistorik;
+//	private HistorikSøgning historikSøgning;
 	
 	@Override
 	public void tilmeldObserver(Observer observer) {
