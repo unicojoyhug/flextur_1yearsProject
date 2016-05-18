@@ -69,7 +69,6 @@ public class FlexturGUI extends Application {
 		}
 	}
 
-
 	public void showOpretProfil() {
 		try {
 			// Load person overview.
@@ -86,7 +85,42 @@ public class FlexturGUI extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}	public void showBestilFlex() {
+	}
+	public void showMenuKunde() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(FlexturGUI.class.getResource("MenuKunde.fxml"));
+			AnchorPane personOverview = (AnchorPane) loader.load();
+
+			// Set person overview into the center of root layout.
+			rootLayout.setCenter(personOverview);
+
+			MenuKundeController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void showMenuAdmin() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(FlexturGUI.class.getResource("MenuAdmin.fxml"));
+			AnchorPane personOverview = (AnchorPane) loader.load();
+
+			// Set person overview into the center of root layout.
+			rootLayout.setCenter(personOverview);
+
+			MenuAdminController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void showBestilFlex() {
 		try {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
@@ -102,7 +136,9 @@ public class FlexturGUI extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}	public void showAendreProfil() {
+	}
+
+	public void showAendreProfil() {
 		try {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
@@ -118,7 +154,9 @@ public class FlexturGUI extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}	public void showHistorikKunde() {
+	}
+
+	public void showHistorikKunde() {
 		try {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
@@ -135,6 +173,7 @@ public class FlexturGUI extends Application {
 			e.printStackTrace();
 		}
 	}
+
 	public void showHistorikAdmin() {
 		try {
 			// Load person overview.
@@ -152,25 +191,43 @@ public class FlexturGUI extends Application {
 			e.printStackTrace();
 		}
 	}
-	public void Login(String user, String password) {
-				try {
-				// Load person overview.
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(FlexturGUI.class.getResource("BestillingsOversigt.fxml"));
-				AnchorPane personOverview = (AnchorPane) loader.load();
 
-				// Set person overview into the center of root layout.
-				rootLayout.setCenter(personOverview);
+	public void showBestillingsOversigt() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(FlexturGUI.class.getResource("BestillingsOversigt.fxml"));
+			AnchorPane personOverview = (AnchorPane) loader.load();
 
-				LoginController controller = loader.getController();
-				controller.setMainApp(this);
+			// Set person overview into the center of root layout.
+			rootLayout.setCenter(personOverview);
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	
+			BestillingsOversigtController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-	
+	}
+
+	public void Login(String user, String password) {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(FlexturGUI.class.getResource("BestillingsOversigt.fxml"));
+			AnchorPane personOverview = (AnchorPane) loader.load();
+
+			// Set person overview into the center of root layout.
+			rootLayout.setCenter(personOverview);
+
+			BestillingsOversigtController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	/**
 	 * @param args

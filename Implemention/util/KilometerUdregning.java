@@ -1,4 +1,4 @@
-package seHistorik;
+package util;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -16,6 +16,7 @@ public class KilometerUdregning {
 
 	private static final String API_KEY = "AIzaSyBoOejgRYqOuDSldGnIDetXOEthJc-CdoM";
 	OkHttpClient client = new OkHttpClient();
+	public String duration;
 
 	public String Distance(String Origin, String Destination) throws IOException, XPathExpressionException {
 		KilometerUdregning request = new KilometerUdregning();
@@ -23,7 +24,7 @@ public class KilometerUdregning {
 				+ "&destinations=" + Destination + "&mode=driving&language=da-DK&key=" + API_KEY;
 		String response = request.run(url_request);
 		String distance = XMLparse(response);
-		System.out.println(response);
+		// System.out.println(response);
 		return distance;
 	}
 
@@ -40,8 +41,9 @@ public class KilometerUdregning {
 		InputSource source = new InputSource(new StringReader(xml));
 		Document doc = (Document) xpath.evaluate("/", source, XPathConstants.NODE);
 		String distance = xpath.evaluate("/DistanceMatrixResponse/row/element/distance/text", doc);
-
-		System.out.println("Distance er = " + distance);
+		String duration = xpath.evaluate("/DistanceMatrixResponse/row/element/duration/text", doc);
+		this.duration = duration;
+		// System.out.println("Distance er = " + distance);
 		return distance;
 	}
 }

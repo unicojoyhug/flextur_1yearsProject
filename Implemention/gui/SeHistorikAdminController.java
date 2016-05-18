@@ -24,24 +24,23 @@ public class SeHistorikAdminController implements Initializable {
 
 	@FXML
 	private Label label;
-	private FlexturGUI flextur;
+	private FlexturGUI flexturGUI;
 	@FXML
-	private TableView tableView;
+	private TableView<?> tableView;
 	@FXML
-	private ChoiceBox kommune;
+	private ChoiceBox<?> kommune;
 	@FXML
 	private DatePicker fraDato, tilDato;
 	@FXML
-	private ComboBox cprsoeg;
+	private ComboBox<?> cprsoeg;
 
 	@FXML
-	private void handleButtonAction(ActionEvent event) {
-		System.out.println("You clicked me!");
-		label.setText("Hello World!");
+	private void handleRetur(ActionEvent event) {
+		flexturGUI.showHistorikAdmin();
 	}
 
-	public void setMainApp(FlexturGUI flextur) {
-		this.flextur = flextur;
+	public void setMainApp(FlexturGUI flexturGUI) {
+		this.flexturGUI = flexturGUI;
 
 	}
 

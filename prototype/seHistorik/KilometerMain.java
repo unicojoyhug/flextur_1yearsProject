@@ -3,6 +3,8 @@ package seHistorik;
 import java.io.IOException;
 import javax.xml.xpath.XPathExpressionException;
 
+import util.KilometerUdregning;
+
 public class KilometerMain {
 	
 	private static String Origin = "Stadilvej 14, 6980";

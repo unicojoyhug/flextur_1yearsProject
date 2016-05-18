@@ -26,5 +26,6 @@
             <Image url="@img/logo.png.gif" />
          </image>
       </ImageView>
+      <Button layoutX="170.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleKunde" text="Kunde" />
    </children>
 </AnchorPane>

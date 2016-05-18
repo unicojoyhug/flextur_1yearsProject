@@ -28,7 +28,10 @@ public class LoginController implements Initializable {
 	private void handleOpretProfil(ActionEvent event) {
 		flextur.showOpretProfil();
 	}
-
+	@FXML
+	private void handleKunde(ActionEvent event) {
+		flextur.showBestilFlex();
+	}
 	@FXML
 	private void handleLogin(ActionEvent event) {
 		String user = username.getText();
