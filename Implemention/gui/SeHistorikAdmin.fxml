@@ -5,9 +5,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" fx:controller="gui.SeHistorikAdminController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView layoutX="25.0" layoutY="155.0" prefHeight="200.0" prefWidth="550.0">
+      <TableView layoutX="79.0" layoutY="190.0" prefHeight="200.0" prefWidth="550.0">
         <columns>
           <TableColumn prefWidth="99.0" text="Person:" />
           <TableColumn prefWidth="63.0" text="Fra Dato:" />
@@ -18,19 +18,19 @@
             <TableColumn prefWidth="75.0" text="Antal ture:" />
         </columns>
       </TableView>
-      <Label layoutX="60.0" layoutY="48.0" text="Historik">
+      <Label layoutX="114.0" layoutY="83.0" text="Historik">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="496.0" layoutY="357.0" mnemonicParsing="false" text="Luk Historik" />
-      <DatePicker layoutX="86.0" layoutY="78.0" />
-      <DatePicker layoutX="335.0" layoutY="78.0" />
-      <Label layoutX="263.0" layoutY="82.0" text="Dato Interval" />
-      <ComboBox editable="true" layoutX="86.0" layoutY="118.0" prefHeight="25.0" prefWidth="174.0" />
-      <Label layoutX="18.0" layoutY="122.0" text="CPR Opslag:" />
-      <ChoiceBox layoutX="335.0" layoutY="118.0" prefHeight="25.0" prefWidth="174.0" />
-      <Label layoutX="274.0" layoutY="122.0" text="Kommune:" />
-      <Button layoutX="25.0" layoutY="357.0" mnemonicParsing="false" text="Eksporter CSV fil" />
+      <Button layoutX="550.0" layoutY="392.0" mnemonicParsing="false" text="Luk Historik" />
+      <DatePicker layoutX="140.0" layoutY="113.0" />
+      <DatePicker layoutX="389.0" layoutY="113.0" />
+      <Label layoutX="317.0" layoutY="117.0" text="Dato Interval" />
+      <ComboBox editable="true" layoutX="140.0" layoutY="153.0" prefHeight="25.0" prefWidth="174.0" />
+      <Label layoutX="72.0" layoutY="157.0" text="CPR Opslag:" />
+      <ChoiceBox layoutX="389.0" layoutY="153.0" prefHeight="25.0" prefWidth="174.0" />
+      <Label layoutX="328.0" layoutY="157.0" text="Kommune:" />
+      <Button layoutX="79.0" layoutY="392.0" mnemonicParsing="false" text="Eksporter CSV fil" />
    </children>
 </AnchorPane>

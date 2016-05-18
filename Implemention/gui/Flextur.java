@@ -25,8 +25,6 @@ public class Flextur extends Application {
 	@FXML
 	private BorderPane rootLayout;
 
-	
-	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
@@ -71,7 +69,7 @@ public class Flextur extends Application {
 	}
 
 	public void showOpretBruger() {
-    	try {
+		try {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Flextur.class.getResource("OpretBruger.fxml"));
@@ -87,24 +85,27 @@ public class Flextur extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void Login(String user, String password) {
-    	try {
-			// Load person overview.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Flextur.class.getResource("flexmain.fxml"));
-			AnchorPane personOverview = (AnchorPane) loader.load();
+				try {
+				// Load person overview.
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(Flextur.class.getResource("BestillingsOversigt.fxml"));
+				AnchorPane personOverview = (AnchorPane) loader.load();
 
-			// Set person overview into the center of root layout.
-			rootLayout.setCenter(personOverview);
+				// Set person overview into the center of root layout.
+				rootLayout.setCenter(personOverview);
 
-			flexmainController controller = loader.getController();
-			controller.setMainApp(this);
+				flexmainController controller = loader.getController();
+				controller.setMainApp(this);
 
-		} catch (IOException e) {
-			e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	
 		}
-	}
+	
+
 	/**
 	 * @param args
 	 *            the command line arguments
