@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 
 /**
@@ -24,15 +23,24 @@ public class BestillingsOversigtController implements Initializable {
     private TableView tableView;
     @FXML
     private DatePicker fraDato, tilDato;
-	private Flextur Flextur;
-  /*  
+	private FlexturGUI Flextur;
+   
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
+    private void handleNyBestilling(ActionEvent event) {
+        Flextur.showBestilFlex();
        
     }
-  */
-    public void setMainApp(Flextur flextur) {
+    @FXML
+    private void handleSeHistorik(ActionEvent event) {
+        Flextur.showHistorikAdmin();
+       
+    }
+    @FXML
+    private void handleTildelBil(ActionEvent event) {
+        Flextur.showBestilFlex();
+       
+    }
+    public void setMainApp(FlexturGUI flextur) {
 		this.Flextur = flextur;
 		
 	}

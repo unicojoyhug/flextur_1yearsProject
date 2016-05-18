@@ -20,14 +20,14 @@ public class flexmainController implements Initializable {
     
     @FXML
     private Label label;
-	private Flextur Flextur;
+	private FlexturGUI Flextur;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
     }
-    public void setMainApp(Flextur flextur) {
+    public void setMainApp(FlexturGUI flextur) {
 		this.Flextur = flextur;
 		
 	}

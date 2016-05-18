@@ -23,7 +23,7 @@ public class OpretProfilController implements Initializable {
     
     @FXML
     private Label label;
-	private Flextur flextur;
+	private FlexturGUI flextur;
 	@FXML
 	private PasswordField password;
 	@FXML
@@ -36,7 +36,7 @@ public class OpretProfilController implements Initializable {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
     }
-    public void setMainApp(Flextur flextur) {
+    public void setMainApp(FlexturGUI flextur) {
 		this.flextur = flextur;
 		
 	}

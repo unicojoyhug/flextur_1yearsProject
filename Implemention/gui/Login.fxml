@@ -17,7 +17,7 @@
       <TextField fx:id="username" layoutX="250.0" layoutY="240.0" />
       <Label layoutX="250.0" layoutY="223.0" text="Brugernavn / CPR-Nummer:" />
       <Label layoutX="250.0" layoutY="290.0" text="Kodeord:" />
-      <Button layoutX="307.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleOpretBruger" text="Opret Bruger" />
+      <Button layoutX="307.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleOpretProfil" text="Opret Bruger" />
       <Button layoutX="414.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
       <TextField fx:id="ShowPassword" layoutX="250.0" layoutY="308.0" />
       <CheckBox fx:id="checkBox" layoutX="414.0" layoutY="312.0" mnemonicParsing="false" text="Vis Kodeord" />

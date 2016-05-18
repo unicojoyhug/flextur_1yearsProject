@@ -22,11 +22,11 @@ public class LoginController implements Initializable {
 	private TextField username, ShowPassword;
 	@FXML
 	private CheckBox checkBox;
-	private Flextur flextur;
+	private FlexturGUI flextur;
 
 	@FXML
-	private void handleOpretBruger(ActionEvent event) {
-		flextur.showOpretBruger();
+	private void handleOpretProfil(ActionEvent event) {
+		flextur.showOpretProfil();
 	}
 
 	@FXML
@@ -50,7 +50,7 @@ public class LoginController implements Initializable {
 		ShowPassword();
 	}
 
-	public void setMainApp(Flextur flextur) {
+	public void setMainApp(FlexturGUI flextur) {
 		this.flextur = flextur;
 		
 	}
