@@ -2,6 +2,9 @@ package domain;
 
 import java.time.LocalDate;
 
+import logic.Tilstand;
+
+
 public class HistorikSøgningImpl implements HistorikSøgning  {
 	
 	private LocalDate fraDato;
@@ -65,6 +68,13 @@ public class HistorikSøgningImpl implements HistorikSøgning  {
 	public void setCprNummer(String cprNummer) {
 		this.cprNummer = cprNummer;
 	}
+	
+	
+	@Override
+	public Tilstand getTilstand() {
+		return Tilstand.SØG_HISTORIK;
+	}
+	
 	@Override
 	public String toString() {
 		return "HistorikSøgningImpl [fraDato=" + fraDato + ", tilDato=" + tilDato + ", kommune=" + kommune

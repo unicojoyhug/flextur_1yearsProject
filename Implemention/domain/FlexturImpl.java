@@ -9,10 +9,32 @@ public class FlexturImpl implements Flextur {
 	private LocalDate dato;
 	private LocalTime tid;
 	private String fraAdress;
+	private int fraPostnummer;
+	private int tilPostnummer;
 	private String tilAdress;
 	private double pris;
 	private int antalPersoner;
 	private EkstraTilvalg ekstraTilvalg;
+	
+	
+	
+	@Override
+	public int getFraPostnummer() {
+		return fraPostnummer;
+	}
+	@Override
+	public void setFraPostnummer(int fraPostnummer) {
+		this.fraPostnummer = fraPostnummer;
+	}
+	@Override
+	public int getTilPostnummer() {
+		return tilPostnummer;
+	}
+	@Override
+	public void setTilPostnummer(int tilPostnummer) {
+		this.tilPostnummer = tilPostnummer;
+	}
+	
 	/* (non-Javadoc)
 	 * @see domain.Flextur#getFlexturId()
 	 */

@@ -9,6 +9,7 @@ import java.sql.Date;
 
 
 import domain.Flextur;
+import domain.FlexturImpl;
 import domain.HistorikSøgning;
 import exception.PersistenceFailureException;
 import util.CloseForSQL;
@@ -32,11 +33,29 @@ public class TurMapperImpl implements TurMapper {
 			statement = dataAccess.getConnection().prepareStatement(GET_MATCHENDE_HISTORIK_KUNDE);
 			statement.setDate(1, Date.valueOf(historikSøgning.getFraDato()));
 			statement.setDate(2, Date.valueOf(historikSøgning.getTilDato()));
+			statement.setString(3, historikSøgning.getCprNummer());
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()){
+				Flextur flextur = new FlexturImpl();
+				flextur.setDato(resultSet.getDate("dato").toLocalDate());
+				flextur.setFraAdress(resultSet.getString("fraAdress"));
+				flextur.setFraPostnummer(resultSet.getInt("fraPostnummer"));
+				flextur.setTilAdress(resultSet.getString("tilAdress"));
+				flextur.setTilPostnummer(resultSet.getInt("tilPostnummer"));
+				flextur.setAntalPersoner(resultSet.getInt("antalPersoner"));
+				flextur.setPris((Double)resultSet.getDouble("pris"));
+				
+				matchendeHistorik.add(flextur);
+			
+			}
 			
 		} catch (SQLException exc){
-			throw new PersistenceFailureException("Query has failed");
-			
+			throw new PersistenceFailureException("Query has failed");			
+		}finally{
+			close.close(resultSet, statement);		
 		}
+		
 		return matchendeHistorik;
 	}
 

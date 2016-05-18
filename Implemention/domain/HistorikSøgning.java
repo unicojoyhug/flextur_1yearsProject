@@ -2,6 +2,8 @@ package domain;
 
 import java.time.LocalDate;
 
+import logic.Tilstand;
+
 public interface HistorikSøgning {
 
 	LocalDate getFraDato();
@@ -19,5 +21,7 @@ public interface HistorikSøgning {
 	String getCprNummer();
 
 	void setCprNummer(String cprNummer);
+
+	Tilstand getTilstand();
 
 }

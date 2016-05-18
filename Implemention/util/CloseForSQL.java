@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class CloseForSQL {
 	
-	public void cleanup(ResultSet rs, PreparedStatement stmt) {
+	public void close(ResultSet rs, PreparedStatement stmt) {
 		if (rs != null) {
 			try {
 				rs.close();
@@ -29,7 +29,7 @@ public class CloseForSQL {
 		}		
 	}
 
-	public void cleanup(PreparedStatement stmt) {
+	public void close(PreparedStatement stmt) {
 		if (stmt != null) {
 			try {
 				stmt.close();

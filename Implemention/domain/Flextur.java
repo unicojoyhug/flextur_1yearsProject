@@ -41,4 +41,12 @@ public interface Flextur {
 
 	void setEkstraTilvalg(EkstraTilvalg ekstraTilvalg);
 
+	int getFraPostnummer();
+
+	void setTilPostnummer(int tilPostnummer);
+
+	int getTilPostnummer();
+
+	void setFraPostnummer(int fraPostnummer);
+
 }
