@@ -1,5 +1,5 @@
 package logic;
 
 public enum Tilstand {
-	SØG_HISTORIK;
+	SØG_HISTORIK, HENT_HISTORIK;
 }

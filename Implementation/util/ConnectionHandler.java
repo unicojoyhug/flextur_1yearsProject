@@ -27,10 +27,13 @@ public class ConnectionHandler {
 		return handler;
 	}
 
-	public Connection getConnection() throws PersistenceConnectionFailureException {
+	synchronized public Connection getConnection() throws PersistenceConnectionFailureException {
 		if (level == 0) {
 			try {
-				this.connection = DriverManager.getConnection("jdbc:hsqldb:hsql://80.163.21.9:25567", "SA", "");
+//				this.connection = DriverManager.getConnection("jdbc:hsqldb:hsql://80.163.21.9:25567", "SA", "");
+				this.connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/mydatabase", "SA", "");
+
+				
 				this.connection.setAutoCommit(false);
 			} catch (SQLException e) {
 				throw new PersistenceConnectionFailureException("Failed to connect to database");
@@ -60,7 +63,7 @@ public class ConnectionHandler {
 		}
 	}
 
-	public void close() {
+	synchronized public void close() {
 		if (level == 1) {
 			try {
 				this.connection.close();

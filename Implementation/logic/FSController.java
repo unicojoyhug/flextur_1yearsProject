@@ -2,17 +2,20 @@ package logic;
 
 import java.util.List;
 
+
 import domain.Flextur;
+import domain.HistorikForBM;
 import domain.HistorikSøgning;
 
-public interface FSController {
+public interface FSController extends Observable {
 
 	void søgHistorik();
 	
 	List<Flextur> angivSøgningOplysninger(HistorikSøgning historikSøgning);
 
-	void tilmeldObserver(Observer observer);
+	List<HistorikForBM> angivSøgningOplysningerForBM(HistorikSøgning historikSøgning);
 
-	void notifyObservers(List<Tilstand> tilstande);
+	String[] getKommuneListe();
+
 	
 }

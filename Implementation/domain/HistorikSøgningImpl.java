@@ -2,15 +2,18 @@ package domain;
 
 import java.time.LocalDate;
 
+import logic.Observable;
 import logic.Tilstand;
 
 
-public class HistorikSøgningImpl implements HistorikSøgning  {
+public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
 	
 	private LocalDate fraDato;
 	private LocalDate tilDato;
 	private String kommune;
 	private String cprNummer;
+	
+	
 	
 	/* (non-Javadoc)
 	 * @see domain.HistorikSøgning#getFraDato()

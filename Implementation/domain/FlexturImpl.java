@@ -3,7 +3,9 @@ package domain;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class FlexturImpl implements Flextur {
+import logic.Observable;
+
+public class FlexturImpl implements Flextur , Observable{
 	private long flexturId;
 	private int kundeId;
 	private LocalDate dato;

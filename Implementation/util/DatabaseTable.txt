@@ -306,7 +306,7 @@ where (dato >= '2016-05-01' AND  dato <= '2016-05-30') AND cpr.cprnummer='170182
 
 
 
-select cpr.cprnummer, kunde.efternavn, kunde.fornavn, kundeid, sum(antalpersoner) as AntalPersoner,
+select cpr.cprnummer, kunde.efternavn, kunde.fornavn, kundeid, kommune.navn as kommune, sum(antalpersoner) as AntalPersoner,
  
 count(id) as antalAfTur , sum(pris) as total_pris from flextur 
 
@@ -314,9 +314,11 @@ inner join kunde on kundeid = kunde.id
 
 inner join cpr on cpr.id = kunde.loginid
 
+inner join kommune on kunde.kommune = kommune.id
+
 where (dato >= '2016-05-01' AND  dato <= '2016-05-30') AND kundeid =3 
 
-group by  kundeid, cpr.cprnummer, kunde.efternavn, kunde.fornavn;
+group by  kundeid, cpr.cprnummer, kunde.efternavn, kunde.fornavn, kommune.navn;
 
 
 

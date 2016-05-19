@@ -15,12 +15,17 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import logic.FSController;
+import logic.FSControllerImpl;
 
 /**
  *
  * @author Jonas Mørch
  */
 public class FlexturGUI extends Application {
+	
+	private FSController fsController = new FSControllerImpl();
+
 
 	private Stage primaryStage;
 	@FXML
@@ -182,10 +187,15 @@ public class FlexturGUI extends Application {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("SeHistorikAdmin.fxml"));
-			AnchorPane personOverview = (AnchorPane) loader.load();
+			AnchorPane showHistorikAdmin = (AnchorPane) loader.load();
 
-			// Set person overview into the center of root layout.
-			rootLayout.setCenter(personOverview);
+			// set FSPane : abstract class for setting FSController
+			rootLayout.setCenter(showHistorikAdmin);
+
+			FSPane showHistorikAdminController = loader.<FSPane> getController();
+			showHistorikAdminController.setFSController(fsController);
+			
+			
 
 			SeHistorikAdminController controller = loader.getController();
 			controller.setMainApp(this);
