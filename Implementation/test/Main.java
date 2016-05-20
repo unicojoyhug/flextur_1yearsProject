@@ -19,6 +19,7 @@ public class Main {
 		hs.setTilDato(LocalDate.of(2016, 05, 31));
 		fs.søgHistorik();
 //		System.out.println(fs.angivSøgningOplysninger(hs));
+		System.out.println(hs);
 		
 		System.out.println(fs.angivSøgningOplysningerForBM(hs));
 		

@@ -39,6 +39,7 @@ import logic.Tilstand;
  */
 public class SeHistorikAdminController extends FSPane implements Initializable {
 	
+	
 	private FlexturGUI flexturGUI;
 
 	@FXML
@@ -104,25 +105,35 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 		this.flexturGUI = flexturGUI;
 	}
 	
+	//TODO input validation : empty text field
 	@FXML
 	private void hentHistorikListe(ActionEvent event) {
+		
+		resultListe.clear();
+		
 		HistorikSøgning hs = new HistorikSøgningImpl();
 		hs.setFraDato(fraDato.getValue());
 		hs.setTilDato(tilDato.getValue());
-		hs.setKommune(getChoice(kommune));
-		hs.setCprNummer(cprNummer.getText());
+		hs.setKommune(getKommune(kommune));
+		if(cprNummer.getText().isEmpty()){
+			hs.setCprNummer(null);
+		}else{
+			hs.setCprNummer(cprNummer.getText());
+		}
+		System.out.println(hs);
 		
-		resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));		
+		resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));	
 //		resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));
 //		
 		tableView.setItems(resultListe);
 	}
 
 	
-	//to exprot csv fil
+	//TODO to exprot csv fil : in gui with fx dependency? or another class to do so
 	@FXML
 	private void exporterCsvFil(){
-		
+		//f.eks.
+		//fsController.exportCSVFil(resultListe); 
 	}
 	
 	private void dropDownMenu() {
@@ -134,7 +145,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 		kommune.getItems().addAll("Herning", "Aarhus" );
 	}
 	
-	private String getChoice(ChoiceBox<String> kommune) {
+	private String getKommune(ChoiceBox<String> kommune) {
 		String k = kommune.getValue();
 		return k;
 	}
@@ -176,7 +187,8 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 	public void update(Observable observable, Object tilstand) {
 			// TODO Auto-generated method stub
 		
-		if(observable.equals(Tilstand.HENT_HISTORIK)){			
+		if(observable.equals(Tilstand.HENT_HISTORIK)){	
+//			resultListe.clear();
 			tableView.setItems(resultListe);
 		}
 		
