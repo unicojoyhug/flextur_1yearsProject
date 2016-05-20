@@ -5,6 +5,8 @@
  */
 package gui;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -26,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logic.Observable;
 import logic.Tilstand;
+import seHistorik.Kommune;
 import logic.FSController;
 import logic.FSControllerImpl;
 
@@ -107,8 +110,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 		} else {
 			hs.setCprNummer(cprNummer.getText());
 		}
-		System.out.println(hs);
-
+		
 		resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));
 		// resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));
 		//
@@ -119,8 +121,17 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 	// do so
 	@FXML
 	private void exporterCsvFil() {
-		// f.eks.
-		// fsController.exportCSVFil(resultListe);
+		if(!resultListe.isEmpty()){
+
+						
+			String filenavn = System.getProperty("user.home")+"\\"+fraDato.getValue().toString() 
+			+ "_" + tilDato.getValue().toString() + "_" + getKommune(kommuneCombo)+ ".csv" ;
+
+			fsController.exporterCSVForKommune(filenavn, resultListe);
+
+		}else{
+
+		}
 	}
 
 	private String getKommune(ComboBox<String> kommuneCombo2) {

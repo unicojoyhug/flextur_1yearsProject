@@ -221,7 +221,7 @@ public class FlexturGUI extends Application {
 	}
 
 	public void Login(String user, String password) {
-		System.out.println("Ikke implementeret");
+		System.out.println("FlexGUI : Ikke implementeret");
 
 	}
 

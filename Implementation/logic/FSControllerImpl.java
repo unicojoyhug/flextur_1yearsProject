@@ -11,6 +11,7 @@ import data.TurMapperImpl;
 import domain.Flextur;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
+import util.CSVExporterImpl;
 import util.LogicTrans;
 import sats.Sats;
 /**
@@ -24,7 +25,7 @@ public class FSControllerImpl implements FSController {
 //	private HistorikSøgning historikSøgning;
 	
 	
-
+	
 	
 
 	@Override
@@ -42,8 +43,7 @@ public class FSControllerImpl implements FSController {
 
 		return new LogicTrans<List<Flextur>>(dataAccess).transaction
 				(()->turMapper.getMatchendeHistorik(dataAccess, historikSøgning));
-	
-	
+		
 	}
 	
 
@@ -61,6 +61,13 @@ public class FSControllerImpl implements FSController {
 	@Override
 	public String[] getKommuneListe(){
 		return Sats.i().getKommuner();
+		
+	}
+
+	@Override
+	public void exporterCSVForKommune(String filenavn, List<HistorikForBM> historikListe){
+		
+		CSVExporterImpl.generateCsvFileFlextur(filenavn, historikListe);	
 		
 	}
 	
