@@ -65,6 +65,8 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 		HistorikSøgning hs = new HistorikSøgningImpl();
 		hs.setFraDato(fraDato.getValue());
 		hs.setTilDato(tilDato.getValue());
+		hs.setCprNummer("000000000"); //TODO
+		hs.setKommune("Herning");
 		resultListe.addAll(fsController.angivSøgningOplysninger(hs));
 		tableView.setItems(resultListe);
 	}
