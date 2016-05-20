@@ -23,9 +23,8 @@ import logic.FSControllerImpl;
  * @author Jonas Mørch
  */
 public class FlexturGUI extends Application {
-	
-	private FSController fsController = new FSControllerImpl();
 
+	private FSController fsController = new FSControllerImpl();
 
 	private Stage primaryStage;
 	@FXML
@@ -194,8 +193,6 @@ public class FlexturGUI extends Application {
 
 			FSPane showHistorikAdminController = loader.<FSPane> getController();
 			showHistorikAdminController.setFSController(fsController);
-			
-			
 
 			SeHistorikAdminController controller = loader.getController();
 			controller.setMainApp(this);
