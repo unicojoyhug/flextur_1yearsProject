@@ -1,22 +1,33 @@
 package data;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-import util.ConnectionHandler;
 
 /**
- * DataAccess using Singleton pattern : ConnectionHandler
  * @author Juyoung Choi
  *
  */
 
 public class DataAccessImpl implements DataAccess {
 	
+	private static final String CONNECTION_URL = "jdbc:hsqldb:hsql://localhost/mydatabase";
+//	private static final String CONNECTION_SERVER = "jdbc:hsqldb:hsql://80.163.21.9:25567";
+
+	private static final String DB_USER = "SA";
+	private static final String DB_PASSWORD = "";
 	private Connection connection = null;
 
 	public DataAccessImpl(){
-		
-		this.connection = ConnectionHandler.getInstance().getConnection();
+		try {
+			this.connection = DriverManager.getConnection(CONNECTION_URL, DB_USER, DB_PASSWORD);
+//			this.connection = DriverManager.getConnection(CONNECTION_SERVER, DB_USER, DB_PASSWORD);
+
+			this.connection.setAutoCommit(false);
+		} catch (SQLException e) {
+			throw new RuntimeException("Connection is not available.", e);
+		}
 	}
 
 	@Override
@@ -25,19 +36,29 @@ public class DataAccessImpl implements DataAccess {
 	}
 
 	@Override
-	public void commit()  {
-		ConnectionHandler.getInstance().commit();
-
+	public void close() {
+		try {
+			this.connection.close();
+		} catch (SQLException e) {
+			throw new RuntimeException("Close : Connection is not available.", e);
+		}
 	}
 
 	@Override
-	public void close() {
-		ConnectionHandler.getInstance().close();
+	public void commit() {
+		try {
+			this.connection.commit();
+		} catch (SQLException e) {
+			throw new RuntimeException("Commit : Connection is not available.", e);
+		}
 	}
 
 	@Override
 	public void rollback() {
-		ConnectionHandler.getInstance().rollback();
+		try {
+			this.connection.rollback();
+		} catch (SQLException e) {
+			throw new RuntimeException("RollBack : Connection is not available.", e);
+		}
 	}
-
 }
