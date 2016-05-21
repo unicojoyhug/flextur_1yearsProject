@@ -11,7 +11,7 @@ public class DialogBox {
 		this.window = window;
 	}
 	
-	public void visAdvarselDialog(){
+	public void visOplysningManglerAdvarselDialog(){
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(window);
 		alert.setTitle("ADVARSEL");

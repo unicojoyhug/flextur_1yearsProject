@@ -126,7 +126,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 			resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));		
 			tableView.setItems(resultListe);
 		} catch (MissingOplysningExcpetion e){
-			alert.visAdvarselDialog();
+			alert.visOplysningManglerAdvarselDialog();
 		} 
 
 		kommuneCombo.setValue(""); 
