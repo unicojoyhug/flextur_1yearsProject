@@ -119,8 +119,18 @@ public class FlexturGUI extends Application {
 			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 
-			MenuAdminController controller = loader.getController();
-			controller.setMainApp(this);
+//			MenuAdminController controller = loader.getController();
+//			controller.setMainApp(this);
+			
+			// TODO remember to set this as fsController, in each controller : setMainApp to connect
+//			f.eks. 
+//			public void setMainApp(FlexturGUI flextur) {
+//					this.flextur = flextur;
+//					
+//				}
+			FSPane showMenuAdmin = loader.<FSPane> getController();
+			showMenuAdmin.setFSController(fsController);
+			showMenuAdmin.setMainApp(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -173,10 +183,11 @@ public class FlexturGUI extends Application {
 			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 			
-
-			SeHistorikKundeController controller = loader.getController();
-			controller.setMainApp(this);
-
+			FSPane seHistorikKundeController = loader.<FSPane> getController();
+			seHistorikKundeController.setFSController(fsController);
+			seHistorikKundeController.setMainApp(this);
+			
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -189,15 +200,12 @@ public class FlexturGUI extends Application {
 			loader.setLocation(FlexturGUI.class.getResource("SeHistorikAdmin.fxml"));
 			AnchorPane showHistorikAdmin = (AnchorPane) loader.load();
 
-			// set FSPane : abstract class for setting FSController
+			// set FSPane : abstract class for setting FSController : setController
 			rootLayout.setCenter(showHistorikAdmin);
 
 			FSPane seHistorikAdminController = loader.<FSPane> getController();
 			seHistorikAdminController.setFSController(fsController);
 			seHistorikAdminController.setMainApp(this);
-
-//			SeHistorikAdminController controller = loader.getController();
-//			controller.setMainApp(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -44,6 +44,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 
 	private FlexturGUI flexturGUI;
 	private FSController FSC = new FSControllerImpl();
+	
 
 	@FXML
 	private Label label;
@@ -93,10 +94,15 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 
 	@FXML
 	private void handleToMenu(ActionEvent event) {
+		
 		flexturGUI.showMenuAdmin();
+		
 	}
 
-	
+	 public void setMainApp(FlexturGUI flextur) {
+			this.flexturGUI = flextur;
+			
+	}
 
 	// TODO input validation : empty text field (DONE with EXCEPTION ) 
 	//TODO kommune combo back to empty choice : DONE with : setValue("")
