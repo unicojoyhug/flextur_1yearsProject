@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
@@ -98,7 +99,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 	
 
 	// TODO input validation : empty text field (DONE with EXCEPTION ) 
-	//TODO kommune combo back to empty choice
+	//TODO kommune combo back to empty choice : DONE with : setValue("")
 	@FXML
 	private void hentHistorikListe(ActionEvent event) {
 		DialogBox alert = new DialogBox(window);
@@ -122,7 +123,8 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 			alert.visAdvarselDialog();
 		} 
 
-		
+		kommuneCombo.setValue(""); 
+
 	}
 
 	// TODO to exprot csv fil : in gui with fx dependency? or another class to
