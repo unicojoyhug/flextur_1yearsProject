@@ -36,9 +36,11 @@ public class MenuAdminController extends FSPane implements Initializable {
     private void handleSeHistorik(ActionEvent event){
     	flextur.showHistorikAdmin();
     }
+    
     @FXML
     private void handleLogUd(ActionEvent event){
-    	System.out.println("Ikke impletementeret");
+
+    	flextur.showLogin();    
     }
     public void setMainApp(FlexturGUI flextur) {
 		this.flextur = flextur;
