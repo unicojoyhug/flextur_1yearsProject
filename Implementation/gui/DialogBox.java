@@ -1,23 +1,19 @@
 package gui;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
+import java.util.List;
 
-public class DialogBox {
-	private Stage window;
+import domain.HistorikForBM;
 
-	public DialogBox(Stage window){
-		this.window = window;
-	}
-	
-	public void visOplysningManglerAdvarselDialog(){
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.initOwner(window);
-		alert.setTitle("ADVARSEL");
-		alert.setHeaderText("Mangler nogle oplysninger");
-		alert.setContentText("Tjek venligst tekstfelterne");
-		alert.showAndWait();
-	}
+public interface DialogBox {
+
+	void visOplysningManglerAdvarselDialog();
+
+	void visGemtDialogue(String filenavn);
+
+	void visCSVFilExportingFejlDialog();
+
+	void visCSVFilExportingAdvarselDialog(String filenavn, List<HistorikForBM> resultListe);
+
+	void visTomListeDialog();
 
 }

@@ -1,7 +1,6 @@
 package test;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 
 import domain.HistorikSøgning;
 import domain.HistorikSøgningImpl;

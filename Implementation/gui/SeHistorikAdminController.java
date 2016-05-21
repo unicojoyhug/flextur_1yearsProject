@@ -5,15 +5,13 @@
  */
 package gui;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
 import domain.HistorikSøgningImpl;
+import exception.CSVExportingFEJLException;
 import exception.MissingOplysningExcpetion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +29,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import logic.Observable;
 import logic.Tilstand;
-import seHistorik.Kommune;
 import logic.FSController;
 import logic.FSControllerImpl;
 
@@ -44,7 +41,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 
 	private FlexturGUI flexturGUI;
 	private FSController FSC = new FSControllerImpl();
-	
+
 
 	@FXML
 	private Label label;
@@ -89,26 +86,26 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 	private Button csvFil;
 
 	private ObservableList<HistorikForBM> resultListe = FXCollections.observableArrayList();
-	
+
 	private Stage window;
 
 	@FXML
 	private void handleToMenu(ActionEvent event) {
-		
+
 		flexturGUI.showMenuAdmin();
-		
+
 	}
 
-	 public void setMainApp(FlexturGUI flextur) {
-			this.flexturGUI = flextur;
-			
+	public void setMainApp(FlexturGUI flextur) {
+		this.flexturGUI = flextur;
+
 	}
 
 	// TODO input validation : empty text field (DONE with EXCEPTION ) 
 	//TODO kommune combo back to empty choice : DONE with : setValue("")
 	@FXML
 	private void hentHistorikListe(ActionEvent event) {
-		DialogBox alert = new DialogBox(window);
+		DialogBox alert = new DialogBoxImpl(window);
 
 		resultListe.clear();
 
@@ -116,49 +113,59 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 		try {
 			hs.setFraDato(fraDato.getValue());
 			hs.setTilDato(tilDato.getValue());
-			hs.setKommune(getKommune(kommuneCombo));
+			hs.setKommune(kommuneCombo.getValue());
 			if (cprNummer.getText().isEmpty()) {
 				hs.setCprNummer(null);
 			} else {
 				hs.setCprNummer(cprNummer.getText());
 			}
+
+			resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));
 			
-			resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));		
 			tableView.setItems(resultListe);
+			
 		} catch (MissingOplysningExcpetion e){
 			alert.visOplysningManglerAdvarselDialog();
 		} 
 
+	}
+
+	
+	@FXML
+	private void exporterCsvFil() {
+		DialogBox alert = new DialogBoxImpl(window);
+		String filenavn = System.getProperty("user.home")+"\\"+fraDato.getValue().toString() 
+				+ "_" + tilDato.getValue().toString() + "_" + kommuneCombo.getValue()+ ".csv" ;
+		
+		try {
+
+			if(resultListe.isEmpty()){
+				
+				alert.visCSVFilExportingAdvarselDialog(filenavn, resultListe);
+
+			}else{
+
+				fsController.exporterCSVForKommune(filenavn, resultListe);
+				alert.visGemtDialogue(filenavn);
+			}
+
+		} catch (CSVExportingFEJLException exe) {
+			alert.visCSVFilExportingFejlDialog();
+
+		}
+		
+		//TODO or clear button? or add it to Sats.
 		kommuneCombo.setValue(""); 
 
 	}
 
-	// TODO to exprot csv fil : in gui with fx dependency? or another class to
-	// do so
-	@FXML
-	private void exporterCsvFil() {
-		if(!resultListe.isEmpty()){
 
-
-			String filenavn = System.getProperty("user.home")+"\\"+fraDato.getValue().toString() 
-					+ "_" + tilDato.getValue().toString() + "_" + getKommune(kommuneCombo)+ ".csv" ;
-
-			fsController.exporterCSVForKommune(filenavn, resultListe);
-
-		}else{
-
-		}
-	}
-
-	private String getKommune(ComboBox<String> kommuneCombo2) {
-		String k = kommuneCombo2.getValue();
-		return k;
-	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		
 		kommuneCombo.setItems(FXCollections.observableArrayList(FSC.getKommuneListe()));
+
 		personCPRColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, String>("cprNummer"));
 		fraDatoColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, LocalDate>("fraDato"));
 		tilDatoColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, LocalDate>("tilDato"));

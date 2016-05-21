@@ -1,6 +1,5 @@
 package logic;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -11,6 +10,7 @@ import data.TurMapperImpl;
 import domain.Flextur;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
+import util.CSVExporter;
 import util.CSVExporterImpl;
 import util.LogicTrans;
 import sats.Sats;
@@ -22,11 +22,11 @@ import sats.Sats;
 public class FSControllerImpl implements FSController {
 	private TurMapper turMapper = new TurMapperImpl();
 
-//	private HistorikSøgning historikSøgning;
-	
-	
-	
-	
+	//	private HistorikSøgning historikSøgning;
+
+
+
+
 
 	@Override
 	public void søgHistorik() {
@@ -38,37 +38,39 @@ public class FSControllerImpl implements FSController {
 	@Override
 	public List<Flextur> angivSøgningOplysninger(HistorikSøgning historikSøgning) {
 		DataAccess dataAccess = new DataAccessImpl();
-		
+
 		notifyObservers(this, Tilstand.HENT_HISTORIK);
 
 		return new LogicTrans<List<Flextur>>(dataAccess).transaction
 				(()->turMapper.getMatchendeHistorik(dataAccess, historikSøgning));
-		
+
 	}
-	
+
 
 
 	@Override
 	public List<HistorikForBM> angivSøgningOplysningerForBM(HistorikSøgning historikSøgning) {
-	
+
 		DataAccess dataAccess = new DataAccessImpl();
-		
+
 		return new LogicTrans<List<HistorikForBM>>(dataAccess).transaction
 				(()->turMapper.getMatchendeHistorikForBM(dataAccess, historikSøgning));
-		
+
 	}
 
 	@Override
 	public String[] getKommuneListe(){
+
+
 		return Sats.i().getKommuner();
-		
+
 	}
 
 	@Override
 	public void exporterCSVForKommune(String filenavn, List<HistorikForBM> historikListe){
-		
-		CSVExporterImpl.generateCsvFileFlextur(filenavn, historikListe);	
-		
+		CSVExporter csvExporter = new CSVExporterImpl();
+
+		csvExporter.generateCsvFileFlextur(filenavn, historikListe);
+
 	}
-	
 }
