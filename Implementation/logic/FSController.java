@@ -17,8 +17,9 @@ public interface FSController extends Observable {
 
 	String[] getKommuneListe();
 
+	void exporterHistorikForBM(String filenavn, List<HistorikForBM> historikListe);
 
-	void exporterCSVForKommune(String filenavn, List<HistorikForBM> historikListe);
+	void exporterHistorikForKunde(String filenavn, List<Flextur> historikListe);
 
 	
 }

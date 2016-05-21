@@ -67,10 +67,18 @@ public class FSControllerImpl implements FSController {
 	}
 
 	@Override
-	public void exporterCSVForKommune(String filenavn, List<HistorikForBM> historikListe){
+	public void exporterHistorikForBM(String filenavn, List<HistorikForBM> historikListe){
 		CSVExporter csvExporter = new CSVExporterImpl();
+		
+		csvExporter.generateCsvFileFlexturForBM(filenavn, historikListe);
 
-		csvExporter.generateCsvFileFlextur(filenavn, historikListe);
+	}
+	
+	@Override
+	public void exporterHistorikForKunde(String filenavn, List<Flextur> historikListe){
+		CSVExporter csvExporter = new CSVExporterImpl();
+		
+		csvExporter.generateCsvFileFlexturForKunde(filenavn, historikListe);
 
 	}
 }

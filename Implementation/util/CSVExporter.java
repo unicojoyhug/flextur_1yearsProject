@@ -2,10 +2,13 @@ package util;
 
 import java.util.List;
 
+import domain.Flextur;
 import domain.HistorikForBM;
 
 public interface CSVExporter {
 
-	void generateCsvFileFlextur(String filenavn, List<HistorikForBM> historikListe);
+	void generateCsvFileFlexturForBM(String filenavn, List<HistorikForBM> historikListe);
+
+	void generateCsvFileFlexturForKunde(String filenavn, List<Flextur> historikListe);
 
 }

@@ -145,7 +145,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 
 			}else{
 
-				fsController.exporterCSVForKommune(filenavn, resultListe);
+				fsController.exporterHistorikForBM(filenavn, resultListe);
 				alert.visGemtDialogue(filenavn);
 			}
 

@@ -56,7 +56,7 @@ public class DialogBoxImpl implements DialogBox {
 		if (result.get() == ButtonType.OK){
 						
 			FSController fsController = new FSControllerImpl();
-			fsController.exporterCSVForKommune(filenavn, resultListe);
+			fsController.exporterHistorikForBM(filenavn, resultListe);
 			visGemtDialogue(filenavn);
 
 		} 
