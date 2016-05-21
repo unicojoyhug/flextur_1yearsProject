@@ -11,7 +11,7 @@ public class BrugerImpl implements Bruger {
 	private long id;
 	private String loginId;
 	private String encryptedKodeord;
-	private boolean erLoggetInd = false;
+	private boolean erLoggetInd;
 	private boolean erKunde;
 	
 	/* (non-Javadoc)

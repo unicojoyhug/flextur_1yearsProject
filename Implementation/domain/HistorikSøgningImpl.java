@@ -2,6 +2,7 @@ package domain;
 
 import java.time.LocalDate;
 
+import exception.MissingOplysningExcpetion;
 import logic.Observable;
 import logic.Tilstand;
 
@@ -27,6 +28,10 @@ public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
 	 */
 	@Override
 	public void setFraDato(LocalDate fraDato) {
+		if (fraDato == null) {
+			throw new MissingOplysningExcpetion ("Fra Dato Mangler");
+		}
+		
 		this.fraDato = fraDato;
 	}
 	/* (non-Javadoc)
@@ -41,6 +46,9 @@ public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
 	 */
 	@Override
 	public void setTilDato(LocalDate tilDato) {
+		if (tilDato == null) {
+			throw new MissingOplysningExcpetion ("Til Dato Mangler");
+		}
 		this.tilDato = tilDato;
 	}
 	/* (non-Javadoc)
@@ -55,6 +63,9 @@ public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
 	 */
 	@Override
 	public void setKommune(String kommune) {
+		if (tilDato == null) {
+			throw new MissingOplysningExcpetion ("Kommune Mangler");
+		}
 		this.kommune = kommune;
 	}
 	/* (non-Javadoc)
