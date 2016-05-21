@@ -15,7 +15,8 @@ import logic.Observable;
 
 /**
  *
- * @author Jonas Mørch
+ * @author Jonas Mørch, Juyoung Choi
+ * 
  */
 public class MenuAdminController extends FSPane implements Initializable {
     

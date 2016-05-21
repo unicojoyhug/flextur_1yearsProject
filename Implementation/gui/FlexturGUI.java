@@ -20,7 +20,7 @@ import logic.FSControllerImpl;
 
 /**
  *
- * @author Jonas Mørch
+ * @author Jonas Mørch, Juyoung Choi
  */
 public class FlexturGUI extends Application {
 
