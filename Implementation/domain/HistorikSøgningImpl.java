@@ -11,7 +11,7 @@ public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
 	
 	private LocalDate fraDato = null;
 	private LocalDate tilDato = null;
-	private String kommune;
+	private String kommune = null;
 	private String cprNummer;
 	
 	
@@ -63,7 +63,9 @@ public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
 	 */
 	@Override
 	public void setKommune(String kommune) {
-	
+		if (kommune == null) {
+			throw new MissingOplysningExcpetion ("Til Dato Mangler");
+		}
 		this.kommune = kommune;
 	}
 	/* (non-Javadoc)

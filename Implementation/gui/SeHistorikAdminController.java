@@ -95,11 +95,10 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 		flexturGUI.showMenuAdmin();
 	}
 
-	public void setMainApp(FlexturGUI flexturGUI) {
-		this.flexturGUI = flexturGUI;
-	}
+	
 
-	// TODO input validation : empty text field
+	// TODO input validation : empty text field (DONE with EXCEPTION ) 
+	//TODO kommune combo back to empty choice
 	@FXML
 	private void hentHistorikListe(ActionEvent event) {
 		DialogBox alert = new DialogBox(window);
@@ -116,14 +115,14 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 			} else {
 				hs.setCprNummer(cprNummer.getText());
 			}
+			
+			resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));		
+			tableView.setItems(resultListe);
 		} catch (MissingOplysningExcpetion e){
 			alert.visAdvarselDialog();
 		} 
 
-		resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));
-		// resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));
-		//
-		tableView.setItems(resultListe);
+		
 	}
 
 	// TODO to exprot csv fil : in gui with fx dependency? or another class to
@@ -150,6 +149,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		
 		kommuneCombo.setItems(FXCollections.observableArrayList(FSC.getKommuneListe()));
 		personCPRColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, String>("cprNummer"));
 		fraDatoColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, LocalDate>("fraDato"));

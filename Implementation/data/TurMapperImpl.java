@@ -90,6 +90,7 @@ public class TurMapperImpl implements TurMapper {
 
 
 		try {
+			
 			if(historikSøgning.getCprNummer()!=null){
 
 				statement = dataAccess.getConnection().prepareStatement(GET_MATCHENDE_HISTORIK_BM_CPR);

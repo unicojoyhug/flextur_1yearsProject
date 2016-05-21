@@ -172,6 +172,7 @@ public class FlexturGUI extends Application {
 
 			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
+			
 
 			SeHistorikKundeController controller = loader.getController();
 			controller.setMainApp(this);
@@ -191,11 +192,12 @@ public class FlexturGUI extends Application {
 			// set FSPane : abstract class for setting FSController
 			rootLayout.setCenter(showHistorikAdmin);
 
-			FSPane showHistorikAdminController = loader.<FSPane> getController();
-			showHistorikAdminController.setFSController(fsController);
+			FSPane seHistorikAdminController = loader.<FSPane> getController();
+			seHistorikAdminController.setFSController(fsController);
+			seHistorikAdminController.setMainApp(this);
 
-			SeHistorikAdminController controller = loader.getController();
-			controller.setMainApp(this);
+//			SeHistorikAdminController controller = loader.getController();
+//			controller.setMainApp(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -211,6 +213,7 @@ public class FlexturGUI extends Application {
 
 			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
+		
 
 			BestillingsOversigtController controller = loader.getController();
 			controller.setMainApp(this);
