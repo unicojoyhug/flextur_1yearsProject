@@ -13,6 +13,7 @@ import domain.FlexturImpl;
 import domain.HistorikForBM;
 import domain.HistorikForBMImpl;
 import domain.HistorikSøgning;
+import exception.MissingOplysningExcpetion;
 import exception.PersistenceFailureException;
 import util.CloseForSQL;
 
@@ -124,8 +125,10 @@ public class TurMapperImpl implements TurMapper {
 			}
 
 		} catch (SQLException exc){
-			throw new PersistenceFailureException("Query has failed");			
-		}finally{
+			throw new PersistenceFailureException("Query has failed");		
+		} catch (NullPointerException exc){
+			throw new MissingOplysningExcpetion("Oplysninger mangler");
+		} finally{
 			close.close(resultSet, statement);		
 		}
 

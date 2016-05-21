@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
 import domain.HistorikSøgningImpl;
+import exception.MissingOplysningExcpetion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import logic.Observable;
 import logic.Tilstand;
 import seHistorik.Kommune;
@@ -85,6 +87,8 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 	private Button csvFil;
 
 	private ObservableList<HistorikForBM> resultListe = FXCollections.observableArrayList();
+	
+	private Stage window;
 
 	@FXML
 	private void handleToMenu(ActionEvent event) {
@@ -98,19 +102,24 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 	// TODO input validation : empty text field
 	@FXML
 	private void hentHistorikListe(ActionEvent event) {
+		DialogBox alert = new DialogBox(window);
 
 		resultListe.clear();
 
 		HistorikSøgning hs = new HistorikSøgningImpl();
-		hs.setFraDato(fraDato.getValue());
-		hs.setTilDato(tilDato.getValue());
-		hs.setKommune(getKommune(kommuneCombo));
-		if (cprNummer.getText().isEmpty()) {
-			hs.setCprNummer(null);
-		} else {
-			hs.setCprNummer(cprNummer.getText());
-		}
-		
+		try {
+			hs.setFraDato(fraDato.getValue());
+			hs.setTilDato(tilDato.getValue());
+			hs.setKommune(getKommune(kommuneCombo));
+			if (cprNummer.getText().isEmpty()) {
+				hs.setCprNummer(null);
+			} else {
+				hs.setCprNummer(cprNummer.getText());
+			}
+		} catch (MissingOplysningExcpetion e){
+			alert.visAdvarselDialog();
+		} 
+
 		resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));
 		// resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));
 		//
@@ -123,9 +132,9 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 	private void exporterCsvFil() {
 		if(!resultListe.isEmpty()){
 
-						
+
 			String filenavn = System.getProperty("user.home")+"\\"+fraDato.getValue().toString() 
-			+ "_" + tilDato.getValue().toString() + "_" + getKommune(kommuneCombo)+ ".csv" ;
+					+ "_" + tilDato.getValue().toString() + "_" + getKommune(kommuneCombo)+ ".csv" ;
 
 			fsController.exporterCSVForKommune(filenavn, resultListe);
 

@@ -15,7 +15,7 @@ public class Main {
 		HistorikSøgning hs = new HistorikSøgningImpl();
 		hs.setCprNummer("170182-3628");
 		hs.setKommune("Herning");
-		hs.setFraDato(LocalDate.of(2016, 05, 01));
+		hs.setFraDato(null);
 		hs.setTilDato(LocalDate.of(2016, 05, 31));
 		fs.søgHistorik();
 //		System.out.println(fs.angivSøgningOplysninger(hs));

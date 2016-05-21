@@ -9,8 +9,8 @@ import logic.Tilstand;
 
 public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
 	
-	private LocalDate fraDato;
-	private LocalDate tilDato;
+	private LocalDate fraDato = null;
+	private LocalDate tilDato = null;
 	private String kommune;
 	private String cprNummer;
 	
@@ -63,9 +63,7 @@ public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
 	 */
 	@Override
 	public void setKommune(String kommune) {
-		if (tilDato == null) {
-			throw new MissingOplysningExcpetion ("Kommune Mangler");
-		}
+	
 		this.kommune = kommune;
 	}
 	/* (non-Javadoc)
