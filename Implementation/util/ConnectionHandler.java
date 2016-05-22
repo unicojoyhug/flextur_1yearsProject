@@ -30,8 +30,8 @@ public class ConnectionHandler {
 	synchronized public Connection getConnection() throws PersistenceConnectionFailureException {
 		if (level == 0) {
 			try {
-//				this.connection = DriverManager.getConnection("jdbc:hsqldb:hsql://80.163.21.9:25567", "SA", "");
-				this.connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/mydatabase", "SA", "");
+			this.connection = DriverManager.getConnection("jdbc:hsqldb:hsql://80.163.21.9:25567", "SA", "eamvdmu2s");
+			//	this.connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/mydatabase", "SA", "");
 
 				
 				this.connection.setAutoCommit(false);
