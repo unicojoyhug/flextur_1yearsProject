@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BestilFlexController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BestilFlexController">
    <children>
       <ChoiceBox fx:id="fraKommune" layoutX="38.0" layoutY="95.0" prefWidth="150.0" />
       <ChoiceBox fx:id="tilKommune" layoutX="255.0" layoutY="95.0" prefWidth="150.0" />
@@ -15,7 +20,7 @@
       <Button layoutX="494.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleBeregnPris" text="Udregn Pris" />
       <Label layoutX="37.0" layoutY="78.0" text="Vælg start kommune:" />
       <Label layoutX="255.0" layoutY="78.0" text="Vælg destinations kommune:" />
-      <TextField editable="false" layoutX="495.0" layoutY="254.0" />
+      <TextField fx:id="prisfelt" editable="false" layoutX="495.0" layoutY="254.0" />
       <Label layoutX="495.0" layoutY="237.0" text="Pris:" />
       <DatePicker fx:id="dato" layoutX="39.0" layoutY="234.0" />
       <Label layoutX="39.0" layoutY="218.0" text="Vælg dato:" />
@@ -30,14 +35,9 @@
       <Label layoutX="256.0" layoutY="361.0" text="Kommentarer:" />
       <ProgressBar fx:id="prisBar" layoutX="495.0" layoutY="279.0" prefHeight="18.0" prefWidth="149.0" />
       <Label layoutX="255.0" layoutY="218.0" text="Angiv tidspunkt:" />
-      <Spinner layoutX="39.0" layoutY="335.0" prefHeight="25.0" prefWidth="58.0" />
       <Label layoutX="104.0" layoutY="340.0" text="Barnevogne" />
-      <Spinner fx:id="tidspunkt" layoutX="255.0" layoutY="234.0" />
-      <Spinner layoutX="39.0" layoutY="365.0" prefHeight="25.0" prefWidth="58.0" />
-      <Spinner layoutX="39.0" layoutY="395.0" prefHeight="25.0" prefWidth="58.0" />
       <Label layoutX="104.0" layoutY="370.0" text="Kørestole" />
       <Label layoutX="104.0" layoutY="400.0" text="Baggage" />
-      <Spinner layoutX="39.0" layoutY="291.0" prefHeight="25.0" prefWidth="99.0" />
       <ImageView fitHeight="71.0" fitWidth="174.0" layoutX="470.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../bin/gui/img/logo.png.gif" />
@@ -48,7 +48,6 @@
       <Label layoutX="39.0" layoutY="126.0" text="Start addresse:" />
       <Label layoutX="255.0" layoutY="126.0" text="Slut Addresse:" />
       <Label layoutX="255.0" layoutY="273.0" text="Kilometer:" />
-      <Spinner fx:id="autostole" layoutX="39.0" layoutY="425.0" prefHeight="25.0" prefWidth="58.0" />
       <Label layoutX="104.0" layoutY="430.0" text="Autostole" />
       <TextField fx:id="kilometer" editable="false" layoutX="255.0" layoutY="291.0" prefHeight="25.0" prefWidth="81.0" />
       <Button layoutX="341.0" layoutY="291.0" mnemonicParsing="false" onAction="#handleBeregnKM" text="Udregn Kilometer" />
@@ -59,5 +58,11 @@
       <TextField fx:id="forventetTid" editable="false" layoutX="255.0" layoutY="331.0" prefHeight="25.0" prefWidth="81.0" />
       <Label layoutX="255.0" layoutY="315.0" text="Forventet køretid:" />
       <Button layoutX="535.0" layoutY="438.0" mnemonicParsing="false" onAction="#handleToMenu" text="Tilbage til menuen" />
+      <TextField fx:id="tidspunkt" layoutX="256.0" layoutY="234.0" prefHeight="25.0" prefWidth="174.0" promptText="feks. 13:15" />
+      <TextField fx:id="personer" layoutX="39.0" layoutY="291.0" prefHeight="25.0" prefWidth="81.0" promptText="1" />
+      <TextField fx:id="barnevogne" layoutX="39.0" layoutY="336.0" prefHeight="25.0" prefWidth="51.0" promptText="0" />
+      <TextField fx:id="koerestole" layoutX="39.0" layoutY="366.0" prefHeight="25.0" prefWidth="51.0" promptText="0" />
+      <TextField fx:id="baggage" layoutX="39.0" layoutY="396.0" prefHeight="25.0" prefWidth="51.0" promptText="0" />
+      <TextField fx:id="autostole" layoutX="39.0" layoutY="426.0" prefHeight="25.0" prefWidth="51.0" promptText="0" />
    </children>
 </AnchorPane>
