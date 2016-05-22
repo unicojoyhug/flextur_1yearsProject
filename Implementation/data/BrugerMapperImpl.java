@@ -1,19 +1,19 @@
 package data;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import domain.Bruger;
 import domain.BrugerImpl;
-import domain.Flextur;
-import domain.FlexturImpl;
 import exception.PersistenceFailureException;
 import util.CloseForSQL;
 
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public class BrugerMapperImpl implements CRUD<Bruger, String> {
 	private static final String ROLLE = "inner join rolle on rolle.id =";
 
