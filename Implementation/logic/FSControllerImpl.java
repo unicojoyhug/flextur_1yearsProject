@@ -2,14 +2,17 @@ package logic;
 
 import java.util.List;
 
-
+import data.BrugerMapperImpl;
+import data.CRUD;
 import data.DataAccess;
 import data.DataAccessImpl;
 import data.TurMapper;
 import data.TurMapperImpl;
+import domain.Bruger;
 import domain.Flextur;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
+import exception.LoginException;
 import util.CSVExporter;
 import util.CSVExporterImpl;
 import util.LogicTrans;
@@ -21,6 +24,7 @@ import sats.Sats;
  */
 public class FSControllerImpl implements FSController {
 	private TurMapper turMapper = new TurMapperImpl();
+	private CRUD<Bruger, String> brugerMapper = new BrugerMapperImpl();
 
 	//	private HistorikSøgning historikSøgning;
 
@@ -80,5 +84,23 @@ public class FSControllerImpl implements FSController {
 		
 		csvExporter.generateCsvFileFlexturForKunde(filenavn, historikListe);
 
+	}
+	@Override
+	public Bruger checkLogin(String loginId, String kodeord){
+
+		
+		DataAccess dataAccess = new DataAccessImpl();
+		Bruger bruger = new LogicTrans<Bruger>(dataAccess).transaction
+				(()->brugerMapper.read(dataAccess, loginId));
+		
+		if(bruger.getEncryptedKodeord().contains(kodeord)){
+			bruger.setErLoggetInd(true);
+			
+			
+		}else{
+			throw new LoginException("Login fejl");
+		}		
+		
+		return bruger;		
 	}
 }

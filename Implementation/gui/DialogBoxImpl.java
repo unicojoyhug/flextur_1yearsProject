@@ -3,6 +3,7 @@ package gui;
 import java.util.List;
 import java.util.Optional;
 
+import domain.Flextur;
 import domain.HistorikForBM;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -85,7 +86,34 @@ public class DialogBoxImpl implements DialogBox {
 		
 	}
 
+	@Override
+	public void visCSVFilExportingAdvarselDialogForKunde(String filenavn, List<Flextur> resultListe) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.initOwner(window);
+		alert.setTitle("ADVARSEL");
+		alert.setHeaderText("TOM LIST");
+		alert.setContentText("Vil du gemme den som tom list?");
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+						
+			FSController fsController = new FSControllerImpl();
+			fsController.exporterHistorikForKunde(filenavn, resultListe);
+			visGemtDialogue(filenavn);
+
+		} 
+		
+	}
+
 	
-	
+	@Override
+	public void visLoginFejllDialog(){
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.initOwner(window);
+		alert.setTitle("ERROR");
+		alert.setHeaderText("Fejl i login");
+		alert.setContentText("Prøv igen");
+		alert.showAndWait();
+	}
 	
 }

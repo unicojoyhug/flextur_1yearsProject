@@ -1,20 +1,27 @@
 package gui;
 
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
+
+import domain.Bruger;
+import domain.BrugerImpl;
+import exception.LoginException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import logic.Observable;
 
 /**
  * FXML Controller class
  *
- * @author Shadowsilver
+ * @author Jonas Mørch, Juyoung Choi
  */
-public class LoginController implements Initializable {
+public class LoginController extends FSPane implements Initializable {
 
 	@FXML
 	private PasswordField password;
@@ -23,6 +30,7 @@ public class LoginController implements Initializable {
 	@FXML
 	private CheckBox checkBox;
 	private FlexturGUI flextur;
+	private Stage window;
 
 	@FXML
 	private void handleOpretProfil(ActionEvent event) {
@@ -41,11 +49,32 @@ public class LoginController implements Initializable {
 
 	@FXML
 	private void handleLogin(ActionEvent event) {
-		String user = username.getText();
-		String pass = password.getText();
-		System.out.println(user + " har prøvet at logge ind med koden: " + pass);
-		flextur.Login(user, pass);
+		DialogBox alert = new DialogBoxImpl(window);
+
+		Bruger bruger = new BrugerImpl();
+		String loginId = username.getText();
+		try {
+			bruger.setAndEncryptPassword(password.getText());
+			String kodeord = bruger.getEncryptedKodeord();
+			bruger = fsController.checkLogin(loginId, kodeord);
+
+			if(bruger.erAktivt()){
+				if(bruger.erKunde()){
+					flextur.showMenuKunde();
+				}else{
+					flextur.showMenuAdmin();
+				}
+			}
+		} catch (NoSuchAlgorithmException e) {
+			alert.visLoginFejllDialog();
+		} catch (LoginException e){
+			alert.visLoginFejllDialog();
+		}
+		//		System.out.println(user + " har prøvet at logge ind med koden: " + pass);
+		//		flextur.Login(user, pass);
 	}
+	
+	
 
 	private void ShowPassword() {
 		ShowPassword.managedProperty().bind(checkBox.selectedProperty());
@@ -62,6 +91,12 @@ public class LoginController implements Initializable {
 
 	public void setMainApp(FlexturGUI flextur) {
 		this.flextur = flextur;
+
+	}
+
+	@Override
+	public void update(Observable observable, Object tilstand) {
+		// TODO Auto-generated method stub
 
 	}
 }

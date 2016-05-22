@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import logic.FSController;
 import logic.FSControllerImpl;
+import sats.Sats;
 
 /**
  *
@@ -47,8 +48,10 @@ public class FlexturGUI extends Application {
 			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 
-			LoginController controller = loader.getController();
-			controller.setMainApp(this);
+
+			FSPane loginController = loader.<FSPane> getController();
+			loginController.setFSController(fsController);
+			loginController.setMainApp(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -100,8 +103,9 @@ public class FlexturGUI extends Application {
 			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 
-			MenuKundeController controller = loader.getController();
-			controller.setMainApp(this);
+			FSPane showMenuKundeController = loader.<FSPane> getController();
+			showMenuKundeController.setFSController(fsController);
+			showMenuKundeController.setMainApp(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -235,6 +239,7 @@ public class FlexturGUI extends Application {
 
 	}
 
+	
 	/**
 	 * @param args
 	 *            the command line arguments

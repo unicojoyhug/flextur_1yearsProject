@@ -39,7 +39,7 @@ public class TurMapperImpl implements TurMapper {
 
 
 	private final static String GET_MATCHENDE_HISTORIK_BM_CPR = MATCHEDNE_HISTORIK
-			+ KUNDE_CPR + KOMMUNE+ WHERE_DATO + " AND " + WHERE_CPR+ GROUP_BY;
+			+ KUNDE_CPR + KOMMUNE+ WHERE_DATO + " AND " + WHERE_CPR + GROUP_BY;
 
 	private final static String GET_MATCHENDE_HISTORIK_BM = MATCHEDNE_HISTORIK + KUNDE_CPR + KOMMUNE + WHERE_DATO + 
 			" AND  kommune.navn = ? " + GROUP_BY;

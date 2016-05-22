@@ -29,8 +29,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import logic.Observable;
 import logic.Tilstand;
-import logic.FSController;
-import logic.FSControllerImpl;
+import sats.Sats;
+//import logic.FSController;
+//import logic.FSControllerImpl;
 
 /**
  *
@@ -40,7 +41,7 @@ import logic.FSControllerImpl;
 public class SeHistorikAdminController extends FSPane implements Initializable {
 
 	private FlexturGUI flexturGUI;
-	private FSController FSC = new FSControllerImpl();
+//	private FSController FSC = new FSControllerImpl();
 
 
 	@FXML
@@ -88,6 +89,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 	private ObservableList<HistorikForBM> resultListe = FXCollections.observableArrayList();
 
 	private Stage window;
+	
 
 	@FXML
 	private void handleToMenu(ActionEvent event) {
@@ -100,7 +102,8 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 		this.flexturGUI = flextur;
 
 	}
-
+	
+	
 	// TODO input validation : empty text field (DONE with EXCEPTION ) 
 	//TODO kommune combo back to empty choice : DONE with : setValue("")
 	@FXML
@@ -164,7 +167,11 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		
-		kommuneCombo.setItems(FXCollections.observableArrayList(FSC.getKommuneListe()));
+//		kommuneCombo.setItems(FXCollections.observableArrayList(FSC.getKommuneListe()));
+
+		
+		kommuneCombo.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
+
 
 		personCPRColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, String>("cprNummer"));
 		fraDatoColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, LocalDate>("fraDato"));

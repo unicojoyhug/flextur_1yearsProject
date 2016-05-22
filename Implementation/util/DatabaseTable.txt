@@ -321,4 +321,5 @@ where (dato >= '2016-05-01' AND  dato <= '2016-05-30') AND kundeid =3
 group by  kundeid, cpr.cprnummer, kunde.efternavn, kunde.fornavn, kommune.navn;
 
 
-
+//
+UPDATE "PUBLIC"."KUNDE" SET  kodeord ='pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=' where id = 3

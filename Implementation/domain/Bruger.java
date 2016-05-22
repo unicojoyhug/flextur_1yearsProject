@@ -26,4 +26,8 @@ public interface Bruger {
 
 	void setErKunde(boolean erKunde);
 
+	boolean erAktivt();
+
+	void setErAktivt(boolean erAktivt);
+
 }

@@ -11,12 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import logic.Observable;
 
 /**
  *
  * @author Jonas Mørch
  */
-public class MenuKundeController implements Initializable {
+public class MenuKundeController extends FSPane implements Initializable {
     
     @FXML
     private Label usernameL;
@@ -37,7 +38,7 @@ public class MenuKundeController implements Initializable {
     }
     @FXML
     private void handleLogUd(ActionEvent event){
-    	System.out.println("Ikke impletementeret");
+    	Flextur.showLogin();
     }
     public void setMainApp(FlexturGUI flextur) {
 		this.Flextur = flextur;
@@ -46,6 +47,11 @@ public class MenuKundeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         usernameL.setText(user);
-    }    
+    }
+	@Override
+	public void update(Observable observable, Object tilstand) {
+		// TODO Auto-generated method stub
+		
+	}    
     
 }

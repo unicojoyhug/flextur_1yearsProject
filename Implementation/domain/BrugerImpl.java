@@ -3,9 +3,15 @@ package domain;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.Observable;
 
 import util.LoginSingleton;
 
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public class BrugerImpl implements Bruger {
 	
 	private long id;
@@ -13,6 +19,7 @@ public class BrugerImpl implements Bruger {
 	private String encryptedKodeord;
 	private boolean erLoggetInd;
 	private boolean erKunde;
+	private boolean erAktivt;
 	
 	/* (non-Javadoc)
 	 * @see domain.Bruger#getId()
@@ -102,6 +109,19 @@ public class BrugerImpl implements Bruger {
 	@Override
 	public void setErKunde(boolean erKunde) {
 		this.erKunde = erKunde;
+	}
+	@Override
+	public String toString() {
+		return "BrugerImpl [id=" + id + ", loginId=" + loginId + ", encryptedKodeord=" + encryptedKodeord
+				+ ", erLoggetInd=" + erLoggetInd + ", erKunde=" + erKunde + "]";
+	}
+	@Override
+	public boolean erAktivt() {
+		return erAktivt;
+	}
+	@Override
+	public void setErAktivt(boolean erAktivt) {
+		this.erAktivt = erAktivt;
 	}
 	
 	

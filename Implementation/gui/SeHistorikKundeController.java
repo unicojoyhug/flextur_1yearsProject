@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 import domain.Flextur;
 import domain.HistorikSøgning;
 import domain.HistorikSøgningImpl;
+import exception.CSVExportingFEJLException;
+import exception.MissingOplysningExcpetion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +22,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import logic.Observable;
 import logic.Tilstand;
 
@@ -34,11 +37,11 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 	@FXML
 	private TableView<Flextur> tableView;
 	@FXML
-	private TableColumn<Flextur, LocalDate> DatoColumn;
+	private TableColumn<Flextur, LocalDate> datoColumn;
 	@FXML
-	private TableColumn<Flextur, String> fraKommuneColumn;
+	private TableColumn<Flextur, String> fraAdressColumn;
 	@FXML
-	private TableColumn<Flextur, String> tilKommuneColumn;
+	private TableColumn<Flextur, String> tilAdressColumn;
 	@FXML
 	private TableColumn<Flextur, Double> totalPrisColumn;
 	@FXML
@@ -47,8 +50,10 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 	private DatePicker fraDato;
 	@FXML
 	private DatePicker tilDato;
+	
 	private ObservableList<Flextur> resultListe = FXCollections.observableArrayList();
-
+	private Stage window;
+	
 	@FXML
 	private void handleToMenu(ActionEvent event) {
 		flexturGUI.showMenuKunde();
@@ -61,30 +66,62 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 	// TODO input validation : empty text field
 	@FXML
 	private void hentHistorikListe(ActionEvent event) {
+		DialogBox alert = new DialogBoxImpl(window);
+
+		try{
 		resultListe.clear();
 		HistorikSøgning hs = new HistorikSøgningImpl();
 		hs.setFraDato(fraDato.getValue());
 		hs.setTilDato(tilDato.getValue());
-		hs.setCprNummer("000000000"); //TODO
+		hs.setCprNummer("170182-3628"); //TODO LOGIN
 		hs.setKommune("Herning");
 		resultListe.addAll(fsController.angivSøgningOplysninger(hs));
 		tableView.setItems(resultListe);
+		
+		
+	} catch (MissingOplysningExcpetion e){
+		alert.visOplysningManglerAdvarselDialog();
+	} 
+
 	}
 
 	// TODO to exprot csv fil : in gui with fx dependency? or another class to
 	// do so
 	@FXML
 	private void exporterCsvFil() {
-		// f.eks.
-		// fsController.exportCSVFil(resultListe);
+		DialogBox alert = new DialogBoxImpl(window);
+		String filenavn = System.getProperty("user.home")+"\\"+fraDato.getValue().toString() 
+				+ "_" + tilDato.getValue().toString() + ".csv" ;
+		
+		try {
+
+			if(resultListe.isEmpty()){
+				
+				alert.visCSVFilExportingAdvarselDialogForKunde(filenavn, resultListe);
+
+			}else{
+
+				fsController.exporterHistorikForKunde(filenavn, resultListe);
+				alert.visGemtDialogue(filenavn);
+			}
+
+		} catch (CSVExportingFEJLException exe) {
+			alert.visCSVFilExportingFejlDialog();
+
+		}
+		
+	
+
 	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		DatoColumn.setCellValueFactory(new PropertyValueFactory<Flextur, LocalDate>("dato"));
-		fraKommuneColumn.setCellValueFactory(new PropertyValueFactory<Flextur, String>("Fra kommune"));
-		tilKommuneColumn.setCellValueFactory(new PropertyValueFactory<Flextur, String>("Til kommune"));
-		totalPrisColumn.setCellValueFactory(new PropertyValueFactory<Flextur, Double>("totalPris"));
+		
+		
+		datoColumn.setCellValueFactory(new PropertyValueFactory<Flextur, LocalDate>("dato"));
+		fraAdressColumn.setCellValueFactory(new PropertyValueFactory<Flextur, String>("fraAdress"));
+		tilAdressColumn.setCellValueFactory(new PropertyValueFactory<Flextur, String>("tilAdress"));
+		totalPrisColumn.setCellValueFactory(new PropertyValueFactory<Flextur, Double>("pris"));
 		antalPersonerColumn.setCellValueFactory(new PropertyValueFactory<Flextur, Integer>("antalPersoner"));
 
 		// //TODO

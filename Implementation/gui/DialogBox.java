@@ -2,6 +2,7 @@ package gui;
 
 import java.util.List;
 
+import domain.Flextur;
 import domain.HistorikForBM;
 
 public interface DialogBox {
@@ -13,7 +14,12 @@ public interface DialogBox {
 	void visCSVFilExportingFejlDialog();
 
 	void visCSVFilExportingAdvarselDialog(String filenavn, List<HistorikForBM> resultListe);
+	
+	void visCSVFilExportingAdvarselDialogForKunde(String filenavn, List<Flextur> resultListe);
 
 	void visTomListeDialog();
+
+	void visLoginFejllDialog();
+
 
 }
