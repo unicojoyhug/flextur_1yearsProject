@@ -17,6 +17,8 @@ public class DataAccessImpl implements DataAccess {
 
 	private static final String DB_USER = "SA";
 	private static final String DB_PASSWORD = "TRu6tu5tEsec";
+//	private static final String DB_PASSWORD = "";
+
 	private Connection connection = null;
 
 	public DataAccessImpl(){

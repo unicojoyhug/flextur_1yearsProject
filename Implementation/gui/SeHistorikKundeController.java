@@ -67,7 +67,7 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 	@FXML
 	private void hentHistorikListe(ActionEvent event) {
 		DialogBox alert = new DialogBoxImpl(window);
-
+		
 		try{
 		resultListe.clear();
 		HistorikSøgning hs = new HistorikSøgningImpl();
