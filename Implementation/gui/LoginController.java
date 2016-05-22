@@ -58,23 +58,24 @@ public class LoginController extends FSPane implements Initializable {
 			String kodeord = bruger.getEncryptedKodeord();
 			bruger = fsController.checkLogin(loginId, kodeord);
 
-			if(bruger.erAktivt()){
-				if(bruger.erKunde()){
-					flextur.showMenuKunde();
-				}else{
-					flextur.showMenuAdmin();
-				}
+			if(bruger.erKunde()&&bruger.erAktivt()){
+				flextur.showMenuKunde();
+			}else if(!bruger.erKunde()){
+				flextur.showMenuAdmin();
 			}
+
 		} catch (NoSuchAlgorithmException e) {
 			alert.visLoginFejllDialog();
 		} catch (LoginException e){
+			alert.visLoginFejllDialog();
+		} catch (RuntimeException e){
 			alert.visLoginFejllDialog();
 		}
 		//		System.out.println(user + " har prøvet at logge ind med koden: " + pass);
 		//		flextur.Login(user, pass);
 	}
-	
-	
+
+
 
 	private void ShowPassword() {
 		ShowPassword.managedProperty().bind(checkBox.selectedProperty());

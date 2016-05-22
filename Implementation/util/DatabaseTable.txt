@@ -323,3 +323,12 @@ group by  kundeid, cpr.cprnummer, kunde.efternavn, kunde.fornavn, kommune.navn;
 
 //
 UPDATE "PUBLIC"."KUNDE" SET  kodeord ='pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=' where id = 3
+
+
+///
+INSERT INTO bestillingsmodtagelse ("LOGINID", "KODEORD", "ROLLE") 
+values ('bm1@flextur.dk', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', 2)
+
+
+///
+Select * from bestillingsmodtagelse inner join rolle on rolle.id = bestillingsmodtagelse.rolle where bestillingsmodtagelse.loginid = 'bm1@flextur.dk'

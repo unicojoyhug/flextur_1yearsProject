@@ -73,34 +73,41 @@ public class FSControllerImpl implements FSController {
 	@Override
 	public void exporterHistorikForBM(String filenavn, List<HistorikForBM> historikListe){
 		CSVExporter csvExporter = new CSVExporterImpl();
-		
+
 		csvExporter.generateCsvFileFlexturForBM(filenavn, historikListe);
+
+	}
+
+	@Override
+	public void exporterHistorikForKunde(String filenavn, List<Flextur> historikListe){
+		CSVExporter csvExporter = new CSVExporterImpl();
+
+		csvExporter.generateCsvFileFlexturForKunde(filenavn, historikListe);
 
 	}
 	
 	@Override
-	public void exporterHistorikForKunde(String filenavn, List<Flextur> historikListe){
-		CSVExporter csvExporter = new CSVExporterImpl();
-		
-		csvExporter.generateCsvFileFlexturForKunde(filenavn, historikListe);
-
-	}
-	@Override
 	public Bruger checkLogin(String loginId, String kodeord){
-
-		
 		DataAccess dataAccess = new DataAccessImpl();
-		Bruger bruger = new LogicTrans<Bruger>(dataAccess).transaction
-				(()->brugerMapper.read(dataAccess, loginId));
-		
-		if(bruger.getEncryptedKodeord().contains(kodeord)){
-			bruger.setErLoggetInd(true);
-			
-			
-		}else{
+		Bruger bruger = null;
+		try{
+			bruger = new LogicTrans<Bruger>(dataAccess).transaction
+					(()->brugerMapper.read(dataAccess, loginId));
+
+			if(bruger.getEncryptedKodeord().contentEquals(kodeord)){
+
+				bruger.setErLoggetInd(true);
+
+			}
+			else{
+				throw new LoginException("Login fejl");
+			}
+		}catch(NullPointerException e){
 			throw new LoginException("Login fejl");
-		}		
-		
+
+		}
 		return bruger;		
 	}
+	
+	
 }
