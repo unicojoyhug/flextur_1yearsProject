@@ -70,7 +70,7 @@ public class BestilFlexController implements Initializable {
 
 	@FXML
 	private void handleBeregnPris(ActionEvent event) throws UnknownKommuneException {
-		prisBar.setVisible(true);
+		
 		setDato();
 		
 	//	String distance = kilometer.getText();
@@ -78,7 +78,7 @@ public class BestilFlexController implements Initializable {
 		String DestinationKommune = tilKommune.getValue();
 		double pris = Sats.i().getSats(OriginKommune, DestinationKommune, year, month, day);
 		prisfelt.setText(String.valueOf(pris));
-		prisBar.setVisible(false);
+		
 	}
 
 	private void setDato() {
