@@ -1,4 +1,4 @@
-package util;
+package logic;
 
 import sats.Sats;
 import sats.UnknownKommuneException;
@@ -20,56 +20,25 @@ public class PrisUdregner {
 		return takst;
 	}
 
-	public double getDistance() {
-		return distance;
-	}
-
 	public void setDistance(double distance) {
 		this.distance = distance;
 	}
 
-	public double getTakst() {
-		return takst;
-	}
-
-	public void setTakst(double takst) {
-		this.takst = takst;
-	}
-
-	public String getOrigin() {
-		return Origin;
-	}
-
 	public void setOrigin(String origin) {
 		Origin = origin;
-	}
 
-	public String getDestination() {
-		return Destination;
 	}
 
 	public void setDestination(String destination) {
 		Destination = destination;
 	}
 
-	public int getYear() {
-		return year;
-	}
-
 	public void setYear(int year) {
 		this.year = year;
 	}
 
-	public int getMonth() {
-		return month;
-	}
-
 	public void setMonth(int month) {
 		this.month = month;
-	}
-
-	public int getDay() {
-		return day;
 	}
 
 	public void setDay(int day) {

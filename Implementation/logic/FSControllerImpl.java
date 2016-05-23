@@ -17,8 +17,10 @@ import util.CSVExporter;
 import util.CSVExporterImpl;
 import util.LogicTrans;
 import sats.Sats;
+
 /**
- * FSControllerImpl : facade controller : 
+ * FSControllerImpl : facade controller :
+ * 
  * @author Juyoung Choi
  *
  */
@@ -26,11 +28,7 @@ public class FSControllerImpl implements FSController {
 	private TurMapper turMapper = new TurMapperImpl();
 	private CRUD<Bruger, String> brugerMapper = new BrugerMapperImpl();
 
-	//	private HistorikSøgning historikSøgning;
-
-
-
-
+	// private HistorikSøgning historikSøgning;
 
 	@Override
 	public void søgHistorik() {
@@ -45,33 +43,30 @@ public class FSControllerImpl implements FSController {
 
 		notifyObservers(this, Tilstand.HENT_HISTORIK);
 
-		return new LogicTrans<List<Flextur>>(dataAccess).transaction
-				(()->turMapper.getMatchendeHistorik(dataAccess, historikSøgning));
+		return new LogicTrans<List<Flextur>>(dataAccess)
+				.transaction(() -> turMapper.getMatchendeHistorik(dataAccess, historikSøgning));
 
 	}
-
-
 
 	@Override
 	public List<HistorikForBM> angivSøgningOplysningerForBM(HistorikSøgning historikSøgning) {
 
 		DataAccess dataAccess = new DataAccessImpl();
 
-		return new LogicTrans<List<HistorikForBM>>(dataAccess).transaction
-				(()->turMapper.getMatchendeHistorikForBM(dataAccess, historikSøgning));
+		return new LogicTrans<List<HistorikForBM>>(dataAccess)
+				.transaction(() -> turMapper.getMatchendeHistorikForBM(dataAccess, historikSøgning));
 
 	}
 
 	@Override
-	public String[] getKommuneListe(){
-
+	public String[] getKommuneListe() {
 
 		return Sats.i().getKommuner();
 
 	}
 
 	@Override
-	public void exporterHistorikForBM(String filenavn, List<HistorikForBM> historikListe){
+	public void exporterHistorikForBM(String filenavn, List<HistorikForBM> historikListe) {
 		CSVExporter csvExporter = new CSVExporterImpl();
 
 		csvExporter.generateCsvFileFlexturForBM(filenavn, historikListe);
@@ -79,35 +74,38 @@ public class FSControllerImpl implements FSController {
 	}
 
 	@Override
-	public void exporterHistorikForKunde(String filenavn, List<Flextur> historikListe){
+	public void exporterHistorikForKunde(String filenavn, List<Flextur> historikListe) {
 		CSVExporter csvExporter = new CSVExporterImpl();
 
 		csvExporter.generateCsvFileFlexturForKunde(filenavn, historikListe);
 
 	}
-	
+
 	@Override
-	public Bruger checkLogin(String loginId, String kodeord){
+	public Bruger checkLogin(String loginId, String kodeord) {
 		DataAccess dataAccess = new DataAccessImpl();
 		Bruger bruger = null;
-		try{
-			bruger = new LogicTrans<Bruger>(dataAccess).transaction
-					(()->brugerMapper.read(dataAccess, loginId));
+		try {
+			bruger = new LogicTrans<Bruger>(dataAccess).transaction(() -> brugerMapper.read(dataAccess, loginId));
 
-			if(bruger.getEncryptedKodeord().contentEquals(kodeord)){
+			if (bruger.getEncryptedKodeord().contentEquals(kodeord)) {
 
 				bruger.setErLoggetInd(true);
 
-			}
-			else{
+			} else {
 				throw new LoginException("Login fejl");
 			}
-		}catch(NullPointerException e){
+		} catch (NullPointerException e) {
 			throw new LoginException("Login fejl");
 
 		}
-		return bruger;		
+		return bruger;
 	}
-	
-	
+
+	public void gemFlextur(Flextur tur) {
+		DataAccess dataAccess = new DataAccessImpl();
+
+		new LogicTrans<>(dataAccess).transaction(() -> brugerMapper.gemFlextur(dataAccess, tur));
+	}
+
 }
