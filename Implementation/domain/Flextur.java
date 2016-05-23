@@ -49,4 +49,12 @@ public interface Flextur   {
 
 	void setFraPostnummer(int fraPostnummer);
 
+	String getFraKommune();
+
+	void setFraKommune(String fraKommune);
+
+	String getTilKommune();
+
+	void setTilKommune(String tilKommune);
+
 }

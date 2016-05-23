@@ -14,12 +14,29 @@ public class FlexturImpl implements Flextur , Observable{
 	private int fraPostnummer;
 	private int tilPostnummer;
 	private String tilAdress;
+	private String fraKommune;
+	private String tilKommune;
 	private double pris;
 	private int antalPersoner;
 	private EkstraTilvalg ekstraTilvalg;
 	
 	
-	
+	@Override
+	public String getFraKommune() {
+		return fraKommune;
+	}
+	@Override
+	public void setFraKommune(String fraKommune) {
+		this.fraKommune = fraKommune;
+	}
+	@Override
+	public String getTilKommune() {
+		return tilKommune;
+	}
+	@Override
+	public void setTilKommune(String tilKommune) {
+		this.tilKommune = tilKommune;
+	}
 	@Override
 	public int getFraPostnummer() {
 		return fraPostnummer;

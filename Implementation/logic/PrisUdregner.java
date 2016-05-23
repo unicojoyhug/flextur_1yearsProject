@@ -1,5 +1,6 @@
 package logic;
 
+import domain.Flextur;
 import sats.Sats;
 import sats.UnknownKommuneException;
 
@@ -9,15 +10,21 @@ public class PrisUdregner {
 	private String Origin, Destination;
 	private int year, month, day;
 
-	public double takstUdregner() {
-		try {
-			takst = Sats.i().getSats(Origin, Destination, year, month, day);
-		} catch (UnknownKommuneException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return takst;
+	
+	// Is this adapter pattern? 
+	public double takstUdregner(Flextur flextur) {
+		SatsAdapter rate = new SatsAdapterImpl();
+		return	rate.hentSatsRate(flextur);
+		
+//		try {
+//			takst = Sats.i().getSats(Origin, Destination, year, month, day);
+//			
+//		} catch (UnknownKommuneException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		return takst;
 	}
 
 	public void setDistance(double distance) {

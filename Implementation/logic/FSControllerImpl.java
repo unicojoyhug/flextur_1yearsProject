@@ -27,8 +27,11 @@ import sats.Sats;
 public class FSControllerImpl implements FSController {
 	private TurMapper turMapper = new TurMapperImpl();
 	private CRUD<Bruger, String> brugerMapper = new BrugerMapperImpl();
+	private HistorikSøgning historikSøgning;
 
 	// private HistorikSøgning historikSøgning;
+	
+//	larsnielsenlind@gmail.com
 
 	@Override
 	public void søgHistorik() {
@@ -40,9 +43,10 @@ public class FSControllerImpl implements FSController {
 	@Override
 	public List<Flextur> angivSøgningOplysninger(HistorikSøgning historikSøgning) {
 		DataAccess dataAccess = new DataAccessImpl();
-
+		// TODO 
+		this.historikSøgning = historikSøgning;
 		notifyObservers(this, Tilstand.HENT_HISTORIK);
-
+		
 		return new LogicTrans<List<Flextur>>(dataAccess)
 				.transaction(() -> turMapper.getMatchendeHistorik(dataAccess, historikSøgning));
 
@@ -102,10 +106,10 @@ public class FSControllerImpl implements FSController {
 		return bruger;
 	}
 
-	public void gemFlextur(Flextur tur) {
-		DataAccess dataAccess = new DataAccessImpl();
-
-		new LogicTrans<>(dataAccess).transaction(() -> brugerMapper.gemFlextur(dataAccess, tur));
-	}
+//	public void gemFlextur(Flextur tur) {
+//		DataAccess dataAccess = new DataAccessImpl();
+//
+//		new LogicTrans<>(dataAccess).transaction(() -> brugerMapper.gemFlextur(dataAccess, tur));
+//	}
 
 }
