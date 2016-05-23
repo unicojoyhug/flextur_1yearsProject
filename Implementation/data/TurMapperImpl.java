@@ -116,7 +116,7 @@ public class TurMapperImpl implements TurMapper {
 				historik.setCprNummer(resultSet.getString("cprNummer"));
 				historik.setKommune(resultSet.getString("kommune"));
 				historik.setAntalPersoner(resultSet.getInt("antalPersoner"));
-				historik.setTotalPris((Double)resultSet.getDouble("totalPris"));
+				historik.setTotalPris(resultSet.getDouble("totalPris"));
 				historik.setFornavn(resultSet.getString("fornavn"));
 				historik.setEfternavn(resultSet.getString("efternavn"));
 				historik.setAntalTur(resultSet.getInt("antalTur"));

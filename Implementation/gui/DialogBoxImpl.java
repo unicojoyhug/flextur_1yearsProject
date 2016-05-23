@@ -76,10 +76,10 @@ public class DialogBoxImpl implements DialogBox {
 
 	@Override
 	public void visGemtDialogue(String filenavn){
-		Alert alert = new Alert(AlertType.INFORMATION);
+		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.initOwner(window);
-		alert.setTitle("GEMT");
-		alert.setHeaderText("Gemt");
+		alert.setTitle("GEM FIL");
+		alert.setHeaderText("Vil du gerne gemme fil?");
 		alert.setContentText("Tjek din mappe : " + filenavn );
 
 		alert.showAndWait();

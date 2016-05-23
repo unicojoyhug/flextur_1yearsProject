@@ -17,7 +17,7 @@ public class CSVExporterImpl implements CSVExporter {
 
 	private static final String NO_MATCH_FOUND = "NO MATCH FOUND";
 
-	
+//	private TekstFormattering format = new TekstFormatteringImpl();
 	@Override
 	public void generateCsvFileFlexturForBM(String filenavn, List<HistorikForBM> historikListe){
        	try {  
@@ -44,7 +44,7 @@ public class CSVExporterImpl implements CSVExporter {
 				fileWriter.append(SEPERATOR);
 				fileWriter.append(h.getKommune());
 				fileWriter.append(SEPERATOR);
-				fileWriter.append(String.valueOf(h.getTotalPris()));				
+				fileWriter.append(String.valueOf(h.getTotalPris()));	// change seperator + maybe put kr?			
 				fileWriter.append(SEPERATOR);
 				fileWriter.append(String.valueOf(h.getAntalPersoner()));				
 				fileWriter.append(SEPERATOR);
