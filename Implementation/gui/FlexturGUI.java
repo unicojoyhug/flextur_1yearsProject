@@ -51,13 +51,17 @@ public class FlexturGUI extends Application {
 
 			FSPane loginController = loader.<FSPane> getController();
 			loginController.setFSController(fsController);
+			
 			loginController.setMainApp(this);
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
+	
+
 
 	private void initRootLayout() {
 		try {
@@ -189,7 +193,8 @@ public class FlexturGUI extends Application {
 			FSPane seHistorikKundeController = loader.<FSPane> getController();
 			seHistorikKundeController.setFSController(fsController);
 			seHistorikKundeController.setMainApp(this);
-			
+			seHistorikKundeController.postInitialize();
+
 		
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -209,6 +214,7 @@ public class FlexturGUI extends Application {
 			FSPane seHistorikAdminController = loader.<FSPane> getController();
 			seHistorikAdminController.setFSController(fsController);
 			seHistorikAdminController.setMainApp(this);
+			seHistorikAdminController.postInitialize();
 
 		} catch (IOException e) {
 			e.printStackTrace();

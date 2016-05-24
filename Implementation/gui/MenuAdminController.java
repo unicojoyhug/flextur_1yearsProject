@@ -57,6 +57,11 @@ public class MenuAdminController extends FSPane implements Initializable {
 	public void update(Observable observable, Tilstand tilstand) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	void postInitialize() {
+		// TODO Auto-generated method stub
+		
 	}    
     
 }

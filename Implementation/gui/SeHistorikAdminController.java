@@ -27,12 +27,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import logic.FSControllerImpl;
 import logic.Observable;
 import logic.Tilstand;
-import sats.Sats;
-//import logic.FSController;
-//import logic.FSControllerImpl;
+
 
 /**
  *
@@ -171,7 +168,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 //		String[] kommuner =FSController.getInstance().getKommuneListe();
 //		kommuneCombo.setItems(FXCollections.observableArrayList(kommuner));
 
-		kommuneCombo.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
+//		kommuneCombo.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
 
 		personCPRColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, String>("cprNummer"));
 		fraDatoColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, LocalDate>("fraDato"));
@@ -187,6 +184,12 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 
 	}
 
+	@Override
+	void postInitialize(){
+		
+		kommuneCombo.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
+
+	}
 	
 
 	@Override

@@ -21,4 +21,5 @@ public abstract class FSPane implements Observer{
 //	public String [] getKommune() {
 //		return Sats.i().getKommuner();
 //	}
+	abstract void postInitialize();
 }

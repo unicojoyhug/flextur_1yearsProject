@@ -143,4 +143,10 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 		}
 	}
 
+	@Override
+	void postInitialize() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
