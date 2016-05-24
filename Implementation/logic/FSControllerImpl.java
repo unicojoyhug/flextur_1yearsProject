@@ -14,8 +14,6 @@ import domain.Flextur;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
 import exception.LoginException;
-import util.CSVExporter;
-import util.CSVExporterImpl;
 import util.LogicTrans;
 import sats.Sats;
 
