@@ -4,7 +4,7 @@ import domain.Flextur;
 import sats.Sats;
 import sats.UnknownKommuneException;
 
-public class SatsAdapterImpl implements SatsAdapter {
+public class FlemmingSatsAdapter implements SatsAdapter {
 	
 
 	public double hentSatsRate(Flextur tur){
@@ -21,4 +21,11 @@ public class SatsAdapterImpl implements SatsAdapter {
 		}
 		return satsRate;
 	}
+
+	@Override
+	public String[] getKommuner() {
+		return Sats.i().getKommuner();
+	}
+	
+	
 }

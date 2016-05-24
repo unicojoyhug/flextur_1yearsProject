@@ -28,7 +28,6 @@ import sats.Sats;
 public class FSControllerImpl implements FSController {
 	private TurMapper turMapper = new TurMapperImpl();
 	private CRUD<Bruger, String> brugerMapper = new BrugerMapperImpl();
-	private HistorikSøgning historikSøgning;
 	private List<Observer> observers = new ArrayList<>();
 	private List<Flextur> flexturListResult = new ArrayList<>();
 	private List<HistorikForBM> flexturListResult_BM = new ArrayList<>();
@@ -88,8 +87,10 @@ public class FSControllerImpl implements FSController {
 
 	@Override
 	public String[] getKommuneListe() {
-
-		return Sats.i().getKommuner();
+		SatsFactory satsFactory = new SatsFactory();
+		SatsAdapter kommunerFraSats = satsFactory.getSatsAdapter();
+		
+		return kommunerFraSats.getKommuner();
 
 	}
 
