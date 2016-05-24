@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 
 public class TekstFormatteringImpl implements TekstFormattering {
 
-	private DecimalFormat format = new DecimalFormat("#.###");
+	private DecimalFormat format = new DecimalFormat("#.##");
 
 	@Override
 	public void formaterTekstfeltInput(TextField input) {

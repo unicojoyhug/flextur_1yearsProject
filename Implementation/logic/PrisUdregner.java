@@ -22,8 +22,11 @@ public class PrisUdregner {
 	}
 	private double antalTilvalg(Flextur flextur){
 		double temp = -1;
-		double tilvalg = flextur.getEkstraTilvalg().getAntal();
-		double tilvres = (temp + tilvalg)*0.5;
+		double tilvalg = flextur.getAntalTilvalg();
+		double tilvres = 0;
+		if (tilvalg > 0){
+			tilvres = (temp + tilvalg)*0.5;
+		}
 				
 		return tilvres;
 		

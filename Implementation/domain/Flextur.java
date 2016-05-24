@@ -3,7 +3,7 @@ package domain;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public interface Flextur   {
+public interface Flextur {
 
 	long getFlexturId();
 
@@ -56,9 +56,17 @@ public interface Flextur   {
 	String getTilKommune();
 
 	void setTilKommune(String tilKommune);
-	
+
 	double getKilometer();
-	
+
 	void setKilometer(double kilometer);
+
+	int getAntalTilvalg();
+
+	void setAntalTilvalg(int antalTilvalg);
+
+	String getKommentar();
+
+	void setKommentar(String kommentar);
 
 }

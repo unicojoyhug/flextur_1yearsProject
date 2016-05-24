@@ -7,6 +7,8 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 import domain.Flextur;
 import domain.FlexturImpl;
@@ -19,6 +21,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import logic.FSController;
+import logic.FSControllerImpl;
 import logic.PrisUdregner;
 import sats.Sats;
 import util.KilometerUdregningAdapter;
@@ -45,6 +49,8 @@ public class BestilFlexController implements Initializable {
 	private String seperator = " , ";
 	private Flextur fti = new FlexturImpl();
 	private PrisUdregner PU = new PrisUdregner();
+	private FSController FSC = new FSControllerImpl();
+
 
 	@FXML
 	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
@@ -76,8 +82,8 @@ public class BestilFlexController implements Initializable {
 		fti.setDato(dato.getValue());
 		fti.setTilKommune(tilKommune.getValue());
 		fti.setAntalPersoner(Integer.parseInt(personer.getText()));
-		fti.setEkstraTilvalg().setAntal(tilvalg());
-		
+		fti.setAntalTilvalg(tilvalg());
+
 		if (fti.getKilometer() == 0)
 			try {
 				handleBeregnKM(event);
@@ -85,10 +91,8 @@ public class BestilFlexController implements Initializable {
 				fti.setPris(result);
 				prisfelt.setText(String.valueOf(result));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Internet fejl");
 			} catch (Throwable e) {
-				// TODO Auto-generated catch block
 				System.out.println("Parameter fejl");
 				e.printStackTrace();
 			}
@@ -97,16 +101,21 @@ public class BestilFlexController implements Initializable {
 			fti.setPris(result);
 			prisfelt.setText(String.valueOf(result));
 		}
-		// double result = PU.takstUdregner(fti);
-		// fti.setPris(result);
-		// prisfelt.setText(String.valueOf(result));
-
 	}
 
 	@FXML
 	private void handleBestilFlextur(ActionEvent event) {
-		System.out.println("Ikke impletemteret");
-
+		if (fti.getPris() == 0.0) {
+			handleBeregnPris(event);
+		}
+		fti.setFraAdress(fraAddresse.getText());
+		fti.setTilAdress(tilAddresse.getText());
+		fti.setTid(LocalTime.parse(tidspunkt.getText()));
+		fti.setKommentar(kommentarer.toString());
+		fti.setFraPostnummer(Integer.parseInt(PostnrO.getText()));
+		fti.setTilPostnummer(Integer.parseInt(PostnrD.getText()));
+		
+	//	FSC.gemFlextur(fti);
 	}
 
 	@FXML
@@ -119,14 +128,16 @@ public class BestilFlexController implements Initializable {
 
 	}
 
-	private int tilvalg(){
-		int result = Integer.parseInt(barnevogne.getText()) + Integer.parseInt(koerestole.getText())+ Integer.parseInt(baggage.getText())+ Integer.parseInt(autostole.getText());
+	private int tilvalg() {
+		int result = Integer.parseInt(barnevogne.getText()) + Integer.parseInt(koerestole.getText())
+				+ Integer.parseInt(baggage.getText()) + Integer.parseInt(autostole.getText());
 		return result;
 	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		prisBar.setVisible(false);
+		dato.setValue(LocalDate.now());
 		fraKommune.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
 		fraKommune.getSelectionModel().selectFirst();
 		tilKommune.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));

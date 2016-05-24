@@ -147,6 +147,6 @@ public class FSControllerImpl implements FSController {
 //		DataAccess dataAccess = new DataAccessImpl();
 //
 //		new LogicTrans<>(dataAccess).transaction(() -> brugerMapper.gemFlextur(dataAccess, tur));
-//	}
+	//	}
 
 }
