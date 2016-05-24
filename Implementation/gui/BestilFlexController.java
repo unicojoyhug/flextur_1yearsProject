@@ -62,15 +62,11 @@ public class BestilFlexController implements Initializable {
 
 		KilometerUdregningAdapterFactory KU = new KilometerUdregningAdapterFactory();
 		KilometerUdregningAdapter KUadapter = KU.getKilometerUdregningAdapter();
-
 		String KM = KUadapter.Distance(Origin, Destination);
-
 		kilometer.setText(KM);
 		forventetTid.setText(KUadapter.Duration());
 		String[] parts = KM.split(" ");
 		String part1 = parts[0];
-		
-		System.out.println(part1);
 		fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));
 	}
 
@@ -80,7 +76,8 @@ public class BestilFlexController implements Initializable {
 		fti.setDato(dato.getValue());
 		fti.setTilKommune(tilKommune.getValue());
 		fti.setAntalPersoner(Integer.parseInt(personer.getText()));
-
+		fti.setEkstraTilvalg().setAntal(tilvalg());
+		
 		if (fti.getKilometer() == 0)
 			try {
 				handleBeregnKM(event);
@@ -120,6 +117,11 @@ public class BestilFlexController implements Initializable {
 	public void setMainApp(FlexturGUI flextur) {
 		this.flexturGUI = flextur;
 
+	}
+
+	private int tilvalg(){
+		int result = Integer.parseInt(barnevogne.getText()) + Integer.parseInt(koerestole.getText())+ Integer.parseInt(baggage.getText())+ Integer.parseInt(autostole.getText());
+		return result;
 	}
 
 	@Override
