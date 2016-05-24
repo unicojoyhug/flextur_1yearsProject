@@ -76,7 +76,7 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 		hs.setCprNummer("170182-3628"); //TODO LOGIN
 		hs.setKommune("Herning");
 		
-		fsController.angive(hs); // void
+		fsController.angivSøgningOplysninger(hs);
 		
 		
 	} catch (MissingOplysningExcpetion e){
@@ -135,8 +135,9 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
 
-		if(tilstand == Tilstand.SØG_HISTORIK){
-			resultListe.addAll(fsController.getResult());
+		if(tilstand.equals(Tilstand.SØG_HISTORIK_KUNDE)){
+			resultListe.clear();
+			resultListe.addAll(fsController.getHistorikResultForKunde());
 			tableView.setItems(resultListe);
 			
 		}

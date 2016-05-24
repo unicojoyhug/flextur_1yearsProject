@@ -14,7 +14,7 @@ import logic.Tilstand;
  *
  */
 
-public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
+public class HistorikSøgningImpl implements HistorikSøgning  {
 
 
 	private LocalDate fraDato = null;
@@ -47,7 +47,7 @@ public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
 	@Override
 	public void setTilDato(LocalDate tilDato) {
 		if (tilDato == null) {
-			throw new MissingOplysningExcpetion ("Til Dato Mangler");
+			throw new MissingOplysningExcpetion ("Til kommune Mangler");
 		}
 		this.tilDato = tilDato;
 	}
@@ -60,7 +60,7 @@ public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
 	@Override
 	public void setKommune(String kommune) {
 		if (kommune == null) {
-			throw new MissingOplysningExcpetion ("Til Dato Mangler");
+			throw new MissingOplysningExcpetion ("Fra kommune Mangler");
 		}
 		this.kommune = kommune;
 	}
@@ -76,28 +76,13 @@ public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
 	}
 
 
-	@Override
-	public Tilstand getTilstand() {
-		return Tilstand.SØG_HISTORIK;
-	}
-
+	
 	@Override
 	public String toString() {
 		return "HistorikSøgningImpl [fraDato=" + fraDato + ", tilDato=" + tilDato + ", kommune=" + kommune
 				+ ", cprNummer=" + cprNummer + "]";
 	}
 
-	@Override
-	public void tilmeldObserver(Observer observer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void notifyObservers(Observable observable, Tilstand tilstand) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 
 }

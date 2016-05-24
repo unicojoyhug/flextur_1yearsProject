@@ -11,9 +11,9 @@ public interface FSController extends Observable {
 
 	void søgHistorik();
 	
-	List<Flextur> angivSøgningOplysninger(HistorikSøgning historikSøgning);
+	void angivSøgningOplysninger(HistorikSøgning historikSøgning);
 
-	List<HistorikForBM> angivSøgningOplysningerForBM(HistorikSøgning historikSøgning);
+	void angivSøgningOplysningerForBM(HistorikSøgning historikSøgning);
 
 	String[] getKommuneListe();
 
@@ -22,6 +22,10 @@ public interface FSController extends Observable {
 	void exporterHistorikForKunde(String filenavn, List<Flextur> historikListe);
 
 	Bruger checkLogin(String loginId, String kodeord);
+
+	List<Flextur> getHistorikResultForKunde();
+
+	List<HistorikForBM> getHistorikResultForBM();
 
 	
 }

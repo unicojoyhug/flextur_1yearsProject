@@ -22,6 +22,4 @@ public interface HistorikSøgning {
 
 	void setCprNummer(String cprNummer);
 
-	Tilstand getTilstand();
-
 }
