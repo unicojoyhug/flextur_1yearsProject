@@ -12,7 +12,7 @@ public class PrisUdregner {
 		SatsAdapter rate = satsFactory.getSatsAdapter();
 		double km = flextur.getKilometer();
 		double personer = antalPersoner(flextur);
-		double sats = rate.hentSatsRate(flextur);
+		double sats = rate.hentSats(flextur);
 		double tilvalg = antalTilvalg(flextur);
 		
 		

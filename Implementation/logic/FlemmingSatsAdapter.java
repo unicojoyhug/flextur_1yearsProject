@@ -7,7 +7,7 @@ import sats.UnknownKommuneException;
 public class FlemmingSatsAdapter implements SatsAdapter {
 	
 
-	public double hentSatsRate(Flextur tur){
+	public double hentSats(Flextur tur){
 		int year = tur.getDato().getYear();
 		int month = tur.getDato().getMonthValue();
 		int day = tur.getDato().getDayOfMonth();
