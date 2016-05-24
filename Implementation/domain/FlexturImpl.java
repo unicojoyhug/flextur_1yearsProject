@@ -21,6 +21,7 @@ public class FlexturImpl implements Flextur , Observable{
 	private double pris;
 	private int antalPersoner;
 	private EkstraTilvalg ekstraTilvalg;
+	private double kilometer;
 	
 	
 	@Override
@@ -196,6 +197,15 @@ public class FlexturImpl implements Flextur , Observable{
 	@Override
 	public void notifyObservers(Observable observable, Tilstand tilstand) {
 		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public double getKilometer() {
+		return kilometer;
+	}
+	@Override
+	public void setKilometer(double kilometer) {
+		this.kilometer = kilometer;
 		
 	}
 	

@@ -12,23 +12,35 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-public class KilometerUdregning {
+public class KilometerUdregningAdapterImpl implements KilometerUdregningAdapter {
 
 	private static final String API_KEY = "AIzaSyBoOejgRYqOuDSldGnIDetXOEthJc-CdoM";
 	OkHttpClient client = new OkHttpClient();
 	public String duration;
 
+	/* (non-Javadoc)
+	 * @see util.KilometerUdregningAdapter#Distance(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public String Distance(String Origin, String Destination) throws IOException, XPathExpressionException {
-		KilometerUdregning request = new KilometerUdregning();
+//		KilometerUdregningAdapter request = new KilometerUdregningAdapterImpl();
 		String url_request = "https://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + Origin
 				+ "&destinations=" + Destination + "&mode=driving&language=da-DK&key=" + API_KEY;
-		String response = request.run(url_request);
+		String response = run(url_request);
 		String distance = XMLparse(response);
 		// System.out.println(response);
 		return distance;
 	}
-
-	public String run(String url) throws IOException {
+	@Override
+	public String Duration(){
+		return duration;
+		
+	}
+	/* (non-Javadoc)
+	 * @see util.KilometerUdregningAdapter#run(java.lang.String)
+	 */
+//	@Override
+	private String run(String url) throws IOException {
 		Request request = new Request.Builder().url(url).build();
 		Response response = client.newCall(request).execute();
 		return response.body().string();

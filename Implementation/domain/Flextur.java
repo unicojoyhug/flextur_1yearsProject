@@ -56,5 +56,9 @@ public interface Flextur   {
 	String getTilKommune();
 
 	void setTilKommune(String tilKommune);
+	
+	double getKilometer();
+	
+	void setKilometer(double kilometer);
 
 }

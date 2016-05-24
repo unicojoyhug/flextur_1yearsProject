@@ -7,13 +7,9 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
-
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.ResourceBundle;
-
+import domain.Flextur;
+import domain.FlexturImpl;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,9 +19,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import logic.PrisUdregner;
 import sats.Sats;
-import sats.UnknownKommuneException;
-import util.KilometerUdregning;
+import util.KilometerUdregningAdapter;
+import util.KilometerUdregningAdapterFactory;
 
 /**
  *
@@ -40,14 +37,14 @@ public class BestilFlexController implements Initializable {
 	@FXML
 	private TextArea kommentarer;
 	@FXML
-	private TextField fraAddresse, tilAddresse, prisfelt, PostnrO, PostnrD, kilometer, forventetTid, personer, barnevogne,
-			koerestole, baggage, autostole, tidspunkt;
+	private TextField fraAddresse, tilAddresse, prisfelt, PostnrO, PostnrD, kilometer, forventetTid, personer,
+			barnevogne, koerestole, baggage, autostole, tidspunkt;
 	@FXML
 	private DatePicker dato;
-	private FlexturGUI flextur;
+	private FlexturGUI flexturGUI;
 	private String seperator = " , ";
-	private KilometerUdregning KU = new KilometerUdregning();
-	private int day, month, year;
+	private Flextur fti = new FlexturImpl();
+	private PrisUdregner PU = new PrisUdregner();
 
 	@FXML
 	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
@@ -63,29 +60,49 @@ public class BestilFlexController implements Initializable {
 		sbD.append(PostnrD.getText());
 		String Destination = sbD.toString();
 
-		kilometer.setText(KU.Distance(Origin, Destination));
-		forventetTid.setText(KU.duration);
+		KilometerUdregningAdapterFactory KU = new KilometerUdregningAdapterFactory();
+		KilometerUdregningAdapter KUadapter = KU.getKilometerUdregningAdapter();
 
+		String KM = KUadapter.Distance(Origin, Destination);
+
+		kilometer.setText(KM);
+		forventetTid.setText(KUadapter.Duration());
+		String[] parts = KM.split(" ");
+		String part1 = parts[0];
+		
+		System.out.println(part1);
+		fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));
 	}
 
 	@FXML
-	private void handleBeregnPris(ActionEvent event) throws UnknownKommuneException {
-		
-		setDato();
-		
-	//	String distance = kilometer.getText();
-		String OriginKommune = fraKommune.getValue();
-		String DestinationKommune = tilKommune.getValue();
-		double pris = Sats.i().getSats(OriginKommune, DestinationKommune, year, month, day);
-		prisfelt.setText(String.valueOf(pris));
-		
-	}
+	private void handleBeregnPris(ActionEvent event) {
+		fti.setFraKommune(fraKommune.getValue());
+		fti.setDato(dato.getValue());
+		fti.setTilKommune(tilKommune.getValue());
+		fti.setAntalPersoner(Integer.parseInt(personer.getText()));
 
-	private void setDato() {
-		LocalDate localDate = dato.getValue();
-		year = localDate.getYear();
-		month = localDate.getMonthValue();
-		day = localDate.getDayOfMonth();
+		if (fti.getKilometer() == 0)
+			try {
+				handleBeregnKM(event);
+				double result = PU.takstUdregner(fti);
+				fti.setPris(result);
+				prisfelt.setText(String.valueOf(result));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Internet fejl");
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				System.out.println("Parameter fejl");
+				e.printStackTrace();
+			}
+		else {
+			double result = PU.takstUdregner(fti);
+			fti.setPris(result);
+			prisfelt.setText(String.valueOf(result));
+		}
+		// double result = PU.takstUdregner(fti);
+		// fti.setPris(result);
+		// prisfelt.setText(String.valueOf(result));
 
 	}
 
@@ -93,21 +110,15 @@ public class BestilFlexController implements Initializable {
 	private void handleBestilFlextur(ActionEvent event) {
 		System.out.println("Ikke impletemteret");
 
-		String distance = kilometer.getText();
-		String OriginKommune = fraKommune.getConverter().toString();
-		String DestinationKommune = tilKommune.getConverter().toString();
-	//	String Pris = pris.getText();
-		// TODO Finish method
-
 	}
 
 	@FXML
 	private void handleToMenu(ActionEvent event) {
-		flextur.showMenuKunde();
+		flexturGUI.showMenuKunde();
 	}
 
 	public void setMainApp(FlexturGUI flextur) {
-		this.flextur = flextur;
+		this.flexturGUI = flextur;
 
 	}
 
