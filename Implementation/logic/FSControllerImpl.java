@@ -46,8 +46,8 @@ public class FSControllerImpl implements FSController {
 	public List<Flextur> angivSøgningOplysninger(HistorikSøgning historikSøgning) {
 		DataAccess dataAccess = new DataAccessImpl();
 		// TODO 
-		this.historikSøgning = historikSøgning;
-		notifyObservers(this, Tilstand.HENT_HISTORIK);
+//		this.historikSøgning = historikSøgning;
+//		notifyObservers(this, Tilstand.HENT_HISTORIK);
 		
 		return new LogicTrans<List<Flextur>>(dataAccess)
 				.transaction(() -> turMapper.getMatchendeHistorik(dataAccess, historikSøgning));

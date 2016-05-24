@@ -14,6 +14,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import logic.FSControllerImpl;
 import logic.Observable;
 import logic.Tilstand;
 
@@ -99,6 +100,10 @@ public class LoginController extends FSPane implements Initializable {
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
 		// TODO Auto-generated method stub
+		if(observable instanceof FSControllerImpl){
+			FSControllerImpl fs = (FSControllerImpl) observable;
+			fs.
+		}
 		
 	}
 

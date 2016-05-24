@@ -27,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import logic.FSControllerImpl;
 import logic.Observable;
 import logic.Tilstand;
 import sats.Sats;
@@ -191,8 +192,12 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
+//		if(observable instanceof FSControllerImpl){
+//			FSControllerImpl fs = (FSControllerImpl) observable;
+//			fs.
+		
 		// TODO Auto-generated method stub
-		if (observable.equals(Tilstand.HENT_HISTORIK)) {
+		if (tilstand == Tilstand.HENT_HISTORIK) {
 			// resultListe.clear();
 			tableView.setItems(resultListe);
 		}

@@ -13,7 +13,8 @@ public class PrisUdregner {
 	
 	// Is this adapter pattern? 
 	public double takstUdregner(Flextur flextur) {
-		SatsAdapter rate = new SatsAdapterImpl();
+		SatsFactory satsFactory = new SatsFactory();
+		SatsAdapter rate = satsFactory.getSatsAdapter();
 		return	rate.hentSatsRate(flextur);
 		
 //		try {
