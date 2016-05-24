@@ -100,10 +100,10 @@ public class LoginController extends FSPane implements Initializable {
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
 		// TODO Auto-generated method stub
-		if(observable instanceof FSControllerImpl){
-			FSControllerImpl fs = (FSControllerImpl) observable;
-			fs.
-		}
+//		if(observable instanceof FSControllerImpl){
+//			FSControllerImpl fs = (FSControllerImpl) observable;
+////			fs.
+//		}
 		
 	}
 

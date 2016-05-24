@@ -30,7 +30,9 @@ public class FSControllerImpl implements FSController {
 	private CRUD<Bruger, String> brugerMapper = new BrugerMapperImpl();
 	private HistorikSøgning historikSøgning;
 	private List<Observer> observers = new ArrayList<>();
-	private List<Flextur> result = new ArrayList<>();
+	private List<Flextur> flexturListResult = new ArrayList<>();
+	private List<HistorikForBM> flexturListResult_BM = new ArrayList<>();
+
 	// private HistorikSøgning historikSøgning;
 	
 //	larsnielsenlind@gmail.com
@@ -38,7 +40,7 @@ public class FSControllerImpl implements FSController {
 	@Override
 	public void søgHistorik() {
 		// TODO tjek loggetInd bruger.....observer......
-		notifyObservers(this, Tilstand.SØG_HISTORIK);
+//		notifyObservers(this, Tilstand.SØG_HISTORIK);
 
 	}
 
@@ -49,25 +51,40 @@ public class FSControllerImpl implements FSController {
 //		this.historikSøgning = historikSøgning;
 //		notifyObservers(this, Tilstand.HENT_HISTORIK);
 		
-		this.result =  new LogicTrans<List<Flextur>>(dataAccess)
+		this.flexturListResult =  new LogicTrans<List<Flextur>>(dataAccess)
 				.transaction(() -> turMapper.getMatchendeHistorik(dataAccess, historikSøgning));
 		
-		notifyObservers(this, Tilstand.SØG_HISTORIK);
+		notifyObservers(this, Tilstand.SØG_HISTORIK_KUNDE);
 
 	}
 	
-	public List<Flextur> getResultListe (){
-		return result;
-	}
 	@Override
-	public List<HistorikForBM> angivSøgningOplysningerForBM(HistorikSøgning historikSøgning) {
+	public List<Flextur> getHistorikResultForKunde (){
+		return flexturListResult;
+	}
+	
+	
+	
+	
+	
+	@Override
+	public void angivSøgningOplysningerForBM(HistorikSøgning historikSøgning) {
 
 		DataAccess dataAccess = new DataAccessImpl();
 
-		return new LogicTrans<List<HistorikForBM>>(dataAccess)
+		this.flexturListResult_BM =  new LogicTrans<List<HistorikForBM>>(dataAccess)
 				.transaction(() -> turMapper.getMatchendeHistorikForBM(dataAccess, historikSøgning));
+		notifyObservers(this, Tilstand.SØG_HISTORIK_BM);
+
 
 	}
+	
+	@Override
+	public List<HistorikForBM> getHistorikResultForBM (){
+		return flexturListResult_BM;
+	}
+	
+	
 
 	@Override
 	public String[] getKommuneListe() {
