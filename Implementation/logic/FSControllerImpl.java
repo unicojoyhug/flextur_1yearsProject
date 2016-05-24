@@ -30,7 +30,7 @@ public class FSControllerImpl implements FSController {
 	private CRUD<Bruger, String> brugerMapper = new BrugerMapperImpl();
 	private HistorikSøgning historikSøgning;
 	private List<Observer> observers = new ArrayList<>();
-
+	private List<Flextur> result = new ArrayList<>();
 	// private HistorikSøgning historikSøgning;
 	
 //	larsnielsenlind@gmail.com
@@ -43,17 +43,22 @@ public class FSControllerImpl implements FSController {
 	}
 
 	@Override
-	public List<Flextur> angivSøgningOplysninger(HistorikSøgning historikSøgning) {
+	public void angivSøgningOplysninger(HistorikSøgning historikSøgning) {
 		DataAccess dataAccess = new DataAccessImpl();
 		// TODO 
 //		this.historikSøgning = historikSøgning;
 //		notifyObservers(this, Tilstand.HENT_HISTORIK);
 		
-		return new LogicTrans<List<Flextur>>(dataAccess)
+		this.result =  new LogicTrans<List<Flextur>>(dataAccess)
 				.transaction(() -> turMapper.getMatchendeHistorik(dataAccess, historikSøgning));
+		
+		notifyObservers(this, Tilstand.SØG_HISTORIK);
 
 	}
-
+	
+	public List<Flextur> getResultListe (){
+		return result;
+	}
 	@Override
 	public List<HistorikForBM> angivSøgningOplysningerForBM(HistorikSøgning historikSøgning) {
 

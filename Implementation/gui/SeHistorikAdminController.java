@@ -123,10 +123,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 			} else {
 				hs.setCprNummer(cprNummer.getText());
 			}
-
-			resultListe.addAll(fsController.angivSøgningOplysningerForBM(hs));
-			
-			tableView.setItems(resultListe);
+			fsController.angivSøgningOplysningerForBM(hs);
 			
 		} catch (MissingOplysningExcpetion e){
 			alert.visOplysningManglerAdvarselDialog();
@@ -170,8 +167,8 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 		
 //		kommuneCombo.setItems(FXCollections.observableArrayList(FSC.getKommuneListe()));
 
-		
-		kommuneCombo.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
+		String[] kommuner =FSController.getInstance().getKommuneListe();
+		kommuneCombo.setItems(FXCollections.observableArrayList(kommuner));
 
 
 		personCPRColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, String>("cprNummer"));
@@ -199,8 +196,9 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 		// TODO Auto-generated method stub
 		if (tilstand == Tilstand.HENT_HISTORIK) {
 			// resultListe.clear();
-			tableView.setItems(resultListe);
+			tableView.setItems(fsController.getOTherllll);
 		}
+		if()
 	}
 
 }
