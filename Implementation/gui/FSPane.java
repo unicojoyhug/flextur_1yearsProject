@@ -11,14 +11,14 @@ public abstract class FSPane implements Observer{
 	
 	public void setFSController (FSController fsController){
 		this.fsController = fsController;
-		this.fsController.tilmedObserver(this);
+		this.fsController.tilmeldObserver(this);
 	}
 
 	public void setMainApp(FlexturGUI flexturGUI) {
 		this.flexturGUI = flexturGUI;
 	}
 	
-	public String [] getKommune() {
-		return Sats.i().getKommuner();
-	}
+//	public String [] getKommune() {
+//		return Sats.i().getKommuner();
+//	}
 }

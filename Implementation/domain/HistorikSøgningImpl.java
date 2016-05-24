@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import exception.MissingOplysningExcpetion;
 import logic.Observable;
+import logic.Observer;
 import logic.Tilstand;
 
 /**
@@ -84,6 +85,18 @@ public class HistorikSøgningImpl implements HistorikSøgning, Observable  {
 	public String toString() {
 		return "HistorikSøgningImpl [fraDato=" + fraDato + ", tilDato=" + tilDato + ", kommune=" + kommune
 				+ ", cprNummer=" + cprNummer + "]";
+	}
+
+	@Override
+	public void tilmeldObserver(Observer observer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyObservers(Observable observable, Tilstand tilstand) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

@@ -187,15 +187,15 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 
 	}
 
-	@Override
-	public void update(Observable observable, Object tilstand) {
-		// TODO Auto-generated method stub
+	
 
+	@Override
+	public void update(Observable observable, Tilstand tilstand) {
+		// TODO Auto-generated method stub
 		if (observable.equals(Tilstand.HENT_HISTORIK)) {
 			// resultListe.clear();
 			tableView.setItems(resultListe);
 		}
-
 	}
 
 }

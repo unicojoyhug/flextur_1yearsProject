@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import data.BrugerMapperImpl;
@@ -28,6 +29,7 @@ public class FSControllerImpl implements FSController {
 	private TurMapper turMapper = new TurMapperImpl();
 	private CRUD<Bruger, String> brugerMapper = new BrugerMapperImpl();
 	private HistorikSøgning historikSøgning;
+	private List<Observer> observers = new ArrayList<>();
 
 	// private HistorikSøgning historikSøgning;
 	
@@ -106,6 +108,20 @@ public class FSControllerImpl implements FSController {
 		return bruger;
 	}
 
+	@Override
+	public void tilmeldObserver(Observer observer) {
+		observers.add(observer);
+		
+	}
+
+	@Override
+	public void notifyObservers(Observable observable, Tilstand tilstand) {
+		for(Observer observer : observers) {
+			observer.update(observable, tilstand);
+		}		
+	}
+
+	
 //	public void gemFlextur(Flextur tur) {
 //		DataAccess dataAccess = new DataAccessImpl();
 //

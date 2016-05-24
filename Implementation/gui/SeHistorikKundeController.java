@@ -130,15 +130,12 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 
 	}
 
+	
+
 	@Override
-	public void update(Observable observable, Object tilstand) {
+	public void update(Observable observable, Tilstand tilstand) {
 		// TODO Auto-generated method stub
-
-		if (observable.equals(Tilstand.HENT_HISTORIK)) {
-			// resultListe.clear();
-			tableView.setItems(resultListe);
-		}
-
+		
 	}
 
 }

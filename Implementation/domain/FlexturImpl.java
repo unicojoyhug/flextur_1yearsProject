@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import logic.Observable;
+import logic.Observer;
+import logic.Tilstand;
 
 public class FlexturImpl implements Flextur , Observable{
 	private long flexturId;
@@ -185,6 +187,16 @@ public class FlexturImpl implements Flextur , Observable{
 		return "FlexturImpl [flexturId=" + flexturId + ", kundeId=" + kundeId + ", dato=" + dato + ", tid=" + tid
 				+ ", fraAdress=" + fraAdress + ", tilAdress=" + tilAdress + ", pris=" + pris + ", antalPersoner="
 				+ antalPersoner + ", ekstraTilvalg=" + ekstraTilvalg + "]";
+	}
+	@Override
+	public void tilmeldObserver(Observer observer) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void notifyObservers(Observable observable, Tilstand tilstand) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

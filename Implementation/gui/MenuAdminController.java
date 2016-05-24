@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import logic.Observable;
+import logic.Tilstand;
 
 /**
  *
@@ -51,8 +52,9 @@ public class MenuAdminController extends FSPane implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         usernameL.setText(user);
     }
+	
 	@Override
-	public void update(Observable observable, Object tilstand) {
+	public void update(Observable observable, Tilstand tilstand) {
 		// TODO Auto-generated method stub
 		
 	}    

@@ -15,6 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import logic.Observable;
+import logic.Tilstand;
 
 /**
  * FXML Controller class
@@ -96,8 +97,10 @@ public class LoginController extends FSPane implements Initializable {
 	}
 
 	@Override
-	public void update(Observable observable, Object tilstand) {
+	public void update(Observable observable, Tilstand tilstand) {
 		// TODO Auto-generated method stub
-
+		
 	}
+
+	
 }
