@@ -2,9 +2,9 @@ package domain;
 
 public interface Kunde {
 
-	int getCprNummer();
+	String getCprNummer();
 
-	void setCprNummer(int cprNummer);
+	void setCprNummer(String cprNummer);
 
 	String getKommune();
 
@@ -33,5 +33,9 @@ public interface Kunde {
 	boolean erAktivt();
 
 	void setErAktivt(boolean erAktivt);
+	
+	int getKundeID();
+	
+	void setKundeID(int kundeID);
 
 }

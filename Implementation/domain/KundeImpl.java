@@ -1,26 +1,27 @@
 package domain;
 
 public class KundeImpl implements Kunde {
-	private int cprNummer;
+	private String cprNummer;
 	private String kommune;
 	private String telefon;
 	private String fornavn;
 	private String efternavn;
 	private String adress;
 	private int postnummer;
+	private int kundeID;
 	private boolean erAktivt;
 	/* (non-Javadoc)
 	 * @see domain.Kunde#getCprNummer()
 	 */
 	@Override
-	public int getCprNummer() {
+	public String getCprNummer() {
 		return cprNummer;
 	}
 	/* (non-Javadoc)
 	 * @see domain.Kunde#setCprNummer(int)
 	 */
 	@Override
-	public void setCprNummer(int cprNummer) {
+	public void setCprNummer(String cprNummer) {
 		this.cprNummer = cprNummer;
 	}
 	/* (non-Javadoc)
@@ -120,6 +121,15 @@ public class KundeImpl implements Kunde {
 	@Override
 	public void setErAktivt(boolean erAktivt) {
 		this.erAktivt = erAktivt;
+	}
+	@Override
+	public int getKundeID() {
+		return kundeID;
+	}
+	@Override
+	public void setKundeID(int kundeID) {
+		this.kundeID = kundeID;
+		
 	}
 	
 	
