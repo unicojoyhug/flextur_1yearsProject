@@ -332,3 +332,21 @@ values ('bm1@flextur.dk', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', 2)
 
 ///
 Select * from bestillingsmodtagelse inner join rolle on rolle.id = bestillingsmodtagelse.rolle where bestillingsmodtagelse.loginid = 'bm1@flextur.dk'
+
+
+/////
+select loginid, kodeord, rolle from bestillingsmodtagelse
+union
+select cpr.cprNummer, kodeord, rolle from kunde
+inner join cpr on cpr.id = kunde.loginid
+
+
+
+
+//////
+select id, loginid, kodeord, rolle.rolle from bestillingsmodtagelse
+inner join rolle on rolle.id = bestillingsmodtagelse.rolle
+union
+select id, cpr.cprNummer, kodeord, rolle.rolle from kunde
+inner join cpr on cpr.id = kunde.loginid  
+inner join rolle on rolle.id = kunde.rolle
