@@ -344,9 +344,11 @@ inner join cpr on cpr.id = kunde.loginid
 
 
 //////
-select id, loginid, kodeord, rolle.rolle from bestillingsmodtagelse
+select loginid, kodeord, rolle.rolle from bestillingsmodtagelse
 inner join rolle on rolle.id = bestillingsmodtagelse.rolle
 union
-select id, cpr.cprNummer, kodeord, rolle.rolle from kunde
+select cpr.cprNummer, kodeord, rolle.rolle from kunde
 inner join cpr on cpr.id = kunde.loginid  
 inner join rolle on rolle.id = kunde.rolle
+where kunde.erAktivt = true
+where loginid = ?

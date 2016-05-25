@@ -17,12 +17,15 @@ import util.CloseForSQL;
 public class BrugerMapperImpl implements CRUD<Bruger, String> {
 	private static final String ROLLE = "inner join rolle on rolle.id =";
 
-	private static final String READ_KUNDE= "Select kunde.*, rolle.rolle, cpr.cprNummer from kunde "
-			+  ROLLE + " kunde.rolle inner join cpr on cpr.id = kunde.loginid "
-			+ "where cpr.cprnummer = ?";
-	private static final String READ_BM = "Select * from bestillingsmodtagelse "
-			+ ROLLE + " bestillingsmodtagelse.rolle where bestillingsmodtagelse.loginid = ?";
-	
+	private static final String READ_KUNDE= "Select id, cpr.cprNummer, rolle.rolle from kunde "
+			+ " inner join cpr on cpr.id = kunde.loginid " + ROLLE + " kunde.rolle "
+			+ " where kunde.erAktivt = true ";
+	private static final String LOGIN_ID = " where loginid = ? ";
+	private static final String READ_BM = "Select id, loginid, kodeord, rolle.rolle from bestillingsmodtagelse "
+			+ ROLLE + " bestillingsmodtagelse.rolle ";
+
+	private static final String READ_BRUGER = READ_BM + " union " + READ_KUNDE + LOGIN_ID;
+
 	private CloseForSQL close = new CloseForSQL();
 
 	@Override
@@ -40,27 +43,21 @@ public class BrugerMapperImpl implements CRUD<Bruger, String> {
 
 
 		try {
-			if(key.contains("@flextur.dk")){
-				statement = dataAccess.getConnection().prepareStatement(READ_BM);
-				statement.setString(1, key);
-				resultSet = statement.executeQuery();
-			}else{
-				statement = dataAccess.getConnection().prepareStatement(READ_KUNDE);
-				statement.setString(1, key);
-				resultSet = statement.executeQuery();
-			}
+			statement = dataAccess.getConnection().prepareStatement(READ_BRUGER);
+			statement.setString(1, key);
+			resultSet = statement.executeQuery();
+
 			if (resultSet.next()){
-				
+
 				bruger.setEncryptedKodeord(resultSet.getString("kodeord"));
-				
+				bruger.setLoginId(resultSet.getString("loginid"));
+				bruger.setId(resultSet.getInt("id"));
+
 				if(resultSet.getString("rolle.rolle").contains("kunde")){
 					bruger.setErKunde(true);
-					bruger.setLoginId(resultSet.getString("cpr.cprNummer"));
 					bruger.setErAktivt(resultSet.getBoolean("erAktivt"));
-					bruger.setId(resultSet.getLong("id"));
-
+				
 				}else{
-					bruger.setLoginId(resultSet.getString("loginid"));
 					bruger.setErKunde(false);
 
 				}

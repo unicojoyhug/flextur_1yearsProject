@@ -21,11 +21,13 @@ public interface FSController extends Observable {
 
 	void exporterHistorikForKunde(String filenavn, List<Flextur> historikListe);
 
-	Bruger checkLogin(String loginId, String kodeord);
-
+	void angivLoginOplysninger(String loginId, String kodeord);
+	
 	List<Flextur> getHistorikResultForKunde();
 
 	List<HistorikForBM> getHistorikResultForBM();
+
+	Bruger getBruger();
 
 	
 }

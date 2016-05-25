@@ -55,26 +55,16 @@ public class LoginController extends FSPane implements Initializable {
 
 		Bruger bruger = new BrugerImpl();
 		String loginId = username.getText();
-		try {
-			bruger.setAndEncryptPassword(password.getText());
-			String kodeord = bruger.getEncryptedKodeord();
-			bruger = fsController.checkLogin(loginId, kodeord);
+			try {
+				bruger.setAndEncryptPassword(password.getText());
+				String kodeord = bruger.getEncryptedKodeord();
+				fsController.angivLoginOplysninger(loginId, kodeord);
+				
+			} catch (NoSuchAlgorithmException e) {
+				alert.visLoginFejllDialog();
 
-			if(bruger.erKunde()&&bruger.erAktivt()){
-				flextur.showMenuKunde();
-			}else if(!bruger.erKunde()){
-				flextur.showMenuAdmin();
-			}
-
-		} catch (NoSuchAlgorithmException e) {
-			alert.visLoginFejllDialog();
-		} catch (LoginException e){
-			alert.visLoginFejllDialog();
-		} catch (RuntimeException e){
-			alert.visLoginFejllDialog();
-		}
-		//		System.out.println(user + " har prøvet at logge ind med koden: " + pass);
-		//		flextur.Login(user, pass);
+			} 
+			
 	}
 
 
@@ -99,19 +89,39 @@ public class LoginController extends FSPane implements Initializable {
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
+
+		DialogBox alert = new DialogBoxImpl(window);
+
 		// TODO Auto-generated method stub
-//		if(observable instanceof FSControllerImpl){
-//			FSControllerImpl fs = (FSControllerImpl) observable;
-////			fs.
-//		}
-		
+		//		if(observable instanceof FSControllerImpl){
+		//			FSControllerImpl fs = (FSControllerImpl) observable;
+		////			fs.
+		//		}
+
+		if(tilstand.equals(Tilstand.LOGIN)){
+			try{
+				Bruger bruger = fsController.getBruger();
+				if(bruger.erKunde()&&bruger.erAktivt()){
+					flextur.showMenuKunde();
+				}else if(!bruger.erKunde()){
+					flextur.showMenuAdmin();
+				}
+			
+		} catch (LoginException e){
+			alert.visLoginFejllDialog();
+		} catch (RuntimeException e){
+			alert.visLoginFejllDialog();
+		}
 	}
 
-	@Override
-	void postInitialize() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	
+}
+
+@Override
+void postInitialize() {
+	// TODO Auto-generated method stub
+
+}
+
+
 }

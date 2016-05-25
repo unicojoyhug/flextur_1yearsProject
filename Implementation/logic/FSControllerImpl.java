@@ -29,7 +29,7 @@ public class FSControllerImpl implements FSController {
 	private List<Observer> observers = new ArrayList<>();
 	private List<Flextur> flexturListResult = new ArrayList<>();
 	private List<HistorikForBM> flexturListResult_BM = new ArrayList<>();
-
+	private Bruger bruger;
 	// private HistorikSøgning historikSøgning;
 	
 //	larsnielsenlind@gmail.com
@@ -108,16 +108,17 @@ public class FSControllerImpl implements FSController {
 
 	}
 
+	
+	
 	@Override
-	public Bruger checkLogin(String loginId, String kodeord) {
+	public void angivLoginOplysninger(String loginId, String kodeord) {
 		DataAccess dataAccess = new DataAccessImpl();
-		Bruger bruger = null;
 		try {
-			bruger = new LogicTrans<Bruger>(dataAccess).transaction(() -> brugerMapper.read(dataAccess, loginId));
+			this.bruger = new LogicTrans<Bruger>(dataAccess).transaction(() -> brugerMapper.read(dataAccess, loginId));
 
 			if (bruger.getEncryptedKodeord().contentEquals(kodeord)) {
-
 				bruger.setErLoggetInd(true);
+				notifyObservers (this, Tilstand.LOGIN);
 
 			} else {
 				throw new LoginException("Login fejl");
@@ -126,9 +127,18 @@ public class FSControllerImpl implements FSController {
 			throw new LoginException("Login fejl");
 
 		}
+	
+	}
+	
+	
+	@Override
+	public Bruger getBruger (){
 		return bruger;
 	}
-
+	
+	
+	
+	
 	@Override
 	public void tilmeldObserver(Observer observer) {
 		observers.add(observer);
