@@ -3,13 +3,14 @@ package domain;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import logic.Observable;
-import logic.Observer;
-import logic.Tilstand;
 
-public class FlexturImpl implements Flextur, Observable {
+public class FlexturImpl implements Flextur{
 	private long flexturId;
 	private int kundeId;
+	private String efternavn;
+	private String fornavn;
+	private String telefon;
+	private String cprNummer;
 	private LocalDate dato;
 	private LocalTime tid;
 	private String fraAdress;
@@ -20,7 +21,6 @@ public class FlexturImpl implements Flextur, Observable {
 	private String tilKommune;
 	private double pris;
 	private int antalPersoner;
-	private EkstraTilvalg ekstraTilvalg;
 	private double kilometer;
 	private String kommentar;
 	private int barnevogne;
@@ -228,44 +228,7 @@ public class FlexturImpl implements Flextur, Observable {
 		this.antalPersoner = antalPersoner;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see domain.Flextur#getEkstraTilvalg()
-	 */
-	@Override
-	public EkstraTilvalg getEkstraTilvalg() {
-		return ekstraTilvalg;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see domain.Flextur#setEkstraTilvalg(domain.EkstraTilvalg)
-	 */
-	@Override
-	public void setEkstraTilvalg(EkstraTilvalg ekstraTilvalg) {
-		this.ekstraTilvalg = ekstraTilvalg;
-	}
-
-	@Override
-	public String toString() {
-		return "FlexturImpl [flexturId=" + flexturId + ", kundeId=" + kundeId + ", dato=" + dato + ", tid=" + tid
-				+ ", fraAdress=" + fraAdress + ", tilAdress=" + tilAdress + ", pris=" + pris + ", antalPersoner="
-				+ antalPersoner + ", ekstraTilvalg=" + ekstraTilvalg + "]";
-	}
-
-	@Override
-	public void tilmeldObserver(Observer observer) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void notifyObservers(Observable observable, Tilstand tilstand) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	@Override
 	public double getKilometer() {
@@ -331,6 +294,59 @@ public class FlexturImpl implements Flextur, Observable {
 	public void setAutostole(int autostole) {
 		this.autostole = autostole;
 
+	}
+	@Override
+	public String getEfternavn() {
+		return efternavn;
+	}
+	@Override
+	public void setEfternavn(String efternavn) {
+		this.efternavn = efternavn;
+	}
+	@Override
+	public String getFornavn() {
+		return fornavn;
+	}
+	@Override
+	public void setFornavn(String fornavn) {
+		this.fornavn = fornavn;
+	}
+	@Override
+	public String getTelefon() {
+		return telefon;
+	}
+	@Override
+	public void setTelefon(String telefon) {
+		this.telefon = telefon;
+	}
+	@Override
+	public String getCprNummer() {
+		return cprNummer;
+	}
+	@Override
+	public void setCprNummer(String cprNummer) {
+		this.cprNummer = cprNummer;
+	}
+
+	@Override
+	public String toString() {
+		return "FlexturImpl [flexturId=" + flexturId + ", kundeId=" + kundeId + ", efternavn=" + efternavn
+				+ ", fornavn=" + fornavn + ", telefon=" + telefon + ", cprNummer=" + cprNummer + ", dato=" + dato
+				+ ", tid=" + tid + ", fraAdress=" + fraAdress + ", fraPostnummer=" + fraPostnummer + ", tilPostnummer="
+				+ tilPostnummer + ", tilAdress=" + tilAdress + ", fraKommune=" + fraKommune + ", tilKommune="
+				+ tilKommune + ", pris=" + pris + ", antalPersoner=" + antalPersoner + ", kilometer=" + kilometer
+				+ ", kommentar=" + kommentar + ", barnevogne=" + barnevogne + ", autostole=" + autostole
+				+ ", koerestole=" + koerestole + ", baggage=" + baggage + ", getFraKommune()=" + getFraKommune()
+				+ ", getTilKommune()=" + getTilKommune() + ", getFraPostnummer()=" + getFraPostnummer()
+				+ ", getTilPostnummer()=" + getTilPostnummer() + ", getFlexturId()=" + getFlexturId()
+				+ ", getKundeId()=" + getKundeId() + ", getDato()=" + getDato() + ", getTid()=" + getTid()
+				+ ", getFraAdress()=" + getFraAdress() + ", getTilAdress()=" + getTilAdress() + ", getPris()="
+				+ getPris() + ", getAntalPersoner()=" + getAntalPersoner() + ", getKilometer()=" + getKilometer()
+				+ ", getKommentar()=" + getKommentar() + ", getBarnevogne()=" + getBarnevogne() + ", getBaggage()="
+				+ getBaggage() + ", getKoerestole()=" + getKoerestole() + ", getAutostole()=" + getAutostole()
+				+ ", getEfternavn()=" + getEfternavn() + ", getFornavn()=" + getFornavn() + ", getTelefon()="
+				+ getTelefon() + ", getCprNummer()=" + getCprNummer() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "] /n";
 	}
 
 }

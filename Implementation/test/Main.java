@@ -20,7 +20,7 @@ public class Main {
 //		System.out.println(fs.angivSøgningOplysninger(hs));
 //		System.out.println(hs);
 		
-		System.out.println(fs.angivSøgningOplysningerForBM(hs));
+//		System.out.println(fs.angivSøgningOplysningerForBM(hs));
 		
 		
 //		for(String s: fs.getKommuneListe()){

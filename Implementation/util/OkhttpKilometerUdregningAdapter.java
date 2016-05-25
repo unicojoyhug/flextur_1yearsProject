@@ -16,13 +16,13 @@ public class OkhttpKilometerUdregningAdapter implements KilometerUdregningAdapte
 
 	private static final String API_KEY = "AIzaSyBoOejgRYqOuDSldGnIDetXOEthJc-CdoM";
 	OkHttpClient client = new OkHttpClient();
-	public String duration;
+	public String duration; //why public?
 
 	/* (non-Javadoc)
 	 * @see util.KilometerUdregningAdapter#Distance(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String Distance(String Origin, String Destination) throws IOException, XPathExpressionException {
+	public String getDistance(String Origin, String Destination) throws IOException, XPathExpressionException {
 //		KilometerUdregningAdapter request = new KilometerUdregningAdapterImpl();
 		String url_request = "https://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + Origin
 				+ "&destinations=" + Destination + "&mode=driving&language=da-DK&key=" + API_KEY;
@@ -32,14 +32,12 @@ public class OkhttpKilometerUdregningAdapter implements KilometerUdregningAdapte
 		return distance;
 	}
 	@Override
-	public String Duration(){
+	public String getDuration(){
 		return duration;
 		
 	}
-	/* (non-Javadoc)
-	 * @see util.KilometerUdregningAdapter#run(java.lang.String)
-	 */
-//	@Override
+	
+	
 	private String run(String url) throws IOException {
 		Request request = new Request.Builder().url(url).build();
 		Response response = client.newCall(request).execute();

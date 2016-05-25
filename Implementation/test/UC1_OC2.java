@@ -22,8 +22,9 @@ public class UC1_OC2 {
 		hs.setFraDato(LocalDate.of(2016, 05, 01));
 		hs.setTilDato(LocalDate.of(2016, 05, 31));
 		hs.setKommune("Herning");
+		fs.angivSøgningOplysningerForBM(hs);
 		
-		assertEquals(1, fs.angivSøgningOplysningerForBM(hs).size());		
+		assertEquals(1, fs.getHistorikResultForBM().size());		
 	}
 	
 	@Test
@@ -35,8 +36,9 @@ public class UC1_OC2 {
 		hs.setFraDato(LocalDate.of(2016, 05, 01));
 		hs.setTilDato(LocalDate.of(2016, 05, 31));
 		hs.setKommune("Herning");
-		
-		assertEquals(1, fs.angivSøgningOplysningerForBM(hs).size());		
+		fs.angivSøgningOplysningerForBM(hs);
+
+		assertEquals(1, fs.getHistorikResultForBM().size());		
 	}
 	
 	
@@ -48,8 +50,9 @@ public class UC1_OC2 {
 		hs.setCprNummer("170182-3008");
 		hs.setFraDato(LocalDate.of(2016, 05, 01));
 		hs.setTilDato(LocalDate.of(2016, 05, 31));
-		
-		assertEquals(0, fs.angivSøgningOplysningerForBM(hs).size());		
+		fs.angivSøgningOplysningerForBM(hs);
+
+		assertEquals(0, fs.getHistorikResultForBM().size());		
 
 	}
 	
@@ -62,8 +65,9 @@ public class UC1_OC2 {
 
 		hs.setFraDato(LocalDate.of(2016, 05, 01));
 		hs.setTilDato(LocalDate.of(2016, 05, 31));
-		
-		assertEquals(2, fs.angivSøgningOplysninger(hs).size());		
+		fs.angivSøgningOplysningerForBM(hs);
+
+		assertEquals(1, fs.getHistorikResultForBM().size());		
 	}
 	
 	@Test
@@ -75,8 +79,9 @@ public class UC1_OC2 {
 
 		hs.setFraDato(LocalDate.of(2016, 05, 22));
 		hs.setTilDato(LocalDate.of(2016, 05, 31));
-		
-		assertEquals(1, fs.angivSøgningOplysninger(hs).size());		
+		fs.angivSøgningOplysningerForBM(hs);
+
+		assertEquals(1, fs.getHistorikResultForBM().size());		
 	}
 	
 

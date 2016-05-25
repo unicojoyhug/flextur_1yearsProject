@@ -17,7 +17,7 @@ public class KilometerMain {
 	
 
 	public static void main(String[] args) throws XPathExpressionException, IOException {
-		KU.Distance(Origin, Destination);
+		KU.getDistance(Origin, Destination);
 		
 	}
 

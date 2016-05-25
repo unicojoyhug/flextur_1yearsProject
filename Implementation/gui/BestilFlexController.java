@@ -75,9 +75,9 @@ public class BestilFlexController extends FSPane implements Initializable {
 
 		KilometerUdregningAdapterFactory KU = new KilometerUdregningAdapterFactory();
 		KilometerUdregningAdapter KUadapter = KU.getKilometerUdregningAdapter();
-		String KM = KUadapter.Distance(Origin, Destination);
+		String KM = KUadapter.getDistance(Origin, Destination);
 		kilometer.setText(KM);
-		forventetTid.setText(KUadapter.Duration());
+		forventetTid.setText(KUadapter.getDuration());
 		String[] parts = KM.split(" ");
 		String part1 = parts[0];
 		fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));

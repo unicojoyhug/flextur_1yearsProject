@@ -36,11 +36,7 @@ public interface Flextur {
 	int getAntalPersoner();
 
 	void setAntalPersoner(int antalPersoner);
-
-	EkstraTilvalg getEkstraTilvalg();
-
-	void setEkstraTilvalg(EkstraTilvalg ekstraTilvalg);
-
+	
 	int getFraPostnummer();
 
 	void setTilPostnummer(int tilPostnummer);
@@ -80,5 +76,21 @@ public interface Flextur {
 	int getAutostole();
 
 	void setAutostole(int autostole);
+
+	void setEfternavn(String efternavn);
+
+	String getEfternavn();
+
+	String getFornavn();
+
+	void setFornavn(String fornavn);
+
+	String getTelefon();
+
+	void setTelefon(String telefon);
+
+	String getCprNummer();
+
+	void setCprNummer(String cprNummer);
 
 }
