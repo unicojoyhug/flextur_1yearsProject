@@ -54,17 +54,24 @@ public class LoginController extends FSPane implements Initializable {
 		DialogBox alert = new DialogBoxImpl(window);
 
 		Bruger bruger = new BrugerImpl();
-		String loginId = username.getText();
+		
+		
+		String loginIds = username.getText();
+		String passwordS = password.getText();
+		if(loginIds.isEmpty()|| passwordS.isEmpty()){
+			alert.visOplysningManglerAdvarselDialog();
+		}else{
+		
 			try {
-				bruger.setAndEncryptPassword(password.getText());
+				bruger.setAndEncryptPassword(passwordS);
 				String kodeord = bruger.getEncryptedKodeord();
-				fsController.angivLoginOplysninger(loginId, kodeord);
+				fsController.angivLoginOplysninger(loginIds, kodeord);
 				
 			} catch (NoSuchAlgorithmException e) {
 				alert.visLoginFejllDialog();
 
 			} 
-			
+		}
 	}
 
 
@@ -98,24 +105,15 @@ public class LoginController extends FSPane implements Initializable {
 		////			fs.
 		//		}
 
-		if(tilstand.equals(Tilstand.LOGIN)){
-			try{
-				Bruger bruger = fsController.getBruger();
-				if(bruger.erKunde()&&bruger.erAktivt()){
-					flextur.showMenuKunde();
-				}else if(!bruger.erKunde()){
-					flextur.showMenuAdmin();
-				}
-			
-		} catch (LoginException e){
+		if(tilstand.equals(Tilstand.LOGIN_KUNDE)){		
+			flextur.showMenuKunde();
+		}else if(tilstand.equals(Tilstand.LOGIN_KUNDE)){
+			flextur.showMenuAdmin();
+		}else if (tilstand.equals(Tilstand.LOGIN_FEJL))			
 			alert.visLoginFejllDialog();
-		} catch (RuntimeException e){
-			alert.visLoginFejllDialog();
-		}
-	}
+		} 
+	
 
-
-}
 
 @Override
 void postInitialize() {

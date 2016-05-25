@@ -111,9 +111,17 @@ public class FSControllerImpl implements FSController {
 
 			if (bruger.getEncryptedKodeord().contentEquals(kodeord)) {
 				bruger.setErLoggetInd(true);
-				notifyObservers (this, Tilstand.LOGIN);
+				
+				if(bruger.erKunde()){
+					notifyObservers (this, Tilstand.LOGIN_KUNDE);
 
+				}else if(!bruger.erKunde()){
+					notifyObservers(this, Tilstand.LOGIN_BM);
+				}
+				
 			} else {
+				notifyObservers(this, Tilstand.LOGIN_FEJL);
+
 				throw new LoginException("Login fejl");
 			}
 		} catch (NullPointerException e) {

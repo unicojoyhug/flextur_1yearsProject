@@ -12,19 +12,19 @@ import java.sql.SQLException;
 
 public class DataAccessImpl implements DataAccess {
 	
-//	private static final String CONNECTION_URL = "jdbc:hsqldb:hsql://localhost/mydatabase";
-	private static final String CONNECTION_SERVER = "jdbc:hsqldb:hsql://80.163.21.9:25567";
+	private static final String CONNECTION_URL = "jdbc:hsqldb:hsql://localhost/mydatabase";
+//	private static final String CONNECTION_SERVER = "jdbc:hsqldb:hsql://80.163.21.9:25567";
 
 	private static final String DB_USER = "SA";
-	private static final String DB_PASSWORD = "TRu6tu5tEsec";
-//	private static final String DB_PASSWORD = "";
+//	private static final String DB_PASSWORD = "TRu6tu5tEsec";
+	private static final String DB_PASSWORD = "";
 
 	private Connection connection = null;
 
 	public DataAccessImpl(){
 		try {
-//			this.connection = DriverManager.getConnection(CONNECTION_URL, DB_USER, DB_PASSWORD);
-			this.connection = DriverManager.getConnection(CONNECTION_SERVER, DB_USER, DB_PASSWORD);
+			this.connection = DriverManager.getConnection(CONNECTION_URL, DB_USER, DB_PASSWORD);
+//			this.connection = DriverManager.getConnection(CONNECTION_SERVER, DB_USER, DB_PASSWORD);
 
 			this.connection.setAutoCommit(false);
 		} catch (SQLException e) {

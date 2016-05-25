@@ -17,14 +17,15 @@ import util.CloseForSQL;
 public class BrugerMapperImpl implements CRUD<Bruger, String> {
 	private static final String ROLLE = "inner join rolle on rolle.id =";
 
-	private static final String READ_KUNDE= "Select id, cpr.cprNummer, rolle.rolle from kunde "
+	private static final String READ_KUNDE= "Select id, cpr.cprNummer as loginid, kodeord, rolle.rolle from kunde "
 			+ " inner join cpr on cpr.id = kunde.loginid " + ROLLE + " kunde.rolle "
 			+ " where kunde.erAktivt = true ";
 	private static final String LOGIN_ID = " where loginid = ? ";
 	private static final String READ_BM = "Select id, loginid, kodeord, rolle.rolle from bestillingsmodtagelse "
 			+ ROLLE + " bestillingsmodtagelse.rolle ";
 
-	private static final String READ_BRUGER = READ_BM + " union " + READ_KUNDE + LOGIN_ID;
+	private static final String READ_BRUGER = "Select * from " + "( "+
+			READ_BM + " union " + READ_KUNDE + " ) " + LOGIN_ID  ;
 
 	private CloseForSQL close = new CloseForSQL();
 
@@ -53,11 +54,9 @@ public class BrugerMapperImpl implements CRUD<Bruger, String> {
 				bruger.setLoginId(resultSet.getString("loginid"));
 				bruger.setId(resultSet.getInt("id"));
 
-				if(resultSet.getString("rolle.rolle").contains("kunde")){
+				if(resultSet.getString("rolle").contains("kunde")){
 					bruger.setErKunde(true);
-					bruger.setErAktivt(resultSet.getBoolean("erAktivt"));
-				
-					bruger.setId(resultSet.getInt("id"));
+					bruger.setErAktivt(true);				
 
 				}else{
 					bruger.setErKunde(false);
