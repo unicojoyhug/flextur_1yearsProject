@@ -1,5 +1,6 @@
 package logic;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,23 @@ public class FSControllerImpl implements FSController {
 
 	// larsnielsenlind@gmail.com
 
+	
+	
+	
+	@Override
+	public void tilmeldObserver(Observer observer) {
+		observers.add(observer);
+
+	}
+
+	@Override
+	public void notifyObservers(Observable observable, Tilstand tilstand) {
+		for (Observer observer : observers) {
+			observer.update(observable, tilstand);
+		}
+	}
+	
+	
 	@Override
 	public void søgHistorik() {
 		// TODO tjek loggetInd bruger.....observer......
@@ -136,21 +154,7 @@ public class FSControllerImpl implements FSController {
 		return bruger;
 	}
 	
-	
-	
-	
-	@Override
-	public void tilmeldObserver(Observer observer) {
-		observers.add(observer);
 
-	}
-
-	@Override
-	public void notifyObservers(Observable observable, Tilstand tilstand) {
-		for (Observer observer : observers) {
-			observer.update(observable, tilstand);
-		}
-	}
 	@Override
 	public void angivFlexturOplysninger(Flextur tur) {
 		DataAccess dataAccess = new DataAccessImpl();
@@ -158,4 +162,14 @@ public class FSControllerImpl implements FSController {
 		notifyObservers(this, Tilstand.BESTIL_KØRSEL);
 	}
 
+	
+	@Override
+	public void søgBestilteKørsler(LocalDate fraDato, LocalDate tilDato){
+		DataAccess dataAccess = new DataAccessImpl();
+		this.flexturListResult = new LogicTrans<List<Flextur>>(dataAccess).transaction(()-> turMapper.getBestilteKørsler(dataAccess, fraDato, tilDato));
+		notifyObservers(this, Tilstand.SØG_BISTILE_KØRSLER);
+
+	}
+	
+	
 }

@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
@@ -44,6 +45,8 @@ public class TurMapperImpl implements TurMapper {
 
 	private final static String BESTIL_FLEXTUR = "INSERT INTO flextur (KUNDEID, DATO, TID, FRAPOSTNUMMER, TILPOSTNUMMER, FRAADRESS, TILADRESS, ANTALPERSONER, KOMMENTAR, PRIS, BARNEVOGNE, KØRESTOLE, BAGGAGE, AUTOSTOLE) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
+	private final static String GET_BESTILTE_KØRSLER = " select cpr.cprnummer, kunde.id, kunde.loginid,kunde.fornavn,kunde.efternavn,  kunde.telefon, flextur.* from flextur " 
+			+ KUNDE_CPR + WHERE_DATO + " AND flextur.erGodkendt = false";
 	@Override
 	public List<Flextur> getMatchendeHistorik(DataAccess dataAccess, HistorikSøgning historikSøgning) {
 
@@ -162,4 +165,41 @@ public class TurMapperImpl implements TurMapper {
 		return null;
 	}
 
+
+	@Override
+	public List<Flextur> getBestilteKørsler(DataAccess dataAccess, LocalDate fraDato, LocalDate tilDato) {
+
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		List<Flextur> bestilteKørsler = new ArrayList<>();
+
+		try {
+			statement = dataAccess.getConnection().prepareStatement(GET_BESTILTE_KØRSLER);
+			statement.setDate(1, Date.valueOf(fraDato));
+			statement.setDate(2, Date.valueOf(tilDato));
+			resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				Flextur flextur = new FlexturImpl();
+				flextur.setDato(resultSet.getDate("dato").toLocalDate());
+				flextur.setFraAdress(resultSet.getString("fraAdress"));
+				flextur.setFraPostnummer(resultSet.getInt("fraPostnummer"));
+				flextur.setTilAdress(resultSet.getString("tilAdress"));
+				flextur.setTilPostnummer(resultSet.getInt("tilPostnummer"));
+				flextur.setAntalPersoner(resultSet.getInt("antalPersoner"));
+				flextur.setPris((Double) resultSet.getDouble("pris"));
+				///flere...
+
+				bestilteKørsler.add(flextur);
+
+			}
+
+		} catch (SQLException exc) {
+			throw new PersistenceFailureException("Query has failed");
+		} finally {
+			close.close(resultSet, statement);
+		}
+
+		return bestilteKørsler;
+	}
 }

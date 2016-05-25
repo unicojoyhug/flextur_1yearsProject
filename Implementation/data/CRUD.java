@@ -1,7 +1,13 @@
 package data;
 
 import exception.PersistenceFailureException;
-
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ * @param <D>
+ * @param <K>
+ */
 public interface CRUD<D, K> {
 
 	public void create(DataAccess dataAccess, D domain) throws PersistenceFailureException;

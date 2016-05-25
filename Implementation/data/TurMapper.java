@@ -1,5 +1,6 @@
 package data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import domain.Flextur;
@@ -13,6 +14,8 @@ public interface TurMapper {
 	List<HistorikForBM> getMatchendeHistorikForBM(DataAccess dataAccess, HistorikSøgning historikSøgning);
 
 	Object gemFlextur(DataAccess dataAccess, Flextur tur); //? is it because we want something return?
+
+	List<Flextur> getBestilteKørsler(DataAccess dataAccess, LocalDate fraDato, LocalDate tilDato);
 	
 	
 }

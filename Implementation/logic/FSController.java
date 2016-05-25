@@ -1,5 +1,6 @@
 package logic;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import domain.Bruger;
@@ -30,6 +31,8 @@ public interface FSController extends Observable {
 	Bruger getBruger();
 
 	void angivFlexturOplysninger(Flextur flextur);
+
+	void søgBestilteKørsler(LocalDate fraDato, LocalDate tilDato);
 
 	
 }
