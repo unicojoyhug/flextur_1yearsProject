@@ -143,10 +143,7 @@ public class BestilFlexController extends FSPane implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		prisBar.setVisible(false);
 		dato.setValue(LocalDate.now());
-		fraKommune.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
-		fraKommune.getSelectionModel().selectFirst();
-		tilKommune.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
-		tilKommune.getSelectionModel().selectFirst();
+	
 
 	}
 
@@ -158,8 +155,10 @@ public class BestilFlexController extends FSPane implements Initializable {
 
 	@Override
 	void postInitialize() {
-		// TODO Auto-generated method stub
-		
+		fraKommune.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
+		fraKommune.getSelectionModel().selectFirst();
+		tilKommune.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
+		tilKommune.getSelectionModel().selectFirst();		
 	}
 
 }
