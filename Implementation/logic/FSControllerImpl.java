@@ -37,7 +37,6 @@ public class FSControllerImpl implements FSController {
 	@Override
 	public void søgHistorik() {
 		// TODO tjek loggetInd bruger.....observer......
-		// notifyObservers(this, Tilstand.SØG_HISTORIK);
 
 	}
 
@@ -153,9 +152,10 @@ public class FSControllerImpl implements FSController {
 		}
 	}
 	@Override
-	public void gemFlextur(Flextur tur) {
+	public void angivFlexturOplysninger(Flextur tur) {
 		DataAccess dataAccess = new DataAccessImpl();
 		new LogicTrans<>(dataAccess).transaction(() -> turMapper.gemFlextur(dataAccess, tur));
+		notifyObservers(this, Tilstand.BESTIL_KØRSEL);
 	}
 
 }

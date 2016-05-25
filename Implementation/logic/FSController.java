@@ -29,7 +29,7 @@ public interface FSController extends Observable {
 
 	Bruger getBruger();
 
-	void gemFlextur(Flextur flextur);
+	void angivFlexturOplysninger(Flextur flextur);
 
 	
 }

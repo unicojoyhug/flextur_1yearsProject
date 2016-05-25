@@ -133,6 +133,7 @@ public class TurMapperImpl implements TurMapper {
 	}
 
 	@Override
+	//TODO there is no execute query f.eks. statement.executeUpdate();  or execute()
 	public Object gemFlextur(DataAccess dataAccess, Flextur tur) {
 		PreparedStatement statement = null;
 		try {

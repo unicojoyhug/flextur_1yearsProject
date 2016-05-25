@@ -127,7 +127,7 @@ public class RegistrerFlexController implements Initializable {
 		fti.setFraPostnummer(Integer.parseInt(PostnrO.getText()));
 		fti.setTilPostnummer(Integer.parseInt(PostnrD.getText()));
 
-		FSC.gemFlextur(fti);
+		FSC.angivFlexturOplysninger(fti);
 	}
 	@FXML
 	private void handleGetKundeID(ActionEvent event) {

@@ -12,7 +12,7 @@ public interface TurMapper {
 
 	List<HistorikForBM> getMatchendeHistorikForBM(DataAccess dataAccess, HistorikSøgning historikSøgning);
 
-	Object gemFlextur(DataAccess dataAccess, Flextur tur);
+	Object gemFlextur(DataAccess dataAccess, Flextur tur); //? is it because we want something return?
 	
 	
 }

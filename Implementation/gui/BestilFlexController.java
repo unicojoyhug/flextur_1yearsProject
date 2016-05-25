@@ -54,7 +54,6 @@ public class BestilFlexController extends FSPane implements Initializable {
 	private String seperator = " , ";
 	private Flextur fti = new FlexturImpl();
 	private PrisUdregner PU = new PrisUdregner();
-	private FSController FSC = new FSControllerImpl();
 	private Bruger bruger = new BrugerImpl();
 	
 	
@@ -126,7 +125,7 @@ public class BestilFlexController extends FSPane implements Initializable {
 		fti.setFraPostnummer(Integer.parseInt(PostnrO.getText()));
 		fti.setTilPostnummer(Integer.parseInt(PostnrD.getText()));
 
-		FSC.gemFlextur(fti);
+		fsController.angivFlexturOplysninger(fti);
 	}
 
 	@FXML
