@@ -109,6 +109,7 @@ public class FlexturGUI extends Application {
 			FSPane showMenuKundeController = loader.<FSPane> getController();
 			showMenuKundeController.setFSController(fsController);
 			showMenuKundeController.setMainApp(this);
+			showMenuKundeController.postInitialize();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -134,9 +135,11 @@ public class FlexturGUI extends Application {
 //					this.flextur = flextur;
 //					
 //				}
-			FSPane showMenuAdmin = loader.<FSPane> getController();
-			showMenuAdmin.setFSController(fsController);
-			showMenuAdmin.setMainApp(this);
+			FSPane showMenuAdminController = loader.<FSPane> getController();
+			showMenuAdminController.setFSController(fsController);
+			showMenuAdminController.setMainApp(this);
+			showMenuAdminController.postInitialize();
+
 
 		} catch (IOException e) {
 			e.printStackTrace();

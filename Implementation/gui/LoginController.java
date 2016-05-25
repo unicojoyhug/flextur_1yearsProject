@@ -53,20 +53,17 @@ public class LoginController extends FSPane implements Initializable {
 	private void handleLogin(ActionEvent event) {
 		DialogBox alert = new DialogBoxImpl(window);
 
-		Bruger bruger = new BrugerImpl();
-		
-		
+		Bruger bruger = new BrugerImpl();	
 		String loginIds = username.getText();
 		String passwordS = password.getText();
 		if(loginIds.isEmpty()|| passwordS.isEmpty()){
 			alert.visOplysningManglerAdvarselDialog();
-		}else{
-		
+		}else{		
 			try {
 				bruger.setAndEncryptPassword(passwordS);
 				String kodeord = bruger.getEncryptedKodeord();
 				fsController.angivLoginOplysninger(loginIds, kodeord);
-				
+
 			} catch (NoSuchAlgorithmException e) {
 				alert.visLoginFejllDialog();
 
@@ -96,30 +93,30 @@ public class LoginController extends FSPane implements Initializable {
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
-
 		DialogBox alert = new DialogBoxImpl(window);
-
+		System.out.println(tilstand);
 		// TODO Auto-generated method stub
 		//		if(observable instanceof FSControllerImpl){
 		//			FSControllerImpl fs = (FSControllerImpl) observable;
 		////			fs.
 		//		}
-
-		if(tilstand.equals(Tilstand.LOGIN_KUNDE)){		
-			flextur.showMenuKunde();
-		}else if(tilstand.equals(Tilstand.LOGIN_KUNDE)){
-			flextur.showMenuAdmin();
-		}else if (tilstand.equals(Tilstand.LOGIN_FEJL))			
-			alert.visLoginFejllDialog();
-		} 
+		
+			if(tilstand.equals(Tilstand.LOGIN_KUNDE)){
+				flextur.showMenuKunde();
+			}else if(tilstand.equals(Tilstand.LOGIN_BM)){
+				flextur.showMenuAdmin();
+			}else if (tilstand.equals(Tilstand.LOGIN_FEJL)){			
+				alert.visLoginFejllDialog();
+			} 
 	
+	}
 
 
-@Override
-void postInitialize() {
-	// TODO Auto-generated method stub
+	@Override
+	void postInitialize() {
+		// TODO Auto-generated method stub
 
-}
+	}
 
 
 }

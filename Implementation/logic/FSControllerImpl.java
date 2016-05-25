@@ -115,7 +115,7 @@ public class FSControllerImpl implements FSController {
 				if(bruger.erKunde()){
 					notifyObservers (this, Tilstand.LOGIN_KUNDE);
 
-				}else if(!bruger.erKunde()){
+				}else{
 					notifyObservers(this, Tilstand.LOGIN_BM);
 				}
 				
