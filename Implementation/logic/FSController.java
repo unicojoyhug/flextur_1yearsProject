@@ -27,5 +27,7 @@ public interface FSController extends Observable {
 
 	List<HistorikForBM> getHistorikResultForBM();
 
+	void gemFlextur(Flextur flextur);
+
 	
 }

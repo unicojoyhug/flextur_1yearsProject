@@ -3,10 +3,10 @@ package data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
-
 
 import domain.Flextur;
 import domain.FlexturImpl;
@@ -33,16 +33,16 @@ public class TurMapperImpl implements TurMapper {
 	private final static String MATCHEDNE_HISTORIK = " select cpr.cprnummer, kunde.efternavn, kunde.fornavn, kundeid, "
 			+ " kommune.navn as kommune, sum(antalpersoner) as antalPersoner, count(id) as antalTur , sum(pris) as totalPris from flextur ";
 
-
 	private final static String GET_MATCHENDE_HISTORIK_KUNDE = " select dato, fraAdress, fraPostnummer, tilAdress, tilpostnummer,  antalpersoner, pris "
-			+ " from flextur"+ KUNDE_CPR + WHERE_DATO + " AND " + WHERE_CPR;
+			+ " from flextur" + KUNDE_CPR + WHERE_DATO + " AND " + WHERE_CPR;
 
+	private final static String GET_MATCHENDE_HISTORIK_BM_CPR = MATCHEDNE_HISTORIK + KUNDE_CPR + KOMMUNE + WHERE_DATO
+			+ " AND " + WHERE_CPR + GROUP_BY;
 
-	private final static String GET_MATCHENDE_HISTORIK_BM_CPR = MATCHEDNE_HISTORIK
-			+ KUNDE_CPR + KOMMUNE+ WHERE_DATO + " AND " + WHERE_CPR + GROUP_BY;
+	private final static String GET_MATCHENDE_HISTORIK_BM = MATCHEDNE_HISTORIK + KUNDE_CPR + KOMMUNE + WHERE_DATO
+			+ " AND  kommune.navn = ? " + GROUP_BY;
 
-	private final static String GET_MATCHENDE_HISTORIK_BM = MATCHEDNE_HISTORIK + KUNDE_CPR + KOMMUNE + WHERE_DATO + 
-			" AND  kommune.navn = ? " + GROUP_BY;
+	private final static String BESTIL_FLEXTUR = "INSERT INTO flextur (KUNDEID, DATO, TID, FRAPOSTNUMMER, TILPOSTNUMMER, FRAADRESS, TILADRESS, ANTALPERSONER, KOMMENTAR, PRIS, BARNEVOGNE, KØRESTOLE, BAGGAGE, AUTOSTOLE) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 	@Override
 	public List<Flextur> getMatchendeHistorik(DataAccess dataAccess, HistorikSøgning historikSøgning) {
@@ -58,7 +58,7 @@ public class TurMapperImpl implements TurMapper {
 			statement.setString(3, historikSøgning.getCprNummer());
 			resultSet = statement.executeQuery();
 
-			while (resultSet.next()){
+			while (resultSet.next()) {
 				Flextur flextur = new FlexturImpl();
 				flextur.setDato(resultSet.getDate("dato").toLocalDate());
 				flextur.setFraAdress(resultSet.getString("fraAdress"));
@@ -66,21 +66,20 @@ public class TurMapperImpl implements TurMapper {
 				flextur.setTilAdress(resultSet.getString("tilAdress"));
 				flextur.setTilPostnummer(resultSet.getInt("tilPostnummer"));
 				flextur.setAntalPersoner(resultSet.getInt("antalPersoner"));
-				flextur.setPris((Double)resultSet.getDouble("pris"));
+				flextur.setPris((Double) resultSet.getDouble("pris"));
 
 				matchendeHistorik.add(flextur);
 
 			}
 
-		} catch (SQLException exc){
-			throw new PersistenceFailureException("Query has failed");			
-		}finally{
-			close.close(resultSet, statement);		
+		} catch (SQLException exc) {
+			throw new PersistenceFailureException("Query has failed");
+		} finally {
+			close.close(resultSet, statement);
 		}
 
 		return matchendeHistorik;
 	}
-
 
 	@Override
 	public List<HistorikForBM> getMatchendeHistorikForBM(DataAccess dataAccess, HistorikSøgning historikSøgning) {
@@ -88,28 +87,25 @@ public class TurMapperImpl implements TurMapper {
 		ResultSet resultSet = null;
 		List<HistorikForBM> matchendeHistorik = new ArrayList<>();
 
-
 		try {
-			
-			if(historikSøgning.getCprNummer()!=null){
+
+			if (historikSøgning.getCprNummer() != null) {
 
 				statement = dataAccess.getConnection().prepareStatement(GET_MATCHENDE_HISTORIK_BM_CPR);
 				statement.setDate(1, Date.valueOf(historikSøgning.getFraDato()));
 				statement.setDate(2, Date.valueOf(historikSøgning.getTilDato()));
 				statement.setString(3, historikSøgning.getCprNummer());
 
-
-			}else{
+			} else {
 				statement = dataAccess.getConnection().prepareStatement(GET_MATCHENDE_HISTORIK_BM);
 				statement.setDate(1, Date.valueOf(historikSøgning.getFraDato()));
 				statement.setDate(2, Date.valueOf(historikSøgning.getTilDato()));
 				statement.setString(3, historikSøgning.getKommune());
 			}
-			
+
 			resultSet = statement.executeQuery();
 
-
-			while (resultSet.next()){
+			while (resultSet.next()) {
 				HistorikForBM historik = new HistorikForBMImpl();
 				historik.setFraDato(historikSøgning.getFraDato());
 				historik.setTilDato(historikSøgning.getTilDato());
@@ -125,15 +121,44 @@ public class TurMapperImpl implements TurMapper {
 
 			}
 
-		} catch (SQLException exc){
-			throw new PersistenceFailureException("Query has failed");		
-		} catch (NullPointerException exc){
+		} catch (SQLException exc) {
+			throw new PersistenceFailureException("Query has failed");
+		} catch (NullPointerException exc) {
 			throw new MissingOplysningExcpetion("Oplysninger mangler");
-		} finally{
-			close.close(resultSet, statement);		
+		} finally {
+			close.close(resultSet, statement);
 		}
 
 		return matchendeHistorik;
+	}
+
+	@Override
+	public Object gemFlextur(DataAccess dataAccess, Flextur tur) {
+		PreparedStatement statement = null;
+		try {
+			statement = dataAccess.getConnection().prepareStatement(BESTIL_FLEXTUR);
+			statement.setInt(1, tur.getKundeId());
+			statement.setDate(2, Date.valueOf(tur.getDato()));
+			statement.setTime(3, Time.valueOf(tur.getTid()));
+			statement.setInt(4, tur.getFraPostnummer());
+			statement.setInt(5, tur.getTilPostnummer());
+			statement.setString(6, tur.getFraAdress());
+			statement.setString(7, tur.getTilAdress());
+			statement.setInt(8, tur.getAntalPersoner());
+			statement.setString(9, tur.getKommentar());
+			statement.setDouble(10, tur.getPris());
+			statement.setInt(11, tur.getBarnevogne());
+			statement.setInt(12, tur.getKoerestole());
+			statement.setInt(13, tur.getBaggage());
+			statement.setInt(14, tur.getAutostole());
+		} catch (SQLException exc) {
+			throw new PersistenceFailureException("Query has failed");
+		} catch (NullPointerException exc) {
+			throw new MissingOplysningExcpetion("Oplysninger mangler");
+		} finally {
+			close.close(statement);
+		}
+		return null;
 	}
 
 }

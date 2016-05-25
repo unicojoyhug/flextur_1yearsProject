@@ -10,6 +10,9 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
+
+import domain.Bruger;
+import domain.BrugerImpl;
 import domain.Flextur;
 import domain.FlexturImpl;
 import javafx.collections.FXCollections;
@@ -50,7 +53,7 @@ public class BestilFlexController implements Initializable {
 	private Flextur fti = new FlexturImpl();
 	private PrisUdregner PU = new PrisUdregner();
 	private FSController FSC = new FSControllerImpl();
-
+	private Bruger bruger = new BrugerImpl();
 
 	@FXML
 	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
@@ -82,7 +85,10 @@ public class BestilFlexController implements Initializable {
 		fti.setDato(dato.getValue());
 		fti.setTilKommune(tilKommune.getValue());
 		fti.setAntalPersoner(Integer.parseInt(personer.getText()));
-		fti.setAntalTilvalg(tilvalg());
+		fti.setAutostole(Integer.parseInt(autostole.getText()));
+		fti.setBaggage(Integer.parseInt(baggage.getText()));
+		fti.setBarnevogne(Integer.parseInt(barnevogne.getText()));
+		fti.setKoerestole(Integer.parseInt(koerestole.getText()));
 
 		if (fti.getKilometer() == 0)
 			try {
@@ -108,14 +114,15 @@ public class BestilFlexController implements Initializable {
 		if (fti.getPris() == 0.0) {
 			handleBeregnPris(event);
 		}
+		fti.setKundeId(bruger.getId());
 		fti.setFraAdress(fraAddresse.getText());
 		fti.setTilAdress(tilAddresse.getText());
 		fti.setTid(LocalTime.parse(tidspunkt.getText()));
 		fti.setKommentar(kommentarer.toString());
 		fti.setFraPostnummer(Integer.parseInt(PostnrO.getText()));
 		fti.setTilPostnummer(Integer.parseInt(PostnrD.getText()));
-		
-	//	FSC.gemFlextur(fti);
+
+		FSC.gemFlextur(fti);
 	}
 
 	@FXML
@@ -126,12 +133,6 @@ public class BestilFlexController implements Initializable {
 	public void setMainApp(FlexturGUI flextur) {
 		this.flexturGUI = flextur;
 
-	}
-
-	private int tilvalg() {
-		int result = Integer.parseInt(barnevogne.getText()) + Integer.parseInt(koerestole.getText())
-				+ Integer.parseInt(baggage.getText()) + Integer.parseInt(autostole.getText());
-		return result;
 	}
 
 	@Override

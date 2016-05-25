@@ -16,7 +16,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import logic.FSController;
 import logic.FSControllerImpl;
-import sats.Sats;
 
 /**
  *

@@ -31,63 +31,56 @@ public class FSControllerImpl implements FSController {
 	private List<HistorikForBM> flexturListResult_BM = new ArrayList<>();
 
 	// private HistorikSøgning historikSøgning;
-	
-//	larsnielsenlind@gmail.com
+
+	// larsnielsenlind@gmail.com
 
 	@Override
 	public void søgHistorik() {
 		// TODO tjek loggetInd bruger.....observer......
-//		notifyObservers(this, Tilstand.SØG_HISTORIK);
+		// notifyObservers(this, Tilstand.SØG_HISTORIK);
 
 	}
 
 	@Override
 	public void angivSøgningOplysninger(HistorikSøgning historikSøgning) {
 		DataAccess dataAccess = new DataAccessImpl();
-		// TODO 
-//		this.historikSøgning = historikSøgning;
-//		notifyObservers(this, Tilstand.HENT_HISTORIK);
-		
-		this.flexturListResult =  new LogicTrans<List<Flextur>>(dataAccess)
+		// TODO
+		// this.historikSøgning = historikSøgning;
+		// notifyObservers(this, Tilstand.HENT_HISTORIK);
+
+		this.flexturListResult = new LogicTrans<List<Flextur>>(dataAccess)
 				.transaction(() -> turMapper.getMatchendeHistorik(dataAccess, historikSøgning));
-		
+
 		notifyObservers(this, Tilstand.SØG_HISTORIK_KUNDE);
 
 	}
-	
+
 	@Override
-	public List<Flextur> getHistorikResultForKunde (){
+	public List<Flextur> getHistorikResultForKunde() {
 		return flexturListResult;
 	}
-	
-	
-	
-	
-	
+
 	@Override
 	public void angivSøgningOplysningerForBM(HistorikSøgning historikSøgning) {
 
 		DataAccess dataAccess = new DataAccessImpl();
 
-		this.flexturListResult_BM =  new LogicTrans<List<HistorikForBM>>(dataAccess)
+		this.flexturListResult_BM = new LogicTrans<List<HistorikForBM>>(dataAccess)
 				.transaction(() -> turMapper.getMatchendeHistorikForBM(dataAccess, historikSøgning));
 		notifyObservers(this, Tilstand.SØG_HISTORIK_BM);
 
-
 	}
-	
+
 	@Override
-	public List<HistorikForBM> getHistorikResultForBM (){
+	public List<HistorikForBM> getHistorikResultForBM() {
 		return flexturListResult_BM;
 	}
-	
-	
 
 	@Override
 	public String[] getKommuneListe() {
 		SatsFactory satsFactory = new SatsFactory();
 		SatsAdapter kommunerFraSats = satsFactory.getSatsAdapter();
-		
+
 		return kommunerFraSats.getKommuner();
 
 	}
@@ -132,21 +125,19 @@ public class FSControllerImpl implements FSController {
 	@Override
 	public void tilmeldObserver(Observer observer) {
 		observers.add(observer);
-		
+
 	}
 
 	@Override
 	public void notifyObservers(Observable observable, Tilstand tilstand) {
-		for(Observer observer : observers) {
+		for (Observer observer : observers) {
 			observer.update(observable, tilstand);
-		}		
+		}
 	}
-
-	
-//	public void gemFlextur(Flextur tur) {
-//		DataAccess dataAccess = new DataAccessImpl();
-//
-//		new LogicTrans<>(dataAccess).transaction(() -> brugerMapper.gemFlextur(dataAccess, tur));
-	//	}
+	@Override
+	public void gemFlextur(Flextur tur) {
+		DataAccess dataAccess = new DataAccessImpl();
+		new LogicTrans<>(dataAccess).transaction(() -> turMapper.gemFlextur(dataAccess, tur));
+	}
 
 }

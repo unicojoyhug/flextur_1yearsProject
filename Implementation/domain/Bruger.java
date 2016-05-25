@@ -4,9 +4,9 @@ import java.security.NoSuchAlgorithmException;
 
 public interface Bruger {
 
-	long getId();
+	int getId();
 
-	void setId(long id);
+	void setId(int id);
 
 	String getLoginId();
 

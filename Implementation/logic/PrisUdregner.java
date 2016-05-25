@@ -22,7 +22,7 @@ public class PrisUdregner {
 	}
 	private double antalTilvalg(Flextur flextur){
 		double temp = -1;
-		double tilvalg = flextur.getAntalTilvalg();
+		double tilvalg = flextur.getAutostole()+flextur.getBaggage()+flextur.getBarnevogne()+flextur.getKoerestole();
 		double tilvres = 0;
 		if (tilvalg > 0){
 			tilvres = (temp + tilvalg)*0.5;
@@ -37,9 +37,10 @@ public class PrisUdregner {
 		double personer = flextur.getAntalPersoner();
 			if (personer==1){
 				result = 1;
+				System.out.println("enkelt person result er = "+result);
 			}
 			else {
-				result = ((personer - temp) * 0.5) + 1;
+				result = ((personer + temp) * 0.5) + 1;
 				System.out.println("Multi Person er = " + result);
 			}
 

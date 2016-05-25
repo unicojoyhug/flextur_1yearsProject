@@ -57,7 +57,7 @@ public class BrugerMapperImpl implements CRUD<Bruger, String> {
 					bruger.setErKunde(true);
 					bruger.setLoginId(resultSet.getString("cpr.cprNummer"));
 					bruger.setErAktivt(resultSet.getBoolean("erAktivt"));
-					bruger.setId(resultSet.getLong("id"));
+					bruger.setId(resultSet.getInt("id"));
 
 				}else{
 					bruger.setLoginId(resultSet.getString("loginid"));

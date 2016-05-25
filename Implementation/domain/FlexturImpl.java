@@ -22,8 +22,11 @@ public class FlexturImpl implements Flextur, Observable {
 	private int antalPersoner;
 	private EkstraTilvalg ekstraTilvalg;
 	private double kilometer;
-	private int antalTilvalg;
 	private String kommentar;
+	private int barnevogne;
+	private int autostole;
+	private int koerestole;
+	private int baggage;
 
 	@Override
 	public String getFraKommune() {
@@ -276,17 +279,6 @@ public class FlexturImpl implements Flextur, Observable {
 	}
 
 	@Override
-	public int getAntalTilvalg() {
-		return antalTilvalg;
-	}
-
-	@Override
-	public void setAntalTilvalg(int antalTilvalg) {
-		this.antalTilvalg = antalTilvalg;
-
-	}
-
-	@Override
 	public String getKommentar() {
 		return kommentar;
 	}
@@ -294,6 +286,50 @@ public class FlexturImpl implements Flextur, Observable {
 	@Override
 	public void setKommentar(String kommentar) {
 		this.kommentar = kommentar;
+
+	}
+
+	@Override
+	public int getBarnevogne() {
+		return barnevogne;
+	}
+
+	@Override
+	public void setBarnevogne(int barnevogne) {
+		this.barnevogne = barnevogne;
+
+	}
+
+	@Override
+	public int getBaggage() {
+		return baggage;
+	}
+
+	@Override
+	public void setBaggage(int baggage) {
+		this.baggage = baggage;
+
+	}
+
+	@Override
+	public int getKoerestole() {
+		return koerestole;
+	}
+
+	@Override
+	public void setKoerestole(int koerestole) {
+		this.koerestole = koerestole;
+
+	}
+
+	@Override
+	public int getAutostole() {
+		return autostole;
+	}
+
+	@Override
+	public void setAutostole(int autostole) {
+		this.autostole = autostole;
 
 	}
 

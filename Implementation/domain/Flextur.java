@@ -61,12 +61,24 @@ public interface Flextur {
 
 	void setKilometer(double kilometer);
 
-	int getAntalTilvalg();
-
-	void setAntalTilvalg(int antalTilvalg);
-
 	String getKommentar();
 
 	void setKommentar(String kommentar);
+
+	int getBarnevogne();
+
+	void setBarnevogne(int barnevogne);
+
+	int getBaggage();
+
+	void setBaggage(int baggage);
+
+	int getKoerestole();
+
+	void setKoerestole(int koerestole);
+
+	int getAutostole();
+
+	void setAutostole(int autostole);
 
 }
