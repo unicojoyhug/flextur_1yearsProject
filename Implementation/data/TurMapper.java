@@ -11,6 +11,8 @@ public interface TurMapper {
 	List<Flextur> getMatchendeHistorik(DataAccess dataAccess, HistorikSøgning historikSøgning);
 
 	List<HistorikForBM> getMatchendeHistorikForBM(DataAccess dataAccess, HistorikSøgning historikSøgning);
+
+	Object gemFlextur(DataAccess dataAccess, Flextur tur);
 	
 	
 }

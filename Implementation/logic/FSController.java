@@ -27,7 +27,11 @@ public interface FSController extends Observable {
 
 	List<HistorikForBM> getHistorikResultForBM();
 
+<<<<<<< HEAD
 	Bruger getBruger();
+=======
+	void gemFlextur(Flextur flextur);
+>>>>>>> branch 'master' of https://github.com/Shadowsilver64/flextur.git
 
 	
 }

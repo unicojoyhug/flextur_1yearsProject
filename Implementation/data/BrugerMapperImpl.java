@@ -56,7 +56,12 @@ public class BrugerMapperImpl implements CRUD<Bruger, String> {
 				if(resultSet.getString("rolle.rolle").contains("kunde")){
 					bruger.setErKunde(true);
 					bruger.setErAktivt(resultSet.getBoolean("erAktivt"));
+<<<<<<< HEAD
 				
+=======
+					bruger.setId(resultSet.getInt("id"));
+
+>>>>>>> branch 'master' of https://github.com/Shadowsilver64/flextur.git
 				}else{
 					bruger.setErKunde(false);
 

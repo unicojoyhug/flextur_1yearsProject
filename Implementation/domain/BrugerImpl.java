@@ -14,7 +14,7 @@ import util.LoginSingleton;
  */
 public class BrugerImpl implements Bruger {
 	
-	private long id;
+	private int id;
 	private String loginId;
 	private String encryptedKodeord;
 	private boolean erLoggetInd;
@@ -25,14 +25,14 @@ public class BrugerImpl implements Bruger {
 	 * @see domain.Bruger#getId()
 	 */
 	@Override
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 	/* (non-Javadoc)
 	 * @see domain.Bruger#setId(long)
 	 */
 	@Override
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
