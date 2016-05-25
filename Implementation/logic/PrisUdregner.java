@@ -1,6 +1,7 @@
 package logic;
 
 import domain.Flextur;
+import seHistorik.AntalPersonerException;
 
 public class PrisUdregner {
 
@@ -37,11 +38,12 @@ public class PrisUdregner {
 		double personer = flextur.getAntalPersoner();
 			if (personer==1){
 				result = 1;
-				System.out.println("enkelt person result er = "+result);
 			}
-			else {
+			else if (6< personer || personer >0) {
 				result = ((personer + temp) * 0.5) + 1;
-				System.out.println("Multi Person er = " + result);
+			}
+			else{
+				throw new AntalPersonerException("Antal Personer exception");
 			}
 
 		return result;
