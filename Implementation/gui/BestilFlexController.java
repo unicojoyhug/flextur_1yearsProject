@@ -26,7 +26,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import logic.FSController;
 import logic.FSControllerImpl;
+import logic.Observable;
 import logic.PrisUdregner;
+import logic.Tilstand;
 import sats.Sats;
 import util.KilometerUdregningAdapter;
 import util.KilometerUdregningAdapterFactory;
@@ -35,7 +37,7 @@ import util.KilometerUdregningAdapterFactory;
  *
  * @author Jonas Mørch
  */
-public class BestilFlexController implements Initializable {
+public class BestilFlexController extends FSPane implements Initializable {
 
 	@FXML
 	private ChoiceBox<String> fraKommune, tilKommune;
@@ -54,6 +56,8 @@ public class BestilFlexController implements Initializable {
 	private PrisUdregner PU = new PrisUdregner();
 	private FSController FSC = new FSControllerImpl();
 	private Bruger bruger = new BrugerImpl();
+	
+	
 
 	@FXML
 	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
@@ -144,6 +148,18 @@ public class BestilFlexController implements Initializable {
 		tilKommune.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
 		tilKommune.getSelectionModel().selectFirst();
 
+	}
+
+	@Override
+	public void update(Observable observable, Tilstand tilstand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	void postInitialize() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

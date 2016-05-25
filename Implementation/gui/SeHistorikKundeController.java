@@ -8,6 +8,8 @@ package gui;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
+import domain.Bruger;
 import domain.Flextur;
 import domain.HistorikSøgning;
 import domain.HistorikSøgningImpl;
@@ -53,7 +55,7 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 	
 	private ObservableList<Flextur> resultListe = FXCollections.observableArrayList();
 	private Stage window;
-	
+	private Bruger bruger;
 	@FXML
 	private void handleToMenu(ActionEvent event) {
 		flexturGUI.showMenuKunde();
@@ -73,8 +75,7 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 		HistorikSøgning hs = new HistorikSøgningImpl();
 		hs.setFraDato(fraDato.getValue());
 		hs.setTilDato(tilDato.getValue());
-		hs.setCprNummer("170182-3628"); //TODO LOGIN
-		hs.setKommune("Herning");
+		hs.setCprNummer(bruger.getLoginId());
 		
 		fsController.angivSøgningOplysninger(hs);
 		
@@ -134,6 +135,8 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
+		
+
 
 		if(tilstand.equals(Tilstand.SØG_HISTORIK_KUNDE)){
 			resultListe.clear();
@@ -145,8 +148,7 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 
 	@Override
 	void postInitialize() {
-		// TODO Auto-generated method stub
-		
+		bruger = fsController.getBruger();
 	}
 
 }

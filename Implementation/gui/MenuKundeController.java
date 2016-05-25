@@ -22,32 +22,32 @@ public class MenuKundeController extends FSPane implements Initializable {
     
     @FXML
     private Label usernameL;
-	private FlexturGUI Flextur;
+	private FlexturGUI flextur;
 	private String user = "Den der bruger systemet";
     
+	
+	public void setMainApp(FlexturGUI flexturGUI) {
+		this.flexturGUI = flexturGUI;
+	}
     @FXML
     private void handleBestilFlextur(ActionEvent event) {
-       Flextur.showBestilFlex();
+       flextur.showBestilFlex();
     }
     @FXML
     private void handleAendreProfil(ActionEvent event){
-    	Flextur.showAendreProfil();
+    	flextur.showAendreProfil();
     }
     @FXML
     private void handleSeHistorik(ActionEvent event){
-    	Flextur.showHistorikKunde();
+    	flextur.showHistorikKunde();
     }
     @FXML
     private void handleLogUd(ActionEvent event){
-    	Flextur.showLogin();
+    	flextur.showLogin();
     }
-    public void setMainApp(FlexturGUI flextur) {
-		this.Flextur = flextur;
-		
-	}
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        usernameL.setText(user);
     }
 
 	@Override
@@ -57,7 +57,7 @@ public class MenuKundeController extends FSPane implements Initializable {
 	}
 	@Override
 	void postInitialize() {
-		// TODO Auto-generated method stub
+//        usernameL.setText(fsController.getBruger().getLoginId());
 		
 	}    
     

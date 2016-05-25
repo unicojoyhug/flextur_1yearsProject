@@ -67,7 +67,10 @@ public class LoginController extends FSPane implements Initializable {
 			} catch (NoSuchAlgorithmException e) {
 				alert.visLoginFejllDialog();
 
-			} 
+			} catch (LoginException e){
+				alert.visLoginFejllDialog();
+
+			}
 		}
 	}
 
@@ -94,7 +97,6 @@ public class LoginController extends FSPane implements Initializable {
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
 		DialogBox alert = new DialogBoxImpl(window);
-		System.out.println(tilstand);
 		// TODO Auto-generated method stub
 		//		if(observable instanceof FSControllerImpl){
 		//			FSControllerImpl fs = (FSControllerImpl) observable;
@@ -103,9 +105,13 @@ public class LoginController extends FSPane implements Initializable {
 		
 			if(tilstand.equals(Tilstand.LOGIN_KUNDE)){
 				flextur.showMenuKunde();
-			}else if(tilstand.equals(Tilstand.LOGIN_BM)){
+			}
+			
+			if(tilstand.equals(Tilstand.LOGIN_BM)){
 				flextur.showMenuAdmin();
-			}else if (tilstand.equals(Tilstand.LOGIN_FEJL)){			
+			}
+			
+			if (tilstand.equals(Tilstand.LOGIN_FEJL)){			
 				alert.visLoginFejllDialog();
 			} 
 	

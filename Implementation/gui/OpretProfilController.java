@@ -14,12 +14,14 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import logic.Observable;
+import logic.Tilstand;
 
 /**
  *
  * @author Jonas Mørch
  */
-public class OpretProfilController implements Initializable {
+public class OpretProfilController extends FSPane implements Initializable {
     
     @FXML
     private Label label;
@@ -47,6 +49,16 @@ public class OpretProfilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+	@Override
+	public void update(Observable observable, Tilstand tilstand) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	void postInitialize() {
+		// TODO Auto-generated method stub
+		
+	}    
     
 }

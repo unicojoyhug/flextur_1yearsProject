@@ -49,10 +49,9 @@ public class FlexturGUI extends Application {
 
 
 			FSPane loginController = loader.<FSPane> getController();
-			loginController.setFSController(fsController);
-			
+			loginController.setFSController(fsController);			
 			loginController.setMainApp(this);
-			
+			loginController.postInitialize();			
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -88,8 +87,10 @@ public class FlexturGUI extends Application {
 			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 
-			OpretProfilController controller = loader.getController();
-			controller.setMainApp(this);
+			FSPane opretProfilController = loader.<FSPane> getController();
+			opretProfilController.setFSController(fsController);
+			opretProfilController.setMainApp(this);
+			opretProfilController.postInitialize();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -156,9 +157,10 @@ public class FlexturGUI extends Application {
 			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 
-			BestilFlexController controller = loader.getController();
-			controller.setMainApp(this);
-
+			FSPane bestilFlexController = loader.<FSPane> getController();
+			bestilFlexController.setFSController(fsController);
+			bestilFlexController.setMainApp(this);
+			bestilFlexController.postInitialize();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -174,8 +176,11 @@ public class FlexturGUI extends Application {
 			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 
-			AendreProfilController controller = loader.getController();
-			controller.setMainApp(this);
+			FSPane aendreProfilContoller = loader.<FSPane> getController();
+			aendreProfilContoller.setFSController(fsController);
+			aendreProfilContoller.setMainApp(this);
+			aendreProfilContoller.postInitialize();
+
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -233,19 +238,15 @@ public class FlexturGUI extends Application {
 			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 		
-
-			BestillingsOversigtController controller = loader.getController();
-			controller.setMainApp(this);
-
+			FSPane bestillingsOversigtController = loader.<FSPane> getController();
+			bestillingsOversigtController.setFSController(fsController);
+			bestillingsOversigtController.setMainApp(this);
+			bestillingsOversigtController.postInitialize();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void Login(String user, String password) {
-		System.out.println("FlexGUI : Ikke implementeret");
-
-	}
 
 	
 	/**

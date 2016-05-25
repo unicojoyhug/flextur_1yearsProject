@@ -12,12 +12,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
+import logic.Observable;
+import logic.Tilstand;
 
 /**
  *
  * @author Jonas Mørch
  */
-public class BestillingsOversigtController implements Initializable {
+public class BestillingsOversigtController extends FSPane implements Initializable {
 
 	@FXML
 	private TableView tableView;
@@ -56,6 +58,18 @@ public class BestillingsOversigtController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
+	}
+
+	@Override
+	public void update(Observable observable, Tilstand tilstand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	void postInitialize() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
