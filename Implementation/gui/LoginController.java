@@ -2,6 +2,7 @@ package gui;
 
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
+import java.util.ConcurrentModificationException;
 import java.util.ResourceBundle;
 
 import domain.Bruger;
@@ -70,6 +71,8 @@ public class LoginController extends FSPane implements Initializable {
 			} catch (LoginException e){
 				alert.visLoginFejllDialog();
 
+			} catch (ConcurrentModificationException e){
+				
 			}
 		}
 	}

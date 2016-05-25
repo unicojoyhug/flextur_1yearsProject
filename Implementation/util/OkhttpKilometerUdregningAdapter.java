@@ -12,7 +12,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-public class KilometerUdregningAdapterImpl implements KilometerUdregningAdapter {
+public class OkhttpKilometerUdregningAdapter implements KilometerUdregningAdapter {
 
 	private static final String API_KEY = "AIzaSyBoOejgRYqOuDSldGnIDetXOEthJc-CdoM";
 	OkHttpClient client = new OkHttpClient();

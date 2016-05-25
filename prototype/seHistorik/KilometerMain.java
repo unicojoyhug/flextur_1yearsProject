@@ -3,7 +3,7 @@ package seHistorik;
 import java.io.IOException;
 import javax.xml.xpath.XPathExpressionException;
 
-import util.KilometerUdregningAdapterImpl;
+import util.OkhttpKilometerUdregningAdapter;
 import util.KilometerUdregningAdapter;
 
 public class KilometerMain {
@@ -12,7 +12,7 @@ public class KilometerMain {
 	private static String Destination = "Munkgårds Alle 88, 7400";
 //	private static String Destination = "Rome";
 
-	private static KilometerUdregningAdapter KU = new KilometerUdregningAdapterImpl();
+	private static KilometerUdregningAdapter KU = new OkhttpKilometerUdregningAdapter();
 	
 	
 
