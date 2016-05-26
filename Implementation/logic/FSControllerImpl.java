@@ -28,6 +28,8 @@ import util.LogicTrans;
  */
 public class FSControllerImpl implements FSController {
 	private TurMapper turMapper = new TurMapperImpl();
+	private CRUD<Kunde, String> kundeMapper = new KundeMapperCRUDImpl();
+
 	private CRUD<Bruger, String> brugerMapper = new BrugerMapperCRUDImpl();
 	private List<Observer> observers = new ArrayList<>();
 	private List<Flextur> flexturListResult = new ArrayList<>();
@@ -164,7 +166,6 @@ public class FSControllerImpl implements FSController {
 		this.flexturListResult = new LogicTrans<List<Flextur>>(dataAccess)
 				.transaction(() -> turMapper.getBestilteKørsler(dataAccess, fraDato, tilDato));
 		notifyObservers(this, Tilstand.SØG_BESTILE_KØRSLER);
-		System.out.println(flexturListResult);
 
 	}
 
@@ -198,8 +199,8 @@ public class FSControllerImpl implements FSController {
 	@Override
 	public Kunde getKundeID(String cpr) {
 		DataAccess dataAccess = new DataAccessImpl();
-		kunde = new LogicTrans<Kunde>(dataAccess).transaction(() -> KundeMapperCRUDImpl.read(dataAccess, cpr));
-		return null;
+		kunde = new LogicTrans<Kunde>(dataAccess).transaction(() -> kundeMapper.read(dataAccess, cpr));
+		return kunde;
 	}
 
 	///// udregn pris til PrisUdregner - factory + adapter

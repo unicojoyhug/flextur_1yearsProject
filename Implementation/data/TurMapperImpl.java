@@ -198,15 +198,10 @@ public class TurMapperImpl implements TurMapper {
 				flextur.setFornavn(resultSet.getString("fornavn"));
 				flextur.setKundeId(resultSet.getInt("loginid"));
 				flextur.setCprNummer(resultSet.getString("cprnummer"));
-
 				flextur.setAutostole(resultSet.getInt("autostole"));
-				System.out.println(flextur);
-
 				flextur.setBaggage(resultSet.getInt("baggage"));
 				flextur.setKoerestole(resultSet.getInt("kørestole"));
-				flextur.setBarnevogne(resultSet.getInt("barnevogn"));
-				
-
+				flextur.setBarnevogne(resultSet.getInt("barnevogne"));
 				flextur.setKommentar(resultSet.getString("kommentar"));
 
 				bestilteKørsler.add(flextur);
