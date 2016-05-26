@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import exception.LoginException;
-import exception.MissingOplysningExcpetion;
 import logic.FSController;
 import logic.FSControllerImpl;
 
