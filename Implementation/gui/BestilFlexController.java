@@ -26,12 +26,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import logic.FSController;
 import logic.FSControllerImpl;
+import logic.KilometerUdregningAdapter;
+import logic.KilometerUdregningAdapterFactory;
 import logic.Observable;
 import logic.PrisUdregner;
 import logic.Tilstand;
 import sats.Sats;
-import util.KilometerUdregningAdapter;
-import util.KilometerUdregningAdapterFactory;
 
 /**
  *

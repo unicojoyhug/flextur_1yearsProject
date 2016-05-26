@@ -3,8 +3,8 @@ package seHistorik;
 import java.io.IOException;
 import javax.xml.xpath.XPathExpressionException;
 
-import util.OkhttpKilometerUdregningAdapter;
-import util.KilometerUdregningAdapter;
+import logic.KilometerUdregningAdapter;
+import logic.OkhttpKilometerUdregningAdapter;
 
 public class KilometerMain {
 	
