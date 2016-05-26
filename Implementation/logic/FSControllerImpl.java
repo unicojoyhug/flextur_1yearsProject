@@ -61,9 +61,6 @@ public class FSControllerImpl implements FSController {
 	@Override
 	public void angivSøgningOplysninger(HistorikSøgning historikSøgning) {
 		DataAccess dataAccess = new DataAccessImpl();
-		// TODO
-		// this.historikSøgning = historikSøgning;
-		// notifyObservers(this, Tilstand.HENT_HISTORIK);
 
 		this.flexturListResult = new LogicTrans<List<Flextur>>(dataAccess)
 				.transaction(() -> turMapper.getMatchendeHistorik(dataAccess, historikSøgning));
@@ -171,5 +168,7 @@ public class FSControllerImpl implements FSController {
 
 	}
 	
+	///// udregn pris til PrisUdregner - factory + adapter 
+	// one void method and return double pris method (datakerne: private double pris)
 	
 }
