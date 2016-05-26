@@ -54,21 +54,15 @@ public class LoginController extends FSPane implements Initializable {
 	private void handleLogin(ActionEvent event) {
 		DialogBox alert = new DialogBoxImpl(window);
 
-		Bruger bruger = new BrugerImpl();	
-		String loginIds = username.getText();
+		String loginIdS = username.getText();
 		String passwordS = password.getText();
-		if(loginIds.isEmpty()|| passwordS.isEmpty()){
+		if(loginIdS.isEmpty()|| passwordS.isEmpty()){
 			alert.visOplysningManglerAdvarselDialog();
 		}else{		
 			try {
-				bruger.setAndEncryptPassword(passwordS);
-				String kodeord = bruger.getEncryptedKodeord();
-				fsController.angivLoginOplysninger(loginIds, kodeord);
+				fsController.angivLoginOplysninger(loginIdS, passwordS);
 
-			} catch (NoSuchAlgorithmException e) {
-				alert.visLoginFejllDialog();
-
-			} catch (LoginException e){
+			}catch (LoginException e){
 				alert.visLoginFejllDialog();
 
 			} 

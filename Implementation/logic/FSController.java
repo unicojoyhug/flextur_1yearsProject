@@ -23,7 +23,7 @@ public interface FSController extends Observable {
 
 	void exporterHistorikForKunde(String filenavn, List<Flextur> historikListe);
 
-	void angivLoginOplysninger(String loginId, String kodeord);
+	void angivLoginOplysninger(String loginIdS, String kodeordS);
 	
 	List<Flextur> getHistorikResultForKunde();
 
