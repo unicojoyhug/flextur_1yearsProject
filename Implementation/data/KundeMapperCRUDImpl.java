@@ -14,7 +14,7 @@ import util.CloseForSQL;
  *
  */
 public class KundeMapperCRUDImpl implements CRUD<Kunde, String> {
-	private static final String READ_KUNDEID = "Select id, cpr.cprNummer as loginid"
+	private static final String READ_KUNDEID = "Select id, cpr.cprNummer as loginid from kunde"
 			+ " inner join cpr on cpr.id = kunde.loginid " 
 			+ " where cpr.cprNummer = ?";
 
@@ -38,7 +38,7 @@ public class KundeMapperCRUDImpl implements CRUD<Kunde, String> {
 			statement.setString(1, key);
 			resultSet = statement.executeQuery();
 
-			while (resultSet.next()) {
+			if (resultSet.next()) {
 				kunde.setCprNummer(key);
 				int kundeID = resultSet.getInt("id");
 				kunde.setKundeID(kundeID);

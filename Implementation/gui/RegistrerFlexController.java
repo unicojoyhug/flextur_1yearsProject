@@ -22,13 +22,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import logic.FSController;
 import logic.FSControllerImpl;
+import logic.Observable;
+import logic.Tilstand;
 import sats.Sats;
 
 /**
  *
  * @author Jonas Mørch
  */
-public class RegistrerFlexController implements Initializable {
+public class RegistrerFlexController extends FSPane implements Initializable {
 
 	@FXML
 	private ChoiceBox<String> fraKommune, tilKommune;
@@ -41,7 +43,6 @@ public class RegistrerFlexController implements Initializable {
 	private DatePicker dato;
 	private FlexturGUI flexturGUI;
 	private Flextur fti = new FlexturImpl();
-	private FSController FSC = new FSControllerImpl();
 
 	@FXML
 	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
@@ -49,7 +50,7 @@ public class RegistrerFlexController implements Initializable {
 		fti.setTilPostnummer(Integer.parseInt(PostnrD.getText()));
 		fti.setFraAdress(fraAddresse.getText());
 		fti.setTilAdress(tilAddresse.getText());
-		FSC.udregnKilometer(fti);
+		fsController.udregnKilometer(fti);
 
 		kilometer.setText(fti.getDistance());
 		forventetTid.setText(fti.getDuration());
@@ -72,7 +73,7 @@ public class RegistrerFlexController implements Initializable {
 		if (fti.getKilometer() == 0)
 			try {
 				handleBeregnKM(event);
-				FSC.udregnPris(fti);
+				fsController.udregnPris(fti);
 				prisfelt.setText(String.valueOf(fti.getPris()));
 			} catch (IOException e) {
 				System.out.println("Internet fejl");
@@ -81,7 +82,7 @@ public class RegistrerFlexController implements Initializable {
 				e.printStackTrace();
 			}
 		else {
-			FSC.udregnPris(fti);
+			fsController.udregnPris(fti);
 			prisfelt.setText(String.valueOf(fti.getPris()));
 		}
 	}
@@ -97,13 +98,13 @@ public class RegistrerFlexController implements Initializable {
 		fti.setKundeId(Integer.parseInt(kundeID.getText()));
 		fti.setTid(LocalTime.parse(tidspunkt.getText()));
 		fti.setKommentar(kommentarer.toString());
-		FSC.angivFlexturOplysninger(fti);
+		fsController.angivFlexturOplysninger(fti);
 	}
 
 	@FXML
 	private void handleGetKundeID(ActionEvent event) {
 		String CPR = cprNummer.getText();
-		int ID = FSC.getKundeID(CPR).getKundeID();
+		int ID = fsController.getKundeID(CPR).getKundeID();
 		fti.setKundeId(ID);
 		kundeID.setText(String.valueOf(ID));
 	}
@@ -126,6 +127,18 @@ public class RegistrerFlexController implements Initializable {
 		tilKommune.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
 		tilKommune.getSelectionModel().selectFirst();
 
+	}
+
+	@Override
+	public void update(Observable observable, Tilstand tilstand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	void postInitialize() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
