@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.BrugerMapperImpl;
+import data.BrugerMapperCRUDImpl;
 import data.CRUD;
 import data.DataAccess;
 import data.DataAccessImpl;
@@ -26,7 +26,7 @@ import sats.Sats;
  */
 public class FSControllerImpl implements FSController {
 	private TurMapper turMapper = new TurMapperImpl();
-	private CRUD<Bruger, String> brugerMapper = new BrugerMapperImpl();
+	private CRUD<Bruger, String> brugerMapper = new BrugerMapperCRUDImpl();
 	private List<Observer> observers = new ArrayList<>();
 	private List<Flextur> flexturListResult = new ArrayList<>();
 	private List<HistorikForBM> flexturListResult_BM = new ArrayList<>();

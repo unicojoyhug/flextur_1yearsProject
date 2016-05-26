@@ -13,9 +13,10 @@ import util.CloseForSQL;
  * @author Juyoung Choi & Jonas Mørch
  *
  */
-public class KundeMapperImpl implements CRUD<Kunde, String> {
+public class KundeMapperCRUDImpl implements CRUD<Kunde, String> {
 	private static final String READ_KUNDEID = "Select id, cpr.cprNummer as loginid"
-			+ " inner join cpr on cpr.id = kunde.loginid " + " where cpr.cprNummer = ?";
+			+ " inner join cpr on cpr.id = kunde.loginid " 
+			+ " where cpr.cprNummer = ?";
 
 	private CloseForSQL close = new CloseForSQL();
 

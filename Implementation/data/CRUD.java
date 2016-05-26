@@ -1,6 +1,5 @@
 package data;
 
-import exception.PersistenceFailureException;
 /**
  * 
  * @author Juyoung Choi
@@ -10,13 +9,12 @@ import exception.PersistenceFailureException;
  */
 public interface CRUD<D, K> {
 
-	public void create(DataAccess dataAccess, D domain) throws PersistenceFailureException;
+	void create(DataAccess dataAccess, D domain);
 
-	public D read(DataAccess dataAccess, K key) throws PersistenceFailureException;
+	D read(DataAccess dataAccess, K key);
 
-	public void update(DataAccess dataAccess, D domain) throws PersistenceFailureException;
+	void update(DataAccess dataAccess, D domain);
 
-	public void delete(DataAccess dataAccess, D domain) throws PersistenceFailureException;
-
+	void delete(DataAccess dataAccess, D domain);
 }
 

@@ -14,7 +14,7 @@ import util.CloseForSQL;
  * @author Juyoung Choi
  *
  */
-public class BrugerMapperImpl implements CRUD<Bruger, String> {
+public class BrugerMapperCRUDImpl implements CRUD<Bruger, String> {
 	private static final String ROLLE = "inner join rolle on rolle.id =";
 
 	private static final String READ_KUNDE= "Select id, cpr.cprNummer as loginid, kodeord, rolle.rolle from kunde "
@@ -30,13 +30,13 @@ public class BrugerMapperImpl implements CRUD<Bruger, String> {
 	private CloseForSQL close = new CloseForSQL();
 
 	@Override
-	public void create(DataAccess dataAccess, Bruger domain) throws PersistenceFailureException {
+	public void create(DataAccess dataAccess, Bruger domain) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public Bruger read(DataAccess dataAccess, String key) throws PersistenceFailureException {
+	public Bruger read(DataAccess dataAccess, String key)  {
 
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -73,13 +73,13 @@ public class BrugerMapperImpl implements CRUD<Bruger, String> {
 	}
 
 	@Override
-	public void update(DataAccess dataAccess, Bruger domain) throws PersistenceFailureException {
+	public void update(DataAccess dataAccess, Bruger domain) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void delete(DataAccess dataAccess, Bruger domain) throws PersistenceFailureException {
+	public void delete(DataAccess dataAccess, Bruger domain) {
 		// TODO Auto-generated method stub
 
 	}

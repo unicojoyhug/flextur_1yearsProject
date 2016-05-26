@@ -69,7 +69,7 @@ public class TurMapperImpl implements TurMapper {
 				flextur.setTilAdress(resultSet.getString("tilAdress"));
 				flextur.setTilPostnummer(resultSet.getInt("tilPostnummer"));
 				flextur.setAntalPersoner(resultSet.getInt("antalPersoner"));
-				flextur.setPris((Double) resultSet.getDouble("pris"));
+				flextur.setPris((resultSet.getDouble("pris")));
 
 				matchendeHistorik.add(flextur);
 
@@ -187,8 +187,18 @@ public class TurMapperImpl implements TurMapper {
 				flextur.setTilAdress(resultSet.getString("tilAdress"));
 				flextur.setTilPostnummer(resultSet.getInt("tilPostnummer"));
 				flextur.setAntalPersoner(resultSet.getInt("antalPersoner"));
-				flextur.setPris((Double) resultSet.getDouble("pris"));
-				///flere...
+				flextur.setPris(resultSet.getDouble("pris"));
+				flextur.setTelefon(resultSet.getString("kunde.telefon"));
+				flextur.setEfternavn(resultSet.getString("kunde.efternavn"));
+				flextur.setFornavn(resultSet.getString("kunde.fornavn"));
+				flextur.setKundeId(resultSet.getInt("kunde.id"));
+				flextur.setCprNummer(resultSet.getString("cpr.cprnummer"));
+				flextur.setAutostole(resultSet.getInt("autostole"));
+				flextur.setBaggage(resultSet.getInt("baggage"));
+				flextur.setKoerestole(resultSet.getInt("kørestole"));
+				flextur.setBarnevogne(resultSet.getInt("barnevogn"));
+				flextur.setKommentar(resultSet.getString("kommentar"));
+
 
 				bestilteKørsler.add(flextur);
 
