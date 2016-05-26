@@ -7,6 +7,7 @@ import domain.Bruger;
 import domain.Flextur;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
+import domain.Kunde;
 
 public interface FSController extends Observable {
 
@@ -39,4 +40,6 @@ public interface FSController extends Observable {
 	double udregnPris(Flextur flextur);
 	
 	String udregnKilometer(String origin, String destination);
+
+	Kunde getKundeID(String cpr);
 }

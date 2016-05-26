@@ -10,7 +10,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
-
 import domain.Flextur;
 import domain.FlexturImpl;
 import javafx.collections.FXCollections;
@@ -24,9 +23,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import logic.FSController;
 import logic.FSControllerImpl;
-import logic.KilometerUdregningAdapter;
-import logic.KilometerUdregningAdapterFactory;
-import logic.PrisUdregner;
 import sats.Sats;
 
 /**
@@ -49,7 +45,6 @@ public class RegistrerFlexController implements Initializable {
 	private FlexturGUI flexturGUI;
 	private String seperator = " , ";
 	private Flextur fti = new FlexturImpl();
-	private PrisUdregner PU = new PrisUdregner();
 	private FSController FSC = new FSControllerImpl();
 	
 
@@ -67,9 +62,7 @@ public class RegistrerFlexController implements Initializable {
 		sbD.append(PostnrD.getText());
 		String Destination = sbD.toString();
 
-		KilometerUdregningAdapterFactory KU = new KilometerUdregningAdapterFactory();
-		KilometerUdregningAdapter KUadapter = KU.getKilometerUdregningAdapter();
-		String KM = KUadapter.getDistance(Origin, Destination);
+		String KM = FSC.udregnKilometer(Origin, Destination);
 		kilometer.setText(KM);
 	//	forventetTid.setText(KUadapter.getDuration());
 		String[] parts = KM.split(" ");
@@ -91,7 +84,7 @@ public class RegistrerFlexController implements Initializable {
 		if (fti.getKilometer() == 0)
 			try {
 				handleBeregnKM(event);
-				double result = PU.takstUdregner(fti);
+				double result = FSC.udregnPris(fti);
 				fti.setPris(result);
 				prisfelt.setText(String.valueOf(result));
 			} catch (IOException e) {
@@ -101,7 +94,7 @@ public class RegistrerFlexController implements Initializable {
 				e.printStackTrace();
 			}
 		else {
-			double result = PU.takstUdregner(fti);
+			double result = FSC.udregnPris(fti);
 			fti.setPris(result);
 			prisfelt.setText(String.valueOf(result));
 		}
@@ -128,7 +121,7 @@ public class RegistrerFlexController implements Initializable {
 	@FXML
 	private void handleGetKundeID(ActionEvent event) {
 		String CPR = cprNummer.getText();
-		
+		FSC.getKundeID(CPR);
 		
 	}
 
