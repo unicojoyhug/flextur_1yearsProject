@@ -175,25 +175,25 @@ public class FSControllerImpl implements FSController {
 	}
 
 	@Override
-	public double udregnPris(Flextur flextur) {
+	public Flextur udregnPris(Flextur flextur) {
 		return PU.takstUdregner(flextur);
 	}
 
 	@Override
-	public String udregnKilometer(String origin, String destination) {
+	public Flextur udregnKilometer(Flextur flextur) {
 		KilometerUdregningAdapterFactory KU = new KilometerUdregningAdapterFactory();
 		KilometerUdregningAdapter KUadapter = KU.getKilometerUdregningAdapter();
-		String KM = "";
+		
 		try {
-			KM = KUadapter.getDistance(origin, destination);
+			return KUadapter.getDistance(flextur);
 		} catch (XPathExpressionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		return KM;
+		};
+		return flextur;
 	}
 
 	@Override

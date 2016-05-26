@@ -3,8 +3,7 @@ package domain;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
-public class FlexturImpl implements Flextur{
+public class FlexturImpl implements Flextur {
 	private long flexturId;
 	private int kundeId;
 	private String efternavn;
@@ -27,6 +26,8 @@ public class FlexturImpl implements Flextur{
 	private int autostole;
 	private int koerestole;
 	private int baggage;
+	private String duration;
+	private String distance;
 
 	@Override
 	public String getFraKommune() {
@@ -228,8 +229,6 @@ public class FlexturImpl implements Flextur{
 		this.antalPersoner = antalPersoner;
 	}
 
-	
-
 	@Override
 	public double getKilometer() {
 		return kilometer;
@@ -295,34 +294,42 @@ public class FlexturImpl implements Flextur{
 		this.autostole = autostole;
 
 	}
+
 	@Override
 	public String getEfternavn() {
 		return efternavn;
 	}
+
 	@Override
 	public void setEfternavn(String efternavn) {
 		this.efternavn = efternavn;
 	}
+
 	@Override
 	public String getFornavn() {
 		return fornavn;
 	}
+
 	@Override
 	public void setFornavn(String fornavn) {
 		this.fornavn = fornavn;
 	}
+
 	@Override
 	public String getTelefon() {
 		return telefon;
 	}
+
 	@Override
 	public void setTelefon(String telefon) {
 		this.telefon = telefon;
 	}
+
 	@Override
 	public String getCprNummer() {
 		return cprNummer;
 	}
+
 	@Override
 	public void setCprNummer(String cprNummer) {
 		this.cprNummer = cprNummer;
@@ -339,6 +346,26 @@ public class FlexturImpl implements Flextur{
 				+ ", koerestole=" + koerestole + ", baggage=" + baggage + "]/n";
 	}
 
-	
+	@Override
+	public void setDistance(String distance) {
+		this.distance = distance;
+
+	}
+
+	@Override
+	public String getDistance() {
+		return distance;
+	}
+
+	@Override
+	public void setDuration(String duration) {
+		this.duration = duration;
+
+	}
+
+	@Override
+	public String getDuration() {
+		return duration;
+	}
 
 }

@@ -8,17 +8,16 @@ public class PrisUdregner {
 
 
 
-	public double takstUdregner(Flextur flextur) {
+	public Flextur takstUdregner(Flextur flextur) {
 		SatsFactory satsFactory = new SatsFactory();
 		SatsAdapter rate = satsFactory.getSatsAdapter();
 		double km = flextur.getKilometer();
 		double personer = antalPersoner(flextur);
 		double sats = rate.hentSats(flextur);
 		double tilvalg = antalTilvalg(flextur);
+		flextur.setPris(((km*sats)*(personer+tilvalg)));
 		
-		
-		double pris = ((km*sats)*(personer+tilvalg));
-		return	pris;
+		return	flextur;
 		
 	}
 	private double antalTilvalg(Flextur flextur){

@@ -165,6 +165,24 @@ public class FlexturGUI extends Application {
 			e.printStackTrace();
 		}
 	}
+	public void showRegistrerFlex() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(FlexturGUI.class.getResource("RegistrerFlex.fxml"));
+			AnchorPane personOverview = (AnchorPane) loader.load();
+
+			// Set person overview into the center of root layout.
+			rootLayout.setCenter(personOverview);
+
+			FSPane registrerFlexController = loader.<FSPane> getController();
+			registrerFlexController.setFSController(fsController);
+			registrerFlexController.setMainApp(this);
+			registrerFlexController.postInitialize();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void showAendreProfil() {
 		try {

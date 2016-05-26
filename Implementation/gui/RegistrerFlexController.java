@@ -36,31 +36,24 @@ public class RegistrerFlexController implements Initializable {
 	private TextArea kommentarer;
 	@FXML
 	private TextField fraAddresse, tilAddresse, prisfelt, PostnrO, PostnrD, kilometer, personer, barnevogne, koerestole,
-			baggage, autostole, tidspunkt, cprNummer, kundeID;
+			baggage, autostole, tidspunkt, cprNummer, kundeID, forventetTid;
 	@FXML
 	private DatePicker dato;
 	private FlexturGUI flexturGUI;
-	private String seperator = " , ";
 	private Flextur fti = new FlexturImpl();
 	private FSController FSC = new FSControllerImpl();
 
 	@FXML
 	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
-		StringBuilder sbO = new StringBuilder();
-		sbO.append(fraAddresse.getText());
-		sbO.append(seperator);
-		sbO.append(PostnrO.getText());
-		String Origin = sbO.toString();
+		fti.setFraPostnummer(Integer.parseInt(PostnrO.getText()));
+		fti.setTilPostnummer(Integer.parseInt(PostnrD.getText()));
+		fti.setFraAdress(fraAddresse.getText());
+		fti.setTilAdress(tilAddresse.getText());
+		FSC.udregnKilometer(fti);
 
-		StringBuilder sbD = new StringBuilder();
-		sbD.append(tilAddresse.getText());
-		sbD.append(seperator);
-		sbD.append(PostnrD.getText());
-		String Destination = sbD.toString();
-
-		String KM = FSC.udregnKilometer(Origin, Destination);
-		kilometer.setText(KM);
-		String[] parts = KM.split(" ");
+		kilometer.setText(fti.getDistance());
+		forventetTid.setText(fti.getDuration());
+		String[] parts = fti.getDistance().split(" ");
 		String part1 = parts[0];
 		fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));
 	}
@@ -79,9 +72,8 @@ public class RegistrerFlexController implements Initializable {
 		if (fti.getKilometer() == 0)
 			try {
 				handleBeregnKM(event);
-				double result = FSC.udregnPris(fti);
-				fti.setPris(result);
-				prisfelt.setText(String.valueOf(result));
+				FSC.udregnPris(fti);
+				prisfelt.setText(String.valueOf(fti.getPris()));
 			} catch (IOException e) {
 				System.out.println("Internet fejl");
 			} catch (Throwable e) {
@@ -89,9 +81,8 @@ public class RegistrerFlexController implements Initializable {
 				e.printStackTrace();
 			}
 		else {
-			double result = FSC.udregnPris(fti);
-			fti.setPris(result);
-			prisfelt.setText(String.valueOf(result));
+			FSC.udregnPris(fti);
+			prisfelt.setText(String.valueOf(fti.getPris()));
 		}
 	}
 
@@ -104,13 +95,8 @@ public class RegistrerFlexController implements Initializable {
 			handleGetKundeID(event);
 
 		fti.setKundeId(Integer.parseInt(kundeID.getText()));
-		fti.setFraAdress(fraAddresse.getText());
-		fti.setTilAdress(tilAddresse.getText());
 		fti.setTid(LocalTime.parse(tidspunkt.getText()));
 		fti.setKommentar(kommentarer.toString());
-		fti.setFraPostnummer(Integer.parseInt(PostnrO.getText()));
-		fti.setTilPostnummer(Integer.parseInt(PostnrD.getText()));
-
 		FSC.angivFlexturOplysninger(fti);
 	}
 

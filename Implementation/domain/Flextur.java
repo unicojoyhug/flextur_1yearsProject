@@ -93,4 +93,12 @@ public interface Flextur {
 
 	void setCprNummer(String cprNummer);
 
+	void setDistance(String distance);
+	
+	String getDistance();
+
+	void setDuration(String duration);
+	
+	String getDuration();
+
 }

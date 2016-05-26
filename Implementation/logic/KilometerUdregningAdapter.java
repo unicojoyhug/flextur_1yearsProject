@@ -4,12 +4,10 @@ import java.io.IOException;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import domain.Flextur;
+
 public interface KilometerUdregningAdapter {
 
-	String getDistance(String Origin, String Destination) throws IOException, XPathExpressionException;
-
-//	String run(String url) throws IOException;
-	
-	String getDuration();
+	Flextur getDistance(Flextur flextur) throws IOException, XPathExpressionException;
 
 }

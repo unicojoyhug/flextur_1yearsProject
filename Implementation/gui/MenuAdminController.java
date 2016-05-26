@@ -20,48 +20,53 @@ import logic.Tilstand;
  * 
  */
 public class MenuAdminController extends FSPane implements Initializable {
-    
-    @FXML
-    private Label usernameL;
+
+	@FXML
+	private Label usernameL;
 	private FlexturGUI flextur;
 	private String user = "Den der bruger systemet";
-    
-    @FXML
-    private void handleRegistrerFlextur(ActionEvent event) {
-    	System.out.println("Ikke impletementeret");
-    }
-    @FXML
-    private void handleSeBestillinger(ActionEvent event){
-    	flextur.showBestillingsOversigt();
-    }
-    @FXML
-    private void handleSeHistorik(ActionEvent event){
-    	flextur.showHistorikAdmin();
-    }
-    
-    @FXML
-    private void handleLogUd(ActionEvent event){
 
-    	flextur.showLogin();    
-    }
-    public void setMainApp(FlexturGUI flextur) {
-		this.flextur = flextur;
-		
+	@FXML
+	private void handleRegistrerFlextur(ActionEvent event) {
+		flextur.showRegistrerFlex();
 	}
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        usernameL.setText(user);
-    }
-	
+
+	@FXML
+	private void handleSeBestillinger(ActionEvent event) {
+		flextur.showBestillingsOversigt();
+	}
+
+	@FXML
+	private void handleSeHistorik(ActionEvent event) {
+		flextur.showHistorikAdmin();
+	}
+
+	@FXML
+	private void handleLogUd(ActionEvent event) {
+
+		flextur.showLogin();
+	}
+
+	public void setMainApp(FlexturGUI flextur) {
+		this.flextur = flextur;
+
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		usernameL.setText(user);
+	}
+
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	void postInitialize() {
 		// TODO Auto-generated method stub
-		
-	}    
-    
+
+	}
+
 }

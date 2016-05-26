@@ -12,32 +12,36 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import domain.Flextur;
+
+/**
+ *
+ * @author Jonas Mørch
+ */
 public class OkhttpKilometerUdregningAdapter implements KilometerUdregningAdapter {
 
 	private static final String API_KEY = "AIzaSyBoOejgRYqOuDSldGnIDetXOEthJc-CdoM";
 	OkHttpClient client = new OkHttpClient();
-	public String duration; //why public?
+	private String duration;
 
-	/* (non-Javadoc)
-	 * @see util.KilometerUdregningAdapter#Distance(java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see util.KilometerUdregningAdapter#Distance(java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
-	public String getDistance(String Origin, String Destination) throws IOException, XPathExpressionException {
-//		KilometerUdregningAdapter request = new KilometerUdregningAdapterImpl();
-		String url_request = "https://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + Origin
-				+ "&destinations=" + Destination + "&mode=driving&language=da-DK&key=" + API_KEY;
+	public Flextur getDistance(Flextur flextur) throws IOException, XPathExpressionException {
+		String url_request = "https://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + flextur.getFraAdress()
+				+ "," + flextur.getFraPostnummer() + "&destinations=" + flextur.getTilAdress() + ","
+				+ flextur.getTilPostnummer() + "&mode=driving&language=da-DK&key=" + API_KEY;
 		String response = run(url_request);
 		String distance = XMLparse(response);
-		// System.out.println(response);
-		return distance;
+		flextur.setDistance(distance);
+		flextur.setDuration(duration);
+		return flextur;
 	}
-	@Override
-	public String getDuration(){
-		return duration;
-		
-	}
-	
-	
+
 	private String run(String url) throws IOException {
 		Request request = new Request.Builder().url(url).build();
 		Response response = client.newCall(request).execute();
@@ -47,13 +51,11 @@ public class OkhttpKilometerUdregningAdapter implements KilometerUdregningAdapte
 	private String XMLparse(String xml) throws XPathExpressionException {
 		XPathFactory xpathFactory = XPathFactory.newInstance();
 		XPath xpath = xpathFactory.newXPath();
-
 		InputSource source = new InputSource(new StringReader(xml));
 		Document doc = (Document) xpath.evaluate("/", source, XPathConstants.NODE);
 		String distance = xpath.evaluate("/DistanceMatrixResponse/row/element/distance/text", doc);
 		String duration = xpath.evaluate("/DistanceMatrixResponse/row/element/duration/text", doc);
 		this.duration = duration;
-		// System.out.println("Distance er = " + distance);
 		return distance;
 	}
 }
