@@ -71,9 +71,7 @@ public class LoginController extends FSPane implements Initializable {
 			} catch (LoginException e){
 				alert.visLoginFejllDialog();
 
-			} catch (ConcurrentModificationException e){
-				
-			}
+			} 
 		}
 	}
 

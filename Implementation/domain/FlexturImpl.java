@@ -336,16 +336,9 @@ public class FlexturImpl implements Flextur{
 				+ tilPostnummer + ", tilAdress=" + tilAdress + ", fraKommune=" + fraKommune + ", tilKommune="
 				+ tilKommune + ", pris=" + pris + ", antalPersoner=" + antalPersoner + ", kilometer=" + kilometer
 				+ ", kommentar=" + kommentar + ", barnevogne=" + barnevogne + ", autostole=" + autostole
-				+ ", koerestole=" + koerestole + ", baggage=" + baggage + ", getFraKommune()=" + getFraKommune()
-				+ ", getTilKommune()=" + getTilKommune() + ", getFraPostnummer()=" + getFraPostnummer()
-				+ ", getTilPostnummer()=" + getTilPostnummer() + ", getFlexturId()=" + getFlexturId()
-				+ ", getKundeId()=" + getKundeId() + ", getDato()=" + getDato() + ", getTid()=" + getTid()
-				+ ", getFraAdress()=" + getFraAdress() + ", getTilAdress()=" + getTilAdress() + ", getPris()="
-				+ getPris() + ", getAntalPersoner()=" + getAntalPersoner() + ", getKilometer()=" + getKilometer()
-				+ ", getKommentar()=" + getKommentar() + ", getBarnevogne()=" + getBarnevogne() + ", getBaggage()="
-				+ getBaggage() + ", getKoerestole()=" + getKoerestole() + ", getAutostole()=" + getAutostole()
-				+ ", getEfternavn()=" + getEfternavn() + ", getFornavn()=" + getFornavn() + ", getTelefon()="
-				+ getTelefon() + ", getCprNummer()=" + getCprNummer() + "] /n";
+				+ ", koerestole=" + koerestole + ", baggage=" + baggage + "]/n";
 	}
+
+	
 
 }
