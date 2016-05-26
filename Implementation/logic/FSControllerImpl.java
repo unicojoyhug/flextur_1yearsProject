@@ -1,6 +1,7 @@
 package logic;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import data.KundeMapperCRUDImpl;
 import data.TurMapper;
 import data.TurMapperImpl;
 import domain.Bruger;
+import domain.BrugerImpl;
 import domain.Flextur;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
@@ -121,10 +123,14 @@ public class FSControllerImpl implements FSController {
 	}
 
 	@Override
-	public void angivLoginOplysninger(String loginId, String kodeord) {
+	public void angivLoginOplysninger(String loginIdS, String kodeordS) {
 		DataAccess dataAccess = new DataAccessImpl();
 		try {
-			this.bruger = new LogicTrans<Bruger>(dataAccess).transaction(() -> brugerMapper.read(dataAccess, loginId));
+			Bruger bruger1 = new BrugerImpl();
+			bruger1.setAndEncryptPassword(kodeordS);
+			String kodeord = bruger1.getEncryptedKodeord();
+			
+			this.bruger = new LogicTrans<Bruger>(dataAccess).transaction(() -> brugerMapper.read(dataAccess, loginIdS));
 
 			if (bruger.getEncryptedKodeord().contentEquals(kodeord)) {
 				bruger.setErLoggetInd(true);
@@ -141,7 +147,7 @@ public class FSControllerImpl implements FSController {
 
 				throw new LoginException("Login fejl");
 			}
-		} catch (NullPointerException e) {
+		} catch (NullPointerException | NoSuchAlgorithmException e) {
 			throw new LoginException("Login fejl");
 
 		}
