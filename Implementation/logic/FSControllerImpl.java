@@ -4,22 +4,21 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.xpath.XPathExpressionException;
-
 import data.BrugerMapperCRUDImpl;
 import data.CRUD;
 import data.DataAccess;
 import data.DataAccessImpl;
+import data.KundeMapperCRUDImpl;
 import data.TurMapper;
 import data.TurMapperImpl;
 import domain.Bruger;
 import domain.Flextur;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
+import domain.Kunde;
 import exception.LoginException;
 import util.LogicTrans;
-import sats.Sats;
 
 /**
  * FSControllerImpl : facade controller :
@@ -34,13 +33,9 @@ public class FSControllerImpl implements FSController {
 	private List<Flextur> flexturListResult = new ArrayList<>();
 	private List<HistorikForBM> flexturListResult_BM = new ArrayList<>();
 	private Bruger bruger;
-	// private HistorikSøgning historikSøgning;
+	private Kunde kunde;
+	private PrisUdregner PU = new PrisUdregner();
 
-	// larsnielsenlind@gmail.com
-
-	
-	
-	
 	@Override
 	public void tilmeldObserver(Observer observer) {
 		observers.add(observer);
@@ -53,8 +48,7 @@ public class FSControllerImpl implements FSController {
 			observer.update(observable, tilstand);
 		}
 	}
-	
-	
+
 	@Override
 	public void søgHistorik() {
 		// TODO tjek loggetInd bruger.....observer......
@@ -118,8 +112,6 @@ public class FSControllerImpl implements FSController {
 
 	}
 
-	
-	
 	@Override
 	public void angivLoginOplysninger(String loginId, String kodeord) {
 		DataAccess dataAccess = new DataAccessImpl();
@@ -128,14 +120,14 @@ public class FSControllerImpl implements FSController {
 
 			if (bruger.getEncryptedKodeord().contentEquals(kodeord)) {
 				bruger.setErLoggetInd(true);
-				
-				if(bruger.erKunde()){
-					notifyObservers (this, Tilstand.LOGIN_KUNDE);
 
-				}else{
+				if (bruger.erKunde()) {
+					notifyObservers(this, Tilstand.LOGIN_KUNDE);
+
+				} else {
 					notifyObservers(this, Tilstand.LOGIN_BM);
 				}
-				
+
 			} else {
 				notifyObservers(this, Tilstand.LOGIN_FEJL);
 
@@ -145,15 +137,13 @@ public class FSControllerImpl implements FSController {
 			throw new LoginException("Login fejl");
 
 		}
-	
+
 	}
-	
-	
+
 	@Override
-	public Bruger getBruger (){
+	public Bruger getBruger() {
 		return bruger;
 	}
-	
 
 	@Override
 	public void angivFlexturOplysninger(Flextur tur) {
@@ -162,25 +152,24 @@ public class FSControllerImpl implements FSController {
 		notifyObservers(this, Tilstand.BESTIL_KØRSEL);
 	}
 
-	
 	@Override
-	public void søgBestilteKørsler(LocalDate fraDato, LocalDate tilDato){
+	public void søgBestilteKørsler(LocalDate fraDato, LocalDate tilDato) {
 		DataAccess dataAccess = new DataAccessImpl();
-		this.flexturListResult = new LogicTrans<List<Flextur>>(dataAccess).transaction(()-> turMapper.getBestilteKørsler(dataAccess, fraDato, tilDato));
+		this.flexturListResult = new LogicTrans<List<Flextur>>(dataAccess)
+				.transaction(() -> turMapper.getBestilteKørsler(dataAccess, fraDato, tilDato));
 		notifyObservers(this, Tilstand.SØG_BESTILE_KØRSLER);
 		System.out.println(flexturListResult);
 
 	}
-	
+
 	@Override
-	public List<Flextur> getBestilteKøsler(){
+	public List<Flextur> getBestilteKøsler() {
 		return flexturListResult;
 	}
 
 	@Override
 	public double udregnPris(Flextur flextur) {
-		// TODO Auto-generated method stub
-		return 0;
+		return PU.takstUdregner(flextur);
 	}
 
 	@Override
@@ -199,8 +188,16 @@ public class FSControllerImpl implements FSController {
 		}
 		return KM;
 	}
-	
-	///// udregn pris til PrisUdregner - factory + adapter 
-	// one void method and return double pris method (datakerne: private double pris)
-	
+
+	@Override
+	public Kunde getKundeID(String cpr) {
+		DataAccess dataAccess = new DataAccessImpl();
+		kunde = new LogicTrans<Kunde>(dataAccess).transaction(() -> KundeMapperCRUDImpl.read(dataAccess, cpr));
+		return null;
+	}
+
+	///// udregn pris til PrisUdregner - factory + adapter
+	// one void method and return double pris method (datakerne: private double
+	///// pris)
+
 }
