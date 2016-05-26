@@ -1,8 +1,11 @@
 package logic;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.xpath.XPathExpressionException;
 
 import data.BrugerMapperCRUDImpl;
 import data.CRUD;
@@ -172,6 +175,29 @@ public class FSControllerImpl implements FSController {
 	@Override
 	public List<Flextur> getBestilteKøsler(){
 		return flexturListResult;
+	}
+
+	@Override
+	public double udregnPris(Flextur flextur) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String udregnKilometer(String origin, String destination) {
+		KilometerUdregningAdapterFactory KU = new KilometerUdregningAdapterFactory();
+		KilometerUdregningAdapter KUadapter = KU.getKilometerUdregningAdapter();
+		String KM = "";
+		try {
+			KM = KUadapter.getDistance(origin, destination);
+		} catch (XPathExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return KM;
 	}
 	
 	///// udregn pris til PrisUdregner - factory + adapter 

@@ -11,8 +11,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-import domain.Bruger;
-import domain.BrugerImpl;
 import domain.Flextur;
 import domain.FlexturImpl;
 import javafx.collections.FXCollections;
@@ -73,7 +71,7 @@ public class RegistrerFlexController implements Initializable {
 		KilometerUdregningAdapter KUadapter = KU.getKilometerUdregningAdapter();
 		String KM = KUadapter.getDistance(Origin, Destination);
 		kilometer.setText(KM);
-		forventetTid.setText(KUadapter.getDuration());
+	//	forventetTid.setText(KUadapter.getDuration());
 		String[] parts = KM.split(" ");
 		String part1 = parts[0];
 		fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));
@@ -118,8 +116,6 @@ public class RegistrerFlexController implements Initializable {
 			handleGetKundeID(event);
 		
 		fti.setKundeId(Integer.parseInt(kundeID.getText()));
-		
-		
 		fti.setFraAdress(fraAddresse.getText());
 		fti.setTilAdress(tilAddresse.getText());
 		fti.setTid(LocalTime.parse(tidspunkt.getText()));

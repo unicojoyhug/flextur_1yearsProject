@@ -36,5 +36,7 @@ public interface FSController extends Observable {
 
 	List<Flextur> getBestilteKøsler();
 
+	double udregnPris(Flextur flextur);
 	
+	String udregnKilometer(String origin, String destination);
 }
