@@ -14,6 +14,11 @@ import logic.FSControllerImpl;
 
 public class DialogBoxImpl implements DialogBox {
 	private Stage window;
+	private Alert warning = new Alert(AlertType.WARNING);
+	private Alert confirmation = new Alert(AlertType.CONFIRMATION);
+	private Alert error = new Alert(AlertType.ERROR);
+	private Alert info = new Alert(AlertType.INFORMATION);
+
 
 	public DialogBoxImpl(Stage window){
 		this.window = window;
@@ -24,22 +29,20 @@ public class DialogBoxImpl implements DialogBox {
 	 */
 	@Override
 	public void visOplysningManglerAdvarselDialog(){
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.initOwner(window);
-		alert.setTitle("ADVARSEL");
-		alert.setHeaderText("Mangler nogle oplysninger");
-		alert.setContentText("Tjek venligst tekstfelterne");
-		alert.showAndWait();
+		warning.initOwner(window);
+		warning.setTitle("ADVARSEL");
+		warning.setHeaderText("Mangler nogle oplysninger");
+		warning.setContentText("Tjek venligst tekstfelterne");
+		warning.showAndWait();
 	}
 	
 	@Override
 	public void visTomListeDialog(){
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.initOwner(window);
-		alert.setTitle("ADVARSEL");
-		alert.setHeaderText("Matchende list er tom.");
-		alert.setContentText("Der er ingen list der matchende.");
-		alert.showAndWait();
+		info.initOwner(window);
+		info.setTitle("ADVARSEL");
+		info.setHeaderText("Matchende list er tom.");
+		info.setContentText("Der er ingen list der matchende.");
+		info.showAndWait();
 	}
 	
 	/* (non-Javadoc)
@@ -47,13 +50,12 @@ public class DialogBoxImpl implements DialogBox {
 	 */
 	@Override
 	public void visCSVFilExportingAdvarselDialog(String filenavn, List<HistorikForBM> resultListe){
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.initOwner(window);
-		alert.setTitle("ADVARSEL");
-		alert.setHeaderText("TOM LIST");
-		alert.setContentText("Vil du gemme den som tom list?");
+		confirmation.initOwner(window);
+		confirmation.setTitle("ADVARSEL");
+		confirmation.setHeaderText("TOM LIST");
+		confirmation.setContentText("Vil du gemme den som tom list?");
 		
-		Optional<ButtonType> result = alert.showAndWait();
+		Optional<ButtonType> result = confirmation.showAndWait();
 		if (result.get() == ButtonType.OK){
 						
 			FSController fsController = new FSControllerImpl();
@@ -65,36 +67,33 @@ public class DialogBoxImpl implements DialogBox {
 	
 	@Override
 	public void visCSVFilExportingFejlDialog(){
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.initOwner(window);
-		alert.setTitle("FEJL");
-		alert.setHeaderText("CSV fil EXPORTERING FEJL");
-		alert.setContentText("Prøv igen.");
-		alert.showAndWait();
+		error.initOwner(window);
+		error.setTitle("FEJL");
+		error.setHeaderText("CSV fil EXPORTERING FEJL");
+		error.setContentText("Prøv igen.");
+		error.showAndWait();
 
 	}
 
 	@Override
 	public void visGemtDialogue(String filenavn){
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.initOwner(window);
-		alert.setTitle("GEM FIL");
-		alert.setHeaderText("Vil du gerne gemme fil?");
-		alert.setContentText("Tjek din mappe : " + filenavn );
+		confirmation.initOwner(window);
+		confirmation.setTitle("GEM FIL");
+		confirmation.setHeaderText("Vil du gerne gemme fil?");
+		confirmation.setContentText("Tjek din mappe : " + filenavn );
 
-		alert.showAndWait();
+		confirmation.showAndWait();
 		
 	}
 
 	@Override
 	public void visCSVFilExportingAdvarselDialogForKunde(String filenavn, List<Flextur> resultListe) {
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.initOwner(window);
-		alert.setTitle("ADVARSEL");
-		alert.setHeaderText("TOM LIST");
-		alert.setContentText("Vil du gemme den som tom list?");
+		confirmation.initOwner(window);
+		confirmation.setTitle("ADVARSEL");
+		confirmation.setHeaderText("TOM LIST");
+		confirmation.setContentText("Vil du gemme den som tom list?");
 		
-		Optional<ButtonType> result = alert.showAndWait();
+		Optional<ButtonType> result = confirmation.showAndWait();
 		if (result.get() == ButtonType.OK){
 						
 			FSController fsController = new FSControllerImpl();
@@ -108,12 +107,20 @@ public class DialogBoxImpl implements DialogBox {
 	
 	@Override
 	public void visLoginFejllDialog(){
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.initOwner(window);
-		alert.setTitle("ERROR");
-		alert.setHeaderText("Fejl i login");
-		alert.setContentText("Prøv igen");
-		alert.showAndWait();
+		warning.initOwner(window);
+		warning.setTitle("ERROR");
+		warning.setHeaderText("Fejl i login");
+		warning.setContentText("Prøv igen");
+		warning.showAndWait();
+	}
+	
+	@Override
+	public void visIngenTurValgt(){
+		error.initOwner(window);
+		error.setTitle("FEJL");
+		error.setHeaderText("Ingen tur er valgt.");
+		error.setContentText("Vælg en tur for godkendelse");
+		error.showAndWait();
 	}
 	
 }

@@ -45,7 +45,7 @@ public class TurMapperImpl implements TurMapper {
 
 	private final static String BESTIL_FLEXTUR = "INSERT INTO flextur (KUNDEID, DATO, TID, FRAPOSTNUMMER, TILPOSTNUMMER, FRAADRESS, TILADRESS, ANTALPERSONER, KOMMENTAR, PRIS, BARNEVOGNE, KØRESTOLE, BAGGAGE, AUTOSTOLE) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-	private final static String GET_BESTILTE_KØRSLER = " select cpr.cprnummer, kunde.id, kunde.loginid,kunde.fornavn,kunde.efternavn,  kunde.telefon, flextur.* from flextur " 
+	private final static String GET_BESTILTE_KØRSLER = " select cpr.cprnummer, kunde.id, kunde.loginid, kunde.fornavn,kunde.efternavn,  kunde.telefon, flextur.* from flextur " 
 			+ KUNDE_CPR + WHERE_DATO + " AND flextur.erGodkendt = false";
 	@Override
 	public List<Flextur> getMatchendeHistorik(DataAccess dataAccess, HistorikSøgning historikSøgning) {
@@ -184,7 +184,7 @@ public class TurMapperImpl implements TurMapper {
 
 
 				Flextur flextur = new FlexturImpl();
-				flextur.setFlexturId(resultSet.getLong("id"));
+				flextur.setFlexturId(resultSet.getLong("flextur.id"));
 				flextur.setDato(resultSet.getDate("dato").toLocalDate());
 				flextur.setTid(resultSet.getTime("tid").toLocalTime());
 				flextur.setFraAdress(resultSet.getString("fraAdress"));
@@ -196,7 +196,7 @@ public class TurMapperImpl implements TurMapper {
 				flextur.setTelefon(resultSet.getString("telefon"));
 				flextur.setEfternavn(resultSet.getString("efternavn"));
 				flextur.setFornavn(resultSet.getString("fornavn"));
-				flextur.setKundeId(resultSet.getInt("loginid"));
+				flextur.setKundeId(resultSet.getInt("kunde.id"));
 				flextur.setCprNummer(resultSet.getString("cprnummer"));
 				flextur.setAutostole(resultSet.getInt("autostole"));
 				flextur.setBaggage(resultSet.getInt("baggage"));

@@ -21,5 +21,7 @@ public interface DialogBox {
 
 	void visLoginFejllDialog();
 
+	void visIngenTurValgt();
+
 
 }

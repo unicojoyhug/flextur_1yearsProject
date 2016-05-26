@@ -171,7 +171,7 @@ public class FSControllerImpl implements FSController {
 		DataAccess dataAccess = new DataAccessImpl();
 		this.flexturListResult = new LogicTrans<List<Flextur>>(dataAccess)
 				.transaction(() -> turMapper.getBestilteKørsler(dataAccess, fraDato, tilDato));
-		notifyObservers(this, Tilstand.SØG_BESTILE_KØRSLER);
+		notifyObservers(this, Tilstand.SØG_BESTILTE_KØRSLER);
 
 	}
 

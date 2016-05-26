@@ -22,7 +22,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="30.0" layoutY="427.0" mnemonicParsing="false" onAction="#handleTildelBil" text="Godkend bestilling" />
+      <Button layoutX="30.0" layoutY="427.0" mnemonicParsing="false" onAction="#handleTildelBil" prefHeight="31.0" prefWidth="144.0" text="Tildel bil " />
       <DatePicker fx:id="fraDato" layoutX="97.0" layoutY="45.0" />
       <DatePicker fx:id="tilDato" layoutX="339.0" layoutY="45.0" />
       <Label layoutX="41.0" layoutY="49.0" text="Fra dato:" />

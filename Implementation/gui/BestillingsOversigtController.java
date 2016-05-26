@@ -19,6 +19,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import logic.Observable;
 import logic.Tilstand;
 
@@ -29,8 +30,8 @@ import logic.Tilstand;
 public class BestillingsOversigtController extends FSPane implements Initializable {
 
 
-	
-	
+
+
 	@FXML
 	private TableView<Flextur> tableView;
 	@FXML
@@ -44,33 +45,29 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 	@FXML
 	private TableColumn<Flextur, Double> totalPrisColumn;
 	@FXML
-	private TableColumn<Flextur, Integer> antalPersonerColumn;
-	
-	
-	
+	private TableColumn<Flextur, Integer> antalPersonerColumn;	
 	@FXML
-	private DatePicker fraDato;
-	
+	private DatePicker fraDato;	
 	@FXML
 	private DatePicker tilDato;
-	
-	private FlexturGUI Flextur;
 
+	private FlexturGUI Flextur;
 	private ObservableList<Flextur> resultListe = FXCollections.observableArrayList();
+	private Stage window;
 
 	@FXML
 	private void handleNyBestilling(ActionEvent event) {
 		Flextur.showBestilFlex();
 
 	}
-	
+
 
 	@FXML
 	private void hentBestilteKørsler(ActionEvent event) {
 		resultListe.clear();	
 
 		fsController.søgBestilteKørsler(fraDato.getValue(), tilDato.getValue());
-	
+
 	}
 
 	@FXML
@@ -81,9 +78,20 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 
 	@FXML
 	private void handleTildelBil(ActionEvent event) {
-		Flextur.showBestilFlex();
+		DialogBox alert = new DialogBoxImpl(window);
+		Flextur flexturForTildel = tableView.getSelectionModel().getSelectedItem();
 
+		if (flexturForTildel != null) {
+			System.out.println("he" + flexturForTildel);
+
+		} else {
+			alert.visIngenTurValgt();
+		}
 	}
+
+
+
+
 
 	public void setMainApp(FlexturGUI flextur) {
 		this.Flextur = flextur;
@@ -104,25 +112,22 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 		totalPrisColumn.setCellValueFactory(new PropertyValueFactory<Flextur, Double>("pris"));
 		antalPersonerColumn.setCellValueFactory(new PropertyValueFactory<Flextur, Integer>("antalPersoner"));
 
-	
-
-	
 	}
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
-		if(tilstand.equals(Tilstand.SØG_BESTILE_KØRSLER)){
+		if(tilstand.equals(Tilstand.SØG_BESTILTE_KØRSLER)){
 			resultListe.clear();
 			resultListe.addAll(fsController.getBestilteKøsler());
 			tableView.setItems(resultListe);
-			
+
 		}
-		
+
 	}
 
 	@Override
 	void postInitialize() {
-		
+
 	}
 
 }
