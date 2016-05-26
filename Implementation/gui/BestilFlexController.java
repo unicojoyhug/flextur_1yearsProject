@@ -10,7 +10,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
-
 import domain.Bruger;
 import domain.BrugerImpl;
 import domain.Flextur;
@@ -21,17 +20,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import logic.FSController;
 import logic.FSControllerImpl;
-import logic.KilometerUdregningAdapter;
-import logic.KilometerUdregningAdapterFactory;
 import logic.Observable;
-import logic.PrisUdregner;
 import logic.Tilstand;
-import sats.Sats;
 
 /**
  *
@@ -42,21 +36,17 @@ public class BestilFlexController extends FSPane implements Initializable {
 	@FXML
 	private ChoiceBox<String> fraKommune, tilKommune;
 	@FXML
-	private ProgressBar prisBar;
-	@FXML
 	private TextArea kommentarer;
 	@FXML
-	private TextField fraAddresse, tilAddresse, prisfelt, PostnrO, PostnrD, kilometer, forventetTid, personer,
-			barnevogne, koerestole, baggage, autostole, tidspunkt;
+	private TextField fraAddresse, tilAddresse, prisfelt, PostnrO, PostnrD, kilometer, personer, barnevogne, koerestole,
+			baggage, autostole, tidspunkt;
 	@FXML
 	private DatePicker dato;
 	private FlexturGUI flexturGUI;
 	private String seperator = " , ";
 	private Flextur fti = new FlexturImpl();
-	private PrisUdregner PU = new PrisUdregner();
+	private FSController FSC = new FSControllerImpl();
 	private Bruger bruger = new BrugerImpl();
-	
-	
 
 	@FXML
 	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
@@ -72,11 +62,8 @@ public class BestilFlexController extends FSPane implements Initializable {
 		sbD.append(PostnrD.getText());
 		String Destination = sbD.toString();
 
-		KilometerUdregningAdapterFactory KU = new KilometerUdregningAdapterFactory();
-		KilometerUdregningAdapter KUadapter = KU.getKilometerUdregningAdapter();
-		String KM = KUadapter.getDistance(Origin, Destination);
+		String KM = FSC.udregnKilometer(Origin, Destination);
 		kilometer.setText(KM);
-		forventetTid.setText(KUadapter.getDuration());
 		String[] parts = KM.split(" ");
 		String part1 = parts[0];
 		fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));
@@ -96,7 +83,7 @@ public class BestilFlexController extends FSPane implements Initializable {
 		if (fti.getKilometer() == 0)
 			try {
 				handleBeregnKM(event);
-				double result = PU.takstUdregner(fti);
+				double result = FSC.udregnPris(fti);
 				fti.setPris(result);
 				prisfelt.setText(String.valueOf(result));
 			} catch (IOException e) {
@@ -106,7 +93,7 @@ public class BestilFlexController extends FSPane implements Initializable {
 				e.printStackTrace();
 			}
 		else {
-			double result = PU.takstUdregner(fti);
+			double result = FSC.udregnPris(fti);
 			fti.setPris(result);
 			prisfelt.setText(String.valueOf(result));
 		}
@@ -140,16 +127,14 @@ public class BestilFlexController extends FSPane implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		prisBar.setVisible(false);
 		dato.setValue(LocalDate.now());
-	
 
 	}
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -157,7 +142,7 @@ public class BestilFlexController extends FSPane implements Initializable {
 		fraKommune.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
 		fraKommune.getSelectionModel().selectFirst();
 		tilKommune.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
-		tilKommune.getSelectionModel().selectFirst();		
+		tilKommune.getSelectionModel().selectFirst();
 	}
 
 }

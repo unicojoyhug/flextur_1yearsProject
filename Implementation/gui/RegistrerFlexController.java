@@ -18,7 +18,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import logic.FSController;
@@ -34,19 +33,16 @@ public class RegistrerFlexController implements Initializable {
 	@FXML
 	private ChoiceBox<String> fraKommune, tilKommune;
 	@FXML
-	private ProgressBar prisBar;
-	@FXML
 	private TextArea kommentarer;
 	@FXML
-	private TextField fraAddresse, tilAddresse, prisfelt, PostnrO, PostnrD, kilometer, forventetTid, personer,
-			barnevogne, koerestole, baggage, autostole, tidspunkt, cprNummer, kundeID;
+	private TextField fraAddresse, tilAddresse, prisfelt, PostnrO, PostnrD, kilometer, personer, barnevogne, koerestole,
+			baggage, autostole, tidspunkt, cprNummer, kundeID;
 	@FXML
 	private DatePicker dato;
 	private FlexturGUI flexturGUI;
 	private String seperator = " , ";
 	private Flextur fti = new FlexturImpl();
 	private FSController FSC = new FSControllerImpl();
-	
 
 	@FXML
 	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
@@ -64,7 +60,6 @@ public class RegistrerFlexController implements Initializable {
 
 		String KM = FSC.udregnKilometer(Origin, Destination);
 		kilometer.setText(KM);
-	//	forventetTid.setText(KUadapter.getDuration());
 		String[] parts = KM.split(" ");
 		String part1 = parts[0];
 		fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));
@@ -107,7 +102,7 @@ public class RegistrerFlexController implements Initializable {
 		}
 		if (kundeID.getText().isEmpty())
 			handleGetKundeID(event);
-		
+
 		fti.setKundeId(Integer.parseInt(kundeID.getText()));
 		fti.setFraAdress(fraAddresse.getText());
 		fti.setTilAdress(tilAddresse.getText());
@@ -118,11 +113,13 @@ public class RegistrerFlexController implements Initializable {
 
 		FSC.angivFlexturOplysninger(fti);
 	}
+
 	@FXML
 	private void handleGetKundeID(ActionEvent event) {
 		String CPR = cprNummer.getText();
-		FSC.getKundeID(CPR);
-		
+		int ID = FSC.getKundeID(CPR).getKundeID();
+		fti.setKundeId(ID);
+		kundeID.setText(String.valueOf(ID));
 	}
 
 	@FXML
@@ -137,7 +134,6 @@ public class RegistrerFlexController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		prisBar.setVisible(false);
 		dato.setValue(LocalDate.now());
 		fraKommune.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
 		fraKommune.getSelectionModel().selectFirst();
