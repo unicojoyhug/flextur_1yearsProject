@@ -181,7 +181,7 @@ public class FSControllerImpl implements FSController {
 	}
 
 	@Override
-	public Flextur udregnPris(Flextur flextur) {
+	public Flextur udregnPris(Flextur flextur){
 		return PU.takstUdregner(flextur);
 	}
 
