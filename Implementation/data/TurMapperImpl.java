@@ -177,10 +177,14 @@ public class TurMapperImpl implements TurMapper {
 			statement = dataAccess.getConnection().prepareStatement(GET_BESTILTE_KØRSLER);
 			statement.setDate(1, Date.valueOf(fraDato));
 			statement.setDate(2, Date.valueOf(tilDato));
+			
 			resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
+
+
 				Flextur flextur = new FlexturImpl();
+				flextur.setFlexturId(resultSet.getLong("id"));
 				flextur.setDato(resultSet.getDate("dato").toLocalDate());
 				flextur.setTid(resultSet.getTime("tid").toLocalTime());
 				flextur.setFraAdress(resultSet.getString("fraAdress"));
@@ -189,17 +193,21 @@ public class TurMapperImpl implements TurMapper {
 				flextur.setTilPostnummer(resultSet.getInt("tilPostnummer"));
 				flextur.setAntalPersoner(resultSet.getInt("antalPersoner"));
 				flextur.setPris(resultSet.getDouble("pris"));
-				flextur.setTelefon(resultSet.getString("kunde.telefon"));
-				flextur.setEfternavn(resultSet.getString("kunde.efternavn"));
-				flextur.setFornavn(resultSet.getString("kunde.fornavn"));
-				flextur.setKundeId(resultSet.getInt("kunde.id"));
-				flextur.setCprNummer(resultSet.getString("cpr.cprnummer"));
+				flextur.setTelefon(resultSet.getString("telefon"));
+				flextur.setEfternavn(resultSet.getString("efternavn"));
+				flextur.setFornavn(resultSet.getString("fornavn"));
+				flextur.setKundeId(resultSet.getInt("loginid"));
+				flextur.setCprNummer(resultSet.getString("cprnummer"));
+
 				flextur.setAutostole(resultSet.getInt("autostole"));
+				System.out.println(flextur);
+
 				flextur.setBaggage(resultSet.getInt("baggage"));
 				flextur.setKoerestole(resultSet.getInt("kørestole"));
 				flextur.setBarnevogne(resultSet.getInt("barnevogn"));
-				flextur.setKommentar(resultSet.getString("kommentar"));
+				
 
+				flextur.setKommentar(resultSet.getString("kommentar"));
 
 				bestilteKørsler.add(flextur);
 

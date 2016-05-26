@@ -60,7 +60,6 @@ public class MenuKundeController extends FSPane implements Initializable {
 	void postInitialize() {
 //        usernameL.setText(fsController.getBruger().getLoginId());
 		
-		setMainApp(flexturGUI);
 	}    
     
 }
