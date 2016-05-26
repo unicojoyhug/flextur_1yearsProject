@@ -345,8 +345,7 @@ public class FlexturImpl implements Flextur{
 				+ ", getKommentar()=" + getKommentar() + ", getBarnevogne()=" + getBarnevogne() + ", getBaggage()="
 				+ getBaggage() + ", getKoerestole()=" + getKoerestole() + ", getAutostole()=" + getAutostole()
 				+ ", getEfternavn()=" + getEfternavn() + ", getFornavn()=" + getFornavn() + ", getTelefon()="
-				+ getTelefon() + ", getCprNummer()=" + getCprNummer() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "] /n";
+				+ getTelefon() + ", getCprNummer()=" + getCprNummer() + "] /n";
 	}
 
 }

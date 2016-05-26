@@ -182,6 +182,7 @@ public class TurMapperImpl implements TurMapper {
 			while (resultSet.next()) {
 				Flextur flextur = new FlexturImpl();
 				flextur.setDato(resultSet.getDate("dato").toLocalDate());
+				flextur.setTid(resultSet.getTime("tid").toLocalTime());
 				flextur.setFraAdress(resultSet.getString("fraAdress"));
 				flextur.setFraPostnummer(resultSet.getInt("fraPostnummer"));
 				flextur.setTilAdress(resultSet.getString("tilAdress"));

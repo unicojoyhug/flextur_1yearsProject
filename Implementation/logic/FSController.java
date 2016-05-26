@@ -34,5 +34,7 @@ public interface FSController extends Observable {
 
 	void søgBestilteKørsler(LocalDate fraDato, LocalDate tilDato);
 
+	List<Flextur> getBestilteKøsler();
+
 	
 }

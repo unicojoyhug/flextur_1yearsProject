@@ -164,8 +164,14 @@ public class FSControllerImpl implements FSController {
 	public void søgBestilteKørsler(LocalDate fraDato, LocalDate tilDato){
 		DataAccess dataAccess = new DataAccessImpl();
 		this.flexturListResult = new LogicTrans<List<Flextur>>(dataAccess).transaction(()-> turMapper.getBestilteKørsler(dataAccess, fraDato, tilDato));
-		notifyObservers(this, Tilstand.SØG_BISTILE_KØRSLER);
+		notifyObservers(this, Tilstand.SØG_BESTILE_KØRSLER);
+		System.out.println(flexturListResult);
 
+	}
+	
+	@Override
+	public List<Flextur> getBestilteKøsler(){
+		return flexturListResult;
 	}
 	
 	///// udregn pris til PrisUdregner - factory + adapter 

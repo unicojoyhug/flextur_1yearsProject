@@ -56,6 +56,8 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 	private ObservableList<Flextur> resultListe = FXCollections.observableArrayList();
 	private Stage window;
 	private Bruger bruger;
+	
+	
 	@FXML
 	private void handleToMenu(ActionEvent event) {
 		flexturGUI.showMenuKunde();
@@ -125,10 +127,7 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 		totalPrisColumn.setCellValueFactory(new PropertyValueFactory<Flextur, Double>("pris"));
 		antalPersonerColumn.setCellValueFactory(new PropertyValueFactory<Flextur, Integer>("antalPersoner"));
 
-		// //TODO
-		// kommune.getSelectionModel().selectedItemProperty()
-		// .addListener((observable, oldValue, newValue) -> (newValue));
-
+		
 	}
 
 	
