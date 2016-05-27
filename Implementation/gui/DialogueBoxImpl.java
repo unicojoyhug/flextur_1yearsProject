@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import logic.FSController;
 import logic.FSControllerImpl;
 
-public class DialogBoxImpl implements DialogBox {
+public class DialogueBoxImpl implements DialogueBox {
 	private Stage window;
 	private Alert warning = new Alert(AlertType.WARNING);
 	private Alert confirmation = new Alert(AlertType.CONFIRMATION);
@@ -20,7 +20,7 @@ public class DialogBoxImpl implements DialogBox {
 	private Alert info = new Alert(AlertType.INFORMATION);
 
 
-	public DialogBoxImpl(Stage window){
+	public DialogueBoxImpl(Stage window){
 		this.window = window;
 	}
 	

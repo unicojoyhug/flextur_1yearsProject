@@ -58,7 +58,6 @@ public class MenuKundeController extends FSPane implements Initializable {
 	}
 	@Override
 	void postInitialize() {
-//        usernameL.setText(fsController.getBruger().getLoginId());
 		
 	}    
     

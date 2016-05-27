@@ -106,7 +106,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 	//TODO kommune combo back to empty choice : DONE with : setValue("")
 	@FXML
 	private void hentHistorikListe(ActionEvent event) {
-		DialogBox alert = new DialogBoxImpl(window);
+		DialogueBox alert = new DialogueBoxImpl(window);
 
 		resultListe.clear();
 
@@ -132,7 +132,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 	
 	@FXML
 	private void exporterCsvFil() {
-		DialogBox alert = new DialogBoxImpl(window);
+		DialogueBox alert = new DialogueBoxImpl(window);
 		String filenavn = System.getProperty("user.home")+"\\"+fraDato.getValue().toString() 
 				+ "_" + tilDato.getValue().toString() + "_" + kommuneCombo.getValue()+ ".csv" ;
 		

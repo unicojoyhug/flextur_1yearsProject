@@ -23,32 +23,32 @@ public class MenuAdminController extends FSPane implements Initializable {
 
 	@FXML
 	private Label usernameL;
-	private FlexturGUI flextur;
+	private FlexturGUI flexturGUI;
 	private String user = "Den der bruger systemet";
 
 	@FXML
 	private void handleRegistrerFlextur(ActionEvent event) {
-		flextur.showRegistrerFlex();
+		flexturGUI.showRegistrerFlex();
 	}
 
 	@FXML
 	private void handleSeBestillinger(ActionEvent event) {
-		flextur.showBestillingsOversigt();
+		flexturGUI.showBestillingsOversigt();
 	}
 
 	@FXML
 	private void handleSeHistorik(ActionEvent event) {
-		flextur.showHistorikAdmin();
+		flexturGUI.showHistorikAdmin();
 	}
 
 	@FXML
 	private void handleLogUd(ActionEvent event) {
 
-		flextur.showLogin();
+		flexturGUI.showLogin();
 	}
 
 	public void setMainApp(FlexturGUI flextur) {
-		this.flextur = flextur;
+		this.flexturGUI = flextur;
 
 	}
 

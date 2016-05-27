@@ -5,7 +5,7 @@ import java.util.List;
 import domain.Flextur;
 import domain.HistorikForBM;
 
-public interface DialogBox {
+public interface DialogueBox {
 
 	void visOplysningManglerAdvarselDialog();
 

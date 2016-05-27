@@ -34,7 +34,7 @@ import logic.Tilstand;
 public class BestilFlexController extends FSPane implements Initializable {
 
 	@FXML
-	private ChoiceBox<String> fraKommune, tilKommune;
+	private ChoiceBox<String> fraKommune, tilKommune; // compare these to ComboBox in seHistorik 
 	@FXML
 	private TextArea kommentarer;
 	@FXML
@@ -44,7 +44,7 @@ public class BestilFlexController extends FSPane implements Initializable {
 	private DatePicker dato;
 	private FlexturGUI flexturGUI;
 	private Flextur fti = new FlexturImpl();
-	private FSController FSC = new FSControllerImpl();
+	private FSController FSC = new FSControllerImpl(); // need to be removed like registrerFlexturController
 	private Bruger bruger = new BrugerImpl();
 
 	@FXML

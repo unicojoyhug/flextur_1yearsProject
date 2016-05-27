@@ -51,13 +51,13 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 	@FXML
 	private DatePicker tilDato;
 
-	private FlexturGUI Flextur;
+	private FlexturGUI flexturGUI;
 	private ObservableList<Flextur> resultListe = FXCollections.observableArrayList();
 	private Stage window;
 
 	@FXML
 	private void handleNyBestilling(ActionEvent event) {
-		Flextur.showBestilFlex();
+		flexturGUI.showBestilFlex();
 
 	}
 
@@ -72,13 +72,13 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 
 	@FXML
 	private void handleSeHistorik(ActionEvent event) {
-		Flextur.showHistorikAdmin();
+		flexturGUI.showHistorikAdmin();
 
 	}
 
 	@FXML
 	private void handleTildelBil(ActionEvent event) {
-		DialogBox alert = new DialogBoxImpl(window);
+		DialogueBox alert = new DialogueBoxImpl(window);
 		Flextur flexturForTildel = tableView.getSelectionModel().getSelectedItem();
 
 		if (flexturForTildel != null) {
@@ -94,13 +94,13 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 
 
 	public void setMainApp(FlexturGUI flextur) {
-		this.Flextur = flextur;
+		this.flexturGUI = flextur;
 
 	}
 
 	@FXML
 	private void handleToMenu(ActionEvent event) {
-		Flextur.showMenuAdmin();
+		flexturGUI.showMenuAdmin();
 	}
 
 	@Override

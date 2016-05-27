@@ -32,27 +32,27 @@ public class LoginController extends FSPane implements Initializable {
 	private TextField username, ShowPassword;
 	@FXML
 	private CheckBox checkBox;
-	private FlexturGUI flextur;
+	private FlexturGUI flexturGUI;
 	private Stage window;
 
 	@FXML
 	private void handleOpretProfil(ActionEvent event) {
-		flextur.showOpretProfil();
+		flexturGUI.showOpretProfil();
 	}
 
 	@FXML
 	private void handleKunde(ActionEvent event) {
-		flextur.showMenuKunde();
+		flexturGUI.showMenuKunde();
 	}
 
 	@FXML
 	private void handleAdmin(ActionEvent event) {
-		flextur.showMenuAdmin();
+		flexturGUI.showMenuAdmin();
 	}
 
 	@FXML
 	private void handleLogin(ActionEvent event) {
-		DialogBox alert = new DialogBoxImpl(window);
+		DialogueBox alert = new DialogueBoxImpl(window);
 
 		String loginIdS = username.getText();
 		String passwordS = password.getText();
@@ -85,13 +85,13 @@ public class LoginController extends FSPane implements Initializable {
 	}
 
 	public void setMainApp(FlexturGUI flextur) {
-		this.flextur = flextur;
+		this.flexturGUI = flextur;
 
 	}
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
-		DialogBox alert = new DialogBoxImpl(window);
+		DialogueBox alert = new DialogueBoxImpl(window);
 		// TODO Auto-generated method stub
 		//		if(observable instanceof FSControllerImpl){
 		//			FSControllerImpl fs = (FSControllerImpl) observable;
@@ -99,11 +99,11 @@ public class LoginController extends FSPane implements Initializable {
 		//		}
 		
 			if(tilstand.equals(Tilstand.LOGIN_KUNDE)){
-				flextur.showMenuKunde();
+				flexturGUI.showMenuKunde();
 			}
 			
 			if(tilstand.equals(Tilstand.LOGIN_BM)){
-				flextur.showMenuAdmin();
+				flexturGUI.showMenuAdmin();
 			}
 			
 			if (tilstand.equals(Tilstand.LOGIN_FEJL)){			

@@ -70,7 +70,7 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 	// TODO input validation : empty text field
 	@FXML
 	private void hentHistorikListe(ActionEvent event) {
-		DialogBox alert = new DialogBoxImpl(window);
+		DialogueBox alert = new DialogueBoxImpl(window);
 		
 		try{
 		resultListe.clear();
@@ -92,7 +92,7 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 	// do so
 	@FXML
 	private void exporterCsvFil() {
-		DialogBox alert = new DialogBoxImpl(window);
+		DialogueBox alert = new DialogueBoxImpl(window);
 		String filenavn = System.getProperty("user.home")+"\\"+fraDato.getValue().toString() 
 				+ "_" + tilDato.getValue().toString() + ".csv" ;
 		

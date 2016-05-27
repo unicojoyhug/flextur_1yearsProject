@@ -7,6 +7,8 @@ package gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +21,7 @@ import logic.Tilstand;
 
 /**
  *
- * @author Jonas Mørch
+ * @author Jonas Mørch, Juyoung Choi
  */
 public class OpretProfilController extends FSPane implements Initializable {
     
@@ -31,7 +33,7 @@ public class OpretProfilController extends FSPane implements Initializable {
 	@FXML
 	private TextField fornavn, efternavn, addresse, telefonnr, email, cprnummer;
 	@FXML
-	private ChoiceBox Kommune;
+	private ChoiceBox<String> kommuneCombo;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -57,7 +59,7 @@ public class OpretProfilController extends FSPane implements Initializable {
 	}
 	@Override
 	void postInitialize() {
-		// TODO Auto-generated method stub
+		kommuneCombo.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
 		
 	}    
     
