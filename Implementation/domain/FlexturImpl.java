@@ -343,7 +343,7 @@ public class FlexturImpl implements Flextur {
 				+ tilPostnummer + ", tilAdress=" + tilAdress + ", fraKommune=" + fraKommune + ", tilKommune="
 				+ tilKommune + ", pris=" + pris + ", antalPersoner=" + antalPersoner + ", kilometer=" + kilometer
 				+ ", kommentar=" + kommentar + ", barnevogne=" + barnevogne + ", autostole=" + autostole
-				+ ", koerestole=" + koerestole + ", baggage=" + baggage + "]/n";
+				+ ", koerestole=" + koerestole + ", baggage=" + baggage + "]";
 	}
 
 	@Override
