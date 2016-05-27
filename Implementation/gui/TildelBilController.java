@@ -41,9 +41,8 @@ public class TildelBilController extends FSPane implements Initializable {
     @FXML
     private void handleAnnuller(ActionEvent event) {
     	
-    }
- 
-   
+    }	
+    	
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
