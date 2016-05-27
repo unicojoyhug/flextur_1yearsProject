@@ -22,8 +22,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import logic.FSController;
-import logic.FSControllerImpl;
 import logic.Observable;
 import logic.Tilstand;
 
@@ -44,7 +42,6 @@ public class BestilFlexController extends FSPane implements Initializable {
 	private DatePicker dato;
 	private FlexturGUI flexturGUI;
 	private Flextur fti = new FlexturImpl();
-	private FSController FSC = new FSControllerImpl(); // need to be removed like registrerFlexturController
 	private Bruger bruger = new BrugerImpl();
 
 	@FXML
@@ -53,7 +50,7 @@ public class BestilFlexController extends FSPane implements Initializable {
 		fti.setTilPostnummer(Integer.parseInt(PostnrD.getText()));
 		fti.setFraAdress(fraAddresse.getText());
 		fti.setTilAdress(tilAddresse.getText());
-		FSC.udregnKilometer(fti);
+		fsController.udregnKilometer(fti);
 
 		kilometer.setText(fti.getDistance());
 		forventetTid.setText(fti.getDuration());
@@ -76,7 +73,7 @@ public class BestilFlexController extends FSPane implements Initializable {
 		if (fti.getKilometer() == 0)
 			try {
 				handleBeregnKM(event);
-				FSC.udregnPris(fti);
+				fsController.udregnPris(fti);
 				prisfelt.setText(String.valueOf(fti.getPris()));
 			} catch (IOException e) {
 				System.out.println("Internet fejl");
@@ -85,7 +82,7 @@ public class BestilFlexController extends FSPane implements Initializable {
 				e.printStackTrace();
 			}
 		else {
-			FSC.udregnPris(fti);
+			fsController.udregnPris(fti);
 			prisfelt.setText(String.valueOf(fti.getPris()));
 		}
 	}

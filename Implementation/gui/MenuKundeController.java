@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import logic.Observable;
 import logic.Tilstand;
 
@@ -20,10 +19,7 @@ import logic.Tilstand;
  */
 public class MenuKundeController extends FSPane implements Initializable {
     
-    @FXML
-    private Label usernameL;
 	private FlexturGUI flexturGUI;
-	private String user = "Den der bruger systemet";
     
 	
 	public void setMainApp(FlexturGUI flexturGUI) {

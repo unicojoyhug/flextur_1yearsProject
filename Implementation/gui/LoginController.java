@@ -1,12 +1,7 @@
 package gui;
 
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
-import java.util.ConcurrentModificationException;
 import java.util.ResourceBundle;
-
-import domain.Bruger;
-import domain.BrugerImpl;
 import exception.LoginException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +10,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import logic.FSControllerImpl;
 import logic.Observable;
 import logic.Tilstand;
 

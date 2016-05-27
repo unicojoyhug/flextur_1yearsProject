@@ -20,8 +20,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import logic.FSController;
-import logic.FSControllerImpl;
 import logic.Observable;
 import logic.Tilstand;
 import sats.Sats;

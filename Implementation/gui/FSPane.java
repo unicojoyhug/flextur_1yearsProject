@@ -2,7 +2,7 @@ package gui;
 
 import logic.FSController;
 import logic.Observer;
-import sats.Sats;
+
 
 public abstract class FSPane implements Observer{
 
@@ -18,8 +18,5 @@ public abstract class FSPane implements Observer{
 		this.flexturGUI = flexturGUI;
 	}
 	
-//	public String [] getKommune() {
-//		return Sats.i().getKommuner();
-//	}
 	abstract void postInitialize();
 }
