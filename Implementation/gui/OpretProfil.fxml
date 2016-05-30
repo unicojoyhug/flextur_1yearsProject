@@ -5,30 +5,32 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40" fx:controller="gui.OpretProfilController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.OpretProfilController">
    <children>
-      <ChoiceBox layoutX="117.0" layoutY="200.0" prefWidth="150.0" />
-      <Button layoutX="336.0" layoutY="278.0" mnemonicParsing="false" text="Opret Profil" />
-      <Label layoutX="118.0" layoutY="95.0" text="Fornavn:" />
-      <PasswordField layoutX="117.0" layoutY="245.0" />
-      <TextField layoutX="117.0" layoutY="110.0" />
-      <Label layoutX="301.0" layoutY="95.0" text="Efternavn:" />
-      <TextField layoutX="300.0" layoutY="110.0" />
-      <Label layoutX="119.0" layoutY="145.0" text="Addresse:" />
-      <TextField layoutX="118.0" layoutY="160.0" />
-      <Label layoutX="118.0" layoutY="185.0" text="Kommune:" />
-      <Label layoutX="118.0" layoutY="230.0" text="Ønsket Kodeord:" />
+      <Button layoutX="250.0" layoutY="435.0" mnemonicParsing="false" onAction="#handleOpret" text="Opret Profil" />
+      <Label layoutX="171.0" layoutY="143.0" text="Fornavn:" />
+      <TextField fx:id="fornavn" layoutX="170.0" layoutY="158.0" />
+      <Label layoutX="372.0" layoutY="143.0" text="Efternavn:" />
+      <TextField fx:id="efternavn" layoutX="371.0" layoutY="158.0" />
+      <Label layoutX="171.0" layoutY="198.0" text="Addresse:" />
+      <TextField fx:id="addresse" layoutX="170.0" layoutY="213.0" />
+      <Label layoutX="171.0" layoutY="248.0" text="Kommune:" />
+      <Label layoutX="171.0" layoutY="310.0" text="Ønsket Kodeord:" />
       <Label layoutX="59.0" layoutY="47.0" text="Opret Profil:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="301.0" layoutY="145.0" text="Telefon nr:" />
-      <TextField layoutX="300.0" layoutY="160.0" />
-      <Label layoutX="301.0" layoutY="186.0" text="Email:" />
-      <TextField layoutX="300.0" layoutY="200.0" />
-      <TextField layoutX="301.0" layoutY="245.0" />
-      <Label layoutX="302.0" layoutY="230.0" text="CPR-Nummer:" />
-      <Button layoutX="558.0" layoutY="435.0" mnemonicParsing="false" onAction="#handleCancel" text="Annuller" />
+      <Label layoutX="372.0" layoutY="198.0" text="Telefon nr:" />
+      <TextField fx:id="telefonnr" layoutX="371.0" layoutY="213.0" />
+      <ChoiceBox fx:id="kommuneCombo" layoutX="170.0" layoutY="266.0" prefWidth="150.0" />
+      <Label layoutX="372.0" layoutY="249.0" text="Email:" />
+      <TextField fx:id="email" layoutX="371.0" layoutY="263.0" />
+      <TextField fx:id="password" layoutX="170.0" layoutY="325.0" />
+      <TextField fx:id="cprnummer" layoutX="372.0" layoutY="325.0" />
+      <Label layoutX="373.0" layoutY="310.0" text="CPR-Nummer:" />
+      <Button layoutX="378.0" layoutY="435.0" mnemonicParsing="false" onAction="#handleCancel" text="Annuller" />
+      <Button layoutX="358.0" layoutY="368.0" mnemonicParsing="false" onAction="#handleTjekCPR" text="Tjek om CPR findes i databasen" />
+      <Label fx:id="cprfejl" layoutX="527.0" layoutY="329.0" text="CPR findes allerede!" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

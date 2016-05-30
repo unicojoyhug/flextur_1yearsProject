@@ -52,7 +52,7 @@ public class KundeMapperCRUDImpl implements CRUD<Kunde, String> {
 		}
 		return kunde;
 	}
-
+	
 	@Override
 	public void update(DataAccess dataAccess, Kunde domain) throws PersistenceFailureException {
 		// TODO Auto-generated method stub

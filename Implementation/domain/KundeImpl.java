@@ -7,6 +7,8 @@ public class KundeImpl implements Kunde {
 	private String fornavn;
 	private String efternavn;
 	private String adress;
+	private String kodeord;
+	private String email;
 	private int postnummer;
 	private int kundeID;
 	private boolean erAktivt;
@@ -130,6 +132,20 @@ public class KundeImpl implements Kunde {
 	public void setKundeID(int kundeID) {
 		this.kundeID = kundeID;
 		
+	}
+	@Override
+	public void setKodeord(String kodeord) {
+		this.kodeord = kodeord;
+		
+	}
+	@Override
+	public void setEmail(String email) {
+		this.email = email;
+		
+	}
+	@Override
+	public String getEmail() {
+		return email;
 	}
 	
 	

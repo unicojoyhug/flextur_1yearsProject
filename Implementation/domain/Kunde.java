@@ -37,5 +37,10 @@ public interface Kunde {
 	int getKundeID();
 	
 	void setKundeID(int kundeID);
-
+	
+	void setKodeord(String kodeord);
+	
+	void setEmail(String email);
+	
+	String getEmail();
 }

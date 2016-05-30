@@ -216,6 +216,13 @@ public class FSControllerImpl implements FSController {
 		return kunde;
 	}
 
+	@Override
+	public void opretKunde(Kunde kunde) {
+		DataAccess dataAccess = new DataAccessImpl();
+		new LogicTrans<Kunde>(dataAccess).transaction(() -> kundeMapper.create(dataAccess, kunde));
+		
+	}
+
 	
 	
 	///// udregn pris til PrisUdregner - factory + adapter

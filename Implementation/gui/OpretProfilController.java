@@ -6,15 +6,19 @@
 package gui;
 
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
+import domain.Bruger;
+import domain.BrugerImpl;
+import domain.Kunde;
+import domain.KundeImpl;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import logic.Observable;
 import logic.Tilstand;
@@ -26,27 +30,46 @@ import logic.Tilstand;
 public class OpretProfilController extends FSPane implements Initializable {
     
     @FXML
-    private Label label;
+    private Label cprfejl;
 	private FlexturGUI flextur;
 	@FXML
-	private PasswordField password;
-	@FXML
-	private TextField fornavn, efternavn, addresse, telefonnr, email, cprnummer;
+	private TextField fornavn, efternavn, addresse, telefonnr, email, cprnummer, password;
 	@FXML
 	private ChoiceBox<String> kommuneCombo;
+	private Kunde kunde = new KundeImpl();
+	private Bruger bruger = new BrugerImpl();
     
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+ 
     public void setMainApp(FlexturGUI flextur) {
 		this.flextur = flextur;
 		
 	}
     @FXML
     private void handleCancel(ActionEvent event) {
-        flextur.showLogin();
+        flextur.showMenuAdmin();
+    }
+    @FXML
+    private void handleOpret(ActionEvent event) throws NoSuchAlgorithmException {
+        kunde.setFornavn(fornavn.getText());
+        kunde.setEfternavn(efternavn.getText());
+        kunde.setAdress(addresse.getText());
+        kunde.setCprNummer(cprnummer.getText());
+        kunde.setKommune(kommuneCombo.getValue());
+        kunde.setTelefon(telefonnr.getText());
+        kunde.setEmail(email.getText());
+        bruger.setAndEncryptPassword(password.getText());
+       	kunde.setKodeord(bruger.getEncryptedKodeord());
+       	
+       	fsController.opretKunde(kunde);
+    }
+    @FXML
+    private void handleTjekCPR(ActionEvent event) {
+       String CPR = cprnummer.getText();
+       Kunde KundeID = fsController.getKundeID(CPR);
+       if (KundeID.getKundeID() > 0){
+    	   cprfejl.setVisible(true);
+    	   
+       }
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {

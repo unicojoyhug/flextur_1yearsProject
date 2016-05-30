@@ -42,6 +42,11 @@ public class MenuAdminController extends FSPane implements Initializable {
 	}
 
 	@FXML
+	private void handleOpretKunde(ActionEvent event) {
+		flexturGUI.showOpretProfil();
+	}
+	
+	@FXML
 	private void handleLogUd(ActionEvent event) {
 
 		flexturGUI.showLogin();
