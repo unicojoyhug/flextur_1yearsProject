@@ -123,4 +123,22 @@ public class DialogueBoxImpl implements DialogueBox {
 		error.showAndWait();
 	}
 	
+	@Override
+	public void visFejl(){
+		error.initOwner(window);
+		error.setTitle("FEJL");
+		error.setHeaderText("Der er noget fejl.");
+		error.setContentText("Prøv igen");
+		error.showAndWait();	
+	}
+	
+	@Override
+	public void visGodkendt(){
+		info.initOwner(window);
+		info.setTitle("GEMT");
+		info.setHeaderText("Godkendelse gemt");
+		info.setContentText("Godkendelse er gemt sikkert");
+		info.showAndWait();	
+	}
+	
 }

@@ -23,5 +23,9 @@ public interface DialogueBox {
 
 	void visIngenTurValgt();
 
+	void visFejl();
+
+	void visGodkendt();
+
 
 }

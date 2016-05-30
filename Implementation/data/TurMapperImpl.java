@@ -47,6 +47,12 @@ public class TurMapperImpl implements TurMapper {
 
 	private final static String GET_BESTILTE_KØRSLER = " select cpr.cprnummer, kunde.id, kunde.loginid, kunde.fornavn,kunde.efternavn,  kunde.telefon, flextur.* from flextur " 
 			+ KUNDE_CPR + WHERE_DATO + " AND flextur.erGodkendt = false";
+	
+	private final static String GET_ALLE_BESTILTE_KØRSLER = " select cpr.cprnummer, kunde.id, kunde.loginid, kunde.fornavn,kunde.efternavn,  kunde.telefon, flextur.* from flextur " 
+			+ KUNDE_CPR + " where flextur.erGodkendt = false";
+	
+	private final static String GODKEND_KØRSEL = "UPDATE FLEXTUR SET ergodkendt = true, kommentar = ? where id = ?";
+	
 	@Override
 	public List<Flextur> getMatchendeHistorik(DataAccess dataAccess, HistorikSøgning historikSøgning) {
 
@@ -178,6 +184,75 @@ public class TurMapperImpl implements TurMapper {
 			statement.setDate(1, Date.valueOf(fraDato));
 			statement.setDate(2, Date.valueOf(tilDato));
 			
+			resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+
+
+				Flextur flextur = new FlexturImpl();
+				flextur.setFlexturId(resultSet.getLong("flextur.id"));
+				flextur.setDato(resultSet.getDate("dato").toLocalDate());
+				flextur.setTid(resultSet.getTime("tid").toLocalTime());
+				flextur.setFraAdress(resultSet.getString("fraAdress"));
+				flextur.setFraPostnummer(resultSet.getInt("fraPostnummer"));
+				flextur.setTilAdress(resultSet.getString("tilAdress"));
+				flextur.setTilPostnummer(resultSet.getInt("tilPostnummer"));
+				flextur.setAntalPersoner(resultSet.getInt("antalPersoner"));
+				flextur.setPris(resultSet.getDouble("pris"));
+				flextur.setTelefon(resultSet.getString("telefon"));
+				flextur.setEfternavn(resultSet.getString("efternavn"));
+				flextur.setFornavn(resultSet.getString("fornavn"));
+				flextur.setKundeId(resultSet.getInt("kunde.id"));
+				flextur.setCprNummer(resultSet.getString("cprnummer"));
+				flextur.setAutostole(resultSet.getInt("autostole"));
+				flextur.setBaggage(resultSet.getInt("baggage"));
+				flextur.setKoerestole(resultSet.getInt("kørestole"));
+				flextur.setBarnevogne(resultSet.getInt("barnevogne"));
+				flextur.setKommentar(resultSet.getString("kommentar"));
+
+				bestilteKørsler.add(flextur);
+
+			}
+
+		} catch (SQLException exc) {
+			throw new PersistenceFailureException("Query has failed");
+		} finally {
+			close.close(resultSet, statement);
+		}
+
+		return bestilteKørsler;
+	}
+	
+	
+	@Override
+	public void godkendKørsel(DataAccess dataAccess, long flexturId, String kommentar){
+		PreparedStatement statement = null;
+
+		try {
+			statement = dataAccess.getConnection().prepareStatement(GODKEND_KØRSEL);
+			statement.setString(1, kommentar);
+			statement.setLong(2, flexturId);	
+			statement.execute();
+
+		} catch (SQLException exc) {
+			throw new PersistenceFailureException("Query has failed");
+		} finally {
+			close.close(statement);
+			
+		}
+
+	}
+	
+	@Override
+	public List<Flextur> getAlleBestilteKørsler(DataAccess dataAccess) {
+
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		List<Flextur> bestilteKørsler = new ArrayList<>();
+
+		try {
+			statement = dataAccess.getConnection().prepareStatement(GET_ALLE_BESTILTE_KØRSLER);
+						
 			resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {

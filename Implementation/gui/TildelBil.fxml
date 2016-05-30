@@ -38,8 +38,8 @@
       <TextField fx:id="bilPersoner" editable="false" layoutX="314.0" layoutY="166.0" prefHeight="25.0" prefWidth="66.0" />
       <Label layoutX="220.0" layoutY="170.0" text="Personer:" />
       <Label layoutX="232.0" layoutY="134.0" text="Valgt køretøjs kapacitet:" />
-      <Button layoutX="242.0" layoutY="346.0" mnemonicParsing="false" text="Godkend" />
-      <Button layoutX="330.0" layoutY="346.0" mnemonicParsing="false" text="Annuller" />
+      <Button layoutX="242.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleGodkend" text="Godkend" />
+      <Button layoutX="330.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleAnnuller" text="Annuller" />
       <ImageView fitHeight="75.0" fitWidth="126.0" layoutX="422.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/vehicle.png" />

@@ -1,5 +1,7 @@
 package data;
 
+import java.util.List;
+
 /**
  * 
  * @author Juyoung Choi
@@ -16,5 +18,6 @@ public interface CRUD<D, K> {
 	void update(DataAccess dataAccess, D domain);
 
 	void delete(DataAccess dataAccess, D domain);
+	
 }
 

@@ -379,3 +379,8 @@ inner join biltype on bil.type = biltype.id
 SELECT * FROM "PUBLIC"."BIL"
 inner join biltype on biltype.id = bil.type
 where erReserveret = false AND maxantalpersoner >=4 AND tilvalgmulighed = true
+
+
+/////
+UPDATE Bil SET erReserveret = true where id = ?
+

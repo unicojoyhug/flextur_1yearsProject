@@ -3,6 +3,7 @@ package logic;
 import java.time.LocalDate;
 import java.util.List;
 
+import domain.Bil;
 import domain.Bruger;
 import domain.Flextur;
 import domain.HistorikForBM;
@@ -46,4 +47,16 @@ public interface FSController extends Observable {
 	void udrengPrisMedTråd(Flextur flextur);
 
 	void opretKunde(Kunde kunde);
+
+	void hentBilListe(Flextur flextur);
+
+	List<Bil> getBilListe();
+
+	Flextur getFlextur();
+
+	void tildelBil(long flexturId, int bilId);
+
+	void godkendKørsel(long flexturId, String kommentar);
+
+	void søgAlleBestilteKørsler();
 }

@@ -55,6 +55,8 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 	private ObservableList<Flextur> resultListe = FXCollections.observableArrayList();
 	private Stage window;
 
+	
+	
 	@FXML
 	private void handleNyBestilling(ActionEvent event) {
 		flexturGUI.showBestilFlex();
@@ -82,7 +84,9 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 		Flextur flexturForTildel = tableView.getSelectionModel().getSelectedItem();
 
 		if (flexturForTildel != null) {
-			System.out.println("he" + flexturForTildel);
+			fsController.hentBilListe(flexturForTildel);
+			flexturGUI.showTildelBil();
+//			System.out.println("he" + flexturForTildel);
 
 		} else {
 			alert.visIngenTurValgt();
@@ -127,6 +131,9 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 
 	@Override
 	void postInitialize() {
+		fsController.søgAlleBestilteKørsler();
+		resultListe.addAll(fsController.getBestilteKøsler());
+		tableView.setItems(resultListe);
 
 	}
 

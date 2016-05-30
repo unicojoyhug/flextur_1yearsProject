@@ -264,6 +264,25 @@ public class FlexturGUI extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	public void showTildelBil() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(FlexturGUI.class.getResource("TildelBil.fxml"));
+			AnchorPane personOverview = (AnchorPane) loader.load();
+
+			// Set person overview into the center of root layout.
+			rootLayout.setCenter(personOverview);
+		
+			FSPane tildelBilController = loader.<FSPane> getController();
+			tildelBilController.setFSController(fsController);
+			tildelBilController.setMainApp(this);
+			tildelBilController.postInitialize();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 
 	

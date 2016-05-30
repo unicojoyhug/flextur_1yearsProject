@@ -16,6 +16,10 @@ public interface TurMapper {
 	Object gemFlextur(DataAccess dataAccess, Flextur tur); //? is it because we want something return?
 
 	List<Flextur> getBestilteKørsler(DataAccess dataAccess, LocalDate fraDato, LocalDate tilDato);
+
+	void godkendKørsel(DataAccess dataAccess, long flexturId, String kommentar);
+
+	List<Flextur> getAlleBestilteKørsler(DataAccess dataAccess);
 	
 	
 }

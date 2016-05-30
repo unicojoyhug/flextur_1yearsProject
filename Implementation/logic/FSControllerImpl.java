@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.xpath.XPathExpressionException;
+
+import data.BilMapper;
+import data.BilMapperCRUDImpl;
 import data.BrugerMapperCRUDImpl;
 import data.CRUD;
 import data.DataAccess;
@@ -13,6 +16,7 @@ import data.DataAccessImpl;
 import data.KundeMapperCRUDImpl;
 import data.TurMapper;
 import data.TurMapperImpl;
+import domain.Bil;
 import domain.Bruger;
 import domain.BrugerImpl;
 import domain.Flextur;
@@ -20,6 +24,7 @@ import domain.HistorikForBM;
 import domain.HistorikSøgning;
 import domain.Kunde;
 import exception.LoginException;
+import exception.TildelogGodkendBilFejException;
 import util.LogicTrans;
 
 /**
@@ -31,13 +36,15 @@ import util.LogicTrans;
 public class FSControllerImpl implements FSController {
 	private TurMapper turMapper = new TurMapperImpl();
 	private CRUD<Kunde, String> kundeMapper = new KundeMapperCRUDImpl();
-
+	private BilMapper bilMapper = new BilMapperCRUDImpl();
 	private CRUD<Bruger, String> brugerMapper = new BrugerMapperCRUDImpl();
 	private List<Observer> observers = new ArrayList<>();
 	private List<Flextur> flexturListResult = new ArrayList<>();
 	private List<HistorikForBM> flexturListResult_BM = new ArrayList<>();
+	private List<Bil> bilListe = new ArrayList<>();
 	private Bruger bruger;
 	private Kunde kunde;
+	private Flextur flextur;
 	private PrisUdregner PU = new PrisUdregner();
 
 	@Override
@@ -223,10 +230,66 @@ public class FSControllerImpl implements FSController {
 		
 	}
 
+
+	@Override
+	public void hentBilListe(Flextur flextur){
+		DataAccess dataAccess = new DataAccessImpl();
+		int antalPersoner = flextur.getAntalPersoner();
+		boolean tilvalgMulighed;
+		if(flextur.getKoerestole()>0){
+			tilvalgMulighed = true;
+		}else{
+			tilvalgMulighed = false;
+		}
+		
+		this.bilListe = new LogicTrans<List<Bil>>(dataAccess).transaction(()-> bilMapper.hentBilListe(dataAccess, antalPersoner, tilvalgMulighed));
+		this.flextur = flextur;
+		notifyObservers(this, Tilstand.HENT_BIL_LISTE);		
+	}
+	
+	@Override
+	public Flextur getFlextur (){
+		return flextur;
+	}
+	
+	@Override
+	public List<Bil> getBilListe(){
+		return bilListe;
+	}
+	
+	@Override
+	public void tildelBil(long flexturId, int bilId){
+		DataAccess dataAccess = new DataAccessImpl();
+		try{
+			new LogicTrans<>(dataAccess).transaction(()->bilMapper.tildelBil(dataAccess, bilId, flexturId));
+		}catch(RuntimeException e){
+			throw new TildelogGodkendBilFejException("Tildel Fejl");
+		}
+		
+		notifyObservers(this, Tilstand.TILDEL_BIL);
+	}
+	
+	@Override
+	public void godkendKørsel(long flexturId, String kommentar){
+		DataAccess dataAccess = new DataAccessImpl();
+		try{
+			new LogicTrans<>(dataAccess).transaction(()->turMapper.godkendKørsel(dataAccess, flexturId, kommentar));
+		}catch(RuntimeException e){
+			throw new TildelogGodkendBilFejException("Tildel Fejl");
+		}
+		
+		notifyObservers(this, Tilstand.GODKEND_KØRSEL);
+	}
+
+	@Override
+	public void søgAlleBestilteKørsler() {
+		DataAccess dataAccess = new DataAccessImpl();
+		this.flexturListResult = new LogicTrans<List<Flextur>>(dataAccess)
+				.transaction(() -> turMapper.getAlleBestilteKørsler(dataAccess));
+		notifyObservers(this, Tilstand.SØG_ALLE_BESTILTE_KØRSLER);
+
+	}
 	
 	
-	///// udregn pris til PrisUdregner - factory + adapter
-	// one void method and return double pris method (datakerne: private double
-	///// pris)
 
 }
