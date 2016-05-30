@@ -32,7 +32,7 @@ public class BrugerMapperCRUDImpl implements CRUD<Bruger, String> {
 	@Override
 	public void create(DataAccess dataAccess, Bruger domain) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

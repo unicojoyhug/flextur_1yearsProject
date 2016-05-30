@@ -43,4 +43,7 @@ public interface Kunde {
 	void setEmail(String email);
 	
 	String getEmail();
+	
+	String getKodeord();
+	
 }

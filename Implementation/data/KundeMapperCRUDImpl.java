@@ -15,15 +15,34 @@ import util.CloseForSQL;
  */
 public class KundeMapperCRUDImpl implements CRUD<Kunde, String> {
 	private static final String READ_KUNDEID = "Select id, cpr.cprNummer as loginid from kunde"
-			+ " inner join cpr on cpr.id = kunde.loginid " 
-			+ " where cpr.cprNummer = ?";
+			+ " inner join cpr on cpr.id = kunde.loginid " + " where cpr.cprNummer = ?";
+	private final static String OPRET_BRUGER = "INSERT INTO kunde (LOGINID, KODEORD, ROLLE, EMAIL, TELEFON, FORNAVN, EFTERNAVN, KOMMUNE, POSTNUMMMER, ERAKTIVT) values (?,?,?,?,?,?,?,?,?,?)";
 
 	private CloseForSQL close = new CloseForSQL();
 
 	@Override
 	public void create(DataAccess dataAccess, Kunde domain) throws PersistenceFailureException {
-		// TODO Auto-generated method stub
 
+		PreparedStatement statement = null;
+		
+		try {
+			statement = dataAccess.getConnection().prepareStatement(OPRET_BRUGER);
+			statement.setString(1, domain.getCprNummer());
+			statement.setString(2, domain.getKodeord());
+			statement.setInt(3, 1);
+			statement.setString(4, domain.getEmail());
+			statement.setString(5, domain.getTelefon());
+			statement.setString(6, domain.getFornavn());
+			statement.setString(7, domain.getEfternavn());
+			statement.setString(8, domain.getKommune());
+			statement.setInt(9, domain.getPostnummer());
+			statement.setBoolean(10, domain.erAktivt());
+
+			statement.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -52,7 +71,7 @@ public class KundeMapperCRUDImpl implements CRUD<Kunde, String> {
 		}
 		return kunde;
 	}
-	
+
 	@Override
 	public void update(DataAccess dataAccess, Kunde domain) throws PersistenceFailureException {
 		// TODO Auto-generated method stub

@@ -147,6 +147,10 @@ public class KundeImpl implements Kunde {
 	public String getEmail() {
 		return email;
 	}
+	@Override
+	public String getKodeord() {
+		return kodeord;
+	}
 	
 	
 	
