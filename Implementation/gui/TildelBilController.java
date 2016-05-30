@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import logic.Observable;
 import logic.Tilstand;
@@ -24,7 +25,9 @@ public class TildelBilController extends FSPane implements Initializable {
     @FXML
     private FlexturGUI flexturGUI;
     @FXML
-    private TextField turPersoner, turAutostole, turBarnevogne, turKoerestole, turBaggage, bilPersoner, bilAutostole, bilBarnevogne, bilKoerestole, bilBaggage;
+    private TextField turPersoner, turAutostole, turBarnevogne, turKoerestole, turBaggage, bilPersoner;
+    @FXML
+    private TextArea kommentarFelt;
     @FXML
     private ComboBox<String> bilValg;
 	

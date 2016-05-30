@@ -126,7 +126,8 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 		tilAdressColumn.setCellValueFactory(new PropertyValueFactory<Flextur, String>("tilAdress"));
 		totalPrisColumn.setCellValueFactory(new PropertyValueFactory<Flextur, Double>("pris"));
 		antalPersonerColumn.setCellValueFactory(new PropertyValueFactory<Flextur, Integer>("antalPersoner"));
-
+		fraDato.setValue(LocalDate.now());
+		tilDato.setValue(LocalDate.now());
 		
 	}
 

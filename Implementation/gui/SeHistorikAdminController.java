@@ -177,7 +177,10 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 		totalPrisColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, Double>("totalPris"));
 		antalPersonerColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, Integer>("antalPersoner"));
 		antalTurColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, Integer>("antalTur"));
-
+		fraDato.setValue(LocalDate.now());
+		tilDato.setValue(LocalDate.now());
+		
+		
 		// //TODO
 		// kommune.getSelectionModel().selectedItemProperty()
 		// .addListener((observable, oldValue, newValue) -> (newValue));
