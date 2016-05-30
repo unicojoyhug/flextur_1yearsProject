@@ -19,12 +19,10 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.RegistrerFlexController">
    <children>
-      <ChoiceBox fx:id="fraKommune" layoutX="38.0" layoutY="95.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="tilKommune" layoutX="255.0" layoutY="95.0" prefWidth="150.0" />
       <Button layoutX="592.0" layoutY="302.0" mnemonicParsing="false" text="Bestil" />
       <Button layoutX="494.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleBeregnPris" text="Udregn Pris" />
-      <Label layoutX="37.0" layoutY="78.0" text="Vælg start kommune:" />
-      <Label layoutX="255.0" layoutY="78.0" text="Vælg destinations kommune:" />
+      <Label layoutX="37.0" layoutY="78.0" text="Vælg start kommune:*" />
+      <Label layoutX="255.0" layoutY="78.0" text="Vælg destinations kommune:*" />
       <Label layoutX="495.0" layoutY="237.0" text="Pris:" />
       <DatePicker fx:id="dato" layoutX="39.0" layoutY="234.0" />
       <Label layoutX="39.0" layoutY="218.0" text="Vælg dato:*" />
@@ -78,5 +76,7 @@
       <TextField fx:id="kundeID" editable="false" layoutX="495.0" layoutY="202.0" promptText="KundeID" />
       <Label layoutX="495.0" layoutY="124.0" text="CPR-Nummer:" />
       <Label layoutX="495.0" layoutY="182.0" text="KundeID" />
+      <ComboBox fx:id="fraKommune" layoutX="43.0" layoutY="99.0" prefWidth="150.0" promptText="Vælg kommune" />
+      <ComboBox fx:id="tilKommune" layoutX="255.0" layoutY="99.0" prefWidth="150.0" promptText="Vælg kommune" />
    </children>
 </AnchorPane>

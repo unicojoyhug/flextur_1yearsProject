@@ -16,22 +16,25 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import logic.Observable;
 import logic.Tilstand;
 import sats.Sats;
 
 /**
  *
- * @author Jonas Mørch
+ * @author Jonas Mørch, Juyoung Choi
  */
 public class RegistrerFlexController extends FSPane implements Initializable {
 
 	@FXML
-	private ChoiceBox<String> fraKommune, tilKommune;
+	private ComboBox <String> fraKommune;
+	@FXML
+	private ComboBox <String> tilKommune;
 	@FXML
 	private TextArea kommentarer;
 	@FXML
@@ -41,6 +44,7 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 	private DatePicker dato;
 	private FlexturGUI flexturGUI;
 	private Flextur fti = new FlexturImpl();
+	private Stage window;
 
 	@FXML
 	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
@@ -68,20 +72,23 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 		fti.setBarnevogne(Integer.parseInt(barnevogne.getText()));
 		fti.setKoerestole(Integer.parseInt(koerestole.getText()));
 
+		DialogueBox alert = new DialogueBoxImpl(window);
 		if (fti.getKilometer() == 0)
 			try {
 				handleBeregnKM(event);
 				fsController.udregnPris(fti);
-				prisfelt.setText(String.valueOf(fti.getPris()));
+				prisfelt.setText(String.valueOf(fti.getPris()).replace('.', ','));
 			} catch (IOException e) {
 				System.out.println("Internet fejl");
 			} catch (Throwable e) {
 				System.out.println("Parameter fejl");
 				e.printStackTrace();
+				alert.visOplysningManglerAdvarselDialog();
+				
 			}
 		else {
 			fsController.udregnPris(fti);
-			prisfelt.setText(String.valueOf(fti.getPris()));
+			prisfelt.setText(String.valueOf(fti.getPris()).replace('.', ','));
 		}
 	}
 
@@ -121,9 +128,9 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		dato.setValue(LocalDate.now());
 		fraKommune.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
-		fraKommune.getSelectionModel().selectFirst();
+//		fraKommune.getSelectionModel().selectFirst();
 		tilKommune.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
-		tilKommune.getSelectionModel().selectFirst();
+//		tilKommune.getSelectionModel().selectFirst();
 
 	}
 

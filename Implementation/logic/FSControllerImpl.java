@@ -184,6 +184,13 @@ public class FSControllerImpl implements FSController {
 	public Flextur udregnPris(Flextur flextur){
 		return PU.takstUdregner(flextur);
 	}
+	
+	@Override
+	public void udrengPrisMedTråd(Flextur flextur){
+		PrisUdregnerMedTråd prisUdregnerMedTråd = new PrisUdregnerMedTråd(flextur);
+		prisUdregnerMedTråd.run();
+		System.out.println(flextur);
+	}
 
 	@Override
 	public Flextur udregnKilometer(Flextur flextur) {
@@ -209,6 +216,8 @@ public class FSControllerImpl implements FSController {
 		return kunde;
 	}
 
+	
+	
 	///// udregn pris til PrisUdregner - factory + adapter
 	// one void method and return double pris method (datakerne: private double
 	///// pris)

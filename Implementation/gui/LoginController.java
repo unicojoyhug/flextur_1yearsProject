@@ -86,11 +86,7 @@ public class LoginController extends FSPane implements Initializable {
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
 		DialogueBox alert = new DialogueBoxImpl(window);
-		// TODO Auto-generated method stub
-		//		if(observable instanceof FSControllerImpl){
-		//			FSControllerImpl fs = (FSControllerImpl) observable;
-		////			fs.
-		//		}
+		
 		
 			if(tilstand.equals(Tilstand.LOGIN_KUNDE)){
 				flexturGUI.showMenuKunde();
@@ -115,3 +111,9 @@ public class LoginController extends FSPane implements Initializable {
 
 
 }
+
+//TODO : if we need more than one concrete observers; 
+		//		if(observable instanceof FSControllerImpl){
+		//			FSControllerImpl fs = (FSControllerImpl) observable;
+		////			fs.
+		//		}
