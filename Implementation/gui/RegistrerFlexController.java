@@ -7,6 +7,7 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
@@ -19,8 +20,11 @@ import domain.Flextur;
 import domain.FlexturImpl;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -59,7 +63,9 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 	private DatePicker dato;
 	private FlexturGUI flexturGUI;
 	private Flextur fti = new FlexturImpl();
-	private Stage window;
+//	private Stage window;
+	private Service<Void> backgroundThread;
+	private DecimalFormat format = new DecimalFormat("#.##");
 
 	@FXML
 	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
@@ -76,79 +82,131 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 		fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));
 	}
 
+	
 	@FXML
 	private void handleBeregnPris(ActionEvent event) {
+		loading.setVisible(true);
 
-		fti.setFraKommune(fraKommune.getValue());
-		fti.setDato(dato.getValue());
-		fti.setTilKommune(tilKommune.getValue());
-		fti.setAntalPersoner(Integer.parseInt(personer.getText()));
-		fti.setAutostole(Integer.parseInt(autostole.getText()));
-		fti.setBaggage(Integer.parseInt(baggage.getText()));
-		fti.setBarnevogne(Integer.parseInt(barnevogne.getText()));
-		fti.setKoerestole(Integer.parseInt(koerestole.getText()));
+		backgroundThread = new Service<Void>(){
 
-		DialogueBox alert = new DialogueBoxImpl(window);
-		alert.visPrisDelay();
+			@Override
+			protected Task<Void> createTask() {
 
+				return new Task<Void>(){
 
-		if (fti.getKilometer() == 0)
-			try {
-				handleBeregnKM(event);
-				
-				ExecutorService executor = Executors.newSingleThreadExecutor();
-				
-				Future<Double> task = executor.submit(()->fsController.udregnPrisMedTråd(fti));
-				
-				while(!task.isDone()){
-					loading.setVisible(true);
-//					alert.visPrisDelay();
+					@Override
+					protected Void call() throws Exception {
+						if(fti.getKilometer() == 0)
+							try {
+								handleBeregnKM(event);
+							} catch (Throwable e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 
-					Thread.sleep(100);
+						fti.setFraKommune(fraKommune.getValue());
+						fti.setDato(dato.getValue());
+						fti.setTilKommune(tilKommune.getValue());
+						fti.setAntalPersoner(Integer.parseInt(personer.getText()));
+						fti.setAutostole(Integer.parseInt(autostole.getText()));
+						fti.setBaggage(Integer.parseInt(baggage.getText()));
+						fti.setBarnevogne(Integer.parseInt(barnevogne.getText()));
+						fti.setKoerestole(Integer.parseInt(koerestole.getText()));
+						fsController.udregnPrisMedTråd(fti);
+						updateMessage(String.valueOf(format.format(fti.getPris())).replace('.', ','));
+						return null;
+					}
+					
+				};
+			}
+			
+		};
+		
+		backgroundThread.setOnSucceeded(new EventHandler<WorkerStateEvent>(){
 
-				}
-
-				
-				executor.shutdown();
+			@Override
+			public void handle(WorkerStateEvent event) {
 				loading.setVisible(false);
 
-				prisfelt.setText(String.valueOf(fti.getPris()).replace('.', ','));
-
-			
-			} catch (IOException e) {
-				System.out.println("Internet fejl");
-			} catch (Throwable e) {
-				System.out.println("Parameter fejl");
-				e.printStackTrace();
-				alert.visOplysningManglerAdvarselDialog();
-				
+				prisfelt.textProperty().unbind();
 			}
-		else {
 			
-			ExecutorService executor = Executors.newSingleThreadExecutor();
-			
-			Future<Double> task = executor.submit(()->fsController.udregnPrisMedTråd(fti));
-			
-			while(!task.isDone()){
-				try {
-//					alert.visPrisDelay();
-
-					loading.setVisible(true);
-
-					Thread.sleep(100);
-
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+		});
 		
-			executor.shutdown();
-			loading.setVisible(false);
+		prisfelt.textProperty().bind(backgroundThread.messageProperty());
+		backgroundThread.restart();
 
-			prisfelt.setText(String.valueOf(fti.getPris()).replace('.', ','));
+//		fti.setFraKommune(fraKommune.getValue());
+//		fti.setDato(dato.getValue());
+//		fti.setTilKommune(tilKommune.getValue());
+//		fti.setAntalPersoner(Integer.parseInt(personer.getText()));
+//		fti.setAutostole(Integer.parseInt(autostole.getText()));
+//		fti.setBaggage(Integer.parseInt(baggage.getText()));
+//		fti.setBarnevogne(Integer.parseInt(barnevogne.getText()));
+//		fti.setKoerestole(Integer.parseInt(koerestole.getText()));
+//
+//		DialogueBox alert = new DialogueBoxImpl(window);
+//		alert.visPrisDelay();
+//		
+//		
+//
+//		if (fti.getKilometer() == 0)
+//			try {
+//				handleBeregnKM(event);
+//				
+//				ExecutorService executor = Executors.newSingleThreadExecutor();
+//				
+//				Future<Double> task = executor.submit(()->fsController.udregnPrisMedTråd(fti));
+//				
+//				while(!task.isDone()){
+//					loading.setVisible(true);
+////					alert.visPrisDelay();
+//
+//					Thread.sleep(100);
+//
+//				}
+//
+//				
+//				executor.shutdown();
+//				loading.setVisible(false);
+//
+//				prisfelt.setText(String.valueOf(fti.getPris()).replace('.', ','));
+//
+//			
+//			} catch (IOException e) {
+//				System.out.println("Internet fejl");
+//			} catch (Throwable e) {
+//				System.out.println("Parameter fejl");
+//				e.printStackTrace();
+//				alert.visOplysningManglerAdvarselDialog();
+//				
+//			}
+//		else {
+//			
+//			ExecutorService executor = Executors.newSingleThreadExecutor();
+//			
+//			Future<Double> task = executor.submit(()->fsController.udregnPrisMedTråd(fti));
+//			
+//			while(!task.isDone()){
+//				try {
+////					alert.visPrisDelay();
+//
+//					loading.setVisible(true);
+//
+//					Thread.sleep(100);
+//
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		
+//			executor.shutdown();
+//			loading.setVisible(false);
+//
+//			prisfelt.setText(String.valueOf(fti.getPris()).replace('.', ','));
 
-		}
+//		}
 	}
 
 	@FXML
