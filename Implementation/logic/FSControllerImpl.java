@@ -5,6 +5,11 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 import javax.xml.xpath.XPathExpressionException;
 
 import data.BilMapper;
@@ -46,6 +51,8 @@ public class FSControllerImpl implements FSController {
 	private Kunde kunde;
 	private Flextur flextur;
 	private PrisUdregner PU = new PrisUdregner();
+//    private static final ExecutorService threadpool = Executors.newFixedThreadPool(3);
+
 
 	@Override
 	public void tilmeldObserver(Observer observer) {
@@ -192,13 +199,48 @@ public class FSControllerImpl implements FSController {
 		return PU.takstUdregner(flextur);
 	}
 	
+//	@SuppressWarnings("unchecked")
 	@Override
 	public void udrengPrisMedTråd(Flextur flextur){
-		PrisUdregnerMedTråd prisUdregnerMedTråd = new PrisUdregnerMedTråd(flextur);
-		prisUdregnerMedTråd.run();
-		System.out.println(flextur);
+		PrisUdregnerMedTråd task = new PrisUdregnerMedTråd(flextur);
+		task.run();		
+		this.flextur = flextur;
+//		
+//		notifyObservers(this, Tilstand.PRIS_UDREGNET);
 	}
+	
+	
+		
+//		PrisUdregnerMedTråd task = new PrisUdregnerMedTråd(flextur);
+//		Future<Flextur> future = threadpool.submit(task);	
+//		while(!future.isDone()){
+//			try {
+//				Thread.sleep(1);
+//			} catch (InterruptedException e) {
+//				
+//			}
+//		}
+//		
+//		try {
+//			this.flextur = (Flextur) future.get();
+//		} catch (InterruptedException | ExecutionException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		threadpool.shutdown();
+//
+//		System.out.println(flextur);
+//	}
 
+//	@Override 
+//	public double visPrisMedTråd(){
+//		
+//		
+//		return 
+//		
+//	}
+//	
 	@Override
 	public Flextur udregnKilometer(Flextur flextur) {
 		KilometerUdregningAdapterFactory KU = new KilometerUdregningAdapterFactory();

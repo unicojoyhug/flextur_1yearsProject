@@ -12,12 +12,16 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 import domain.Flextur;
 import domain.FlexturImpl;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -30,7 +34,9 @@ import sats.Sats;
  * @author Jonas Mørch, Juyoung Choi
  */
 public class RegistrerFlexController extends FSPane implements Initializable {
-
+	@FXML
+	private Label ventText;
+	
 	@FXML
 	private ComboBox <String> fraKommune;
 	@FXML
@@ -48,12 +54,12 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 
 	@FXML
 	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
+
 		fti.setFraPostnummer(Integer.parseInt(PostnrO.getText()));
 		fti.setTilPostnummer(Integer.parseInt(PostnrD.getText()));
 		fti.setFraAdress(fraAddresse.getText());
 		fti.setTilAdress(tilAddresse.getText());
 		fsController.udregnKilometer(fti);
-
 		kilometer.setText(fti.getDistance());
 		forventetTid.setText(fti.getDuration());
 		String[] parts = fti.getDistance().split(" ");
@@ -73,11 +79,19 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 		fti.setKoerestole(Integer.parseInt(koerestole.getText()));
 
 		DialogueBox alert = new DialogueBoxImpl(window);
+
 		if (fti.getKilometer() == 0)
 			try {
 				handleBeregnKM(event);
-				fsController.udregnPris(fti);
+				
+
+				
+				fsController.udrengPrisMedTråd(fti);
+						
+					
 				prisfelt.setText(String.valueOf(fti.getPris()).replace('.', ','));
+
+			
 			} catch (IOException e) {
 				System.out.println("Internet fejl");
 			} catch (Throwable e) {
@@ -87,8 +101,16 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 				
 			}
 		else {
-			fsController.udregnPris(fti);
+			
+			fsController.udrengPrisMedTråd(fti);
+
+			
+//			fsController.udregnPris(fti);
+					
+				
 			prisfelt.setText(String.valueOf(fti.getPris()).replace('.', ','));
+
+		
 		}
 	}
 
@@ -136,8 +158,11 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
-		// TODO Auto-generated method stub
-		
+
+		if(tilstand.equals(Tilstand.PRIS_UDREGNET)){
+			ventText.setText("Pris udregnet");
+
+		}
 	}
 
 	@Override

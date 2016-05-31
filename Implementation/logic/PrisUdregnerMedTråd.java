@@ -1,30 +1,76 @@
 package logic;
+//import java.util.concurrent.ExecutorService;
+//import java.util.concurrent.Executors;
+////import java.util.concurrent.Future;
+//import java.util.concurrent.FutureTask;
+
 import domain.Flextur;
 import seHistorik.AntalPersonerException;
 
-public class PrisUdregnerMedTråd extends Thread {
+public class PrisUdregnerMedTråd implements Runnable {
 	private Flextur flextur;
-	private FSController fsController;
+//	private FutureTask<Double> futureTask;
 	
-	public PrisUdregnerMedTråd (Flextur flextur){
+	public PrisUdregnerMedTråd(Flextur flextur){
 		this.flextur = flextur;
 	}
-
-	public void run() {
+	
+	@Override 
+	public void run(){
 		SatsFactory satsFactory = new SatsFactory();
 		SatsAdapter rate = satsFactory.getSatsAdapter();
 		double km = flextur.getKilometer();
 		double personer = antalPersoner(flextur);
-		double sats = rate.hentSats(flextur);
 		double tilvalg = antalTilvalg(flextur);
-		
+		double sats = rate.hentSats(flextur);
+
 		flextur.setPris(((km*sats)*(personer+tilvalg)));
-		
-		synchronized(this){
-			notify();
-			
-		}
 	}
+	
+//	public void udregnPris(Flextur flextur) {
+//		SatsFactory satsFactory = new SatsFactory();
+//		SatsAdapter rate = satsFactory.getSatsAdapter();
+//		double km = flextur.getKilometer();
+//		double personer = antalPersoner(flextur);
+//		double tilvalg = antalTilvalg(flextur);
+//		double sats = rate.hentSats(flextur);
+//
+//		flextur.setPris(((km*sats)*(personer+tilvalg)));
+//		
+//		synchronized(this){
+//			notify();
+//			
+//		}
+//		
+//		return ;
+//	}
+//	
+	
+	
+//	private Flextur flextur;
+//	private FSController fsController;
+//	
+//	public PrisUdregnerMedTråd (Flextur flextur){
+//		this.flextur = flextur;
+//	}
+//
+//	public Future run() {
+//		SatsFactory satsFactory = new SatsFactory();
+//		SatsAdapter rate = satsFactory.getSatsAdapter();
+//		double km = flextur.getKilometer();
+//		double personer = antalPersoner(flextur);
+//		double sats = rate.hentSats(flextur);
+//		double tilvalg = antalTilvalg(flextur);
+//		
+//		flextur.setPris(((km*sats)*(personer+tilvalg)));
+//		
+////		synchronized(this){
+////			notify();
+////			
+////		}
+//		
+//		return ;
+//	}
 	
 	
 	

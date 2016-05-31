@@ -59,4 +59,5 @@ public interface FSController extends Observable {
 	void godkendKørsel(long flexturId, String kommentar);
 
 	void søgAlleBestilteKørsler();
+
 }
