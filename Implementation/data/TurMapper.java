@@ -14,7 +14,7 @@ public interface TurMapper {
 
 	List<HistorikForBM> getMatchendeHistorikForBM(DataAccess dataAccess, HistorikSøgning historikSøgning);
 
-	Object gemFlextur(DataAccess dataAccess, Flextur tur); //? is it because we want something return?
+	void gemFlextur(DataAccess dataAccess, Flextur tur); 
 
 	List<Flextur> getBestilteKørsler(DataAccess dataAccess, LocalDate fraDato, LocalDate tilDato);
 

@@ -143,8 +143,7 @@ public class TurMapperImpl implements TurMapper {
 	}
 
 	@Override
-	//TODO there is no execute query f.eks. statement.executeUpdate();  or execute()
-	public Object gemFlextur(DataAccess dataAccess, Flextur tur) {
+	public void gemFlextur(DataAccess dataAccess, Flextur tur) {
 		PreparedStatement statement = null;
 		try {
 			statement = dataAccess.getConnection().prepareStatement(BESTIL_FLEXTUR);
@@ -162,6 +161,8 @@ public class TurMapperImpl implements TurMapper {
 			statement.setInt(12, tur.getKoerestole());
 			statement.setInt(13, tur.getBaggage());
 			statement.setInt(14, tur.getAutostole());
+			
+			statement.executeQuery();
 		} catch (SQLException exc) {
 			throw new PersistenceFailureException("Query has failed");
 		} catch (NullPointerException exc) {
@@ -169,7 +170,7 @@ public class TurMapperImpl implements TurMapper {
 		} finally {
 			close.close(statement);
 		}
-		return null;
+		
 	}
 
 
