@@ -1,13 +1,14 @@
 package logic;
-//import java.util.concurrent.ExecutorService;
-//import java.util.concurrent.Executors;
-////import java.util.concurrent.Future;
-//import java.util.concurrent.FutureTask;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 
 import domain.Flextur;
 import seHistorik.AntalPersonerException;
 
-public class PrisUdregnerMedTråd implements Runnable {
+public class PrisUdregnerMedTråd {
 	private Flextur flextur;
 //	private FutureTask<Double> futureTask;
 	
@@ -15,18 +16,59 @@ public class PrisUdregnerMedTråd implements Runnable {
 		this.flextur = flextur;
 	}
 	
-	@Override 
-	public void run(){
+	public double udregnPris(Flextur flextur) {
 		SatsFactory satsFactory = new SatsFactory();
 		SatsAdapter rate = satsFactory.getSatsAdapter();
 		double km = flextur.getKilometer();
 		double personer = antalPersoner(flextur);
 		double tilvalg = antalTilvalg(flextur);
 		double sats = rate.hentSats(flextur);
-
-		flextur.setPris(((km*sats)*(personer+tilvalg)));
+		flextur.setPris((km*sats)*(personer+tilvalg));
+		return(((km*sats)*(personer+tilvalg)));
 	}
 	
+//	@Override 
+//	public void setTask(Flextur flextur){
+//		ExecutorService executor = Executors.newSingleThreadExecutor();
+//		futureTask = new FutureTask<Double>(()-> hentPris(flextur));
+//		executor.submit(futureTask);
+//		executor.shutdown();
+//		
+////		return futureTask;
+//	}
+	
+//	public double getPris(){
+//		double pris = Double.NaN;
+//		try {
+//			pris = futureTask.get();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ExecutionException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return pris;
+//	}
+//	
+//	public boolean isDone(){
+////		boolean isDone = false;
+//		return futureTask.isDone();
+//	}
+//	
+//	private double hentPris(Flextur flextur){
+//		SatsFactory satsFactory = new SatsFactory();
+//		SatsAdapter rate = satsFactory.getSatsAdapter();
+//		double km = flextur.getKilometer();
+//		double personer = antalPersoner(flextur);
+//		double tilvalg = antalTilvalg(flextur);
+//		double sats = rate.hentSats(flextur);
+//
+//		flextur.setPris(((km*sats)*(personer+tilvalg)));
+//		
+//		return ((km*sats)*(personer+tilvalg));
+//	}
+//	
 //	public void udregnPris(Flextur flextur) {
 //		SatsFactory satsFactory = new SatsFactory();
 //		SatsAdapter rate = satsFactory.getSatsAdapter();

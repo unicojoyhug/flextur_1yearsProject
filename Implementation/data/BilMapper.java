@@ -3,6 +3,7 @@ package data;
 import java.util.List;
 
 import domain.Bil;
+import util.DataAccess;
 
 public interface BilMapper extends CRUD<Bil, Integer> {
 

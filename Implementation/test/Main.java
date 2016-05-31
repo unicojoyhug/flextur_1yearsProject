@@ -1,6 +1,10 @@
 package test;
 
 import java.time.LocalDate;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import domain.Flextur;
 import domain.FlexturImpl;
@@ -12,7 +16,7 @@ import logic.PrisUdregnerMedTråd;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		FSController fs = new FSControllerImpl();
 		
 		Flextur flextur = new FlexturImpl();
@@ -22,8 +26,28 @@ public class Main {
 		flextur.setDato(LocalDate.of(2016, 05, 26));
 		flextur.setKilometer(200);
 		
-		fs.udrengPrisMedTråd(flextur);
-		System.out.println(fs.getFlextur().getPris());
+
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+		
+		Future<Double> task = executor.submit(()->fs.udregnPrisMedTråd(flextur));
+		
+		while(!task.isDone()){
+			System.out.println("Calculating...");
+			Thread.sleep(1000);
+		}
+		System.out.println(task.get());
+		
+		executor.shutdown();
+	}
+	
+		
+		
+//		while(!fs.udrengPrisMedTråd(flextur).isDone()){
+//			System.out.println("not done");
+//			Thread.sleep(100);
+//		}
+//		
+//		System.out.println(	fs.udrengPrisMedTråd(flextur).get());
 		
 //		PrisUdregnerMedTråd task = new PrisUdregnerMedTråd(flextur);
 //		task.run();
@@ -56,4 +80,4 @@ public class Main {
 		
 	}
 
-}
+//}

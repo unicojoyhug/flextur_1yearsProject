@@ -1,7 +1,5 @@
 package util;
 import java.util.function.Supplier;
-
-import data.DataAccess;
 /**
  * Using supplier for lambda expression with dataAccess in facade controller
  * @author Juyoung Choi

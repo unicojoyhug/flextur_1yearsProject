@@ -45,6 +45,15 @@ public class DialogueBoxImpl implements DialogueBox {
 		info.showAndWait();
 	}
 	
+	@Override
+	public void visPrisDelay(){
+		info.initOwner(window);
+		info.setTitle("ADVARSEL");
+		info.setHeaderText("Pris udregning tager tid.");
+		info.setContentText("Vent venligst.");
+		info.showAndWait();
+	}
+	
 	/* (non-Javadoc)
 	 * @see gui.DialogBox#visCSVFilExportingAdvarselDialog()
 	 */

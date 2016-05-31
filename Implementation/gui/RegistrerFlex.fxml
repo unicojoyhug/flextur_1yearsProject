@@ -79,5 +79,6 @@
       <ComboBox fx:id="fraKommune" layoutX="43.0" layoutY="99.0" prefWidth="150.0" promptText="Vælg kommune" />
       <ComboBox fx:id="tilKommune" layoutX="255.0" layoutY="99.0" prefWidth="150.0" promptText="Vælg kommune" />
       <Label fx:id="ventText" layoutX="491.0" layoutY="357.0" prefHeight="60.0" prefWidth="174.0" textFill="#4215e4" />
+      <ProgressIndicator fx:id="loading" layoutX="564.0" layoutY="361.0" />
    </children>
 </AnchorPane>

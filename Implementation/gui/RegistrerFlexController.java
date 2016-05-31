@@ -10,6 +10,11 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
+
 import domain.Flextur;
 import domain.FlexturImpl;
 import javafx.application.Platform;
@@ -22,6 +27,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -36,6 +42,9 @@ import sats.Sats;
 public class RegistrerFlexController extends FSPane implements Initializable {
 	@FXML
 	private Label ventText;
+	
+	@FXML
+	private ProgressIndicator loading;
 	
 	@FXML
 	private ComboBox <String> fraKommune;
@@ -69,6 +78,7 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 
 	@FXML
 	private void handleBeregnPris(ActionEvent event) {
+
 		fti.setFraKommune(fraKommune.getValue());
 		fti.setDato(dato.getValue());
 		fti.setTilKommune(tilKommune.getValue());
@@ -79,16 +89,29 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 		fti.setKoerestole(Integer.parseInt(koerestole.getText()));
 
 		DialogueBox alert = new DialogueBoxImpl(window);
+		alert.visPrisDelay();
+
 
 		if (fti.getKilometer() == 0)
 			try {
 				handleBeregnKM(event);
 				
+				ExecutorService executor = Executors.newSingleThreadExecutor();
+				
+				Future<Double> task = executor.submit(()->fsController.udregnPrisMedTråd(fti));
+				
+				while(!task.isDone()){
+					loading.setVisible(true);
+//					alert.visPrisDelay();
+
+					Thread.sleep(100);
+
+				}
 
 				
-				fsController.udrengPrisMedTråd(fti);
-						
-					
+				executor.shutdown();
+				loading.setVisible(false);
+
 				prisfelt.setText(String.valueOf(fti.getPris()).replace('.', ','));
 
 			
@@ -102,15 +125,29 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 			}
 		else {
 			
-			fsController.udrengPrisMedTråd(fti);
-
+			ExecutorService executor = Executors.newSingleThreadExecutor();
 			
-//			fsController.udregnPris(fti);
-					
-				
+			Future<Double> task = executor.submit(()->fsController.udregnPrisMedTråd(fti));
+			
+			while(!task.isDone()){
+				try {
+//					alert.visPrisDelay();
+
+					loading.setVisible(true);
+
+					Thread.sleep(100);
+
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		
+			executor.shutdown();
+			loading.setVisible(false);
+
 			prisfelt.setText(String.valueOf(fti.getPris()).replace('.', ','));
 
-		
 		}
 	}
 
@@ -153,13 +190,15 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 //		fraKommune.getSelectionModel().selectFirst();
 		tilKommune.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
 //		tilKommune.getSelectionModel().selectFirst();
-
+		loading.setVisible(false);
 	}
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
 
 		if(tilstand.equals(Tilstand.PRIS_UDREGNET)){
+			prisfelt.setText(String.valueOf(fsController.getFlextur().getPris()).replace('.', ','));
+
 			ventText.setText("Pris udregnet");
 
 		}

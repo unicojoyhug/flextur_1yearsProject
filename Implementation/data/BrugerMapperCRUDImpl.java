@@ -8,6 +8,7 @@ import domain.Bruger;
 import domain.BrugerImpl;
 import exception.PersistenceFailureException;
 import util.CloseForSQL;
+import util.DataAccess;
 
 /**
  * 

@@ -17,6 +17,7 @@ import domain.HistorikSøgning;
 import exception.MissingOplysningExcpetion;
 import exception.PersistenceFailureException;
 import util.CloseForSQL;
+import util.DataAccess;
 
 /**
  * 

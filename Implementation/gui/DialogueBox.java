@@ -27,5 +27,7 @@ public interface DialogueBox {
 
 	void visGodkendt();
 
+	void visPrisDelay();
+
 
 }

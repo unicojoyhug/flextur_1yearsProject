@@ -6,6 +6,7 @@ import java.util.List;
 import domain.Flextur;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
+import util.DataAccess;
 
 public interface TurMapper {
 

@@ -2,6 +2,7 @@ package logic;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.FutureTask;
 
 import domain.Bil;
 import domain.Bruger;
@@ -12,7 +13,6 @@ import domain.Kunde;
 
 public interface FSController extends Observable {
 
-	void søgHistorik();
 	
 	void angivSøgningOplysninger(HistorikSøgning historikSøgning);
 
@@ -44,7 +44,7 @@ public interface FSController extends Observable {
 
 	Flextur udregnKilometer(Flextur flextur);
 
-	void udrengPrisMedTråd(Flextur flextur);
+	double udregnPrisMedTråd(Flextur flextur);
 
 	void opretKunde(Kunde kunde);
 
@@ -59,5 +59,9 @@ public interface FSController extends Observable {
 	void godkendKørsel(long flexturId, String kommentar);
 
 	void søgAlleBestilteKørsler();
+
+//	boolean prisFærdig();
+//
+//	double getPris();
 
 }

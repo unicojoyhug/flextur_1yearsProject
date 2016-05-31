@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -16,7 +17,6 @@ import data.BilMapper;
 import data.BilMapperCRUDImpl;
 import data.BrugerMapperCRUDImpl;
 import data.CRUD;
-import data.DataAccess;
 import data.DataAccessImpl;
 import data.KundeMapperCRUDImpl;
 import data.TurMapper;
@@ -30,6 +30,7 @@ import domain.HistorikSøgning;
 import domain.Kunde;
 import exception.LoginException;
 import exception.TildelogGodkendBilFejException;
+import util.DataAccess;
 import util.LogicTrans;
 
 /**
@@ -51,7 +52,7 @@ public class FSControllerImpl implements FSController {
 	private Kunde kunde;
 	private Flextur flextur;
 	private PrisUdregner PU = new PrisUdregner();
-//    private static final ExecutorService threadpool = Executors.newFixedThreadPool(3);
+//	private double pris = Double.NaN;
 
 
 	@Override
@@ -62,10 +63,7 @@ public class FSControllerImpl implements FSController {
 
 	@Override
 	public void notifyObservers(Observable observable, Tilstand tilstand) {
-//		for (Observer observer : observers) {
-//			observer.update(observable, tilstand);
-//		}
-		
+
 		int size = observers.size();
 		
 		for (int i=0;i<size;i++) {
@@ -73,11 +71,6 @@ public class FSControllerImpl implements FSController {
 		}
 	}
 
-	@Override
-	public void søgHistorik() {
-		// TODO tjek loggetInd bruger.....observer......
-
-	}
 
 	@Override
 	public void angivSøgningOplysninger(HistorikSøgning historikSøgning) {
@@ -198,49 +191,12 @@ public class FSControllerImpl implements FSController {
 	public Flextur udregnPris(Flextur flextur){
 		return PU.takstUdregner(flextur);
 	}
-	
-//	@SuppressWarnings("unchecked")
 	@Override
-	public void udrengPrisMedTråd(Flextur flextur){
-		PrisUdregnerMedTråd task = new PrisUdregnerMedTråd(flextur);
-		task.run();		
-		this.flextur = flextur;
-//		
-//		notifyObservers(this, Tilstand.PRIS_UDREGNET);
+	public double udregnPrisMedTråd(Flextur flextur){
+		PrisUdregnerMedTråd pris = new PrisUdregnerMedTråd(flextur);
+		return pris.udregnPris(flextur);
 	}
-	
-	
-		
-//		PrisUdregnerMedTråd task = new PrisUdregnerMedTråd(flextur);
-//		Future<Flextur> future = threadpool.submit(task);	
-//		while(!future.isDone()){
-//			try {
-//				Thread.sleep(1);
-//			} catch (InterruptedException e) {
-//				
-//			}
-//		}
-//		
-//		try {
-//			this.flextur = (Flextur) future.get();
-//		} catch (InterruptedException | ExecutionException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		threadpool.shutdown();
-//
-//		System.out.println(flextur);
-//	}
 
-//	@Override 
-//	public double visPrisMedTråd(){
-//		
-//		
-//		return 
-//		
-//	}
-//	
 	@Override
 	public Flextur udregnKilometer(Flextur flextur) {
 		KilometerUdregningAdapterFactory KU = new KilometerUdregningAdapterFactory();

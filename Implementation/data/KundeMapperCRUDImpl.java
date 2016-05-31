@@ -7,6 +7,7 @@ import domain.Kunde;
 import domain.KundeImpl;
 import exception.PersistenceFailureException;
 import util.CloseForSQL;
+import util.DataAccess;
 
 /**
  * 
