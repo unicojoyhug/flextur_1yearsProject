@@ -16,7 +16,7 @@ import domain.Flextur;
 
 /**
  *
- * @author Jonas Mørch
+ * @author Jonas Mørch & Juyoung Choi
  */
 public class OkhttpKilometerUdregningAdapter implements KilometerUdregningAdapter {
 

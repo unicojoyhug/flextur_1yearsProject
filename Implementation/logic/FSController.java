@@ -2,15 +2,17 @@ package logic;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.FutureTask;
-
 import domain.Bil;
 import domain.Bruger;
 import domain.Flextur;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
 import domain.Kunde;
-
+/**
+ * 
+ * @author Juyoung Choi & Jonas Mørch
+ *
+ */
 public interface FSController extends Observable {
 
 	
@@ -59,9 +61,5 @@ public interface FSController extends Observable {
 	void godkendKørsel(long flexturId, String kommentar);
 
 	void søgAlleBestilteKørsler();
-
-//	boolean prisFærdig();
-//
-//	double getPris();
 
 }

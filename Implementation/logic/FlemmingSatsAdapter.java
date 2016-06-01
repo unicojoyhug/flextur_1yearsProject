@@ -3,7 +3,11 @@ package logic;
 import domain.Flextur;
 import sats.Sats;
 import sats.UnknownKommuneException;
-
+/**
+ * 
+ * @author Juyoung Choi & Jonas Mørch
+ *
+ */
 public class FlemmingSatsAdapter implements SatsAdapter {
 	
 
