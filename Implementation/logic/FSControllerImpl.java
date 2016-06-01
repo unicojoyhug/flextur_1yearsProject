@@ -52,7 +52,6 @@ public class FSControllerImpl implements FSController {
 	private Kunde kunde;
 	private Flextur flextur;
 	private PrisUdregner PU = new PrisUdregner();
-//	private double pris = Double.NaN;
 
 
 	@Override
