@@ -2,6 +2,8 @@ package domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import exception.MissingOplysningExcpetion;
 /**
  * 
  * @author Juyoung Choi & Jonas Mørch
@@ -14,18 +16,18 @@ public class FlexturImpl implements Flextur {
 	private String fornavn;
 	private String telefon;
 	private String cprNummer;
-	private LocalDate dato;
-	private LocalTime tid;
+	private LocalDate dato = null;
+	private LocalTime tid = null;
 	private String fraAdress;
 	private int fraPostnummer;
 	private int tilPostnummer;
 	private String tilAdress;
 	private String fraKommune;
 	private String tilKommune;
-	private double pris;
+	private double pris = Double.NaN;
 	private int antalPersoner;
-	private double kilometer;
-	private String kommentar;
+	private double kilometer = Double.NaN;
+	private String kommentar = null;
 	private int barnevogne;
 	private int autostole;
 	private int koerestole;
@@ -50,6 +52,9 @@ public class FlexturImpl implements Flextur {
 
 	@Override
 	public void setTilKommune(String tilKommune) {
+		if (tilKommune == null) {
+			throw new MissingOplysningExcpetion ("Til kommune Mangler");
+		}
 		this.tilKommune = tilKommune;
 	}
 
@@ -60,6 +65,9 @@ public class FlexturImpl implements Flextur {
 
 	@Override
 	public void setFraPostnummer(int fraPostnummer) {
+		if (fraPostnummer == 0 ) {
+			throw new MissingOplysningExcpetion ("Fra postnummer Mangler");
+		}
 		this.fraPostnummer = fraPostnummer;
 	}
 
@@ -70,6 +78,9 @@ public class FlexturImpl implements Flextur {
 
 	@Override
 	public void setTilPostnummer(int tilPostnummer) {
+		if (tilPostnummer == 0 ) {
+			throw new MissingOplysningExcpetion ("Fra postnummer Mangler");
+		}
 		this.tilPostnummer = tilPostnummer;
 	}
 
@@ -150,6 +161,10 @@ public class FlexturImpl implements Flextur {
 	 */
 	@Override
 	public void setTid(LocalTime tid) {
+		if (tid == null) {
+			throw new MissingOplysningExcpetion ("Tid Mangler");
+		}
+		
 		this.tid = tid;
 	}
 
@@ -210,6 +225,9 @@ public class FlexturImpl implements Flextur {
 	 */
 	@Override
 	public void setPris(double pris) {
+		if (pris == Double.NaN) {
+			throw new MissingOplysningExcpetion ("Fra Dato Mangler");
+		}
 		this.pris = pris;
 	}
 
@@ -235,6 +253,9 @@ public class FlexturImpl implements Flextur {
 
 	@Override
 	public double getKilometer() {
+		if (kilometer == Double.NaN) {
+			throw new MissingOplysningExcpetion ("Fra Dato Mangler");
+		}
 		return kilometer;
 	}
 

@@ -19,7 +19,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.RegistrerFlexController">
    <children>
-      <Button layoutX="592.0" layoutY="302.0" mnemonicParsing="false" text="Bestil" />
+      <Button layoutX="592.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleBestilFlextur" text="Bestil" />
       <Button layoutX="494.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleBeregnPris" text="Udregn Pris" />
       <Label layoutX="37.0" layoutY="78.0" text="Vælg start kommune:*" />
       <Label layoutX="255.0" layoutY="78.0" text="Vælg destinations kommune:*" />

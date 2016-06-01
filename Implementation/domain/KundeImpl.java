@@ -1,11 +1,14 @@
 package domain;
+
+import exception.MissingOplysningExcpetion;
+
 /**
  * 
  * @author Juyoung Choi & Jonas Mørch
  *
  */
 public class KundeImpl implements Kunde {
-	private String cprNummer;
+	private String cprNummer = null;
 	private String kommune;
 	private String telefon;
 	private String fornavn;
@@ -14,7 +17,7 @@ public class KundeImpl implements Kunde {
 	private String kodeord;
 	private String email;
 	private int postnummer;
-	private int kundeID;
+	private int kundeID = 0;
 	private boolean erAktivt;
 	/* (non-Javadoc)
 	 * @see domain.Kunde#getCprNummer()
@@ -28,6 +31,9 @@ public class KundeImpl implements Kunde {
 	 */
 	@Override
 	public void setCprNummer(String cprNummer) {
+		if (cprNummer == null) {
+			throw new MissingOplysningExcpetion ("CPR Mangler");
+		}
 		this.cprNummer = cprNummer;
 	}
 	/* (non-Javadoc)
@@ -134,6 +140,9 @@ public class KundeImpl implements Kunde {
 	}
 	@Override
 	public void setKundeID(int kundeID) {
+		if (kundeID == 0 ) {
+			throw new MissingOplysningExcpetion ("Fra postnummer Mangler");
+		}
 		this.kundeID = kundeID;
 		
 	}
