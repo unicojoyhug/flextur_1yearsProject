@@ -135,78 +135,6 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 		
 		prisfelt.textProperty().bind(backgroundThread.messageProperty());
 		backgroundThread.restart();
-
-//		fti.setFraKommune(fraKommune.getValue());
-//		fti.setDato(dato.getValue());
-//		fti.setTilKommune(tilKommune.getValue());
-//		fti.setAntalPersoner(Integer.parseInt(personer.getText()));
-//		fti.setAutostole(Integer.parseInt(autostole.getText()));
-//		fti.setBaggage(Integer.parseInt(baggage.getText()));
-//		fti.setBarnevogne(Integer.parseInt(barnevogne.getText()));
-//		fti.setKoerestole(Integer.parseInt(koerestole.getText()));
-//
-//		DialogueBox alert = new DialogueBoxImpl(window);
-//		alert.visPrisDelay();
-//		
-//		
-//
-//		if (fti.getKilometer() == 0)
-//			try {
-//				handleBeregnKM(event);
-//				
-//				ExecutorService executor = Executors.newSingleThreadExecutor();
-//				
-//				Future<Double> task = executor.submit(()->fsController.udregnPrisMedTråd(fti));
-//				
-//				while(!task.isDone()){
-//					loading.setVisible(true);
-////					alert.visPrisDelay();
-//
-//					Thread.sleep(100);
-//
-//				}
-//
-//				
-//				executor.shutdown();
-//				loading.setVisible(false);
-//
-//				prisfelt.setText(String.valueOf(fti.getPris()).replace('.', ','));
-//
-//			
-//			} catch (IOException e) {
-//				System.out.println("Internet fejl");
-//			} catch (Throwable e) {
-//				System.out.println("Parameter fejl");
-//				e.printStackTrace();
-//				alert.visOplysningManglerAdvarselDialog();
-//				
-//			}
-//		else {
-//			
-//			ExecutorService executor = Executors.newSingleThreadExecutor();
-//			
-//			Future<Double> task = executor.submit(()->fsController.udregnPrisMedTråd(fti));
-//			
-//			while(!task.isDone()){
-//				try {
-////					alert.visPrisDelay();
-//
-//					loading.setVisible(true);
-//
-//					Thread.sleep(100);
-//
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		
-//			executor.shutdown();
-//			loading.setVisible(false);
-//
-//			prisfelt.setText(String.valueOf(fti.getPris()).replace('.', ','));
-
-//		}
 	}
 
 	@FXML
@@ -233,7 +161,7 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 
 	@FXML
 	private void handleToMenu(ActionEvent event) {
-		flexturGUI.showMenuKunde();
+		flexturGUI.showMenuAdmin();
 	}
 
 	public void setMainApp(FlexturGUI flextur) {
