@@ -1,4 +1,4 @@
-package gui;
+package seHistorik;
 
 import domain.HistorikForBM;
 import javafx.beans.property.DoubleProperty;
