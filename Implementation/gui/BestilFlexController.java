@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 import domain.Bruger;
-import domain.BrugerImpl;
 import domain.Flextur;
 import domain.FlexturImpl;
 import exception.MissingOplysningExcpetion;

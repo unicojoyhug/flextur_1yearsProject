@@ -7,6 +7,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public class TekstFormatteringImpl implements TekstFormattering {
 
 	private DecimalFormat format = new DecimalFormat("#.##");
