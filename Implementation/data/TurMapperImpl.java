@@ -162,7 +162,7 @@ public class TurMapperImpl implements TurMapper {
 			statement.setInt(13, tur.getBaggage());
 			statement.setInt(14, tur.getAutostole());
 			
-			statement.executeQuery();
+			statement.executeQuery(); // when you have only statement, you need statement.executeUpdate(); or just statement.execute();
 		} catch (SQLException exc) {
 			throw new PersistenceFailureException("Query has failed");
 		} catch (NullPointerException exc) {
