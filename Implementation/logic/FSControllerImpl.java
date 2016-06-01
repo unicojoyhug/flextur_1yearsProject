@@ -5,14 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
-
 import javax.xml.xpath.XPathExpressionException;
-
 import data.BilMapper;
 import data.BilMapperCRUDImpl;
 import data.BrugerMapperCRUDImpl;
@@ -36,7 +29,7 @@ import util.LogicTrans;
 /**
  * FSControllerImpl : facade controller :
  * 
- * @author Juyoung Choi
+ * @author Juyoung Choi & Jonas Mørch
  *
  */
 public class FSControllerImpl implements FSController {
@@ -53,7 +46,6 @@ public class FSControllerImpl implements FSController {
 	private Flextur flextur;
 	private PrisUdregner PU = new PrisUdregner();
 
-
 	@Override
 	public void tilmeldObserver(Observer observer) {
 		observers.add(observer);
@@ -64,12 +56,11 @@ public class FSControllerImpl implements FSController {
 	public void notifyObservers(Observable observable, Tilstand tilstand) {
 
 		int size = observers.size();
-		
-		for (int i=0;i<size;i++) {
+
+		for (int i = 0; i < size; i++) {
 			observers.get(i).update(observable, tilstand);
 		}
 	}
-
 
 	@Override
 	public void angivSøgningOplysninger(HistorikSøgning historikSøgning) {
@@ -135,7 +126,7 @@ public class FSControllerImpl implements FSController {
 			Bruger bruger1 = new BrugerImpl();
 			bruger1.setAndEncryptPassword(kodeordS);
 			String kodeord = bruger1.getEncryptedKodeord();
-			
+
 			this.bruger = new LogicTrans<Bruger>(dataAccess).transaction(() -> brugerMapper.read(dataAccess, loginIdS));
 
 			if (bruger.getEncryptedKodeord().contentEquals(kodeord)) {
@@ -187,11 +178,12 @@ public class FSControllerImpl implements FSController {
 	}
 
 	@Override
-	public Flextur udregnPris(Flextur flextur){
+	public Flextur udregnPris(Flextur flextur) {
 		return PU.takstUdregner(flextur);
 	}
+
 	@Override
-	public double udregnPrisMedTråd(Flextur flextur){
+	public double udregnPrisMedTråd(Flextur flextur) {
 		PrisUdregnerMedTråd pris = new PrisUdregnerMedTråd(flextur);
 		return pris.udregnPris(flextur);
 	}
@@ -200,7 +192,7 @@ public class FSControllerImpl implements FSController {
 	public Flextur udregnKilometer(Flextur flextur) {
 		KilometerUdregningAdapterFactory KU = new KilometerUdregningAdapterFactory();
 		KilometerUdregningAdapter KUadapter = KU.getKilometerUdregningAdapter();
-		
+
 		try {
 			return KUadapter.getDistance(flextur);
 		} catch (XPathExpressionException e) {
@@ -209,7 +201,8 @@ public class FSControllerImpl implements FSController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		};
+		}
+		;
 		return flextur;
 	}
 
@@ -224,57 +217,57 @@ public class FSControllerImpl implements FSController {
 	public void opretKunde(Kunde kunde) {
 		DataAccess dataAccess = new DataAccessImpl();
 		new LogicTrans<Kunde>(dataAccess).transaction(() -> kundeMapper.create(dataAccess, kunde));
-		
+
 	}
 
-
 	@Override
-	public void hentBilListe(Flextur flextur){
+	public void hentBilListe(Flextur flextur) {
 		DataAccess dataAccess = new DataAccessImpl();
 		int antalPersoner = flextur.getAntalPersoner();
 		boolean tilvalgMulighed;
-		if(flextur.getKoerestole()>0){
+		if (flextur.getKoerestole() > 0) {
 			tilvalgMulighed = true;
-		}else{
+		} else {
 			tilvalgMulighed = false;
 		}
-		
-		this.bilListe = new LogicTrans<List<Bil>>(dataAccess).transaction(()-> bilMapper.hentBilListe(dataAccess, antalPersoner, tilvalgMulighed));
+
+		this.bilListe = new LogicTrans<List<Bil>>(dataAccess)
+				.transaction(() -> bilMapper.hentBilListe(dataAccess, antalPersoner, tilvalgMulighed));
 		this.flextur = flextur;
-		notifyObservers(this, Tilstand.HENT_BIL_LISTE);		
+		notifyObservers(this, Tilstand.HENT_BIL_LISTE);
 	}
-	
+
 	@Override
-	public Flextur getFlextur (){
+	public Flextur getFlextur() {
 		return flextur;
 	}
-	
+
 	@Override
-	public List<Bil> getBilListe(){
+	public List<Bil> getBilListe() {
 		return bilListe;
 	}
-	
+
 	@Override
-	public void tildelBil(long flexturId, int bilId){
+	public void tildelBil(long flexturId, int bilId) {
 		DataAccess dataAccess = new DataAccessImpl();
-		try{
-			new LogicTrans<>(dataAccess).transaction(()->bilMapper.tildelBil(dataAccess, bilId, flexturId));
-		}catch(RuntimeException e){
+		try {
+			new LogicTrans<>(dataAccess).transaction(() -> bilMapper.tildelBil(dataAccess, bilId, flexturId));
+		} catch (RuntimeException e) {
 			throw new TildelogGodkendBilFejException("Tildel Fejl");
 		}
-		
+
 		notifyObservers(this, Tilstand.TILDEL_BIL);
 	}
-	
+
 	@Override
-	public void godkendKørsel(long flexturId, String kommentar){
+	public void godkendKørsel(long flexturId, String kommentar) {
 		DataAccess dataAccess = new DataAccessImpl();
-		try{
-			new LogicTrans<>(dataAccess).transaction(()->turMapper.godkendKørsel(dataAccess, flexturId, kommentar));
-		}catch(RuntimeException e){
+		try {
+			new LogicTrans<>(dataAccess).transaction(() -> turMapper.godkendKørsel(dataAccess, flexturId, kommentar));
+		} catch (RuntimeException e) {
 			throw new TildelogGodkendBilFejException("Tildel Fejl");
 		}
-		
+
 		notifyObservers(this, Tilstand.GODKEND_KØRSEL);
 	}
 
@@ -286,7 +279,5 @@ public class FSControllerImpl implements FSController {
 		notifyObservers(this, Tilstand.SØG_ALLE_BESTILTE_KØRSLER);
 
 	}
-	
-	
 
 }
