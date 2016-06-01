@@ -3,9 +3,6 @@ package domain;
 import java.time.LocalDate;
 
 import exception.MissingOplysningExcpetion;
-import logic.Observable;
-import logic.Observer;
-import logic.Tilstand;
 
 /**
  * This is the domain class for HistorikSøgningsOplysninger for UC1-seHistorik

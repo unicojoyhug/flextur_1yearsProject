@@ -3,7 +3,11 @@ package gui;
 import logic.FSController;
 import logic.Observer;
 
-
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public abstract class FSPane implements Observer{
 
 	protected FSController fsController;

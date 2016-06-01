@@ -11,7 +11,11 @@ import domain.BilImpl;
 import exception.PersistenceFailureException;
 import util.CloseForSQL;
 import util.DataAccess;
-
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public class BilMapperCRUDImpl implements BilMapper {
 	private CloseForSQL close = new CloseForSQL();
  

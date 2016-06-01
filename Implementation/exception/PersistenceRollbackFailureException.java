@@ -1,5 +1,9 @@
 package exception;
-
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public class PersistenceRollbackFailureException extends RuntimeException{
 
 

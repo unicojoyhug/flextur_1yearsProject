@@ -1,5 +1,9 @@
 package exception;
-
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public class PersistenceConnectionFailureException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

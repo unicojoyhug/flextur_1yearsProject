@@ -1,5 +1,9 @@
 package domain;
-
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public interface Bil {
 
 	int getId();

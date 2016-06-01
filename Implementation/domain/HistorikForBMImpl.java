@@ -1,7 +1,11 @@
 package domain;
 
 import java.time.LocalDate;
-
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public class HistorikForBMImpl implements HistorikForBM {
 
 	private String cprNummer;

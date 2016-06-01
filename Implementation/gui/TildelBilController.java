@@ -40,42 +40,38 @@ public class TildelBilController extends FSPane implements Initializable {
 	private Flextur flextur;
 	private Stage window;
 
-
-
-
 	public void setMainApp(FlexturGUI flexturGUI) {
 		this.flexturGUI = flexturGUI;
 	}
 
 	@FXML
 	private void handleGodkend(ActionEvent event) {
-		try{
+		try {
 			fsController.tildelBil(flextur.getFlexturId(), bilValg.getSelectionModel().getSelectedItem().getId());
 
-
-
-		}catch(TildelogGodkendBilFejException e){
+		} catch (TildelogGodkendBilFejException e) {
 			DialogueBox alert = new DialogueBoxImpl(window);
 
 			alert.visFejl();
 		}
 
 		flexturGUI.showBestillingsOversigt();
-	}	
+	}
+
 	@FXML
 	private void handleAnnuller(ActionEvent event) {
 		flexturGUI.showBestillingsOversigt();
-	}	
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		bilValg.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setBilOplysning(newValue));
+		bilValg.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> setBilOplysning(newValue));
 	}
 
 	private void setBilOplysning(Bil bil) {
 		bilPersoner.clear();
 		bilPersoner.setText(String.valueOf(bil.getMaxAntalPersoner()));
-
 
 	}
 
@@ -83,21 +79,20 @@ public class TildelBilController extends FSPane implements Initializable {
 	public void update(Observable observable, Tilstand tilstand) {
 		DialogueBox alert = new DialogueBoxImpl(window);
 
-		if(tilstand.equals(Tilstand.TILDEL_BIL)){
-			try{
+		if (tilstand.equals(Tilstand.TILDEL_BIL)) {
+			try {
 				fsController.godkendKørsel(flextur.getFlexturId(), kommentarFelt.getText());
 				alert.visGodkendt();
-			} catch (TildelogGodkendBilFejException e){
+			} catch (TildelogGodkendBilFejException e) {
 				alert.visFejl();
 			}
 		}
-		
-
 
 	}
+
 	@Override
 	void postInitialize() {
-		bilValg.setItems(FXCollections.observableArrayList(fsController.getBilListe())); //?	
+		bilValg.setItems(FXCollections.observableArrayList(fsController.getBilListe())); // ?
 		this.flextur = fsController.getFlextur();
 		turPersoner.setText(String.valueOf(flextur.getAntalPersoner()));
 		turAutostole.setText(String.valueOf(flextur.getAutostole()));
@@ -106,6 +101,6 @@ public class TildelBilController extends FSPane implements Initializable {
 		turKoerestole.setText(String.valueOf(flextur.getKoerestole()));
 		kommentarFelt.setText(flextur.getKommentar());
 
-	}    
+	}
 
 }

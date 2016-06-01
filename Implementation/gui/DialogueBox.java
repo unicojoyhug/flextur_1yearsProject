@@ -4,7 +4,11 @@ import java.util.List;
 
 import domain.Flextur;
 import domain.HistorikForBM;
-
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public interface DialogueBox {
 
 	void visOplysningManglerAdvarselDialog();

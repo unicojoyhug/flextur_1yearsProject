@@ -30,17 +30,14 @@ import javafx.stage.Stage;
 import logic.Observable;
 import logic.Tilstand;
 
-
 /**
  *
- * @author Jonas Mørch, Juyoung Choi
+ * @author Jonas Mørch & Juyoung Choi
  *
  */
 public class SeHistorikAdminController extends FSPane implements Initializable {
 
 	private FlexturGUI flexturGUI;
-//	private FSController FSC = new FSControllerImpl();
-
 
 	@FXML
 	private Label label;
@@ -87,7 +84,6 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 	private ObservableList<HistorikForBM> resultListe = FXCollections.observableArrayList();
 
 	private Stage window;
-	
 
 	@FXML
 	private void handleToMenu(ActionEvent event) {
@@ -100,10 +96,7 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 		this.flexturGUI = flextur;
 
 	}
-	
-	
-	// TODO input validation : empty text field (DONE with EXCEPTION ) 
-	//TODO kommune combo back to empty choice : DONE with : setValue("")
+
 	@FXML
 	private void hentHistorikListe(ActionEvent event) {
 		DialogueBox alert = new DialogueBoxImpl(window);
@@ -120,29 +113,28 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 			} else {
 				hs.setCprNummer(cprNummer.getText());
 			}
-			
+
 			fsController.angivSøgningOplysningerForBM(hs);
-			
-		} catch (MissingOplysningExcpetion e){
+
+		} catch (MissingOplysningExcpetion e) {
 			alert.visOplysningManglerAdvarselDialog();
-		} 
+		}
 
 	}
 
-	
 	@FXML
 	private void exporterCsvFil() {
 		DialogueBox alert = new DialogueBoxImpl(window);
-		String filenavn = System.getProperty("user.home")+"\\"+fraDato.getValue().toString() 
-				+ "_" + tilDato.getValue().toString() + "_" + kommuneCombo.getValue()+ ".csv" ;
-		
+		String filenavn = System.getProperty("user.home") + "\\" + fraDato.getValue().toString() + "_"
+				+ tilDato.getValue().toString() + "_" + kommuneCombo.getValue() + ".csv";
+
 		try {
 
-			if(resultListe.isEmpty()){
-				
+			if (resultListe.isEmpty()) {
+
 				alert.visCSVFilExportingAdvarselDialog(filenavn, resultListe);
 
-			}else{
+			} else {
 
 				fsController.exporterHistorikForBM(filenavn, resultListe);
 				alert.visGemtDialogue(filenavn);
@@ -152,24 +144,12 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 			alert.visCSVFilExportingFejlDialog();
 
 		}
-		
-		//TODO or clear button? or add it to Sats.
-		kommuneCombo.setValue(""); 
+		kommuneCombo.setValue("");
 
 	}
 
-
-
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-//		kommuneCombo.setItems(FXCollections.observableArrayList(FSC.getKommuneListe()));
-
-//		String[] kommuner =FSController.getInstance().getKommuneListe();
-//		kommuneCombo.setItems(FXCollections.observableArrayList(kommuner));
-
-//		kommuneCombo.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
-
 		personCPRColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, String>("cprNummer"));
 		fraDatoColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, LocalDate>("fraDato"));
 		tilDatoColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, LocalDate>("tilDato"));
@@ -179,34 +159,22 @@ public class SeHistorikAdminController extends FSPane implements Initializable {
 		antalTurColumn.setCellValueFactory(new PropertyValueFactory<HistorikForBM, Integer>("antalTur"));
 		fraDato.setValue(LocalDate.now());
 		tilDato.setValue(LocalDate.now());
-		
-		
-		// //TODO
-		// kommune.getSelectionModel().selectedItemProperty()
-		// .addListener((observable, oldValue, newValue) -> (newValue));
-
 	}
 
 	@Override
-	void postInitialize(){
-		
+	void postInitialize() {
+
 		kommuneCombo.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
 
 	}
-	
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
-//		if(observable instanceof FSControllerImpl){
-//			FSControllerImpl fs = (FSControllerImpl) observable;
-//			fs.
-		
-		// TODO Auto-generated method stub
-		if (tilstand.equals(Tilstand.SØG_HISTORIK_BM)) {			
+		if (tilstand.equals(Tilstand.SØG_HISTORIK_BM)) {
 			resultListe.addAll(fsController.getHistorikResultForBM());
 			tableView.setItems(resultListe);
 		}
-		
+
 	}
 
 }

@@ -8,7 +8,7 @@ import util.DataAccess;
 
 
 /**
- * @author Juyoung Choi
+ * @author Juyoung Choi & Jonas Mørch
  *
  */
 

@@ -12,6 +12,11 @@ import javafx.stage.Stage;
 import logic.FSController;
 import logic.FSControllerImpl;
 
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public class DialogueBoxImpl implements DialogueBox {
 	private Stage window;
 	private Alert warning = new Alert(AlertType.WARNING);
@@ -19,63 +24,66 @@ public class DialogueBoxImpl implements DialogueBox {
 	private Alert error = new Alert(AlertType.ERROR);
 	private Alert info = new Alert(AlertType.INFORMATION);
 
-
-	public DialogueBoxImpl(Stage window){
+	public DialogueBoxImpl(Stage window) {
 		this.window = window;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see gui.DialogBox#visOplysningManglerAdvarselDialog()
 	 */
 	@Override
-	public void visOplysningManglerAdvarselDialog(){
+	public void visOplysningManglerAdvarselDialog() {
 		warning.initOwner(window);
 		warning.setTitle("ADVARSEL");
 		warning.setHeaderText("Mangler nogle oplysninger");
 		warning.setContentText("Tjek venligst tekstfelterne");
 		warning.showAndWait();
 	}
-	
+
 	@Override
-	public void visTomListeDialog(){
+	public void visTomListeDialog() {
 		info.initOwner(window);
 		info.setTitle("ADVARSEL");
 		info.setHeaderText("Matchende list er tom.");
 		info.setContentText("Der er ingen list der matchende.");
 		info.showAndWait();
 	}
-	
+
 	@Override
-	public void visPrisDelay(){
+	public void visPrisDelay() {
 		info.initOwner(window);
 		info.setTitle("ADVARSEL");
 		info.setHeaderText("Pris udregning tager tid.");
 		info.setContentText("Vent venligst.");
 		info.showAndWait();
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see gui.DialogBox#visCSVFilExportingAdvarselDialog()
 	 */
 	@Override
-	public void visCSVFilExportingAdvarselDialog(String filenavn, List<HistorikForBM> resultListe){
+	public void visCSVFilExportingAdvarselDialog(String filenavn, List<HistorikForBM> resultListe) {
 		confirmation.initOwner(window);
 		confirmation.setTitle("ADVARSEL");
 		confirmation.setHeaderText("TOM LIST");
 		confirmation.setContentText("Vil du gemme den som tom list?");
-		
+
 		Optional<ButtonType> result = confirmation.showAndWait();
-		if (result.get() == ButtonType.OK){
-						
+		if (result.get() == ButtonType.OK) {
+
 			FSController fsController = new FSControllerImpl();
 			fsController.exporterHistorikForBM(filenavn, resultListe);
 			visGemtDialogue(filenavn);
 
-		} 
+		}
 	}
-	
+
 	@Override
-	public void visCSVFilExportingFejlDialog(){
+	public void visCSVFilExportingFejlDialog() {
 		error.initOwner(window);
 		error.setTitle("FEJL");
 		error.setHeaderText("CSV fil EXPORTERING FEJL");
@@ -85,14 +93,14 @@ public class DialogueBoxImpl implements DialogueBox {
 	}
 
 	@Override
-	public void visGemtDialogue(String filenavn){
+	public void visGemtDialogue(String filenavn) {
 		confirmation.initOwner(window);
 		confirmation.setTitle("GEM FIL");
 		confirmation.setHeaderText("Vil du gerne gemme fil?");
-		confirmation.setContentText("Tjek din mappe : " + filenavn );
+		confirmation.setContentText("Tjek din mappe : " + filenavn);
 
 		confirmation.showAndWait();
-		
+
 	}
 
 	@Override
@@ -101,53 +109,52 @@ public class DialogueBoxImpl implements DialogueBox {
 		confirmation.setTitle("ADVARSEL");
 		confirmation.setHeaderText("TOM LIST");
 		confirmation.setContentText("Vil du gemme den som tom list?");
-		
+
 		Optional<ButtonType> result = confirmation.showAndWait();
-		if (result.get() == ButtonType.OK){
-						
+		if (result.get() == ButtonType.OK) {
+
 			FSController fsController = new FSControllerImpl();
 			fsController.exporterHistorikForKunde(filenavn, resultListe);
 			visGemtDialogue(filenavn);
 
-		} 
-		
+		}
+
 	}
 
-	
 	@Override
-	public void visLoginFejllDialog(){
+	public void visLoginFejllDialog() {
 		warning.initOwner(window);
 		warning.setTitle("ERROR");
 		warning.setHeaderText("Fejl i login");
 		warning.setContentText("Prøv igen");
 		warning.showAndWait();
 	}
-	
+
 	@Override
-	public void visIngenTurValgt(){
+	public void visIngenTurValgt() {
 		error.initOwner(window);
 		error.setTitle("FEJL");
 		error.setHeaderText("Ingen tur er valgt.");
 		error.setContentText("Vælg en tur for godkendelse");
 		error.showAndWait();
 	}
-	
+
 	@Override
-	public void visFejl(){
+	public void visFejl() {
 		error.initOwner(window);
 		error.setTitle("FEJL");
 		error.setHeaderText("Der er noget fejl.");
 		error.setContentText("Prøv igen");
-		error.showAndWait();	
+		error.showAndWait();
 	}
-	
+
 	@Override
-	public void visGodkendt(){
+	public void visGodkendt() {
 		info.initOwner(window);
 		info.setTitle("GEMT");
 		info.setHeaderText("Godkendelse gemt");
 		info.setContentText("Godkendelse er gemt sikkert");
-		info.showAndWait();	
+		info.showAndWait();
 	}
-	
+
 }

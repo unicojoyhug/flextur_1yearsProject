@@ -25,12 +25,12 @@ import logic.Tilstand;
 
 /**
  *
- * @author Jonas Mørch, Juyoung Choi
+ * @author Jonas Mørch & Juyoung Choi
  */
 public class OpretProfilController extends FSPane implements Initializable {
-    
-    @FXML
-    private Label cprfejl;
+
+	@FXML
+	private Label cprfejl;
 	private FlexturGUI flextur;
 	@FXML
 	private TextField fornavn, efternavn, addresse, telefonnr, email, cprnummer, password;
@@ -38,52 +38,57 @@ public class OpretProfilController extends FSPane implements Initializable {
 	private ChoiceBox<String> kommuneCombo;
 	private Kunde kunde = new KundeImpl();
 	private Bruger bruger = new BrugerImpl();
-    
- 
-    public void setMainApp(FlexturGUI flextur) {
+
+	public void setMainApp(FlexturGUI flextur) {
 		this.flextur = flextur;
-		
+
 	}
-    @FXML
-    private void handleCancel(ActionEvent event) {
-        flextur.showMenuAdmin();
-    }
-    @FXML
-    private void handleOpret(ActionEvent event) throws NoSuchAlgorithmException {
-        kunde.setFornavn(fornavn.getText());
-        kunde.setEfternavn(efternavn.getText());
-        kunde.setAdress(addresse.getText());
-        kunde.setCprNummer(cprnummer.getText());
-        kunde.setKommune(kommuneCombo.getValue());
-        kunde.setTelefon(telefonnr.getText());
-        kunde.setEmail(email.getText());
-        bruger.setAndEncryptPassword(password.getText());
-       	kunde.setKodeord(bruger.getEncryptedKodeord());
-       	
-       	fsController.opretKunde(kunde);
-    }
-    @FXML
-    private void handleTjekCPR(ActionEvent event) {
-       String CPR = cprnummer.getText();
-       Kunde KundeID = fsController.getKundeID(CPR);
-       if (KundeID.getKundeID() > 0){
-    	   cprfejl.setVisible(true);
-    	   
-       }
-    }
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
+
+	@FXML
+	private void handleCancel(ActionEvent event) {
+		flextur.showMenuAdmin();
+	}
+
+	@FXML
+	private void handleOpret(ActionEvent event) throws NoSuchAlgorithmException {
+		kunde.setFornavn(fornavn.getText());
+		kunde.setEfternavn(efternavn.getText());
+		kunde.setAdress(addresse.getText());
+		kunde.setCprNummer(cprnummer.getText());
+		kunde.setKommune(kommuneCombo.getValue());
+		kunde.setTelefon(telefonnr.getText());
+		kunde.setEmail(email.getText());
+		bruger.setAndEncryptPassword(password.getText());
+		kunde.setKodeord(bruger.getEncryptedKodeord());
+
+		fsController.opretKunde(kunde);
+	}
+
+	@FXML
+	private void handleTjekCPR(ActionEvent event) {
+		String CPR = cprnummer.getText();
+		Kunde KundeID = fsController.getKundeID(CPR);
+		if (KundeID.getKundeID() > 0) {
+			cprfejl.setVisible(true);
+
+		}
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		// TODO
+	}
+
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	void postInitialize() {
 		kommuneCombo.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
-		
-	}    
-    
+
+	}
+
 }

@@ -1,9 +1,11 @@
 package domain;
 
 import java.time.LocalDate;
-
-import logic.Tilstand;
-
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public interface HistorikSøgning {
 
 	LocalDate getFraDato();

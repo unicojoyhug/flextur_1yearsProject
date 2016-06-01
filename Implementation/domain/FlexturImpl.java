@@ -2,7 +2,11 @@ package domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+/**
+ * 
+ * @author Juyoung Choi & Jonas Mørch
+ *
+ */
 public class FlexturImpl implements Flextur {
 	private long flexturId;
 	private int kundeId;

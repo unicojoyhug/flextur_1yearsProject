@@ -39,7 +39,7 @@ public class KundeMapperCRUDImpl implements CRUD<Kunde, String> {
 			statement.setInt(9, domain.getPostnummer());
 			statement.setBoolean(10, domain.erAktivt());
 
-			statement.executeQuery();
+			statement.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

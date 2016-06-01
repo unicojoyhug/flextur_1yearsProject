@@ -7,7 +7,11 @@ import domain.Flextur;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
 import util.DataAccess;
-
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public interface TurMapper {
 
 	List<Flextur> getMatchendeHistorik(DataAccess dataAccess, HistorikSøgning historikSøgning);

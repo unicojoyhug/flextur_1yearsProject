@@ -19,7 +19,7 @@ import logic.FSControllerImpl;
 
 /**
  *
- * @author Jonas Mørch, Juyoung Choi
+ * @author Jonas Mørch & Juyoung Choi
  */
 public class FlexturGUI extends Application {
 
@@ -39,12 +39,10 @@ public class FlexturGUI extends Application {
 
 	public void showLogin() {
 		try {
-			// Load person overview.
+			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("Login.fxml"));
 			AnchorPane personOverview = (AnchorPane) loader.load();
-
-			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 
 
@@ -63,12 +61,10 @@ public class FlexturGUI extends Application {
 
 	private void initRootLayout() {
 		try {
-			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
 
-			// Show the scene containing the root layout.
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -79,12 +75,10 @@ public class FlexturGUI extends Application {
 
 	public void showOpretProfil() {
 		try {
-			// Load person overview.
+		
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("OpretProfil.fxml"));
-			AnchorPane personOverview = (AnchorPane) loader.load();
-
-			// Set person overview into the center of root layout.
+			AnchorPane personOverview = (AnchorPane) loader.load();	
 			rootLayout.setCenter(personOverview);
 
 			FSPane opretProfilController = loader.<FSPane> getController();
@@ -99,12 +93,9 @@ public class FlexturGUI extends Application {
 
 	public void showMenuKunde() {
 		try {
-			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("MenuKunde.fxml"));
 			AnchorPane personOverview = (AnchorPane) loader.load();
-
-			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 
 			FSPane showMenuKundeController = loader.<FSPane> getController();
@@ -119,23 +110,12 @@ public class FlexturGUI extends Application {
 
 	public void showMenuAdmin() {
 		try {
-			// Load person overview.
+			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("MenuAdmin.fxml"));
 			AnchorPane personOverview = (AnchorPane) loader.load();
-
-			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 
-//			MenuAdminController controller = loader.getController();
-//			controller.setMainApp(this);
-			
-			// TODO remember to set this as fsController, in each controller : setMainApp to connect
-//			f.eks. 
-//			public void setMainApp(FlexturGUI flextur) {
-//					this.flextur = flextur;
-//					
-//				}
 			FSPane showMenuAdminController = loader.<FSPane> getController();
 			showMenuAdminController.setFSController(fsController);
 			showMenuAdminController.setMainApp(this);
@@ -149,12 +129,10 @@ public class FlexturGUI extends Application {
 
 	public void showBestilFlex() {
 		try {
-			// Load person overview.
+			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("BestilFlex.fxml"));
 			AnchorPane personOverview = (AnchorPane) loader.load();
-
-			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 
 			FSPane bestilFlexController = loader.<FSPane> getController();
@@ -167,12 +145,10 @@ public class FlexturGUI extends Application {
 	}
 	public void showRegistrerFlex() {
 		try {
-			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("RegistrerFlex.fxml"));
 			AnchorPane personOverview = (AnchorPane) loader.load();
 
-			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 
 			FSPane registrerFlexController = loader.<FSPane> getController();
@@ -186,12 +162,10 @@ public class FlexturGUI extends Application {
 
 	public void showAendreProfil() {
 		try {
-			// Load person overview.
+			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("AendreProfil.fxml"));
 			AnchorPane personOverview = (AnchorPane) loader.load();
-
-			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 
 			FSPane aendreProfilContoller = loader.<FSPane> getController();
@@ -207,12 +181,9 @@ public class FlexturGUI extends Application {
 
 	public void showHistorikKunde() {
 		try {
-			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("SeHistorikKunde.fxml"));
 			AnchorPane personOverview = (AnchorPane) loader.load();
-
-			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 			
 			FSPane seHistorikKundeController = loader.<FSPane> getController();
@@ -228,12 +199,9 @@ public class FlexturGUI extends Application {
 
 	public void showHistorikAdmin() {
 		try {
-			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("SeHistorikAdmin.fxml"));
 			AnchorPane showHistorikAdmin = (AnchorPane) loader.load();
-
-			// set FSPane : abstract class for setting FSController : setController
 			rootLayout.setCenter(showHistorikAdmin);
 
 			FSPane seHistorikAdminController = loader.<FSPane> getController();
@@ -248,12 +216,9 @@ public class FlexturGUI extends Application {
 
 	public void showBestillingsOversigt() {
 		try {
-			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("BestillingsOversigt.fxml"));
 			AnchorPane personOverview = (AnchorPane) loader.load();
-
-			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 		
 			FSPane bestillingsOversigtController = loader.<FSPane> getController();
@@ -267,12 +232,9 @@ public class FlexturGUI extends Application {
 	
 	public void showTildelBil() {
 		try {
-			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FlexturGUI.class.getResource("TildelBil.fxml"));
 			AnchorPane personOverview = (AnchorPane) loader.load();
-
-			// Set person overview into the center of root layout.
 			rootLayout.setCenter(personOverview);
 		
 			FSPane tildelBilController = loader.<FSPane> getController();

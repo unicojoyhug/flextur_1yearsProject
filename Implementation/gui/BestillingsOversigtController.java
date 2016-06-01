@@ -25,12 +25,9 @@ import logic.Tilstand;
 
 /**
  *
- * @author Jonas Mørch, Juyoung Choi
+ * @author Jonas Mørch & Juyoung Choi
  */
 public class BestillingsOversigtController extends FSPane implements Initializable {
-
-
-
 
 	@FXML
 	private TableView<Flextur> tableView;
@@ -45,9 +42,9 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 	@FXML
 	private TableColumn<Flextur, Double> totalPrisColumn;
 	@FXML
-	private TableColumn<Flextur, Integer> antalPersonerColumn;	
+	private TableColumn<Flextur, Integer> antalPersonerColumn;
 	@FXML
-	private DatePicker fraDato;	
+	private DatePicker fraDato;
 	@FXML
 	private DatePicker tilDato;
 
@@ -55,18 +52,15 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 	private ObservableList<Flextur> resultListe = FXCollections.observableArrayList();
 	private Stage window;
 
-	
-	
 	@FXML
 	private void handleNyBestilling(ActionEvent event) {
 		flexturGUI.showBestilFlex();
 
 	}
 
-
 	@FXML
 	private void hentBestilteKørsler(ActionEvent event) {
-		resultListe.clear();	
+		resultListe.clear();
 
 		fsController.søgBestilteKørsler(fraDato.getValue(), tilDato.getValue());
 
@@ -86,16 +80,11 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 		if (flexturForTildel != null) {
 			fsController.hentBilListe(flexturForTildel);
 			flexturGUI.showTildelBil();
-//			System.out.println("he" + flexturForTildel);
 
 		} else {
 			alert.visIngenTurValgt();
 		}
 	}
-
-
-
-
 
 	public void setMainApp(FlexturGUI flextur) {
 		this.flexturGUI = flextur;
@@ -120,7 +109,7 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
-		if(tilstand.equals(Tilstand.SØG_BESTILTE_KØRSLER)){
+		if (tilstand.equals(Tilstand.SØG_BESTILTE_KØRSLER)) {
 			resultListe.clear();
 			resultListe.addAll(fsController.getBestilteKøsler());
 			tableView.setItems(resultListe);

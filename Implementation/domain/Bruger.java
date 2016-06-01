@@ -1,7 +1,11 @@
 package domain;
 
 import java.security.NoSuchAlgorithmException;
-
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public interface Bruger {
 
 	int getId();

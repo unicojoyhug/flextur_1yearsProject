@@ -1,5 +1,9 @@
 package domain;
-
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 public class EkstraTilvalgImpl implements EkstraTilvalg {
 	
 	private int id;

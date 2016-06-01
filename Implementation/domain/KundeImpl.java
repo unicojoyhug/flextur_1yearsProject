@@ -1,5 +1,9 @@
 package domain;
-
+/**
+ * 
+ * @author Juyoung Choi & Jonas Mørch
+ *
+ */
 public class KundeImpl implements Kunde {
 	private String cprNummer;
 	private String kommune;

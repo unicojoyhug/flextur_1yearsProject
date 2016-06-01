@@ -16,7 +16,7 @@ import logic.Tilstand;
 /**
  * FXML Controller class
  *
- * @author Jonas Mørch, Juyoung Choi
+ * @author Jonas Mørch & Juyoung Choi
  */
 public class LoginController extends FSPane implements Initializable {
 
@@ -50,20 +50,18 @@ public class LoginController extends FSPane implements Initializable {
 
 		String loginIdS = username.getText();
 		String passwordS = password.getText();
-		if(loginIdS.isEmpty()|| passwordS.isEmpty()){
+		if (loginIdS.isEmpty() || passwordS.isEmpty()) {
 			alert.visOplysningManglerAdvarselDialog();
-		}else{		
+		} else {
 			try {
 				fsController.angivLoginOplysninger(loginIdS, passwordS);
 
-			}catch (LoginException e){
+			} catch (LoginException e) {
 				alert.visLoginFejllDialog();
 
-			} 
+			}
 		}
 	}
-
-
 
 	private void ShowPassword() {
 		ShowPassword.managedProperty().bind(checkBox.selectedProperty());
@@ -86,34 +84,24 @@ public class LoginController extends FSPane implements Initializable {
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
 		DialogueBox alert = new DialogueBoxImpl(window);
-		
-		
-			if(tilstand.equals(Tilstand.LOGIN_KUNDE)){
-				flexturGUI.showMenuKunde();
-			}
-			
-			if(tilstand.equals(Tilstand.LOGIN_BM)){
-				flexturGUI.showMenuAdmin();
-			}
-			
-			if (tilstand.equals(Tilstand.LOGIN_FEJL)){			
-				alert.visLoginFejllDialog();
-			} 
-	
-	}
 
+		if (tilstand.equals(Tilstand.LOGIN_KUNDE)) {
+			flexturGUI.showMenuKunde();
+		}
+
+		if (tilstand.equals(Tilstand.LOGIN_BM)) {
+			flexturGUI.showMenuAdmin();
+		}
+
+		if (tilstand.equals(Tilstand.LOGIN_FEJL)) {
+			alert.visLoginFejllDialog();
+		}
+
+	}
 
 	@Override
 	void postInitialize() {
 		// TODO Auto-generated method stub
 
 	}
-
-
 }
-
-//TODO : if we need more than one concrete observers; 
-		//		if(observable instanceof FSControllerImpl){
-		//			FSControllerImpl fs = (FSControllerImpl) observable;
-		////			fs.
-		//		}

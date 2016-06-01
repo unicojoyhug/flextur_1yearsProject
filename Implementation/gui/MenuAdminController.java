@@ -16,7 +16,7 @@ import logic.Tilstand;
 
 /**
  *
- * @author Jonas Mørch, Juyoung Choi
+ * @author Jonas Mørch & Juyoung Choi
  * 
  */
 public class MenuAdminController extends FSPane implements Initializable {

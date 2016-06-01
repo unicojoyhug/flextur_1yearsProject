@@ -21,7 +21,7 @@ import util.DataAccess;
 
 /**
  * 
- * @author Juyoung Choi
+ * @author Juyoung Choi & Jonas Mørch
  *
  */
 public class TurMapperImpl implements TurMapper {
@@ -46,14 +46,14 @@ public class TurMapperImpl implements TurMapper {
 
 	private final static String BESTIL_FLEXTUR = "INSERT INTO flextur (KUNDEID, DATO, TID, FRAPOSTNUMMER, TILPOSTNUMMER, FRAADRESS, TILADRESS, ANTALPERSONER, KOMMENTAR, PRIS, BARNEVOGNE, KØRESTOLE, BAGGAGE, AUTOSTOLE) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-	private final static String GET_BESTILTE_KØRSLER = " select cpr.cprnummer, kunde.id, kunde.loginid, kunde.fornavn,kunde.efternavn,  kunde.telefon, flextur.* from flextur " 
+	private final static String GET_BESTILTE_KØRSLER = " select cpr.cprnummer, kunde.id, kunde.loginid, kunde.fornavn,kunde.efternavn,  kunde.telefon, flextur.* from flextur "
 			+ KUNDE_CPR + WHERE_DATO + " AND flextur.erGodkendt = false";
-	
-	private final static String GET_ALLE_BESTILTE_KØRSLER = " select cpr.cprnummer, kunde.id, kunde.loginid, kunde.fornavn,kunde.efternavn,  kunde.telefon, flextur.* from flextur " 
+
+	private final static String GET_ALLE_BESTILTE_KØRSLER = " select cpr.cprnummer, kunde.id, kunde.loginid, kunde.fornavn,kunde.efternavn,  kunde.telefon, flextur.* from flextur "
 			+ KUNDE_CPR + " where flextur.erGodkendt = false";
-	
+
 	private final static String GODKEND_KØRSEL = "UPDATE FLEXTUR SET ergodkendt = true, kommentar = ? where id = ?";
-	
+
 	@Override
 	public List<Flextur> getMatchendeHistorik(DataAccess dataAccess, HistorikSøgning historikSøgning) {
 
@@ -161,8 +161,8 @@ public class TurMapperImpl implements TurMapper {
 			statement.setInt(12, tur.getKoerestole());
 			statement.setInt(13, tur.getBaggage());
 			statement.setInt(14, tur.getAutostole());
-			
-			statement.executeQuery(); // when you have only statement, you need statement.executeUpdate(); or just statement.execute();
+
+			statement.execute();
 		} catch (SQLException exc) {
 			throw new PersistenceFailureException("Query has failed");
 		} catch (NullPointerException exc) {
@@ -170,9 +170,8 @@ public class TurMapperImpl implements TurMapper {
 		} finally {
 			close.close(statement);
 		}
-		
-	}
 
+	}
 
 	@Override
 	public List<Flextur> getBestilteKørsler(DataAccess dataAccess, LocalDate fraDato, LocalDate tilDato) {
@@ -185,11 +184,10 @@ public class TurMapperImpl implements TurMapper {
 			statement = dataAccess.getConnection().prepareStatement(GET_BESTILTE_KØRSLER);
 			statement.setDate(1, Date.valueOf(fraDato));
 			statement.setDate(2, Date.valueOf(tilDato));
-			
+
 			resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
-
 
 				Flextur flextur = new FlexturImpl();
 				flextur.setFlexturId(resultSet.getLong("flextur.id"));
@@ -224,27 +222,26 @@ public class TurMapperImpl implements TurMapper {
 
 		return bestilteKørsler;
 	}
-	
-	
+
 	@Override
-	public void godkendKørsel(DataAccess dataAccess, long flexturId, String kommentar){
+	public void godkendKørsel(DataAccess dataAccess, long flexturId, String kommentar) {
 		PreparedStatement statement = null;
 
 		try {
 			statement = dataAccess.getConnection().prepareStatement(GODKEND_KØRSEL);
 			statement.setString(1, kommentar);
-			statement.setLong(2, flexturId);	
+			statement.setLong(2, flexturId);
 			statement.execute();
 
 		} catch (SQLException exc) {
 			throw new PersistenceFailureException("Query has failed");
 		} finally {
 			close.close(statement);
-			
+
 		}
 
 	}
-	
+
 	@Override
 	public List<Flextur> getAlleBestilteKørsler(DataAccess dataAccess) {
 
@@ -254,11 +251,10 @@ public class TurMapperImpl implements TurMapper {
 
 		try {
 			statement = dataAccess.getConnection().prepareStatement(GET_ALLE_BESTILTE_KØRSLER);
-						
+
 			resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
-
 
 				Flextur flextur = new FlexturImpl();
 				flextur.setFlexturId(resultSet.getLong("flextur.id"));

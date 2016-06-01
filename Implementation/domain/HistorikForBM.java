@@ -1,6 +1,11 @@
 package domain;
 
 import java.time.LocalDate;
+/**
+ * 
+ * @author Juyoung Choi
+ *
+ */
 
 public interface HistorikForBM {
 

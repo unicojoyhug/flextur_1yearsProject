@@ -32,7 +32,7 @@ import logic.Tilstand;
 public class BestilFlexController extends FSPane implements Initializable {
 
 	@FXML
-	private ChoiceBox<String> fraKommune, tilKommune; // compare these to ComboBox in seHistorik 
+	private ChoiceBox<String> fraKommune, tilKommune;
 	@FXML
 	private TextArea kommentarer;
 	@FXML

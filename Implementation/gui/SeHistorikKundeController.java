@@ -30,7 +30,7 @@ import logic.Tilstand;
 
 /**
  *
- * @author Jonas Mørch, Juyoung Choi
+ * @author Jonas Mørch & Juyoung Choi
  *
  */
 public class SeHistorikKundeController extends FSPane implements Initializable {
@@ -52,12 +52,11 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 	private DatePicker fraDato;
 	@FXML
 	private DatePicker tilDato;
-	
+
 	private ObservableList<Flextur> resultListe = FXCollections.observableArrayList();
 	private Stage window;
 	private Bruger bruger;
-	
-	
+
 	@FXML
 	private void handleToMenu(ActionEvent event) {
 		flexturGUI.showMenuKunde();
@@ -67,42 +66,38 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 		this.flexturGUI = flexturGUI;
 	}
 
-	// TODO input validation : empty text field
 	@FXML
 	private void hentHistorikListe(ActionEvent event) {
 		DialogueBox alert = new DialogueBoxImpl(window);
-		
-		try{
-		resultListe.clear();
-		HistorikSøgning hs = new HistorikSøgningImpl();
-		hs.setFraDato(fraDato.getValue());
-		hs.setTilDato(tilDato.getValue());
-		hs.setCprNummer(bruger.getLoginId());
-		
-		fsController.angivSøgningOplysninger(hs);
-		
-		
-	} catch (MissingOplysningExcpetion e){
-		alert.visOplysningManglerAdvarselDialog();
-	} 
+
+		try {
+			resultListe.clear();
+			HistorikSøgning hs = new HistorikSøgningImpl();
+			hs.setFraDato(fraDato.getValue());
+			hs.setTilDato(tilDato.getValue());
+			hs.setCprNummer(bruger.getLoginId());
+
+			fsController.angivSøgningOplysninger(hs);
+
+		} catch (MissingOplysningExcpetion e) {
+			alert.visOplysningManglerAdvarselDialog();
+		}
 
 	}
 
-	// TODO to exprot csv fil : in gui with fx dependency? or another class to
-	// do so
 	@FXML
 	private void exporterCsvFil() {
 		DialogueBox alert = new DialogueBoxImpl(window);
-		String filenavn = System.getProperty("user.home")+"\\"+fraDato.getValue().toString() 
-				+ "_" + tilDato.getValue().toString() + ".csv" ;
-		
+		String filenavn = System.getProperty("user.home") + "\\" + fraDato.getValue().toString() + "_"
+				+ tilDato.getValue().toString() + ".csv";
+
 		try {
 
-			if(resultListe.isEmpty()){
-				
+			if (resultListe.isEmpty()) {
+
 				alert.visCSVFilExportingAdvarselDialogForKunde(filenavn, resultListe);
 
-			}else{
+			} else {
 
 				fsController.exporterHistorikForKunde(filenavn, resultListe);
 				alert.visGemtDialogue(filenavn);
@@ -112,15 +107,12 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 			alert.visCSVFilExportingFejlDialog();
 
 		}
-		
-	
 
 	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-		
+
 		datoColumn.setCellValueFactory(new PropertyValueFactory<Flextur, LocalDate>("dato"));
 		fraAdressColumn.setCellValueFactory(new PropertyValueFactory<Flextur, String>("fraAdress"));
 		tilAdressColumn.setCellValueFactory(new PropertyValueFactory<Flextur, String>("tilAdress"));
@@ -128,21 +120,17 @@ public class SeHistorikKundeController extends FSPane implements Initializable {
 		antalPersonerColumn.setCellValueFactory(new PropertyValueFactory<Flextur, Integer>("antalPersoner"));
 		fraDato.setValue(LocalDate.now());
 		tilDato.setValue(LocalDate.now());
-		
-	}
 
-	
+	}
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
-		
 
-
-		if(tilstand.equals(Tilstand.SØG_HISTORIK_KUNDE)){
+		if (tilstand.equals(Tilstand.SØG_HISTORIK_KUNDE)) {
 			resultListe.clear();
 			resultListe.addAll(fsController.getHistorikResultForKunde());
 			tableView.setItems(resultListe);
-			
+
 		}
 	}
 
