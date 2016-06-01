@@ -181,8 +181,7 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		dato.setValue(LocalDate.now());
-		fraKommune.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
-		tilKommune.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
+		
 		loading.setVisible(false);
 
 	}
@@ -202,7 +201,8 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 
 	@Override
 	void postInitialize() {
-		// TODO Auto-generated method stub
+		fraKommune.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
+		tilKommune.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
 
 	}
 
