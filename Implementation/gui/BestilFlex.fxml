@@ -78,5 +78,6 @@
 				<Font name="System Italic" size="12.0" />
 			</font>
 		</Label>
+      <ProgressIndicator fx:id="loading" layoutX="552.0" layoutY="356.0" />
 	</children>
 </AnchorPane>

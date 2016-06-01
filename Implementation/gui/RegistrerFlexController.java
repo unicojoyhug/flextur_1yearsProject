@@ -13,6 +13,7 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 import domain.Flextur;
 import domain.FlexturImpl;
+import exception.MissingOplysningExcpetion;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -27,9 +28,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import logic.Observable;
 import logic.Tilstand;
-import sats.Sats;
 
 /**
  *
@@ -50,27 +51,36 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 	private TextArea kommentarer;
 	@FXML
 	private TextField fraAddresse, tilAddresse, prisfelt, PostnrO, PostnrD, kilometer, personer, barnevogne, koerestole,
-			baggage, autostole, tidspunkt, cprNummer, kundeID, forventetTid;
+	baggage, autostole, tidspunkt, cprNummer, kundeID, forventetTid;
+
+
 	@FXML
 	private DatePicker dato;
 	private FlexturGUI flexturGUI;
 	private Flextur fti = new FlexturImpl();
 	private Service<Void> backgroundThread;
 	private DecimalFormat format = new DecimalFormat("#.##");
+	private Stage window;
 
 	@FXML
 	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
+		DialogueBox alert = new DialogueBoxImpl(window);
 
-		fti.setFraPostnummer(Integer.parseInt(PostnrO.getText()));
-		fti.setTilPostnummer(Integer.parseInt(PostnrD.getText()));
-		fti.setFraAdress(fraAddresse.getText());
-		fti.setTilAdress(tilAddresse.getText());
-		fsController.udregnKilometer(fti);
-		kilometer.setText(fti.getDistance());
-		forventetTid.setText(fti.getDuration());
-		String[] parts = fti.getDistance().split(" ");
-		String part1 = parts[0];
-		fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));
+		try{
+			fti.setFraPostnummer(PostnrO.getText().isEmpty() ? 0 :Integer.parseInt(PostnrO.getText()));
+			fti.setTilPostnummer(PostnrD.getText().isEmpty() ? 0 :Integer.parseInt(PostnrD.getText()));
+			fti.setFraAdress(fraAddresse.getText());
+			fti.setTilAdress(tilAddresse.getText());
+			fsController.udregnKilometer(fti);
+			kilometer.setText(fti.getDistance());
+			forventetTid.setText(fti.getDuration());
+			String[] parts = fti.getDistance().split(" ");
+			String part1 = parts[0];
+			fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));
+		}
+		catch(MissingOplysningExcpetion e){
+			alert.visOplysningManglerAdvarselDialog();
+		}
 	}
 
 	@FXML
@@ -129,24 +139,33 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 
 	@FXML
 	private void handleBestilFlextur(ActionEvent event) {
-		if (fti.getPris() == 0.0) {
-			handleBeregnPris(event);
-		}
-		if (kundeID.getText().isEmpty())
-			handleGetKundeID(event);
+		DialogueBox alert = new DialogueBoxImpl(window);
 
-		fti.setKundeId(Integer.parseInt(kundeID.getText()));
-		fti.setTid(LocalTime.parse(tidspunkt.getText()));
-		fti.setKommentar(kommentarer.toString());
-		fsController.angivFlexturOplysninger(fti);
+		try{
+			if (fti.getPris() == 0.0) {
+				handleBeregnPris(event);
+			}
+			if (kundeID.getText().isEmpty())
+				handleGetKundeID(event);
+
+			fti.setKundeId(kundeID.getText().isEmpty() ? 0 : Integer.parseInt(kundeID.getText()));
+			fti.setTid(tidspunkt.getText().isEmpty() ? null :LocalTime.parse(tidspunkt.getText()));
+			fti.setKommentar(kommentarer.getText());
+			fsController.angivFlexturOplysninger(fti);
+		}catch(MissingOplysningExcpetion e){
+				kundeID.setText(null);
+			alert.visOplysningManglerAdvarselDialog();
+		}
 	}
 
 	@FXML
 	private void handleGetKundeID(ActionEvent event) {
+
 		String CPR = cprNummer.getText();
 		int ID = fsController.getKundeID(CPR).getKundeID();
 		fti.setKundeId(ID);
 		kundeID.setText(String.valueOf(ID));
+		
 	}
 
 	@FXML
@@ -162,20 +181,23 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		dato.setValue(LocalDate.now());
-		fraKommune.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
-		tilKommune.setItems(FXCollections.observableArrayList(Sats.i().getKommuner()));
+		fraKommune.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
+		tilKommune.setItems(FXCollections.observableArrayList(fsController.getKommuneListe()));
 		loading.setVisible(false);
+
 	}
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
+		DialogueBox alert = new DialogueBoxImpl(window);
 
-		if (tilstand.equals(Tilstand.PRIS_UDREGNET)) {
-			prisfelt.setText(String.valueOf(fsController.getFlextur().getPris()).replace('.', ','));
-
-			ventText.setText("Pris udregnet");
+		if(tilstand.equals(Tilstand.BESTIL_KØRSEL)){
+			alert.visGemFlextur();
+			flexturGUI.showBestillingsOversigt();
 
 		}
+
+
 	}
 
 	@Override

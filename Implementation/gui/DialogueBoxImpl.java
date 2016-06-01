@@ -156,5 +156,14 @@ public class DialogueBoxImpl implements DialogueBox {
 		info.setContentText("Godkendelse er gemt sikkert");
 		info.showAndWait();
 	}
+	
+	@Override
+	public void visGemFlextur() {
+		info.initOwner(window);
+		info.setTitle("GEMT");
+		info.setHeaderText("Bestilling er gemt");
+		info.setContentText("Bestilling er gemt sikkert");
+		info.showAndWait();
+	}
 
 }

@@ -33,5 +33,7 @@ public interface DialogueBox {
 
 	void visPrisDelay();
 
+	void visGemFlextur();
+
 
 }
