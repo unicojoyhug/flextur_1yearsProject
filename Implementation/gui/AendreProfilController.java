@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import domain.Bruger;
+import domain.Kunde;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +25,7 @@ import logic.Tilstand;
  */
 public class AendreProfilController extends FSPane implements Initializable {
 	private Bruger bruger;
+	private Kunde kunde;
     
     @FXML
     private Label label;
@@ -73,8 +75,21 @@ public class AendreProfilController extends FSPane implements Initializable {
 	}
 	@Override
 	void postInitialize() {
-		this.bruger = fsController.getBruger();
-		set
+//		this.bruger = fsController.getBruger();
+////		cpr = bruger.getLoginId();
+//		efternavn.setText(kunde.getEfternavn());
+//	    
+//	    adresse;
+//	    
+//	     email;
+//	    
+//	     kodeord;
+//	    
+//	   cpr;
+//	    
+//	     fornavn;
+//	    
+//	  telefon;
 	}    
     
 }
