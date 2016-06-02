@@ -166,4 +166,13 @@ public class DialogueBoxImpl implements DialogueBox {
 		info.showAndWait();
 	}
 
+	
+	@Override
+	public void visDatoFejl() {
+		warning.initOwner(window);
+		warning.setTitle("ERROR");
+		warning.setHeaderText("Fejl i dato");
+		warning.setContentText("Vælg dato i fremtiden");
+		warning.showAndWait();
+	}
 }

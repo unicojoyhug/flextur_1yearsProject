@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import domain.Flextur;
+import exception.DatoFEJLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,9 +61,14 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 
 	@FXML
 	private void hentBestilteKørsler(ActionEvent event) {
+		DialogueBox alert = new DialogueBoxImpl(window);
 		resultListe.clear();
+		try{
 
 		fsController.søgBestilteKørsler(fraDato.getValue(), tilDato.getValue());
+		} catch (DatoFEJLException e){
+			alert.visDatoFejl();
+		}
 
 	}
 
@@ -104,6 +110,7 @@ public class BestillingsOversigtController extends FSPane implements Initializab
 		tilAdressColumn.setCellValueFactory(new PropertyValueFactory<Flextur, String>("tilAdress"));
 		totalPrisColumn.setCellValueFactory(new PropertyValueFactory<Flextur, Double>("pris"));
 		antalPersonerColumn.setCellValueFactory(new PropertyValueFactory<Flextur, Integer>("antalPersoner"));
+	
 
 	}
 

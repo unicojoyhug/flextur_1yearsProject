@@ -21,6 +21,7 @@ import domain.Flextur;
 import domain.HistorikForBM;
 import domain.HistorikSøgning;
 import domain.Kunde;
+import exception.DatoFEJLException;
 import exception.LoginException;
 import exception.TildelogGodkendBilFejException;
 import util.DataAccess;
@@ -165,11 +166,15 @@ public class FSControllerImpl implements FSController {
 
 	@Override
 	public void søgBestilteKørsler(LocalDate fraDato, LocalDate tilDato) {
+		if(fraDato.isAfter(LocalDate.now()) && tilDato.isAfter(LocalDate.now())){
 		DataAccess dataAccess = new DataAccessImpl();
 		this.flexturListResult = new LogicTrans<List<Flextur>>(dataAccess)
 				.transaction(() -> turMapper.getBestilteKørsler(dataAccess, fraDato, tilDato));
 		notifyObservers(this, Tilstand.SØG_BESTILTE_KØRSLER);
-
+		}else{
+			throw new DatoFEJLException("Dato fejl");
+		}
+		
 	}
 
 	@Override

@@ -35,5 +35,7 @@ public interface DialogueBox {
 
 	void visGemFlextur();
 
+	void visDatoFejl();
+
 
 }
