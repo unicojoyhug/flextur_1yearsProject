@@ -7,10 +7,14 @@ package gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import domain.Bruger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import logic.Observable;
 import logic.Tilstand;
 
@@ -19,9 +23,35 @@ import logic.Tilstand;
  * @author Jonas Mørch
  */
 public class AendreProfilController extends FSPane implements Initializable {
+	private Bruger bruger;
     
     @FXML
     private Label label;
+    
+    @FXML
+    private TextField efternavn;
+    
+    @FXML
+    private TextField adresse;
+    
+    @FXML
+    private TextField email;
+    
+    @FXML
+    private TextField kodeord;
+    
+    @FXML
+    private TextField cpr;
+    
+    @FXML
+    private TextField fornavn;
+    
+    @FXML
+    private TextField telefon;
+    
+    @FXML
+    private ChoiceBox<String> kommune;
+    
 	private FlexturGUI flextur;
     
     @FXML
@@ -43,8 +73,8 @@ public class AendreProfilController extends FSPane implements Initializable {
 	}
 	@Override
 	void postInitialize() {
-		// TODO Auto-generated method stub
-		
+		this.bruger = fsController.getBruger();
+		set
 	}    
     
 }

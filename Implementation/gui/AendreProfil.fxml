@@ -7,15 +7,15 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AendreProfilController">
    <children>
-      <ChoiceBox layoutX="188.0" layoutY="257.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="kommune" layoutX="188.0" layoutY="257.0" prefWidth="150.0" />
       <Button layoutX="160.0" layoutY="402.0" mnemonicParsing="false" text="Ret Profil" />
       <Label layoutX="189.0" layoutY="152.0" text="Fornavn:" />
-      <PasswordField layoutX="188.0" layoutY="302.0" />
-      <TextField layoutX="188.0" layoutY="167.0" />
+      <PasswordField fx:id="kodeord" layoutX="188.0" layoutY="302.0" />
+      <TextField fx:id="fornavn" layoutX="188.0" layoutY="167.0" />
       <Label layoutX="372.0" layoutY="152.0" text="Efternavn:" />
-      <TextField layoutX="371.0" layoutY="167.0" />
+      <TextField fx:id="efternavn" layoutX="371.0" layoutY="167.0" />
       <Label layoutX="190.0" layoutY="202.0" text="Addresse:" />
-      <TextField layoutX="189.0" layoutY="217.0" />
+      <TextField fx:id="adresse" layoutX="189.0" layoutY="217.0" />
       <Label layoutX="189.0" layoutY="242.0" text="Kommune:" />
       <Label layoutX="189.0" layoutY="287.0" text="Ønsket Kodeord:" />
       <Label layoutX="130.0" layoutY="104.0" text="Ændre Profil:">
@@ -24,12 +24,12 @@
          </font>
       </Label>
       <Label layoutX="372.0" layoutY="202.0" text="Telefon nr:" />
-      <TextField layoutX="371.0" layoutY="217.0" />
+      <TextField fx:id="telefon" layoutX="371.0" layoutY="217.0" />
       <Label layoutX="372.0" layoutY="243.0" text="Email:" />
-      <TextField layoutX="371.0" layoutY="257.0" />
+      <TextField fx:id="email" layoutX="371.0" layoutY="257.0" />
       <Button layoutX="325.0" layoutY="402.0" mnemonicParsing="false" text="Slet Profil" />
       <Label layoutX="372.0" layoutY="287.0" text="CPR-Nummer:" />
-      <TextField layoutX="371.0" layoutY="302.0" />
+      <TextField fx:id="cpr" layoutX="371.0" layoutY="302.0" />
       <Button layoutX="479.0" layoutY="402.0" mnemonicParsing="false" onAction="#handleToMenu" text="Tilbage til menuen" />
    </children>
 </AnchorPane>

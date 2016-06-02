@@ -15,7 +15,7 @@ import util.DataAccess;
  *
  */
 public class KundeMapperCRUDImpl implements CRUD<Kunde, String> {
-	private static final String READ_KUNDEID = "Select id, cpr.cprNummer as loginid from kunde"
+	private static final String READ_KUNDEID = "Select kunde.*, cpr.cprNummer as loginid from kunde"
 			+ " inner join cpr on cpr.id = kunde.loginid " + " where cpr.cprNummer = ?";
 	private final static String OPRET_BRUGER = "INSERT INTO kunde (LOGINID, KODEORD, ROLLE, EMAIL, TELEFON, FORNAVN, EFTERNAVN, KOMMUNE, POSTNUMMMER, ERAKTIVT) values (?,?,?,?,?,?,?,?,?,?)";
 
@@ -62,7 +62,11 @@ public class KundeMapperCRUDImpl implements CRUD<Kunde, String> {
 				kunde.setCprNummer(key);
 				int kundeID = resultSet.getInt("id");
 				kunde.setKundeID(kundeID);
-
+				kunde.setEfternavn(resultSet.getString("efternavn"));
+				kunde.setFornavn(resultSet.getString("fornavn"));
+				kunde.setAdress(resultSet.getString("adress"));
+				kunde.setTelefon(resultSet.getString("telefon"));
+				kunde.setEmail("email");
 			}
 
 		} catch (SQLException exc) {
