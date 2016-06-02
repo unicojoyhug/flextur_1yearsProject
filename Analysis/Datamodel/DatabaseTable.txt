@@ -383,3 +383,7 @@ where erReserveret = false AND maxantalpersoner >=4 AND tilvalgmulighed = true
 /////
 UPDATE Bil SET erReserveret = true where id = ?
 
+/////
+
+Select kunde.*, cpr.cprNummer as loginid from kunde  inner join cpr on cpr.id = kunde.loginid inner join rolle on rolle.id = kunde.rolle  where cpr.cprnummer = '170182-3628'
+
