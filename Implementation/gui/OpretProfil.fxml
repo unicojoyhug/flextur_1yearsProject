@@ -15,7 +15,7 @@
       <Label layoutX="171.0" layoutY="198.0" text="Addresse:" />
       <TextField fx:id="addresse" layoutX="170.0" layoutY="213.0" />
       <Label layoutX="171.0" layoutY="248.0" text="Kommune:" />
-      <Label layoutX="173.0" layoutY="358.0" text="Ønsket Kodeord:" />
+      <Label layoutX="171.0" layoutY="358.0" text="Ønsket Kodeord:" />
       <Label layoutX="59.0" layoutY="47.0" text="Opret Profil:">
          <font>
             <Font size="18.0" />
@@ -26,13 +26,13 @@
       <ChoiceBox fx:id="kommuneCombo" layoutX="170.0" layoutY="266.0" prefWidth="150.0" />
       <Label layoutX="372.0" layoutY="249.0" text="Email:" />
       <TextField fx:id="email" layoutX="371.0" layoutY="263.0" />
-      <TextField fx:id="password" layoutX="170.0" layoutY="384.0" />
-      <TextField fx:id="cprnummer" layoutX="372.0" layoutY="325.0" />
-      <Label layoutX="373.0" layoutY="310.0" text="CPR-Nummer:" />
+      <TextField fx:id="password" layoutX="170.0" layoutY="375.0" />
+      <TextField fx:id="cprnummer" layoutX="371.0" layoutY="318.0" />
+      <Label layoutX="372.0" layoutY="302.0" text="CPR-Nummer:" />
       <Button layoutX="378.0" layoutY="435.0" mnemonicParsing="false" onAction="#handleCancel" text="Annuller" />
       <Button layoutX="371.0" layoutY="384.0" mnemonicParsing="false" onAction="#handleTjekCPR" text="Tjek om CPR findes i databasen" />
       <Label fx:id="cprfejl" layoutX="527.0" layoutY="329.0" text="CPR findes allerede!" textFill="RED" visible="false" />
-      <TextField fx:id="postnummer" layoutX="170.0" layoutY="324.0" />
-      <Label layoutX="173.0" layoutY="300.0" text="Postnummer" />
+      <TextField fx:id="postnummer" layoutX="170.0" layoutY="318.0" />
+      <Label layoutX="171.0" layoutY="302.0" text="Postnummer" />
    </children>
 </AnchorPane>
