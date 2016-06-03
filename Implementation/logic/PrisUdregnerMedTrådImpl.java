@@ -1,7 +1,7 @@
 package logic;
 
 import domain.Flextur;
-import seHistorik.AntalPersonerException;
+import exception.AntalPersonerException;
 
 /**
  * Pris Udregner klasse for at hente sats ved SatsFactory og SatsAdapter

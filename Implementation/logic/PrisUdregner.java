@@ -1,7 +1,7 @@
 package logic;
 
 import domain.Flextur;
-import seHistorik.AntalPersonerException;
+import exception.AntalPersonerException;
 
 /**
  * prototype og 'temporary' klasse for pris udregning
