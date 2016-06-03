@@ -36,16 +36,6 @@ public class LoginController extends FSPane implements Initializable {
 	}
 
 	@FXML
-	private void handleKunde(ActionEvent event) {
-		flexturGUI.showMenuKunde();
-	}
-
-	@FXML
-	private void handleAdmin(ActionEvent event) {
-		flexturGUI.showMenuAdmin();
-	}
-
-	@FXML
 	private void handleLogin(ActionEvent event) {
 		DialogueBox alert = new DialogueBoxImpl(window);
 
