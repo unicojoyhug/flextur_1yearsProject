@@ -1,7 +1,7 @@
 package exception;
 /**
  * 
- * prototype klasse for at løse problemer
+ * 
  * @author Juyoung Choi
  *
  */
