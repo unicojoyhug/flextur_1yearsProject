@@ -4,6 +4,8 @@ package util;
  * Login with singleton pattern : only one user can logged in at a time. 
  * should be modified for multiuser login. 
  * 
+ * Vi fravalgte den mønster på grund at multisuser platform i fremtiden
+ * 
  * @author Juyoung Choi
  *
  */

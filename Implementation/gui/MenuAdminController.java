@@ -16,6 +16,7 @@ import logic.Tilstand;
 
 /**
  *
+ * GUI controller klasse til Menu for admin (bestillingsmodtagelse)
  * @author Jonas Mørch & Juyoung Choi
  * 
  */

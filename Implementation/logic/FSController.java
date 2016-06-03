@@ -9,6 +9,7 @@ import domain.HistorikForBM;
 import domain.HistorikSøgning;
 import domain.Kunde;
 /**
+ * Interface til FSController
  * 
  * @author Juyoung Choi & Jonas Mørch
  *
@@ -48,7 +49,7 @@ public interface FSController extends Observable {
 
 	double udregnPrisMedTråd(Flextur flextur);
 
-	void opretKunde(Kunde kunde);
+//	void opretKunde(Kunde kunde);
 
 	void hentBilListe(Flextur flextur);
 
@@ -61,5 +62,11 @@ public interface FSController extends Observable {
 	void godkendKørsel(long flexturId, String kommentar);
 
 	void søgAlleBestilteKørsler();
+
+	void opretKundeProfil(Kunde kunde);
+
+	Kunde readKundeProfil(String kundeId);
+
+	void retKundeProfil(Kunde kunde);
 
 }

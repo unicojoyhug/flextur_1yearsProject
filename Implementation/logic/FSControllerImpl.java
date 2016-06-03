@@ -11,6 +11,7 @@ import data.BilMapperCRUDImpl;
 import data.BrugerMapperCRUDImpl;
 import data.CRUD;
 import data.DataAccessImpl;
+import data.KundeMapper;
 import data.KundeMapperCRUDImpl;
 import data.TurMapper;
 import data.TurMapperImpl;
@@ -28,14 +29,17 @@ import util.DataAccess;
 import util.LogicTrans;
 
 /**
- * FSControllerImpl : facade controller :
+ * FSControllerImpl : facade controller
+ * Den klasse er subjekt(observable) og observer vill være GUI controller
+ * 
+ * Abstraktklasse (FSPane) tilmeldObserver
  * 
  * @author Juyoung Choi & Jonas Mørch
  *
  */
 public class FSControllerImpl implements FSController {
 	private TurMapper turMapper = new TurMapperImpl();
-	private CRUD<Kunde, String> kundeMapper = new KundeMapperCRUDImpl();
+	private KundeMapper kundeMapper = new KundeMapperCRUDImpl();
 	private BilMapper bilMapper = new BilMapperCRUDImpl();
 	private CRUD<Bruger, String> brugerMapper = new BrugerMapperCRUDImpl();
 	private List<Observer> observers = new ArrayList<>();
@@ -189,10 +193,11 @@ public class FSControllerImpl implements FSController {
 
 	@Override
 	public double udregnPrisMedTråd(Flextur flextur) {
-		PrisUdregnerMedTråd pris = new PrisUdregnerMedTråd(flextur);
+		PrisUdregnerMedTråd pris = new PrisUdregnerMedTrådImpl(flextur);
 		return pris.udregnPris(flextur);
 	}
 
+	
 	@Override
 	public Flextur udregnKilometer(Flextur flextur) {
 		KilometerUdregningAdapterFactory KU = new KilometerUdregningAdapterFactory();
@@ -218,12 +223,7 @@ public class FSControllerImpl implements FSController {
 		return kunde;
 	}
 
-	@Override
-	public void opretKunde(Kunde kunde) {
-		DataAccess dataAccess = new DataAccessImpl();
-		new LogicTrans<Kunde>(dataAccess).transaction(() -> kundeMapper.create(dataAccess, kunde));
 
-	}
 
 	@Override
 	public void hentBilListe(Flextur flextur) {
@@ -282,6 +282,30 @@ public class FSControllerImpl implements FSController {
 		this.flexturListResult = new LogicTrans<List<Flextur>>(dataAccess)
 				.transaction(() -> turMapper.getAlleBestilteKørsler(dataAccess));
 		notifyObservers(this, Tilstand.SØG_ALLE_BESTILTE_KØRSLER);
+
+	}
+	
+	
+	@Override
+	public void opretKundeProfil(Kunde kunde){
+		DataAccess dataAccess = new DataAccessImpl();
+		new LogicTrans<>(dataAccess).transaction(()->kundeMapper.createCPRogKunde(dataAccess, kunde));
+		notifyObservers(this, Tilstand.KUNDE_OPRETTET);
+
+	}
+	
+	@Override
+	public Kunde readKundeProfil(String kundeId){
+		DataAccess dataAccess = new DataAccessImpl();
+		return new LogicTrans<Kunde>(dataAccess).transaction(()->kundeMapper.read(dataAccess, kundeId));
+		
+	}
+	
+	@Override
+	public void retKundeProfil(Kunde kunde){
+		DataAccess dataAccess = new DataAccessImpl();
+		new LogicTrans<>(dataAccess).transaction(()->kundeMapper.update(dataAccess, kunde));
+		notifyObservers(this, Tilstand.KUNDE_RETTET);
 
 	}
 

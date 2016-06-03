@@ -7,7 +7,7 @@ import java.util.Base64;
 import exception.MissingOplysningExcpetion;
 
 /**
- * 
+ * Domæneklasse for Brugers login (både bestillingsmodtagelse og kunde)
  * @author Juyoung Choi
  *
  */
@@ -20,31 +20,22 @@ public class BrugerImpl implements Bruger {
 	private boolean erKunde;
 	private boolean erAktivt;
 	
-	/* (non-Javadoc)
-	 * @see domain.Bruger#getId()
-	 */
+	
 	@Override
 	public int getId() {
 		return id;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Bruger#setId(long)
-	 */
+	
 	@Override
 	public void setId(int id) {
 		this.id = id;
 	}
 	
-	/* (non-Javadoc)
-	 * @see domain.Bruger#getLoginId()
-	 */
 	@Override
 	public String getLoginId() {
 		return loginId;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Bruger#setLoginId(java.lang.String)
-	 */
+	
 	@Override
 	public void setLoginId(String loginId) {
 		if (loginId.isEmpty()) {
@@ -54,31 +45,27 @@ public class BrugerImpl implements Bruger {
 	}
 	
 	private static String encrypt(String kodeord) throws NoSuchAlgorithmException {
+		if (kodeord.isEmpty()) {
+			throw new MissingOplysningExcpetion ("LoginId Mangler");
+		}
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		byte[] mdbytes = md.digest(kodeord.getBytes());
 		return Base64.getEncoder().encodeToString(mdbytes);
 	}
 	
 	
-	/* (non-Javadoc)
-	 * @see domain.Bruger#setAndEncryptPassword(java.lang.String)
-	 */
 	@Override
 	public void setAndEncryptPassword(String kodeord) throws NoSuchAlgorithmException {
 		this.encryptedKodeord = encrypt(kodeord);
 	}
 	
-	/* (non-Javadoc)
-	 * @see domain.Bruger#getEncryptedKodeord()
-	 */
+	
 	@Override
 	public String getEncryptedKodeord() {
 		return encryptedKodeord;
 	}
 	
-	/* (non-Javadoc)
-	 * @see domain.Bruger#setEncryptedKodeord(java.lang.String)
-	 */
+	
 	@Override
 	public void setEncryptedKodeord(String encryptedKodeord) {
 		
@@ -88,30 +75,22 @@ public class BrugerImpl implements Bruger {
 		this.encryptedKodeord = encryptedKodeord;
 	}
 	
-	/* (non-Javadoc)
-	 * @see domain.Bruger#erLoggetInd()
-	 */
+
 	@Override
 	public boolean erLoggetInd() {
 		return erLoggetInd;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Bruger#setErLoggetInd(boolean)
-	 */
+
 	@Override
 	public void setErLoggetInd(boolean erLoggetInd) {
 		this.erLoggetInd = erLoggetInd;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Bruger#erKunde()
-	 */
+
 	@Override
 	public boolean erKunde() {
 		return erKunde;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Bruger#setErKunde(boolean)
-	 */
+	
 	@Override
 	public void setErKunde(boolean erKunde) {
 		this.erKunde = erKunde;

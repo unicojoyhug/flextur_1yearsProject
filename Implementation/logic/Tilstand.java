@@ -1,6 +1,7 @@
 package logic;
 /**
- * 
+ * Tilstand (forskellige scenarier på grund af use cases
+ * bruges for notifyObservers
  * @author Juyoung Choi
  *
  */

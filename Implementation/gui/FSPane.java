@@ -4,7 +4,14 @@ import logic.FSController;
 import logic.Observer;
 
 /**
+ * 'abstract' klasse for GUI Controllers : GUI controllers arver fra den klasse
+ * for at set FSController, set MainApp for at skifte sider, tilmeld observer here
  * 
+ * postInitialize :
+ * 
+ * 'abstract' metode (package scope) bruges for at hente oplysninger fra FSController 
+ * efter initialize i GUI controllers
+ *  
  * @author Juyoung Choi
  *
  */

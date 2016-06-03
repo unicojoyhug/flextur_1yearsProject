@@ -25,7 +25,7 @@ import logic.Observable;
 import logic.Tilstand;
 
 /**
- *
+ *GUI controller for at se oversigt over bestilte kørsler (bestillingsmodtagelse)
  * @author Jonas Mørch & Juyoung Choi
  */
 public class BestillingsOversigtController extends FSPane implements Initializable {

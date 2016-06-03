@@ -4,6 +4,10 @@ import domain.Flextur;
 import sats.Sats;
 import sats.UnknownKommuneException;
 /**
+ * sats : eksternt systemet for sats til Flextur
+ * 
+ * to metoder : hentSats og getKommuner
+ * hentSats returer sats værdi som double (med Flextur type parameter)
  * 
  * @author Juyoung Choi & Jonas Mørch
  *

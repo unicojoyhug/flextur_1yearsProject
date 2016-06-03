@@ -1,6 +1,9 @@
 
 package sats;
-
+/**
+ * Decomplied klasse for at forstå systemet
+ * 
+ */
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Map;

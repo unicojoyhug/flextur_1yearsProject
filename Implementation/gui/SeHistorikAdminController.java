@@ -31,7 +31,7 @@ import logic.Observable;
 import logic.Tilstand;
 
 /**
- *
+ * GUI controller klasse for at se histsorik (bestillingsmodtagelse)
  * @author Jonas Mørch & Juyoung Choi
  *
  */

@@ -49,5 +49,9 @@ public interface Kunde {
 	String getEmail();
 	
 	String getKodeord();
+
+	int getCprId();
+
+	void setCprId(int cprId);
 	
 }

@@ -33,7 +33,7 @@ import logic.Observable;
 import logic.Tilstand;
 
 /**
- *
+ *GUI controller for bestilFlextur (kunde)
  * @author Jonas Mørch
  */
 public class BestilFlexController extends FSPane implements Initializable {

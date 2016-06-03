@@ -14,6 +14,7 @@ import logic.FSControllerImpl;
 
 /**
  * 
+ * DialogueBox alert per exceptions type
  * @author Juyoung Choi
  *
  */
@@ -28,11 +29,6 @@ public class DialogueBoxImpl implements DialogueBox {
 		this.window = window;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see gui.DialogBox#visOplysningManglerAdvarselDialog()
-	 */
 	@Override
 	public void visOplysningManglerAdvarselDialog() {
 		warning.initOwner(window);
@@ -60,11 +56,7 @@ public class DialogueBoxImpl implements DialogueBox {
 		info.showAndWait();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see gui.DialogBox#visCSVFilExportingAdvarselDialog()
-	 */
+	
 	@Override
 	public void visCSVFilExportingAdvarselDialog(String filenavn, List<HistorikForBM> resultListe) {
 		confirmation.initOwner(window);
@@ -175,4 +167,32 @@ public class DialogueBoxImpl implements DialogueBox {
 		warning.setContentText("Vælg dato i fremtiden");
 		warning.showAndWait();
 	}
+	
+	@Override
+	public void visProfilOperettet() {
+		info.initOwner(window);
+		info.setTitle("Operettet");
+		info.setHeaderText("Ny profil er operettet");
+		info.setContentText("Ny profil er gemt sikkert");
+		info.showAndWait();
+	}
+	
+	@Override
+	public void visKontaktOs() {
+		error.initOwner(window);
+		error.setTitle("FEJL");
+		error.setHeaderText("Kontakt os.");
+		error.setContentText("Telefon : 70 210 230");
+		error.showAndWait();
+	}
+	
+	@Override
+	public void visProfilRettet() {
+		info.initOwner(window);
+		info.setTitle("Rettet");
+		info.setHeaderText("Din profil er rettet");
+		info.setContentText("Din profil er gemt sikkert");
+		info.showAndWait();
+	}
+	
 }

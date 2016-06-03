@@ -3,6 +3,7 @@ package logic;
 import domain.Flextur;
 /**
  * 
+ * Sats Adapter interface
  * @author Juyoung Choi
  *
  */

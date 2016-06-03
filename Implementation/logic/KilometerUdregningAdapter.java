@@ -7,6 +7,8 @@ import javax.xml.xpath.XPathExpressionException;
 import domain.Flextur;
 /**
  * 
+ * Adapter for kilometer udregning
+ * 
  * @author Juyoung Choi
  *
  */

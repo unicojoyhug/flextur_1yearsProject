@@ -3,6 +3,7 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 import exception.LoginException;
+import exception.MissingOplysningExcpetion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +15,7 @@ import logic.Observable;
 import logic.Tilstand;
 
 /**
- * FXML Controller class
+ * GUI controller klasse til Login
  *
  * @author Jonas Mørch & Juyoung Choi
  */
@@ -48,18 +49,13 @@ public class LoginController extends FSPane implements Initializable {
 	private void handleLogin(ActionEvent event) {
 		DialogueBox alert = new DialogueBoxImpl(window);
 
-		String loginIdS = username.getText();
-		String passwordS = password.getText();
-		if (loginIdS.isEmpty() || passwordS.isEmpty()) {
+		try {
+			fsController.angivLoginOplysninger(username.getText(), password.getText());
+
+		} catch (LoginException e ) {
+			alert.visLoginFejllDialog();
+		} catch (MissingOplysningExcpetion e){
 			alert.visOplysningManglerAdvarselDialog();
-		} else {
-			try {
-				fsController.angivLoginOplysninger(loginIdS, passwordS);
-
-			} catch (LoginException e) {
-				alert.visLoginFejllDialog();
-
-			}
 		}
 	}
 
@@ -83,18 +79,11 @@ public class LoginController extends FSPane implements Initializable {
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
-		DialogueBox alert = new DialogueBoxImpl(window);
 
 		if (tilstand.equals(Tilstand.LOGIN_KUNDE)) {
 			flexturGUI.showMenuKunde();
-		}
-
-		if (tilstand.equals(Tilstand.LOGIN_BM)) {
+		}else if (tilstand.equals(Tilstand.LOGIN_BM)) {
 			flexturGUI.showMenuAdmin();
-		}
-
-		if (tilstand.equals(Tilstand.LOGIN_FEJL)) {
-			alert.visLoginFejllDialog();
 		}
 
 	}

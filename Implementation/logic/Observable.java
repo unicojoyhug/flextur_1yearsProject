@@ -1,7 +1,9 @@
 package logic;
 
 /**
+ * interface for observable 
  * 
+ * notifyObservers parameter observable bruges for flere observable i fremtiden
  * @author Juyoung Choi
  *
  */

@@ -4,7 +4,7 @@ import domain.Flextur;
 import seHistorik.AntalPersonerException;
 
 /**
- * 
+ * prototype og 'temporary' klasse for pris udregning
  * @author Jonas Mørch
  *
  */

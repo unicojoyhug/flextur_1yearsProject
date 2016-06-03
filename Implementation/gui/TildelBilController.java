@@ -23,7 +23,7 @@ import logic.Observable;
 import logic.Tilstand;
 
 /**
- *
+ * GUI controller klasse for at tildele bil og godkende kørsel (bestillingsmodtagelse)
  * @author Jonas Mørch
  */
 public class TildelBilController extends FSPane implements Initializable {

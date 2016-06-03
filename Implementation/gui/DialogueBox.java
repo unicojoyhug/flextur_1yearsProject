@@ -37,5 +37,11 @@ public interface DialogueBox {
 
 	void visDatoFejl();
 
+	void visProfilOperettet();
+
+	void visKontaktOs();
+
+	void visProfilRettet();
+
 
 }

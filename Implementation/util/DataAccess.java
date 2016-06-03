@@ -2,7 +2,7 @@ package util;
 
 import java.sql.Connection;
 /**
- * DataAccess using Singleton pattern
+ * DataAccess interface
 
  * @author Juyoung Choi
  *

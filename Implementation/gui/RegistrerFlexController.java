@@ -33,7 +33,8 @@ import logic.Observable;
 import logic.Tilstand;
 
 /**
- *
+ * GUI controller klasse for at registrere kørsel (bestillingsmodtagelse)
+ * 
  * @author Jonas Mørch & Juyoung Choi
  */
 public class RegistrerFlexController extends FSPane implements Initializable {

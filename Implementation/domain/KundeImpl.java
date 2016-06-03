@@ -3,12 +3,14 @@ package domain;
 import exception.MissingOplysningExcpetion;
 
 /**
- * 
+ * Domæneklasse for kundeprofil
+ *  
  * @author Juyoung Choi & Jonas Mørch
  *
  */
 public class KundeImpl implements Kunde {
 	private String cprNummer = null;
+	private int cprId;
 	private String kommune;
 	private String telefon;
 	private String fornavn;
@@ -19,16 +21,12 @@ public class KundeImpl implements Kunde {
 	private int postnummer;
 	private int kundeID = 0;
 	private boolean erAktivt;
-	/* (non-Javadoc)
-	 * @see domain.Kunde#getCprNummer()
-	 */
+	
 	@Override
 	public String getCprNummer() {
 		return cprNummer;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#setCprNummer(int)
-	 */
+	
 	@Override
 	public void setCprNummer(String cprNummer) {
 		if (cprNummer == null) {
@@ -36,100 +34,90 @@ public class KundeImpl implements Kunde {
 		}
 		this.cprNummer = cprNummer;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#getKommune()
-	 */
+	
 	@Override
 	public String getKommune() {
 		return kommune;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#setKommune(java.lang.String)
-	 */
+	
 	@Override
 	public void setKommune(String kommune) {
+		if (kommune == null) {
+			throw new MissingOplysningExcpetion ("kommune Mangler");
+		}
 		this.kommune = kommune;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#getTelefon()
-	 */
+	
 	@Override
 	public String getTelefon() {
 		return telefon;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#setTelefon(java.lang.String)
-	 */
+
 	@Override
 	public void setTelefon(String telefon) {
+		if (telefon == null) {
+			throw new MissingOplysningExcpetion ("telefon Mangler");
+		}
 		this.telefon = telefon;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#getFornavn()
-	 */
+	
 	@Override
 	public String getFornavn() {
 		return fornavn;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#setFornavn(java.lang.String)
-	 */
+	
 	@Override
 	public void setFornavn(String fornavn) {
+		if (fornavn == null) {
+			throw new MissingOplysningExcpetion ("fornavn Mangler");
+		}
 		this.fornavn = fornavn;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#getEfternavn()
-	 */
+	
 	@Override
 	public String getEfternavn() {
 		return efternavn;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#setEfternavn(java.lang.String)
-	 */
+	
 	@Override
 	public void setEfternavn(String efternavn) {
+		if (efternavn == null) {
+			throw new MissingOplysningExcpetion ("efternavn Mangler");
+		}
 		this.efternavn = efternavn;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#getAdress()
-	 */
+
 	@Override
 	public String getAdress() {
 		return adress;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#setAdress(java.lang.String)
-	 */
+	
 	@Override
 	public void setAdress(String adress) {
+		if (adress == null) {
+			throw new MissingOplysningExcpetion ("adress Mangler");
+		}
 		this.adress = adress;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#getPostnummer()
-	 */
+	
 	@Override
 	public int getPostnummer() {
 		return postnummer;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#setPostnummer(int)
-	 */
+	
 	@Override
 	public void setPostnummer(int postnummer) {
+		if (postnummer == 0) {
+			throw new MissingOplysningExcpetion ("postnummer Mangler");
+		}
 		this.postnummer = postnummer;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#erAktivt()
-	 */
+	
 	@Override
 	public boolean erAktivt() {
 		return erAktivt;
 	}
-	/* (non-Javadoc)
-	 * @see domain.Kunde#setErAktivt(boolean)
-	 */
+	
 	@Override
 	public void setErAktivt(boolean erAktivt) {
 		this.erAktivt = erAktivt;
@@ -141,18 +129,24 @@ public class KundeImpl implements Kunde {
 	@Override
 	public void setKundeID(int kundeID) {
 		if (kundeID == 0 ) {
-			throw new MissingOplysningExcpetion ("Fra postnummer Mangler");
+			throw new MissingOplysningExcpetion ("kundeID Mangler");
 		}
 		this.kundeID = kundeID;
 		
 	}
 	@Override
 	public void setKodeord(String kodeord) {
+		if (kodeord == null) {
+			throw new MissingOplysningExcpetion ("kodeord Mangler");
+		}
 		this.kodeord = kodeord;
 		
 	}
 	@Override
 	public void setEmail(String email) {
+		if (email == null ) {
+			throw new MissingOplysningExcpetion ("kodeord Mangler");
+		}
 		this.email = email;
 		
 	}
@@ -163,6 +157,25 @@ public class KundeImpl implements Kunde {
 	@Override
 	public String getKodeord() {
 		return kodeord;
+	}
+	@Override
+	public int getCprId() {
+		return cprId;
+	}
+	@Override
+	public void setCprId(int cprId) {
+		if (cprId == 0 ) {
+			throw new MissingOplysningExcpetion ("cprId Mangler");
+		}
+		this.cprId = cprId;
+	}
+
+	@Override
+	public String toString() {
+		return "KundeImpl [cprNummer=" + cprNummer + ", cprId=" + cprId + ", kommune=" + kommune + ", telefon="
+				+ telefon + ", fornavn=" + fornavn + ", efternavn=" + efternavn + ", adress=" + adress + ", kodeord="
+				+ kodeord + ", email=" + email + ", postnummer=" + postnummer + ", kundeID=" + kundeID + ", erAktivt="
+				+ erAktivt + "]";
 	}
 	
 	

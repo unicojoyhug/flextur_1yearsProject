@@ -8,6 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
 /**
+ * tekstformattering hjælpeklasse for GUI
  * 
  * @author Juyoung Choi
  *

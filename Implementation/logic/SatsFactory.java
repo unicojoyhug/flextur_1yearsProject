@@ -1,6 +1,6 @@
 package logic;
 /**
- * 
+ * Sats Factory for at skabe FlemmingsSatsAdapter objekt
  * @author Juyoung Choi
  *
  */

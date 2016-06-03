@@ -2,7 +2,8 @@ package domain;
 
 import java.time.LocalDate;
 /**
- * 
+ *  Domæneklasse for UC1: Se historik - bestillingsmodtagelse
+ *  alle tur per person vises med total pris og antal af ture.
  * @author Juyoung Choi
  *
  */

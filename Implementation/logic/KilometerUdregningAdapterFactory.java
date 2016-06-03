@@ -1,6 +1,8 @@
 package logic;
 /**
  * 
+ * KilometerUdregnningAdapterFactory for at skabe OkhttpKilometerUdregningAdapter objekt
+ * 
  * @author Juyoung Choi
  *
  */

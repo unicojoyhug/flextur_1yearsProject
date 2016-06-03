@@ -13,6 +13,7 @@ import domain.Bruger;
 import domain.BrugerImpl;
 import domain.Kunde;
 import domain.KundeImpl;
+import exception.MissingOplysningExcpetion;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,11 +21,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import logic.Observable;
 import logic.Tilstand;
 
 /**
  *
+ * GUI controller klasse for at oprette profil (bestillingsmodtagelse)
  * @author Jonas Mørch & Juyoung Choi
  */
 public class OpretProfilController extends FSPane implements Initializable {
@@ -33,11 +36,12 @@ public class OpretProfilController extends FSPane implements Initializable {
 	private Label cprfejl;
 	private FlexturGUI flextur;
 	@FXML
-	private TextField fornavn, efternavn, addresse, telefonnr, email, cprnummer, password;
+	private TextField fornavn, efternavn, addresse, telefonnr, email, cprnummer, password, postnummer;
 	@FXML
 	private ChoiceBox<String> kommuneCombo;
 	private Kunde kunde = new KundeImpl();
 	private Bruger bruger = new BrugerImpl();
+	private Stage window;
 
 	public void setMainApp(FlexturGUI flextur) {
 		this.flextur = flextur;
@@ -51,21 +55,28 @@ public class OpretProfilController extends FSPane implements Initializable {
 
 	@FXML
 	private void handleOpret(ActionEvent event) throws NoSuchAlgorithmException {
-		kunde.setFornavn(fornavn.getText());
-		kunde.setEfternavn(efternavn.getText());
-		kunde.setAdress(addresse.getText());
-		kunde.setCprNummer(cprnummer.getText());
-		kunde.setKommune(kommuneCombo.getValue());
-		kunde.setTelefon(telefonnr.getText());
-		kunde.setEmail(email.getText());
-		bruger.setAndEncryptPassword(password.getText());
-		kunde.setKodeord(bruger.getEncryptedKodeord());
+		DialogueBox alert = new DialogueBoxImpl(window);
+		try{
+			kunde.setFornavn(fornavn.getText());
+			kunde.setEfternavn(efternavn.getText());
+			kunde.setAdress(addresse.getText());
+			kunde.setCprNummer(cprnummer.getText());
+			kunde.setKommune(kommuneCombo.getValue());
+			kunde.setTelefon(telefonnr.getText());
+			kunde.setEmail(email.getText());
+			bruger.setAndEncryptPassword(password.getText());
+			kunde.setKodeord(bruger.getEncryptedKodeord());
+			kunde.setPostnummer(Integer.parseInt(postnummer.getText()));
 
-		fsController.opretKunde(kunde);
+			fsController.opretKundeProfil(kunde);
+		}catch(MissingOplysningExcpetion e){
+			alert.visOplysningManglerAdvarselDialog();
+		}
 	}
 
 	@FXML
 	private void handleTjekCPR(ActionEvent event) {
+		cprfejl.setVisible(false);
 		String CPR = cprnummer.getText();
 		Kunde KundeID = fsController.getKundeID(CPR);
 		if (KundeID.getKundeID() > 0) {
@@ -81,8 +92,10 @@ public class OpretProfilController extends FSPane implements Initializable {
 
 	@Override
 	public void update(Observable observable, Tilstand tilstand) {
-		// TODO Auto-generated method stub
-
+		DialogueBox alert = new DialogueBoxImpl(window);
+		if(tilstand.equals(Tilstand.KUNDE_OPRETTET)){
+			alert.visProfilOperettet();
+		}
 	}
 
 	@Override

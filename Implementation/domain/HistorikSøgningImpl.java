@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import exception.MissingOplysningExcpetion;
 
 /**
- * This is the domain class for HistorikSøgningsOplysninger for UC1-seHistorik
+ * Domæneklasse for HistorikSøgningsOplysninger for UC1-seHistorik
  * MissingOplysningException
  * @author Juyoung Choi
  *

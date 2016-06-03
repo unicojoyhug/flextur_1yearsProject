@@ -15,6 +15,7 @@ import com.squareup.okhttp.Response;
 import domain.Flextur;
 
 /**
+ * Adapter for eksternt systemet (Okhttp) 
  *
  * @author Jonas Mørch & Juyoung Choi
  */

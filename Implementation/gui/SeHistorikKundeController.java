@@ -30,6 +30,7 @@ import logic.Tilstand;
 
 /**
  *
+ * GUI controller klasse for at se historik (kunde)
  * @author Jonas Mørch & Juyoung Choi
  *
  */

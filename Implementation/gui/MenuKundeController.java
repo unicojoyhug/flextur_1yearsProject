@@ -14,7 +14,7 @@ import logic.Observable;
 import logic.Tilstand;
 
 /**
- *
+ * GUI controller klasse til Menu for admin (kunde)
  * @author Jonas Mørch
  */
 public class MenuKundeController extends FSPane implements Initializable {

@@ -8,7 +8,9 @@ import exception.PersistenceConnectionFailureException;
 import exception.PersistenceRollbackFailureException;
 
 /**
- * ConnectionHandler with Singleton : so it can use only one connection
+ * ConnectionHandler with Singleton
+ * 
+ * ide for singleton pattern : vi fravalgte den mønster
  * @author Juyoung Choi
  *
  */

@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 /**
+ * hjælpeklasse
  * Close for resultSet and preparedStatement : to reuse for logic - controller with closing
  * @author Juyoung Choi
  *

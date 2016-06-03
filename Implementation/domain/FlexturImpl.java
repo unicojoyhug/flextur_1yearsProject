@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 import exception.MissingOplysningExcpetion;
 /**
- * 
+ *  Domæneklasse for Flextur oplysninger
  * @author Juyoung Choi & Jonas Mørch
  *
  */

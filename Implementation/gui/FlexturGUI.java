@@ -18,6 +18,7 @@ import logic.FSController;
 import logic.FSControllerImpl;
 
 /**
+ *GUI main metode : programme køres med den klasse.
  *
  * @author Jonas Mørch & Juyoung Choi
  */
