@@ -51,7 +51,7 @@ public class PrisUdregnerMedTrådImpl implements PrisUdregnerMedTråd {
 		double personer = flextur.getAntalPersoner();
 		if (personer == 1) {
 			result = 1;
-		} else if (6 < personer || personer > 0) {
+		} else if (5 >=  personer && personer > 0) {
 			result = ((personer + temp) * 0.5) + 1;
 		} else {
 			throw new AntalPersonerException("Antal Personer exception");

@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import domain.Bruger;
 import domain.Flextur;
 import domain.FlexturImpl;
+import exception.AntalPersonerException;
 import exception.MissingOplysningExcpetion;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Service;
@@ -67,16 +68,18 @@ public class BestilFlexController extends FSPane implements Initializable {
 			fti.setFraAdress(fraAddresse.getText());
 			fti.setTilAdress(tilAddresse.getText());
 			fsController.udregnKilometer(fti);
-
+			fti.setAntalPersoner(Integer.parseInt(personer.getText()));
 			kilometer.setText(fti.getDistance());
 			forventetTid.setText(fti.getDuration());
 			String[] parts = fti.getDistance().split(" ");
 			String part1 = parts[0];
 			fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));
-		}
-		catch(MissingOplysningExcpetion e){
+		}catch(MissingOplysningExcpetion e){
 			alert.visOplysningManglerAdvarselDialog();
+		}catch(AntalPersonerException e){
+			alert.antalPersonerFejllDialog();
 		}
+		
 	}
 
 	@FXML

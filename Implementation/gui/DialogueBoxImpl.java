@@ -121,7 +121,14 @@ public class DialogueBoxImpl implements DialogueBox {
 		warning.setContentText("Prøv igen");
 		warning.showAndWait();
 	}
-
+	@Override
+	public void antalPersonerFejllDialog() {
+		warning.initOwner(window);
+		warning.setTitle("ERROR");
+		warning.setHeaderText("For mange personer");
+		warning.setContentText("Maks 5 personer");
+		warning.showAndWait();
+	}
 	@Override
 	public void visIngenTurValgt() {
 		error.initOwner(window);

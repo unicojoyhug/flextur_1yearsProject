@@ -43,5 +43,7 @@ public interface DialogueBox {
 
 	void visProfilRettet();
 
+	void antalPersonerFejllDialog();
+
 
 }
