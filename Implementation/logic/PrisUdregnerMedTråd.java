@@ -1,6 +1,7 @@
 package logic;
 
 import domain.Flextur;
+
 /**
  * interface for pris udregning returer pris som double værdi
  * 
@@ -10,6 +11,6 @@ import domain.Flextur;
  */
 public interface PrisUdregnerMedTråd {
 
-	double udregnPris(Flextur flextur);
+	void udregnPris(Flextur flextur);
 
 }

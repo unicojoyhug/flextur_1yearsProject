@@ -5,7 +5,6 @@
  */
 package gui;
 
-import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -13,6 +12,7 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 import domain.Flextur;
 import domain.FlexturImpl;
+import exception.AntalPersonerException;
 import exception.MissingOplysningExcpetion;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Service;
@@ -64,7 +64,7 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 	private Stage window;
 
 	@FXML
-	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
+	private void handleBeregnKM(ActionEvent event){
 		DialogueBox alert = new DialogueBoxImpl(window);
 
 		try{
@@ -78,14 +78,21 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 			String[] parts = fti.getDistance().split(" ");
 			String part1 = parts[0];
 			fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));
-		}
-		catch(MissingOplysningExcpetion e){
+					
+			fti.setAntalPersoner(Integer.parseInt(personer.getText()));
+		
+		}catch(MissingOplysningExcpetion e){
 			alert.visOplysningManglerAdvarselDialog();
+		}catch(AntalPersonerException e){
+			alert.antalPersonerFejllDialog();
 		}
 	}
 
 	@FXML
 	private void handleBeregnPris(ActionEvent event) {
+		handleBeregnKM(event);
+
+		
 		loading.setVisible(true);
 
 		backgroundThread = new Service<Void>() {
@@ -97,14 +104,7 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 
 					@Override
 					protected Void call() throws Exception {
-						if (fti.getKilometer() == 0)
-							try {
-								handleBeregnKM(event);
-							} catch (Throwable e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-
+					
 						fti.setFraKommune(fraKommune.getValue());
 						fti.setDato(dato.getValue());
 						fti.setTilKommune(tilKommune.getValue());
@@ -113,8 +113,9 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 						fti.setBaggage(Integer.parseInt(baggage.getText()));
 						fti.setBarnevogne(Integer.parseInt(barnevogne.getText()));
 						fti.setKoerestole(Integer.parseInt(koerestole.getText()));
+					
 						fsController.udregnPrisMedTråd(fti);
-						updateMessage(String.valueOf(format.format(fti.getPris())).replace('.', ','));
+						updateMessage(String.valueOf(format.format(fti.getPris()).replace('.', ',')));
 						return null;
 					}
 
@@ -143,6 +144,7 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 		DialogueBox alert = new DialogueBoxImpl(window);
 
 		try{
+			
 			if (fti.getPris() == 0.0) {
 				handleBeregnPris(event);
 			}
@@ -150,8 +152,9 @@ public class RegistrerFlexController extends FSPane implements Initializable {
 				handleGetKundeID(event);
 
 			fti.setKundeId(kundeID.getText().isEmpty() ? 0 : Integer.parseInt(kundeID.getText()));
-			fti.setTid(tidspunkt.getText().isEmpty() ? null :LocalTime.parse(tidspunkt.getText()));
-			fti.setKommentar(kommentarer.getText());
+			fti.setTid(LocalTime.parse(tidspunkt.getText()));
+			fti.setKommentar(kommentarer.getText());		
+
 			fsController.angivFlexturOplysninger(fti);
 		}catch(MissingOplysningExcpetion e){
 				kundeID.setText(null);

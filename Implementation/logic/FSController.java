@@ -47,7 +47,7 @@ public interface FSController extends Observable {
 
 	Flextur udregnKilometer(Flextur flextur);
 
-	double udregnPrisMedTråd(Flextur flextur);
+	void udregnPrisMedTråd(Flextur flextur);
 
 //	void opretKunde(Kunde kunde);
 

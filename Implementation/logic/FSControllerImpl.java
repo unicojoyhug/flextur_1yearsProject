@@ -192,9 +192,9 @@ public class FSControllerImpl implements FSController {
 	}
 
 	@Override
-	public double udregnPrisMedTråd(Flextur flextur) {
-		PrisUdregnerMedTråd pris = new PrisUdregnerMedTrådImpl(flextur);
-		return pris.udregnPris(flextur);
+	public void udregnPrisMedTråd(Flextur flextur) {
+		PrisUdregnerMedTråd pris = new PrisUdregnerMedTrådImpl();
+		pris.udregnPris(flextur);
 	}
 
 	

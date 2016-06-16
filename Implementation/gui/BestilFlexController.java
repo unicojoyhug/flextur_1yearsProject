@@ -5,7 +5,6 @@
  */
 package gui;
 
-import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -58,7 +57,7 @@ public class BestilFlexController extends FSPane implements Initializable {
 	private DecimalFormat format = new DecimalFormat("#.##");
 
 	@FXML
-	private void handleBeregnKM(ActionEvent event) throws Throwable, IOException {
+	private void handleBeregnKM(ActionEvent event) { // why throwable and ioexception?
 		DialogueBox alert = new DialogueBoxImpl(window);
 
 		try{
@@ -67,26 +66,32 @@ public class BestilFlexController extends FSPane implements Initializable {
 
 			fti.setFraAdress(fraAddresse.getText());
 			fti.setTilAdress(tilAddresse.getText());
+		
+			
 			fsController.udregnKilometer(fti);
-			fti.setAntalPersoner(Integer.parseInt(personer.getText()));
+
 			kilometer.setText(fti.getDistance());
 			forventetTid.setText(fti.getDuration());
 			String[] parts = fti.getDistance().split(" ");
 			String part1 = parts[0];
 			fti.setKilometer(Double.parseDouble(part1.replace(',', '.')));
+			fti.setAntalPersoner(Integer.parseInt(personer.getText()));
+
 		}catch(MissingOplysningExcpetion e){
+			loading.setVisible(false);
 			alert.visOplysningManglerAdvarselDialog();
 		}catch(AntalPersonerException e){
 			alert.antalPersonerFejllDialog();
 		}
-		
 	}
 
 	@FXML
 	private void handleBeregnPris(ActionEvent event) {
-
+						
+		handleBeregnKM(event);
+		
 		loading.setVisible(true);
-
+		
 		backgroundThread = new Service<Void>() {
 
 			@Override
@@ -96,24 +101,17 @@ public class BestilFlexController extends FSPane implements Initializable {
 
 					@Override
 					protected Void call() throws Exception {
-						if (kilometer.getText().isEmpty())
-							try {
-								handleBeregnKM(event);
-							} catch (Throwable e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-
+						
 						fti.setFraKommune(fraKommune.getValue());
 						fti.setDato(dato.getValue());
 						fti.setTilKommune(tilKommune.getValue());
-						fti.setAntalPersoner(Integer.parseInt(personer.getText()));
 						fti.setAutostole(Integer.parseInt(autostole.getText()));
 						fti.setBaggage(Integer.parseInt(baggage.getText()));
 						fti.setBarnevogne(Integer.parseInt(barnevogne.getText()));
 						fti.setKoerestole(Integer.parseInt(koerestole.getText()));
+						
 						fsController.udregnPrisMedTråd(fti);
-						updateMessage(String.valueOf(format.format(fti.getPris())).replace('.', ','));
+						updateMessage(String.valueOf(format.format(fti.getPris()).replace('.', ',')));
 						return null;
 					}
 
@@ -135,7 +133,6 @@ public class BestilFlexController extends FSPane implements Initializable {
 
 		prisfelt.textProperty().bind(backgroundThread.messageProperty());
 		backgroundThread.restart();
-
 	}
 
 	@FXML

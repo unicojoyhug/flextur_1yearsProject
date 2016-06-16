@@ -1,7 +1,6 @@
 package logic;
 
 import domain.Flextur;
-import exception.AntalPersonerException;
 
 /**
  * Pris Udregner klasse for at hente sats ved SatsFactory og SatsAdapter
@@ -12,16 +11,9 @@ import exception.AntalPersonerException;
  *
  */
 public class PrisUdregnerMedTrådImpl implements PrisUdregnerMedTråd {
-	@SuppressWarnings("unused")
-	private Flextur flextur;
-
-	public PrisUdregnerMedTrådImpl(Flextur flextur) {
-		this.flextur = flextur;
-	}
-
 	
 	@Override
-	public double udregnPris(Flextur flextur) {
+	public void udregnPris(Flextur flextur) {
 		SatsFactory satsFactory = new SatsFactory();
 		SatsAdapter rate = satsFactory.getSatsAdapter();
 		double km = flextur.getKilometer();
@@ -29,7 +21,6 @@ public class PrisUdregnerMedTrådImpl implements PrisUdregnerMedTråd {
 		double tilvalg = antalTilvalg(flextur);
 		double sats = rate.hentSats(flextur);
 		flextur.setPris((km * sats) * (personer + tilvalg));
-		return (((km * sats) * (personer + tilvalg)));
 	}
 
 	private double antalTilvalg(Flextur flextur) {
@@ -49,15 +40,14 @@ public class PrisUdregnerMedTrådImpl implements PrisUdregnerMedTråd {
 		double result = 0;
 		double temp = -1;
 		double personer = flextur.getAntalPersoner();
+
 		if (personer == 1) {
 			result = 1;
-		} else if (5 >=  personer && personer > 0) {
+		}  else if (0 < personer && personer < 6) {
 			result = ((personer + temp) * 0.5) + 1;
-		} else {
-			throw new AntalPersonerException("Antal Personer exception");
-		}
+		} 
 
 		return result;
 	}
-
+	
 }

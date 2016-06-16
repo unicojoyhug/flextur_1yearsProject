@@ -3,6 +3,7 @@ package domain;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import exception.AntalPersonerException;
 import exception.MissingOplysningExcpetion;
 /**
  *  Domæneklasse for Flextur oplysninger
@@ -42,6 +43,9 @@ public class FlexturImpl implements Flextur {
 
 	@Override
 	public void setFraKommune(String fraKommune) {
+		if (fraKommune == null) {
+			throw new MissingOplysningExcpetion ("Fra kommune Mangler");
+		}
 		this.fraKommune = fraKommune;
 	}
 
@@ -248,6 +252,9 @@ public class FlexturImpl implements Flextur {
 	 */
 	@Override
 	public void setAntalPersoner(int antalPersoner) {
+		if(antalPersoner < 0 || antalPersoner > 5){
+			throw new AntalPersonerException("antal personer fejl");
+		}
 		this.antalPersoner = antalPersoner;
 	}
 
