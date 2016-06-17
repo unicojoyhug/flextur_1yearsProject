@@ -252,7 +252,7 @@ public class FlexturImpl implements Flextur {
 	 */
 	@Override
 	public void setAntalPersoner(int antalPersoner) {
-		if(antalPersoner < 0 || antalPersoner > 5){
+		if(antalPersoner <= 0 || antalPersoner > 5){
 			throw new AntalPersonerException("antal personer fejl");
 		}
 		this.antalPersoner = antalPersoner;

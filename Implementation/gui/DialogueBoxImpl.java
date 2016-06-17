@@ -15,6 +15,7 @@ import logic.FSControllerImpl;
 /**
  * 
  * DialogueBox alert per exceptions type
+ * 
  * @author Juyoung Choi
  *
  */
@@ -56,7 +57,6 @@ public class DialogueBoxImpl implements DialogueBox {
 		info.showAndWait();
 	}
 
-	
 	@Override
 	public void visCSVFilExportingAdvarselDialog(String filenavn, List<HistorikForBM> resultListe) {
 		confirmation.initOwner(window);
@@ -121,14 +121,16 @@ public class DialogueBoxImpl implements DialogueBox {
 		warning.setContentText("Prøv igen");
 		warning.showAndWait();
 	}
+
 	@Override
 	public void antalPersonerFejllDialog() {
 		warning.initOwner(window);
-		warning.setTitle("ERROR");
-		warning.setHeaderText("For mange personer");
-		warning.setContentText("Maks 5 personer");
+		warning.setTitle("Fejl");
+		warning.setHeaderText("Fejl i antallet af personer");
+		warning.setContentText("Antal personer skal være minimum 1, og maksimum 5.");
 		warning.showAndWait();
 	}
+
 	@Override
 	public void visIngenTurValgt() {
 		error.initOwner(window);
@@ -155,7 +157,7 @@ public class DialogueBoxImpl implements DialogueBox {
 		info.setContentText("Godkendelse er gemt sikkert");
 		info.showAndWait();
 	}
-	
+
 	@Override
 	public void visGemFlextur() {
 		info.initOwner(window);
@@ -165,7 +167,6 @@ public class DialogueBoxImpl implements DialogueBox {
 		info.showAndWait();
 	}
 
-	
 	@Override
 	public void visDatoFejl() {
 		warning.initOwner(window);
@@ -174,7 +175,7 @@ public class DialogueBoxImpl implements DialogueBox {
 		warning.setContentText("Vælg dato i fremtiden");
 		warning.showAndWait();
 	}
-	
+
 	@Override
 	public void visProfilOperettet() {
 		info.initOwner(window);
@@ -183,7 +184,7 @@ public class DialogueBoxImpl implements DialogueBox {
 		info.setContentText("Ny profil er gemt sikkert");
 		info.showAndWait();
 	}
-	
+
 	@Override
 	public void visKontaktOs() {
 		error.initOwner(window);
@@ -192,7 +193,7 @@ public class DialogueBoxImpl implements DialogueBox {
 		error.setContentText("Telefon : 70 210 230");
 		error.showAndWait();
 	}
-	
+
 	@Override
 	public void visProfilRettet() {
 		info.initOwner(window);
@@ -201,5 +202,5 @@ public class DialogueBoxImpl implements DialogueBox {
 		info.setContentText("Din profil er gemt sikkert");
 		info.showAndWait();
 	}
-	
+
 }
