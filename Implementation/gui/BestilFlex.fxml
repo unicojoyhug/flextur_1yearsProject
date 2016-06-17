@@ -43,7 +43,7 @@
 		<Label layoutX="104.0" layoutY="400.0" text="Baggage" />
 		<ImageView fitHeight="71.0" fitWidth="174.0" layoutX="470.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@../../bin/gui/img/logo.png.gif" />
+				<Image url="@img/logo.png.gif" />
 			</image>
 		</ImageView>
 		<TextField fx:id="fraAddresse" layoutX="39.0" layoutY="143.0" prefHeight="25.0" prefWidth="174.0" />
