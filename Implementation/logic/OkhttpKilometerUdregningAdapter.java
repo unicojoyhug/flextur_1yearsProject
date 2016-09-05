@@ -21,7 +21,7 @@ import domain.Flextur;
  */
 public class OkhttpKilometerUdregningAdapter implements KilometerUdregningAdapter {
 
-	private static final String API_KEY = "AIzaSyBoOejgRYqOuDSldGnIDetXOEthJc-CdoM";
+	private static final String API_KEY = "AIzaSyCIHV5yBK9x-dU30qNGSrmAxyhqseDBNdU";
 	OkHttpClient client = new OkHttpClient();
 	private String duration;
 
